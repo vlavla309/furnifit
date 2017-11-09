@@ -4,3 +4,5 @@ RemoteSystemTempFiles/
 Servers/
 *.class
 *.properties
+*.MF
+
