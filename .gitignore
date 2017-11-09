@@ -3,3 +3,4 @@
 RemoteSystemTempFiles/
 Servers/
 *.class
+*.properties
