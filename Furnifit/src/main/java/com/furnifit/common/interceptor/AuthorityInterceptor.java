@@ -34,7 +34,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter{
 
 		if(member == null){
 
-			log.info("current member is not logined");
+			log.debug("current member is not logined");
 
 			saveDest(request);
 
@@ -44,7 +44,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter{
 
 				member = memberServ.checkLoginBefore(loginCookie.getValue());
 
-				log.info("Member: " + member);
+				log.debug("Member: " + member);
 
 				if(member != null){
 					session.setAttribute("login", member);
