@@ -4,7 +4,7 @@
                         
 <mapper namespace="com.furnifit.member.dao.MemberDao">
 	
-	<select id="" resultType="member" >
+	<select id="login" resultType="member" >
 		SELECT email,
 			   passwd,
 			   name,

@@ -26,7 +26,7 @@ public class MemberController {
 	@Inject
 	private MemberService memberService;
 	
-	// 로그인 화면
+	// 로그인 페이지
 	@RequestMapping(value = "/login", method=RequestMethod.GET)
 	public String loginGet(Model model) throws Exception {
 		model.addAttribute("title", "Login - FurniFit");
@@ -34,13 +34,12 @@ public class MemberController {
 	}
 	
 	// 로그인 처리
-		@RequestMapping(value = "/loginPost", method=RequestMethod.POST)
+		@RequestMapping(value = "/login", method=RequestMethod.POST)
 		public void loginPost(LoginDTO dto, Model model) throws Exception {
+			log.info("Param : "+dto);
 			Member member = memberService.login(dto);
 			
 			if(member != null) {
-				// 여기에서 HttpSession에 사용자정보를 저장할 수 있지만
-				// LoginInterceptor를 활용하여 HttpSession 처리를 캡슐화
 				model.addAttribute("member",  member);
 			}
 		}
@@ -54,7 +53,6 @@ public class MemberController {
 		response.addCookie(loginCookie);
 		
 		return "redirect:/";
-		
 		
 	}
 
