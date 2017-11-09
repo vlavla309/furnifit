@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.furnifit.one">
+	<logger name="com.furnifit">
 		<level value="info" />
 	</logger>
 	

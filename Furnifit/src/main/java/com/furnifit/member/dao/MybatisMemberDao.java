@@ -36,7 +36,7 @@ public class MybatisMemberDao implements MemberDao {
 	}
 
 	@Override
-	public Member readBySession(String sessionId) {
+	public Member checkUserBySession(String sessionId) {
 		return sqlSession.selectOne(NAMESPACE+".readBySession", sessionId);
 	}
 
@@ -51,11 +51,12 @@ public class MybatisMemberDao implements MemberDao {
 	}
 	
 	@Override
-	public void updateAuto(String email, String sessionid, Date sessionlimit) throws Exception {
+	public void keepLogin(String email, String sessionid, Date sessionlimit) throws Exception {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("email", email);
 		paramMap.put("sessionid", sessionid);
 		paramMap.put("sessionlimit", sessionlimit);
-		sqlSession.update(NAMESPACE + ".updateAuto", paramMap);
+		sqlSession.update(NAMESPACE + ".keepLogin", paramMap);
 	}
+
 }

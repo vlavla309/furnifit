@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--A Design by W3layouts
 Author: W3layout
 Author URL: http://w3layouts.com
@@ -17,7 +19,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--// bootstrap-css -->
 <!-- css -->
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/resources/css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/resources/css/login.css" type="text/css" media="all" />
 <!--// css -->
+
 <!-- font-awesome icons -->
 <link href="${pageContext.servletContext.contextPath }/resources/css/font-awesome.css" rel="stylesheet"> 
 <!-- //font-awesome icons -->
@@ -118,9 +122,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<h1>Login</h1>
 				</div>
 				<div class="login-info">
-				<form method="post">
+				<form action="${pageContext.servletContext.contextPath }/member/loginAction" method="post">
 						<input type="email" class="user" name="email" placeholder="Email" required>
 						<input type="password" name="passwd" class="lock" placeholder="Password" required>
+						
+						<c:if test="${err eq 'failed'}">
+						<div class="alert alert-danger" role="alert">
+							<strong>로그인 실패!</strong> 이메일과 비밀번호를 확인해주세요.
+						</div>
+						</c:if>
 						<div class="forgot-top-grids">
 							<div class="forgot-grid">
 								
@@ -187,7 +197,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="clearfix"> </div>
 			</div>
 			<div class="copyright w3l wow fadeInUp animated" data-wow-delay=".5s">
-				<p>© 2017 Triplex . All Rights Reserved . Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+				<p>Â© 2017 Triplex . All Rights Reserved . Design by <a href="http://w3layouts.com/">W3layouts</a></p>
 			</div>
 		</div>
 	</div>

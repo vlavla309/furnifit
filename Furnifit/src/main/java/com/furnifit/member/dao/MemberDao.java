@@ -21,11 +21,9 @@ public interface MemberDao {
 	
 	// 이메일로 회원 조회
 	public Member read(String email) throws Exception;
-		
-	
 	
 	// 세션아이디에 해당하는 사용자 정보 반환
-	public Member readBySession(String sessionid) throws Exception;
+	public Member checkUserBySession(String sessionid) throws Exception;
 	
 	
 	public void update(Member member);
@@ -34,6 +32,6 @@ public interface MemberDao {
 	public Member login(LoginDTO dto);
 	
 	// 자동 로그인 처리를 위한 세션아이디와 유효기간 저장
-	public void updateAuto(String email, String sessionid, Date sessionlimit) throws Exception;
+	public void keepLogin(String email, String sessionid, Date sessionlimit) throws Exception;
 	
 }

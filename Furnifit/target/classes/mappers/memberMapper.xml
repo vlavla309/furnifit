@@ -14,11 +14,11 @@
 		       AND passwd = #{passwd}
 	</select>
 	
-	<update id="updateAuto" parameterType="map">
+	<update id="keepLogin" parameterType="map">
 		UPDATE members 
 		SET    sessionid = #{sessionid}, 
 		       sessionlimit = #{sessionlimit} 
-		WHERE  userid = #{userid}
+		WHERE  email = #{email}
 	</update>
 	
 	<select id="readBySession" parameterType="string" resultType="member">

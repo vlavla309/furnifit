@@ -9,7 +9,7 @@ public interface MemberService {
 	
 public Member login(LoginDTO dto) throws Exception;
 	
-	public void setAutoLogin(String email, String sessionid, Date sessionlimit) throws Exception;
+	public void keepLogin(String email, String sessionid, Date sessionlimit) throws Exception;
 	
 	public Member checkLoginBefore(String sessionid) throws Exception;
 

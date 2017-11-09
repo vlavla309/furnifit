@@ -23,13 +23,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void setAutoLogin(String email, String sessionid, Date sessionlimit) throws Exception {
-		dao.updateAuto(email, sessionid, sessionlimit);
+	public void keepLogin(String email, String sessionid, Date sessionlimit) throws Exception {
+		dao.keepLogin(email, sessionid, sessionlimit);
 		
 	}
 
 	@Override
 	public Member checkLoginBefore(String sessionid) throws Exception {
-		return dao.readBySession(sessionid);
+		return dao.checkUserBySession(sessionid);
 	}
 }
