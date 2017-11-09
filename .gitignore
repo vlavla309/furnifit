@@ -3,6 +3,8 @@
 RemoteSystemTempFiles/
 Servers/
 *.class
+pom.properties
 *.properties
 *.MF
+*.prefs
 
