@@ -80,7 +80,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="bottom-header navBar">
 			<div class="container">
 				<div class="logo wow fadeInDown animated" data-wow-delay=".5s">
-					<h1><a href="index.html"><img src="images/logo.jpg" alt="" /></a></h1>
+					<h1><a href="index.html"><img src="${pageContext.servletContext.contextPath }/resources/images/logo.jpg" alt="" /></a></h1>
 				</div>
 				<div class="top-nav wow fadeInRight animated" data-wow-delay=".5s">
 					<nav class="navbar navbar-default">
