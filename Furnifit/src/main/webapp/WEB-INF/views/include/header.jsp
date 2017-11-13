@@ -15,23 +15,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- bootstrap-css -->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="${pageContext.servletContext.contextPath }/resources/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <!--// bootstrap-css -->
 <!-- css -->
-<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/resources/css/style.css" type="text/css" media="all" />
 <!--// css -->
 
 <!-- font-awesome icons -->
-<link href="css/font-awesome.css" rel="stylesheet"> 
+<link href="${pageContext.servletContext.contextPath }/resources/css/font-awesome.css" rel="stylesheet"> 
 <!-- //font-awesome icons -->
 <!-- font -->
 <link href="//fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
 <link href="//fonts.googleapis.com/css?family=Dosis:300,400,500,600" rel="stylesheet">
 <!-- //font -->
-<script src="js/jquery-1.11.1.min.js"></script>
-<script src="js/bootstrap.js"></script>
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
+<script src="${pageContext.servletContext.contextPath }/resources/js/jquery-1.11.1.min.js"></script>
+<script src="${pageContext.servletContext.contextPath }/resources/js/bootstrap.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/js/move-top.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/js/easing.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -41,8 +41,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	});
 </script>	
 <!--animate-->
-<link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
-<script src="js/wow.min.js"></script>
+<link href="${pageContext.servletContext.contextPath }/resources/css/animate.css" rel="stylesheet" type="text/css" media="all">
+<script src="${pageContext.servletContext.contextPath }/resources/js/wow.min.js"></script>
 	<script>
 		 new WOW().init();
 	</script>
