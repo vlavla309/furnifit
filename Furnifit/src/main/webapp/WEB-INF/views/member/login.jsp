@@ -15,24 +15,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- bootstrap-css -->
-<link href="${pageContext.servletContext.contextPath }/resources/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="${rSrcPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <!--// bootstrap-css -->
 <!-- css -->
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/resources/css/style.css" type="text/css" media="all" />
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/resources/css/login.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${rSrcPath}/css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${rSrcPath}/css/login.css" type="text/css" media="all" />
 <!--// css -->
 
 <!-- font-awesome icons -->
-<link href="${pageContext.servletContext.contextPath }/resources/css/font-awesome.css" rel="stylesheet"> 
+<link href="${rSrcPath}/css/font-awesome.css" rel="stylesheet"> 
 <!-- //font-awesome icons -->
 <!-- font -->
 <link href="//fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
 <link href="//fonts.googleapis.com/css?family=Dosis:300,400,500,600" rel="stylesheet">
 <!-- //font -->
-<script src="${pageContext.servletContext.contextPath }/resources/js/jquery-1.11.1.min.js"></script>
-<script src="${pageContext.servletContext.contextPath }/resources/js/bootstrap.js"></script>
-<script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/js/move-top.js"></script>
-<script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/js/easing.js"></script>
+<script src="${rSrcPath}/js/jquery-1.11.1.min.js"></script>
+<script src="${rSrcPath}/js/bootstrap.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/move-top.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/easing.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -42,8 +42,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	});
 </script>	
 <!--animate-->
-<link href="${pageContext.servletContext.contextPath }/resources/css/animate.css" rel="stylesheet" type="text/css" media="all">
-<script src="${pageContext.servletContext.contextPath }/resources/js/wow.min.js"></script>
+<link href="${rSrcPath}/css/animate.css" rel="stylesheet" type="text/css" media="all">
+<script src="${rSrcPath}/js/wow.min.js"></script>
 	<script>
 		 new WOW().init();
 	</script>
@@ -81,7 +81,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="bottom-header">
 			<div class="container">
 				<div class="logo wow fadeInDown animated" data-wow-delay=".5s">
-					<h1><a href="index.html"><img src="${pageContext.servletContext.contextPath }/resources/images/logo.jpg" alt="" /></a></h1>
+					<h1><a href="index.html"><img src="${rSrcPath}/images/logo.jpg" alt="" /></a></h1>
 				</div>
 				<div class="top-nav wow fadeInRight animated" data-wow-delay=".5s">
 					<nav class="navbar navbar-default">
