@@ -1,6 +1,7 @@
 Furnifit/target/
 target/
 target/*
+target/classes/
 .metadata/
 .recommenders/
 RemoteSystemTempFiles/
