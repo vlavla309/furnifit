@@ -1,7 +1,6 @@
 package com.furnifit.member.controller;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
@@ -20,7 +19,6 @@ import org.springframework.web.util.WebUtils;
 import com.furnifit.member.domain.LoginDTO;
 import com.furnifit.member.domain.Member;
 import com.furnifit.member.service.MemberService;
-import com.furnifit.orderitems.domain.Orderitems;
 
 
 @Controller
@@ -70,13 +68,78 @@ public class MemberController {
 		return "redirect:/";
 
 	}
-
+	
+	// 회원가입
+	@RequestMapping(value = "/register", method=RequestMethod.GET)
+	public String signup() {
+		log.debug("회원가입 폼");
+		return "member/signup";
+	}
+	
+	// 회원가입 처리
+	@RequestMapping(value = "/register", method=RequestMethod.POST)
+	public String signup(Member member) throws Exception {
+		log.debug("회원가입 처리");
+		memberService.create(member);
+		return "/";
+	}
+	
+	// 회원정보 수정
+	@RequestMapping(value = "/edit", method=RequestMethod.GET)
+	public String editSignup() {
+		log.debug("회원정보 수정 폼");
+		return "member/editSignup";
+	}
+	
+	// 회원정보 수정 처리
+	@RequestMapping(value = "/edit", method=RequestMethod.POST)
+	public String editSignup(Member member, HttpSession session) throws Exception {
+		log.debug("회원정보 수정 처리");
+		Member loginMember = (Member) session.getAttribute("member");
+		String email = loginMember.getEmail();
+		
+		if(member.getPhone() == null) {
+			member.setPhone(loginMember.getPhone());
+		}
+		if(member.getPasswd() == null) {
+			member.setPasswd(loginMember.getPasswd());
+		}
+		if(member.getName() == null) {
+			member.setName(loginMember.getName());
+		}
+		
+		member.setEmail(email);
+		int check = memberService.update(member);
+		if(check == 1) {
+			session.setAttribute("member", member);
+		}
+		
+		return "/";
+	}
+	
+	// 회원 탈퇴
+	@RequestMapping(value = "/withdraw", method=RequestMethod.GET)
+	public String delete() {
+		log.debug("mypage 회원 탈퇴");
+		return "member/mypage";
+	}
+	
+	// 회원 탈퇴 처리
+	@RequestMapping(value = "/withdraw", method=RequestMethod.POST)
+	public String delete(String email, String passwd, Model model) throws Exception {
+		log.debug("회원 탈퇴 처리");
+		/*
+		Member loginMember = (Member) session.getAttribute("member");
+		String password = loginMember.getPasswd();
+		*/
+		boolean result = memberService.checkPw(email, passwd);
+		
+		if(result) {
+			memberService.delete(email);
+			return "/";
+		} else {
+			model.addAttribute("비밀번호가 일치하지 않습니다.");
+			return "member/mypage";
+		}
+	}
 }
-
-
-
-
-
-
-
-

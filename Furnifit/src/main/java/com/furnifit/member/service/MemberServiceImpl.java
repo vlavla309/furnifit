@@ -32,4 +32,24 @@ public class MemberServiceImpl implements MemberService {
 	public Member checkLoginBefore(String sessionid) throws Exception {
 		return dao.checkUserBySession(sessionid);
 	}
+
+	@Override
+	public void create(Member member) {
+		dao.create(member);
+	}
+
+	@Override
+	public int update(Member member) {
+		return update(member);
+	}
+
+	@Override
+	public void delete(String email) {
+		delete(email);
+	}
+
+	@Override
+	public boolean checkPw(String email, String passwd) {
+		return dao.checkPw(email, passwd);
+	}
 }
