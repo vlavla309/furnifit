@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 Manifest-Version: 1.0
-Built-By: vlavl
+Built-By: kosta
 Build-Jdk: 1.8.0_131
 Created-By: Maven Integration for Eclipse
 
+=======
+Manifest-Version: 1.0
+Built-By: kosta
+Build-Jdk: 1.8.0_131
+Created-By: Maven Integration for Eclipse
+
+>>>>>>> 288c849bfdc4a73bab49826e3cb6fda36e4cdfa4
