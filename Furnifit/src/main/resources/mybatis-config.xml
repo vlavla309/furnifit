@@ -6,7 +6,11 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.furnifit.member.domain.Member" alias="member"/>
+<<<<<<< HEAD
 		<typeAlias type="com.furnifit.product.domain.Product" alias="Product"/>
 		<typeAlias type="com.furnifit.productimg.domain.ProductImg" alias="ProductImg"/>
+=======
+		<typeAlias type="com.furnifit.orderitems.domain.Orderitems" alias="Orderitems"/>
+>>>>>>> 81d93e302a89412de6f23b960be2946c146861d5
 	</typeAliases>
 </configuration>

@@ -29,5 +29,31 @@
 		FROM   members
 		WHERE  sessionid = #{sessionid} 
 		       AND sessionlimit > SYSDATE
-	</select>	
+	</select>
+	
+	<insert id="create" parameterType="Member">
+		INSERT INTO members(email, passwd, name, phone)
+		VALUES (#{email}, #{passwd}, #{name}, #{phone})
+	</insert>
+	
+	<update id="update" parameterType="Member">
+		UPDATE members
+		SET passwd = #{passwd}, phone = #{phone}, name = #{name}
+		WHERE email = #{email}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM members
+		WHERE email = #{email}
+	</delete>
+	
+	<select id="checkPw" resultType="int">
+        SELECT COUNT(*) 
+        FROM members
+        WHERE email = #{email} AND passwd = #{passwd}
+    </select>
+	
+	
+	
+	
 </mapper>
