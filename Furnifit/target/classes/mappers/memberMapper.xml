@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -56,4 +57,38 @@
 	
 	
 	
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<mapper namespace="com.furnifit.member.dao.MemberDao">
+	
+	<select id="login" resultType="member" >
+		SELECT email,
+			   passwd,
+			   name,
+			   phone
+		FROM   members 
+		WHERE  email = #{email} 
+		       AND passwd = #{passwd}
+	</select>
+	
+	<update id="keepLogin" parameterType="map">
+		UPDATE members 
+		SET    sessionid = #{sessionid}, 
+		       sessionlimit = #{sessionlimit} 
+		WHERE  email = #{email}
+	</update>
+	
+	<select id="readBySession" parameterType="string" resultType="member">
+		SELECT email,
+			   passwd,
+			   name,
+			   phone
+		FROM   members
+		WHERE  sessionid = #{sessionid} 
+		       AND sessionlimit > SYSDATE
+	</select>	
+>>>>>>> 288c849bfdc4a73bab49826e3cb6fda36e4cdfa4
 </mapper>

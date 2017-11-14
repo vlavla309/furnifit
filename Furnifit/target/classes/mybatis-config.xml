@@ -6,5 +6,6 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.furnifit.member.domain.Member" alias="member"/>
+		<typeAlias type="com.furnifit.orderitems.domain.Orderitems" alias="Orderitems"/>
 	</typeAliases>
 </configuration>
