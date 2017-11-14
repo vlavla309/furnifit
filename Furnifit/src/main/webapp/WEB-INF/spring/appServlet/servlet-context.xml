@@ -28,7 +28,7 @@
 	
 	<!-- 업로드 패스 등록 -->
 	<beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="C:\\upload\\file"/>
+		<beans:constructor-arg value="C:/workspace/git/Furnifit/src/main/webapp/resources/productimg"/>
 	</beans:bean>
 	
 	
