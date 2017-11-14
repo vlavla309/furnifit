@@ -43,7 +43,7 @@
 		
 		<!-- 업로드 패스 등록 -->
 		<bean id="uploadPath" class="java.lang.String">
-			<constructor-arg value="C:\\upload\\file"/>
+			<constructor-arg value="C:/workspace/git/Furnifit/src/main/webapp/resources/productimg"/>
 		</bean>
 		
 		<context:component-scan base-package="com.furnifit"/>
