@@ -92,7 +92,7 @@ public class OrderitemsController {
 //		model.addAttribute("title", "Login - FurniFit");
 //	}
 	
-	@RequestMapping(value = "", method=RequestMethod.GET)
+	@RequestMapping(value = "/test", method=RequestMethod.GET)
 	public String list(Model model) throws Exception {
 		List<Orderitems> list = itemsService.listAll();
 		for (Orderitems orderitems : list) {
@@ -134,7 +134,3 @@ public class OrderitemsController {
 //
 //	}
 }
-
-//order get, post 폼, 작성처리
-//order/{주문번호} 삭제
-//order/{주문번호} 주문항목 상세보기
