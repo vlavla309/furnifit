@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.furnifit.orderitems.controller;
 
 import java.util.List;
@@ -82,38 +81,6 @@ public class OrderitemsController {
 //		return "redirect:/order/order-list";
 //	}
 	
-}
-=======
-package com.furnifit.orderitems.controller;
-
-import java.util.List;
-
-import javax.inject.Inject;
-
-import org.apache.log4j.Logger;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.furnifit.orderitems.domain.Orderitems;
-import com.furnifit.orderitems.service.OrderitemsService;
-
-
-/**
- * OrderitemsController 클래스
- * @author 손정화
- *
- */
-@Controller
-@RequestMapping("/order")
-public class OrderitemsController {
-	
-	Logger logger = Logger.getLogger(OrderitemsController.class);
-	
-	@Inject
-	private OrderitemsService itemsService;
-	
 	//@Inject
 	//private Product product;
 	
@@ -171,4 +138,3 @@ public class OrderitemsController {
 //order get, post 폼, 작성처리
 //order/{주문번호} 삭제
 //order/{주문번호} 주문항목 상세보기
->>>>>>> f84c1c3b056425bca1975289fe719346a3af98c0
