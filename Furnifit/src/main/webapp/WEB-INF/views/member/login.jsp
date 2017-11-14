@@ -61,8 +61,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="top-header-right wow fadeInRight animated" data-wow-delay=".5s">
 						<div class="top-header-right-info">
 							<ul>
-								<li><a href="login.html">Login</a></li>
-								<li><a href="signup.html">Sign up</a></li>
+								<li><a href="${contextPath}/member/login }">Login</a></li>
+								<li><a href="${contextPath}/member/register">Sign up</a></li>
 							</ul>
 						</div>
 						<div class="social-icons">
