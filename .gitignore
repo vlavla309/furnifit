@@ -1,3 +1,4 @@
+Furnifit/.settings/*
 target/
 .metadata/
 .recommenders/
@@ -10,4 +11,6 @@ pom.properties
 *.properties
 *.MF
 *.prefs
+*.component
+org.eclipse.wst.common.component
 
