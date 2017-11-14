@@ -1,7 +1,4 @@
-/Furnifit/target/
-**/target/
-/target/
-**/classes/
+target/
 .metadata/
 .recommenders/
 RemoteSystemTempFiles/
