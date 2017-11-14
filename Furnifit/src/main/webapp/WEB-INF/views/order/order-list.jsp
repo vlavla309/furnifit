@@ -35,7 +35,7 @@
                       <tr>
                         <td colspan="2">가구이미지</td>
                         <td colspan="7">가구명</td>
-                        <td>${item.amount }</td>
+                        <td>${item.amount}</td>
                         <td>5000원</td>
                         <td><span name="totalPrice">10000원</span></td>
                       </tr>
