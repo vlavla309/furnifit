@@ -1,9 +1,13 @@
+Furnifit/target/
+target/
+target/*
 .metadata/
 .recommenders/
 RemoteSystemTempFiles/
 Servers/
 META-INF/
 *.class
+*.classpath
 pom.properties
 *.properties
 *.MF
