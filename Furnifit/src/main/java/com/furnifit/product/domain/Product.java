@@ -1,5 +1,7 @@
 package com.furnifit.product.domain;
 
+import java.util.Arrays;
+
 /**
  * @author 한수진
  *
@@ -9,21 +11,24 @@ public class Product {
 	private int productId;  // 테이블 column :  product_id 
 	private String category;  // 선반, 쇼파, 식탁, 옷장, 책상, 침대
 	private String name;
-	private String brand;
+	private String brand;  //일룸, 까사미아, 이케아
 	private int price; 
 	private String color;  //black, white, braun , walnut, green
 	private int width;
 	private int length;
 	private int height;
 	private String description;
+	private String[] files;
 	
 	/**
 	 * 생성자 
 	 */
 	public Product() {}
 	
-	public Product(String category, String name, String brand, int price, String color, int width,
-			int length, int height, String description) {
+	
+	public Product(String category, String name, String brand, int price, String color, int width, int length,
+			int height, String description, String[] files) {
+		super();
 		this.category = category;
 		this.name = name;
 		this.brand = brand;
@@ -33,10 +38,12 @@ public class Product {
 		this.length = length;
 		this.height = height;
 		this.description = description;
+		this.files = files;
 	}
-	
+
 	public Product(int productId, String category, String name, String brand, int price, String color, int width,
-			int length, int height, String description) {
+			int length, int height, String description, String[] files) {
+		super();
 		this.productId = productId;
 		this.category = category;
 		this.name = name;
@@ -47,6 +54,7 @@ public class Product {
 		this.length = length;
 		this.height = height;
 		this.description = description;
+		this.files = files;
 	}
 
 	/**
@@ -133,6 +141,15 @@ public class Product {
 	}
 
 	
+	public String[] getFiles() {
+		return files;
+	}
+
+
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
+
 	/* 
 	 * @see Product#toString()
 	 */
@@ -140,7 +157,7 @@ public class Product {
 	public String toString() {
 		return "Product [productId=" + productId + ", category=" + category + ", name=" + name + ", brand=" + brand
 				+ ", price=" + price + ", color=" + color + ", width=" + width + ", length=" + length + ", height="
-				+ height + ", description=" + description + "]";
+				+ height + ", description=" + description + ", files=" + Arrays.toString(files) + "]";
 	}
 	
 }

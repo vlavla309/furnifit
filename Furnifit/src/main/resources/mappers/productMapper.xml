@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.furnifit.product.dao.ProductDao">
+	<insert id="create" parameterType="Product">
+		<selectKey keyProperty="productId" resultType="int" order="BEFORE">
+			select PRODUCTS_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO products
+		(product_id,
+		NAME,
+		brand,
+		description,
+		category,
+		price,
+		width,
+		length,
+		height,
+		color)
+		VALUES (#{productId},
+		#{name},
+		#{brand},
+		#{description},
+		#{category},
+		#{price},
+		#{width},
+		#{length},
+		#{height},
+		#{color})
+	</insert>
+
+	<insert id="addAttach" parameterType="map">
+		INSERT INTO product_img
+		(NAME,
+		path,
+		product_id,
+		order_no,
+		regdate)
+		VALUES (#{name},
+		#{path},
+		#{product_id},
+		#{order_no},
+		sysdate)
+	</insert>
+
+	<select id="list" resultType="Product">
+		SELECT product_id  AS "productId", 
+		category,
+		NAME,
+		brand,
+		price,
+		color,
+		width,
+		length,
+		height,
+		description
+		FROM products
+	</select>
+
+</mapper>

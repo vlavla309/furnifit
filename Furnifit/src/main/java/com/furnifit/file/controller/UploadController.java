@@ -58,28 +58,28 @@ public class UploadController {
 		return savedName;
 	}
 	
-	@RequestMapping(value="/uploadAjax", method=RequestMethod.GET)
+	@RequestMapping(value="/uploadajax", method=RequestMethod.GET)
 	public void uploadAjax() {}
 	
 	@ResponseBody
-	@RequestMapping(value="/uploadAjax", method=RequestMethod.POST, produces="text/plan;charset=UTF-8")
+	@RequestMapping(value="/uploadajax", method=RequestMethod.POST, produces="text/plan;charset=UTF-8")
 	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception{
 		
 		logger.info("originalName :"+file.getOriginalFilename());
 		logger.info("size :"+file.getSize());
 		logger.info("contentType : " + file.getContentType());
-		
+		logger.info(uploadPath);
 		return new ResponseEntity<>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.CREATED);
 	}
 	
 	@ResponseBody
-	@RequestMapping("/displayFile")
+	@RequestMapping("/displayfile")
 	public ResponseEntity<byte[]> displayFile(String fileName)throws Exception{
 		
 		InputStream in =null;
 		ResponseEntity<byte []> entity = null;
 		
-		logger.info("File Name : " + fileName);
+		logger.info("[displayFile] --> File Name : " + fileName + " [uploadPath] : "+uploadPath);
 		try {
 			String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
 			MediaType mType = MediaUtils.getMediaType(formatName);
@@ -108,7 +108,7 @@ public class UploadController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/deleteFile", method=RequestMethod.POST)
+	@RequestMapping(value="/deletefile", method=RequestMethod.POST)
 	public ResponseEntity<String> deleteFile(String fileName){
 		logger.info("delete file : " + fileName);
 		
@@ -129,7 +129,7 @@ public class UploadController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/deleteAllFiles",method=RequestMethod.POST)
+	@RequestMapping(value="/deleteallfiles",method=RequestMethod.POST)
 	public ResponseEntity<String> deleteFile(@RequestParam("file[]") String[] files){
 		
 		logger.info("delete all file : " + files);
