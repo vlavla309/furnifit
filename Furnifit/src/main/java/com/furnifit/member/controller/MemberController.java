@@ -1,6 +1,7 @@
 package com.furnifit.member.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
@@ -19,6 +20,7 @@ import org.springframework.web.util.WebUtils;
 import com.furnifit.member.domain.LoginDTO;
 import com.furnifit.member.domain.Member;
 import com.furnifit.member.service.MemberService;
+import com.furnifit.orderitems.domain.Orderitems;
 
 
 @Controller
