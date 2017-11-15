@@ -61,7 +61,7 @@ th{
 						</div>
 						<div class="large-12 column">
 							<div class="xzoom-container">
-								<c:forEach items="${product.imgs}" var="img">
+								<c:forEach items="${imglist}" var="img">
 									<c:if test="${img.orderNo==0}">
 										<img class="xzoom" id="xzoom-default" 
 											src="${rSrcPath}/productimg/${img.path}/${img.name}"
@@ -69,7 +69,7 @@ th{
 									</c:if>	
 								</c:forEach>
 								<div class="xzoom-thumbs">
-									<c:forEach items="${product.imgs}" var="img">
+									<c:forEach items="${imglist}" var="img">
 										<a href="${rSrcPath}/productimg/${img.path}/${img.name}">
 											<img class="xzoom-gallery" width="80" src="${rSrcPath}/productimg/${img.path}/${img.name}" xpreview="${rSrcPath}/productimg/${img.path}/${img.name}"
 													title="The description goes here">

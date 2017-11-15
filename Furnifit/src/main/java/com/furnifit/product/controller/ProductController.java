@@ -19,6 +19,10 @@ import com.furnifit.productimg.dao.ProductImageDao;
 import com.furnifit.productimg.domain.ProductImg;
 
 
+/**
+ * @author 한수진
+ *
+ */
 @Controller
 @RequestMapping("/product")
 public class ProductController {
@@ -37,6 +41,7 @@ public class ProductController {
 	@RequestMapping(value="", method= RequestMethod.GET)
 	public String list(Model model) {
 		List<Product> list = productsrv.list();
+		/*
 		for (Product product : list) {
 			logger.info(product);
 		}
@@ -49,11 +54,15 @@ public class ProductController {
 		model.addAttribute("list",list);
 		model.addAttribute("uploadPath", uploadPath);
 		model.addAttribute("imglist", imglist);
+		*/
+		
+		model.addAttribute("list",list);
 		return "product/list";
 	}
 	
 	@RequestMapping(value="/{productid}", method= RequestMethod.GET)
 	public String read(Model model, @PathVariable("productid") int productid) {
+		/*
 		Product product = productsrv.read(productid);
 		logger.info("[read] : "+product);
 		List<ProductImg> imglist = imgdao.productImg(productid);
@@ -62,6 +71,10 @@ public class ProductController {
 		}
 		model.addAttribute("product", product);
 		model.addAttribute("imglist", imglist);
+		*/
+		Product product = productsrv.read(productid);
+		logger.info("[read] : "+product);
+		model.addAttribute("product", product);
 		return "product/read";
 	}
 	

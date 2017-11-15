@@ -1,6 +1,9 @@
 package com.furnifit.product.domain;
 
 import java.util.Arrays;
+import java.util.List;
+
+import com.furnifit.productimg.domain.ProductImg;
 
 /**
  * @author 한수진
@@ -20,7 +23,7 @@ public class Product {
 	private String description;
 	private String regdate;
 	private String[] files;
-	
+	private List<ProductImg> imgs;
 	/**
 	 * 생성자 
 	 */
@@ -161,6 +164,18 @@ public class Product {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
+	
+	
+	
+	public List<ProductImg> getImgs() {
+		return imgs;
+	}
+
+
+	public void setImgs(List<ProductImg> imgs) {
+		this.imgs = imgs;
+	}
+
 
 	@Override
 	public String toString() {

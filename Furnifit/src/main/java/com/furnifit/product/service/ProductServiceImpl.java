@@ -9,10 +9,11 @@ import javax.inject.Inject;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.furnifit.product.dao.ProductDao;
 import com.furnifit.product.domain.Product;
+import com.furnifit.productimg.dao.ProductImageDao;
+import com.furnifit.productimg.domain.ProductImg;
 
 /**
  * @author 한수진
@@ -24,6 +25,9 @@ public class ProductServiceImpl implements ProductService {
 	@Inject
 	private ProductDao productdao;
 
+	@Inject
+	private ProductImageDao imgDao;
+	
 	Logger logger = Logger.getLogger(ProductServiceImpl.class);
 
 	@Override
@@ -55,7 +59,14 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product read(int productid) {
-		return productdao.read(productid);
+		Product product=productdao.read(productid);
+		if(product!=null) {
+			product.setImgs(imgDao.productImg(productid));
+			for (ProductImg img : product.getImgs()) {
+				logger.debug(img);
+			}
+		}
+		return product;
 	}
 
 	@Override
@@ -64,11 +75,13 @@ public class ProductServiceImpl implements ProductService {
 		
 	}
 
-
-
 	@Override
 	public List<Product> list() {
-		return productdao.list();
+		List<Product> products=productdao.list();
+		for (Product product : products) {
+			product.setImgs(imgDao.productImg(product.getProductId()));
+		}
+		return products;
 	}
 
 	
