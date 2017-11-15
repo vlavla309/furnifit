@@ -60,10 +60,7 @@ public class MemberController {
 	// 로그아웃 처리
 	@RequestMapping(value = "logout", method=RequestMethod.GET)
 	public String logOut(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
-		Cookie loginCookie = WebUtils.getCookie(request, "login");
-		loginCookie.setPath("/");
-		loginCookie.setMaxAge(0);
-		response.addCookie(loginCookie);
+		
 
 		return "redirect:/";
 
@@ -81,7 +78,7 @@ public class MemberController {
 	public String signup(Member member) throws Exception {
 		log.debug("회원가입 처리");
 		memberService.create(member);
-		return "/";
+		return "redirect:/";
 	}
 	
 	// 회원정보 수정
