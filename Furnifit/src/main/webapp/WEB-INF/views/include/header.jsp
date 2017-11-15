@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!--A Design by W3layouts
 Author: W3layout
 Author URL: http://w3layouts.com
@@ -59,10 +60,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 					<div class="top-header-right wow fadeInRight animated" data-wow-delay=".5s">
 						<div class="top-header-right-info">
-							<ul>
+                          <ul>
+                          <c:choose>
+                            <c:when test="${empty login }">
+                              <li><a href="${contextPath}/member/login">Login</a></li>
+                              <li><a href="${contextPath}/member/register">Sign up</a></li>
+                            </c:when>
+                            <c:otherwise>
+                              <li><a href="${contextPath}/member/logout">Logout</a></li>
+                              <li><a href="${contextPath}/mypage/mypage">Mypage</a></li>
+                            </c:otherwise>
+                          </c:choose>
+                          </ul>
+            
+            
+<%-- 							<ul>
 								<li><a href="login.html">Login</a></li>
-								<li><a href="{rSrcPath}/member/register">Sign up</a></li>
-							</ul>
+								<li><a href="${contextPath}/member/register">Sign up</a></li>
+                                
+							</ul> --%>
 						</div>
 						<div class="social-icons">
 							<ul>
