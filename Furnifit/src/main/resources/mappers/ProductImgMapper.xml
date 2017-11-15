@@ -6,10 +6,21 @@
 	<select id="list" resultType="ProductImg">
 		SELECT NAME,
 		path,
-		product_id AS "productId",
+		product_id AS
+		"productId",
 		order_no
 		FROM product_img
 		WHERE order_no = 0
+	</select>
+
+	<select id="productimg" parameterType="int" resultType="ProductImg">
+		SELECT NAME,
+		path,
+		product_id AS "productId",
+		order_no AS "orderNo",
+		regdate
+		FROM product_img
+		WHERE product_id = #{value}
 	</select>
 
 </mapper>

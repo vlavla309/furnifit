@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -49,6 +50,19 @@ public class ProductController {
 		model.addAttribute("uploadPath", uploadPath);
 		model.addAttribute("imglist", imglist);
 		return "product/list";
+	}
+	
+	@RequestMapping(value="/{productid}", method= RequestMethod.GET)
+	public String read(Model model, @PathVariable("productid") int productid) {
+		Product product = productsrv.read(productid);
+		logger.info("[read] : "+product);
+		List<ProductImg> imglist = imgdao.productImg(productid);
+		for (ProductImg productImg : imglist) {
+			logger.info(productImg);
+		}
+		model.addAttribute("product", product);
+		model.addAttribute("imglist", imglist);
+		return "product/read";
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)

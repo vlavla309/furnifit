@@ -146,14 +146,15 @@ th {
 						<c:forEach items="${imglist}" var="img">
 							<div class="information-grid-img">
 								<c:if test="${product.productId == img.productId}">
-									<img src="${pageContext.servletContext.contextPath}/resources/productimg/${img.path}/${img.name}"
-										alt="" class="img-responsive" style="height: 300px; width: auto"/>
-								</c:if>
+									<a href="${contextPath}/product/${product.productId}"><img src="${rSrcPath}/productimg/${img.path}/${img.name}"
+										alt="" class="img-responsive" style="height: 300px;width: auto"/></a>
+								</c:if> 
 							</div>
 						</c:forEach>
+						
 						<div class="information-grid-info">
 							<span class="badge badge-danger">Sale 40%</span>
-							<h4>${product.name}</h4>
+							<h4><a href="${contextPath}/product/${product.productId}">${product.name}</a></h4>
 							<hr>
 							<p>
 								<strong>&#8361; ${product.price} </strong> <br>
@@ -166,6 +167,7 @@ th {
 							</h3>
 							<!-- <span class="label label-danger"><i class="fa fa-heart-o" aria-hidden="true"></i></span> -->
 						</div>
+						</a>
 					</div>
 				</div>
 			</c:forEach>

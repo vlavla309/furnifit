@@ -45,19 +45,17 @@ public class ProductServiceImpl implements ProductService {
 			map.put("name", fileName.replace("s_", ""));
 			map.put("path", filePath);
 			logger.info(product.getProductId());
-			map.put("product_id", Integer.toString(product.getProductId()));
+			map.put("product_id", product.getProductId()+"");
 			map.put("order_no", count+"");
 			productdao.addAttach(map);
 			count++;
 		}
 	}
 	
-	
 
 	@Override
 	public Product read(int productid) {
-		// TODO Auto-generated method stub
-		return null;
+		return productdao.read(productid);
 	}
 
 	@Override

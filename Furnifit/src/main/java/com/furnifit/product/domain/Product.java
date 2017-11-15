@@ -18,6 +18,7 @@ public class Product {
 	private int length;
 	private int height;
 	private String description;
+	private String regdate;
 	private String[] files;
 	
 	/**
@@ -42,7 +43,7 @@ public class Product {
 	}
 
 	public Product(int productId, String category, String name, String brand, int price, String color, int width,
-			int length, int height, String description, String[] files) {
+			int length, int height, String description, String regdate, String[] files) {
 		super();
 		this.productId = productId;
 		this.category = category;
@@ -54,6 +55,7 @@ public class Product {
 		this.length = length;
 		this.height = height;
 		this.description = description;
+		this.regdate = regdate;
 		this.files = files;
 	}
 
@@ -150,14 +152,22 @@ public class Product {
 		this.files = files;
 	}
 
-	/* 
-	 * @see Product#toString()
-	 */
+	
+	public String getRegdate() {
+		return regdate;
+	}
+
+
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", category=" + category + ", name=" + name + ", brand=" + brand
 				+ ", price=" + price + ", color=" + color + ", width=" + width + ", length=" + length + ", height="
-				+ height + ", description=" + description + ", files=" + Arrays.toString(files) + "]";
+				+ height + ", description=" + description + ", regdate=" + regdate + ", files=" + Arrays.toString(files)
+				+ "]";
 	}
 	
 }
