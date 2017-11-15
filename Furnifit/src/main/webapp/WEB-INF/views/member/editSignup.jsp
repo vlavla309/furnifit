@@ -19,12 +19,12 @@
                         <h1>Modify</h1>
                       </div>
                       <div class="login-info">
-                        <form id="editSignupForm" action="member/edit" method="post">
-                          <input type="text" class="user" value="${login.email}"name="email" placeholder="Email" readonly="readonly" required="">
-                          <input type="password" name="passwd" class="lock" placeholder="Password">
-                          <input type="password" name="passwd" class="lock" placeholder="Confirm Password">
-                          <input type="text" name="name" class="user" placeholder="Name" required="">
-                          <input type="text" name="phone" class="" placeholder="Telephone" required="">
+                        <form id="editSignupForm" action="${contextPath}/member/edit" method="post">
+                          <input type="text" class="user" value="${login.email}" name="email" readonly="readonly" required="">
+                          <input type="password" pattern="^[0-9]{4}$" required name="passwd" class="lock" placeholder="Password" onclick="openConfirmid(this.form)">
+                          <input type="password" pattern="^[0-9]{4}$" required name="repasswd" class="lock" placeholder="Confirm Password">
+                          <input type="text" pattern="^[가-힣]{0,5}$" required name="name" value="${login.name}" class="user" placeholder="Name : 한글 5자리까지" required="">
+                          <input type="text" pattern="[0-9]{10}[0-9]$" required name="phone" class="" placeholder="Telephone : '-'는 제외하고 입력" required="">
                           <input type="submit" name="Modify" value="Confirmation">
                         </form>
                       </div>

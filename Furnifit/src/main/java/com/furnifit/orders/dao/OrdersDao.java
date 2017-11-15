@@ -17,18 +17,14 @@ public interface OrdersDao {
 	 * @param orders
 	 */
 	
-	// 주문할 가구 담기
-	public void create(Orders order) throws Exception;
+//	public void create(Orders order) throws Exception;
 	
-	// 이메일로 가구 조회
-	public Orders read(String email) throws Exception;
+	// 주문내역 상세보기
+	public Orders read(int orderId) throws Exception;
 	
-	// 회원별 주문할 가구 리스트
+	// 회원별 주문목록 리스트
 	public List<Orders> listAll(String email) throws Exception;
 	
-	// 주문할 가구 삭제
-	public void delete(int orderId) throws Exception;
-	
-	// 가구 수량 변경
-	public void update(Orders order) throws Exception;
+//	public void delete(int orderId) throws Exception;
+//	public void update(Orders order) throws Exception;
 }

@@ -40,8 +40,8 @@ public class OrderitemsServiceImpl implements OrderitemsService {
 	
 	// 주문할 가구 삭제
 	@Override
-	public void delete(int orderId) throws Exception {
-		dao.delete(orderId);
+	public void delete(int orderId, int productId) throws Exception {
+		dao.delete(orderId, productId);
 	}
 	
 	// 가구의 수량 변경
