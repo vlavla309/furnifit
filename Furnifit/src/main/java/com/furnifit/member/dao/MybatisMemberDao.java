@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.furnifit.member.domain.Coupon;
 import com.furnifit.member.domain.LoginDTO;
 import com.furnifit.member.domain.Member;
 
@@ -45,11 +46,12 @@ public class MybatisMemberDao implements MemberDao {
 	public int update(Member member) {
 		return sqlSession.update(NAMESPACE + ".update", member);
 	}
-
+	
 	@Override
 	public void delete(String email) {
 		sqlSession.delete(NAMESPACE + ".delete", email);
 	}
+	
 
 	@Override
 	public boolean checkPw(String email, String passwd) {
@@ -77,5 +79,6 @@ public class MybatisMemberDao implements MemberDao {
 		paramMap.put("sessionlimit", sessionlimit);
 		sqlSession.update(NAMESPACE + ".keepLogin", paramMap);
 	}
+
 
 }
