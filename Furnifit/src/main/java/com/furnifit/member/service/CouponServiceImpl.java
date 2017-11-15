@@ -25,5 +25,10 @@ public class CouponServiceImpl implements CouponService {
 	public List<Coupon> read(String email) throws Exception {
 		return daodao.read(email);
 	}
+
+	@Override
+	public List<Coupon> readAvailable(String email) throws Exception {
+		return daodao.readAvailable(email);
+	}
 	
 }
