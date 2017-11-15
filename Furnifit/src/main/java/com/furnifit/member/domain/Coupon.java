@@ -2,7 +2,7 @@ package com.furnifit.member.domain;
 
 public class Coupon {
 	private int serial;
-	private int discountRate;
+	private double discountRate;
 	private String expirationDate;
 	private String status;
 	
@@ -12,10 +12,10 @@ public class Coupon {
 	public void setSerial(int serial) {
 		this.serial = serial;
 	}
-	public int getDiscount_rate() {
+	public double getDiscountRate() {
 		return discountRate;
 	}
-	public void setDiscount_rate(int discountRate) {
+	public void setDiscountRate(double discountRate) {
 		this.discountRate = discountRate;
 	}
 	public String getExpirationDate() {
