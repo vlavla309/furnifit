@@ -11,5 +11,5 @@ public interface CouponDao {
 	*/
 	
 	// 쿠폰 확인
-	public List<Coupon> read(String email);
+	public List<Coupon> read(String email) throws Exception;
 }

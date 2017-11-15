@@ -28,7 +28,7 @@ public class MybatisCouponDao implements CouponDao {
 	@Override
 	public List<Coupon> read(String email) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".read", email);
-		// 이 주석 지우기
+		
 	}
 	
 }
