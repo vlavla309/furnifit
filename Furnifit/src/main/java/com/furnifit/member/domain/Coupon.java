@@ -2,8 +2,8 @@ package com.furnifit.member.domain;
 
 public class Coupon {
 	private int serial;
-	private int discount_rate;
-	private String expiration_date;
+	private int discountRate;
+	private String expirationDate;
 	private String status;
 	
 	public int getSerial() {
@@ -13,16 +13,16 @@ public class Coupon {
 		this.serial = serial;
 	}
 	public int getDiscount_rate() {
-		return discount_rate;
+		return discountRate;
 	}
-	public void setDiscount_rate(int discount_rate) {
-		this.discount_rate = discount_rate;
+	public void setDiscount_rate(int discountRate) {
+		this.discountRate = discountRate;
 	}
-	public String getExpiration_date() {
-		return expiration_date;
+	public String getExpirationDate() {
+		return expirationDate;
 	}
-	public void setExpiration_date(String expiration_date) {
-		this.expiration_date = expiration_date;
+	public void setExpiration_date(String expirationDate) {
+		this.expirationDate = expirationDate;
 	}
 	public String getStatus() {
 		return status;
@@ -33,7 +33,7 @@ public class Coupon {
 	
 	@Override
 	public String toString() {
-		return "Coupon [serial=" + serial + ", discount_rate=" + discount_rate + ", expiration_date=" + expiration_date
+		return "Coupon [serial=" + serial + ", discountRate=" + discountRate + ", expirationDate=" + expirationDate
 				+ ", status=" + status + "]";
 	}
 	
