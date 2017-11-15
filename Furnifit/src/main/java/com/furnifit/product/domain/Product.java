@@ -1,6 +1,9 @@
 package com.furnifit.product.domain;
 
 import java.util.Arrays;
+import java.util.List;
+
+import com.furnifit.productimg.domain.ProductImg;
 
 /**
  * @author 한수진
@@ -18,8 +21,9 @@ public class Product {
 	private int length;
 	private int height;
 	private String description;
+	private String regdate;
 	private String[] files;
-	
+	private List<ProductImg> imgs;
 	/**
 	 * 생성자 
 	 */
@@ -42,7 +46,7 @@ public class Product {
 	}
 
 	public Product(int productId, String category, String name, String brand, int price, String color, int width,
-			int length, int height, String description, String[] files) {
+			int length, int height, String description, String regdate, String[] files) {
 		super();
 		this.productId = productId;
 		this.category = category;
@@ -54,6 +58,7 @@ public class Product {
 		this.length = length;
 		this.height = height;
 		this.description = description;
+		this.regdate = regdate;
 		this.files = files;
 	}
 
@@ -150,14 +155,34 @@ public class Product {
 		this.files = files;
 	}
 
-	/* 
-	 * @see Product#toString()
-	 */
+	
+	public String getRegdate() {
+		return regdate;
+	}
+
+
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
+	
+	
+	
+	public List<ProductImg> getImgs() {
+		return imgs;
+	}
+
+
+	public void setImgs(List<ProductImg> imgs) {
+		this.imgs = imgs;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", category=" + category + ", name=" + name + ", brand=" + brand
 				+ ", price=" + price + ", color=" + color + ", width=" + width + ", length=" + length + ", height="
-				+ height + ", description=" + description + ", files=" + Arrays.toString(files) + "]";
+				+ height + ", description=" + description + ", regdate=" + regdate + ", files=" + Arrays.toString(files)
+				+ "]";
 	}
 	
 }

@@ -143,9 +143,9 @@ th {
 			<c:forEach items="${list}" var="product">
 				<div class="col-md-4 information-grid pdbotton" data-wow-delay=".5s">
 					<div class="information-info">
-						<c:forEach items="${product.imgs}" var="img">
+						<c:forEach items="${imglist}" var="img">
 							<div class="information-grid-img">
-								<c:if test="${product.productId == img.productId  && img.orderNo==0}">
+								<c:if test="${product.productId == img.productId}">
 									<a href="${contextPath}/product/${product.productId}"><img src="${rSrcPath}/productimg/${img.path}/${img.name}"
 										alt="" class="img-responsive" style="height: 300px;width: auto"/></a>
 								</c:if> 

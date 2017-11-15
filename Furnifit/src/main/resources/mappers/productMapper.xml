@@ -57,5 +57,21 @@
 		description
 		FROM products
 	</select>
+	
+	<select id="read" resultType="Product" parameterType="int">
+		SELECT product_id  AS "productId",
+		category,
+		NAME,
+		brand,
+		price,
+		color,
+		width,
+		length,
+		height,
+		description,
+		REGDATE
+		FROM products
+		where product_id = #{value}
+	</select>
 
 </mapper>

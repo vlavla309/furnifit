@@ -29,8 +29,7 @@ public class MybatisProductDao implements ProductDao {
 
 	@Override
 	public Product read(int productid) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlsession.selectOne(namespace+".read", productid);
 	}
 
 	@Override
