@@ -30,5 +30,11 @@ public class MybatisCouponDao implements CouponDao {
 		return sqlSession.selectList(NAMESPACE + ".read", email);
 		
 	}
+
+
+	@Override
+	public List<Coupon> readAvailable(String email) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".readAvailable", email);
+	}
 	
 }

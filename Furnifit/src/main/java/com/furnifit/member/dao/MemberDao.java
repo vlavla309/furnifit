@@ -2,6 +2,7 @@ package com.furnifit.member.dao;
 
 import java.util.Date;
 
+import com.furnifit.member.domain.Coupon;
 import com.furnifit.member.domain.LoginDTO;
 import com.furnifit.member.domain.Member;
 
@@ -30,6 +31,7 @@ public interface MemberDao {
 	// 회원정보 수정
 	public int update(Member member);
 	
+		
 	// 회원 탈퇴
 	public void delete(String email);
 	

@@ -40,12 +40,12 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int update(Member member) {
-		return update(member);
+		return dao.update(member);
 	}
 
 	@Override
 	public void delete(String email) {
-		delete(email);
+		dao.delete(email);
 	}
 
 	@Override
