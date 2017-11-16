@@ -17,6 +17,8 @@ import com.furnifit.product.domain.Product;
 import com.furnifit.product.service.ProductService;
 import com.furnifit.productimg.dao.ProductImageDao;
 import com.furnifit.productimg.domain.ProductImg;
+import com.furnifit.wishlist.domain.Wishlist;
+import com.furnifit.wishlist.service.WishlistService;
 
 
 /**
@@ -38,9 +40,13 @@ public class ProductController {
 	@Inject
 	private ProductImageDao imgdao;
 	
+	@Inject
+	private WishlistService wishsrv;
+	
 	@RequestMapping(value="", method= RequestMethod.GET)
 	public String list(Model model) {
 		List<Product> list = productsrv.list();
+		List<Wishlist> wishlist = wishsrv.read();
 		/*
 		for (Product product : list) {
 			logger.info(product);
@@ -57,6 +63,7 @@ public class ProductController {
 		*/
 		
 		model.addAttribute("list",list);
+		model.addAttribute("wishlist",wishlist);
 		return "product/list";
 	}
 	

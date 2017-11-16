@@ -4,6 +4,39 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<script>
+	$(document).on("click", ".wishbtn", function(event) {
+		event.preventDefault();
+		var wishbtn = $(this);
+		var productId = $(this).attr("href");
+		$.ajax({
+			url : '${contextPath}/wishlist/' + productId,
+			type : 'post',
+			success : function(data) {
+				alert("추가성공")
+				wishbtn.attr('class', 'wishdeletebtn')
+				wishbtn.children().children().attr('class','fa fa-heart')
+			}
+		});
+	});
+	
+	
+	$(document).on("click", ".wishdeletebtn", function(event) {
+		event.preventDefault();
+		var wishdeletebtn = $(this);
+		var productId = $(this).attr("href");
+		$.ajax({
+			url : '${contextPath}/wishlist/' + productId,
+			type : 'DELETE',
+			success : function(data) {
+				alert("삭제성공")
+				wishdeletebtn.attr('class', 'wishbtn')
+				wishdeletebtn.children().children().attr('class','fa fa-heart-o')
+			}
+		});
+	});
+</script>
+
 <style>
 .information-grid-info {
 	height: 250px;
@@ -145,16 +178,20 @@ th {
 					<div class="information-info">
 						<c:forEach items="${product.imgs}" var="img">
 							<div class="information-grid-img">
-								<c:if test="${product.productId == img.productId  && img.orderNo==0}">
-									<a href="${contextPath}/product/${product.productId}"><img src="${rSrcPath}/productimg/${img.path}/${img.name}"
-										alt="" class="img-responsive" style="height: 300px;width: auto"/></a>
-								</c:if> 
+								<c:if
+									test="${product.productId == img.productId  && img.orderNo==0}">
+									<a href="${product.productId}"><img
+										src="${rSrcPath}/productimg/${img.path}/${img.name}" alt=""
+										class="img-responsive" style="height: 300px; width: auto" /></a>
+								</c:if>
 							</div>
 						</c:forEach>
-						
+
 						<div class="information-grid-info">
 							<span class="badge badge-danger">Sale 40%</span>
-							<h4><a href="${contextPath}/product/${product.productId}">${product.name}</a></h4>
+							<h4>
+								<a href="${contextPath}/product/${product.productId}">${product.name}</a>
+							</h4>
 							<hr>
 							<p>
 								<strong>&#8361; ${product.price} </strong> <br>
@@ -162,10 +199,38 @@ th {
 									* 세로 * 높이 mm)</small>
 							</p>
 							<h3>
-								<span class="label label-danger"><i class="fa fa-heart"
-									aria-hidden="true"></i></span>
+								<c:choose>
+									<c:when test="${empty login || login eq null }">
+										<a href="${product.productId}" class="wishbtn"> 
+											<span class="label label-danger"> <i class="fa fa-heart-o" aria-hidden="true"></i></span>
+										</a>
+									</c:when>
+									<c:otherwise>
+										<!-- 로그인을 하면 -->
+										<c:set var="doneLoop" value="false" />
+										<c:set var="find" value="false" />
+										<c:forEach items="${wishlist}" var="wish" varStatus="status">
+											<c:if test="${not doneLoop}">
+												<c:if
+													test="${(wish.productId==product.productId)&&(wish.email==login.email)}">
+													<a href="${product.productId}" class="wishdeletebtn">
+														<span class="label label-danger"> 
+															<i class="fa fa-heart" aria-hidden="true"></i>
+														</span>
+													</a>
+													<c:set var="doneLoop" value="true" />
+													<c:set var="find" value="true" />
+												</c:if>
+											</c:if>
+										</c:forEach>
+										<c:if test="${not find}">
+											<a href="${product.productId}" class="wishbtn">
+												<span class="label label-danger"> <i class="fa fa-heart-o" aria-hidden="true"></i></span>
+											</a>
+										</c:if>
+									</c:otherwise>
+								</c:choose>
 							</h3>
-							<!-- <span class="label label-danger"><i class="fa fa-heart-o" aria-hidden="true"></i></span> -->
 						</div>
 						</a>
 					</div>

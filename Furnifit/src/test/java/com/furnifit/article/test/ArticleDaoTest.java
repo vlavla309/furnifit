@@ -1,4 +1,4 @@
-package com.furcnifit.article.test;
+package com.furnifit.article.test;
 
 import javax.inject.Inject;
 
