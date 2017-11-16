@@ -27,9 +27,15 @@
 	</beans:bean>
 	
 	<!-- 업로드 패스 등록 -->
-	<beans:bean id="uploadPath" class="java.lang.String">
+	<beans:bean id="productImgPath" class="java.lang.String">
 		<beans:constructor-arg value="C:/workspace/git/Furnifit/src/main/webapp/resources/productimg"/>
 	</beans:bean>
+	
+	<!-- 업로드 패스 등록 -->
+	<beans:bean id="articleImgPath" class="java.lang.String">
+		<beans:constructor-arg value="C:/workspace/git/Furnifit/src/main/webapp/resources/articleimg"/>
+	</beans:bean>
+	
 	
 	
 	<!-- 로그인 인터셉터 등록 -->

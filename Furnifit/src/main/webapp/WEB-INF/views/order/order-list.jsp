@@ -47,7 +47,7 @@ li { list-style-type: none; }
         <div class="table-responsive" >
           <table class="table">
             <tbody>
-              <tr><td><img class="img-size" alt="" src="images/user.png"></td></tr>
+              <tr><td><img class="img-size" alt="" src="${rSrcPath}/images/user.png"></td></tr>
             </tbody>
           </table>
           </div>
@@ -56,8 +56,8 @@ li { list-style-type: none; }
         <div class="table-responsive" >
           <table class="table">
             <tbody>
-              <tr><td>이메일 : bangry@naver.com</td></tr>
-              <tr><td>이름 : 방그리</td></tr>
+              <tr><td>이메일 : ${member.email}</td></tr>
+              <tr><td>이름 : ${member.name}</td></tr>
               <tr><td>쿠폰 : 2개 보유</td></tr>
               <tr><td>주문내역 : 2회</td></tr>
             </tbody>
@@ -70,14 +70,12 @@ li { list-style-type: none; }
     <div class="col-md-12">
       <div class="box">
           <div class="text-center" id="box">
+           <c:forEach items="${orderlist}" var="list">
             <dl>
-              <dt class="accordion">1 / bangry님의 주문목록 / 2017-11-13<<div class="text-right"><button type="submit" class="btn btn-primary text-right">상세보기</button></div></dt>
-              <dt class="accordion">2 / bangry님의 주문목록 / 2017-11-13<<div class="text-right"><button type="submit" class="btn btn-primary text-right">상세보기</button></div></dt>
-              <dt class="accordion">3 / bangry님의 주문목록 / 2017-11-13<<div class="text-right"><button type="submit" class="btn btn-primary text-right">상세보기</button></div></dt>
-              <dt class="accordion">4 / bangry님의 주문목록 / 2017-11-13<<div class="text-right"><button type="submit" class="btn btn-primary text-right">상세보기</button></div></dt>
-              <dt class="accordion">5 / bangry님의 주문목록 / 2017-11-13<<div class="text-right"><button type="submit" class="btn btn-primary text-right">상세보기</button></div></dt>
-              <dt class="accordion">6 / bangry님의 주문목록 / 2017-11-13<<div class="text-right"><button type="submit" class="btn btn-primary text-right">상세보기</button></div></dt>
+              <dt class="accordion">${list.orderId} / ${list.email}님의 주문목록 / ${list.regdate}
+              <div class="text-right"><button type="submit" class="btn btn-primary text-right"><a href="${list.orderId}">상세보기</a></button></div></dt>
             </dl>
+            </c:forEach>
           </div>
       </div>
 

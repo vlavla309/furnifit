@@ -72,7 +72,7 @@
         </div>
       </div>
       <div class="box-footer text-center">
-          <button type="submit" class="btn btn-primary" style="height: 40px">마이페이지로</button>
+          <button type="submit" class="btn btn-primary" style="height: 40px">목록으로</button>
       </div>
       <!-- /.box -->
       <!-- /.col-md-9 -->

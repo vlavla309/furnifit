@@ -18,7 +18,7 @@ public interface OrderitemsService {
 	public Orderitems read(int productId) throws Exception;
 	
 	// 회원별 주문할 리스트
-	public List<Orderitems> listAll() throws Exception;
+	public List<Orderitems> listAll(String email) throws Exception;
 	
 	// 주문할 가구 삭제
 	public void delete(int orderId, int productId) throws Exception;

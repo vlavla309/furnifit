@@ -1,5 +1,7 @@
 package com.furnifit.article.test;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.log4j.Logger;
@@ -32,12 +34,21 @@ public class ArticleDaoTest {
 		dao.create(article); 
 	}
 	 
-	@Test
+//	@Test
 	public void testRead() throws Exception {
 		Article article = dao.read(5);
 		logger.info(article);
 	}
-
-
-
+	
+//	@Test
+	public void testlistAll() throws Exception {
+		List<Article> allList = dao.listAll();
+		for (Article list : allList) {
+			logger.info(list);
+		}
+	}
+	
+	
+	
+	
 }

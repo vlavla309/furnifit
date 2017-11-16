@@ -1,4 +1,4 @@
-package com.furnifit.orderitems.dao;
+package com.furnifit.plan.dao;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import com.furnifit.orderitems.domain.Orderitems;
  * @author 손정화
  *
  */
-public interface OrderitemsDao {
+public interface PlanDao {
 	
 	/**
 	 * orderitems 추가

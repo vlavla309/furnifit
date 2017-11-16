@@ -211,8 +211,7 @@ th {
 										<c:set var="find" value="false" />
 										<c:forEach items="${wishlist}" var="wish" varStatus="status">
 											<c:if test="${not doneLoop}">
-												<c:if
-													test="${(wish.productId==product.productId)&&(wish.email==login.email)}">
+												<c:if test="${(wish.productId==product.productId)&&(wish.email==login.email)}">
 													<a href="${product.productId}" class="wishdeletebtn">
 														<span class="label label-danger"> 
 															<i class="fa fa-heart" aria-hidden="true"></i>
