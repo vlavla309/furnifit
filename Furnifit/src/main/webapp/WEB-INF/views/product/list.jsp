@@ -180,7 +180,7 @@ th {
 							<div class="information-grid-img">
 								<c:if
 									test="${product.productId == img.productId  && img.orderNo==0}">
-									<a href="${product.productId}"><img
+									<a href="${contextPath}/product/${product.productId}"><img
 										src="${rSrcPath}/productimg/${img.path}/${img.name}" alt=""
 										class="img-responsive" style="height: 300px; width: auto" /></a>
 								</c:if>
