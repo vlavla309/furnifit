@@ -16,4 +16,6 @@ public interface WishlistDao {
 	public List<Wishlist> read();
 
 	public void delete(Map<String, String> map);
+	
+	public List<Wishlist> userwishlist(Map<String, String> map);
 }

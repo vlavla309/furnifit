@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 import com.furnifit.wishlist.dao.WishlistDao;
 import com.furnifit.wishlist.domain.Wishlist;
 
+/**
+ * @author 한수진
+ *
+ */
 @Service
 public class WishlistServiceImpl implements WishlistService {
 
@@ -33,6 +37,11 @@ public class WishlistServiceImpl implements WishlistService {
 	@Override
 	public void delete(Map<String, String> map) {
 		wishdao.delete(map);
+	}
+
+	@Override
+	public List<Wishlist> userwishlist(Map<String, String> map) {
+		return wishdao.userwishlist(map);
 	}
 
 }
