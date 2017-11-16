@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.furnifit.member.dao.CouponDao;
 import com.furnifit.member.dao.MemberDao;
+import com.furnifit.member.domain.Coupon;
 import com.furnifit.member.domain.Member;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,24 +26,24 @@ public class MemberDaoTest {
 	//@Test
 	public void testCreate() throws Exception {
 		Member member = new Member();
-		member.setEmail("aatest3@gmail.com");
+		member.setEmail("aatest7@gmail.com");
 		member.setPasswd("1111");
 		member.setName("방그리");
 		member.setPhone("01011111111");
 		dao.create(member);
 	}
 
-	//@Test
+	@Test
 	public void testUpdate() throws Exception {
 		Member member = new Member();
-		member.setEmail("aatest@gmail.com");
+		member.setEmail("aatest123@gmail.com");
 		member.setPasswd("3333");
 		member.setName("방그리test2");
 		member.setPhone("01022222222");
 		dao.update(member);
 	}
 	
-	@Test
+//	@Test
 	public void testDelete() throws Exception {
 		//dao.delete();
 	}
