@@ -39,12 +39,16 @@
 		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 			<property name="dataSource" ref="dataSource"/>
 		</bean>
-		
-		
-		<!-- 업로드 패스 등록 -->
-		<bean id="uploadPath" class="java.lang.String">
-			<constructor-arg value="C:/workspace/git/Furnifit/src/main/webapp/resources/productimg"/>
-		</bean>
+	
+			<!-- 업로드 패스 등록 -->
+	<bean id="productImgPath" class="java.lang.String">
+		<constructor-arg value="C:/workspace/git/Furnifit/src/main/webapp/resources/productimg"/>
+	</bean>
+	
+	<!-- 업로드 패스 등록 -->
+	<bean id="articleImgPath" class="java.lang.String">
+		<constructor-arg value="C:/workspace/git/Furnifit/src/main/webapp/resources/articleimg"/>
+	</bean>
 		
 		<context:component-scan base-package="com.furnifit"/>
 		

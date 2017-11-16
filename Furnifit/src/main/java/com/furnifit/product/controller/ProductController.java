@@ -24,7 +24,7 @@ public class ProductController {
 	
 	Logger logger = Logger.getLogger(ProductController.class);
 	
-	@Resource(name = "uploadPath")
+	@Resource(name = "productImgPath")
 	private String uploadPath;
 	
 	@Inject
