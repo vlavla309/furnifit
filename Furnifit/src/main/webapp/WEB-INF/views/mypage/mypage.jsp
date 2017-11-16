@@ -111,8 +111,6 @@
                   
                   <div class="juicy">
                   <a href="${pageContext.servletContext.contextPath}" class="juicy"><img src="${rSrcPath}/images/layout.png"  class="img2"/></a>
-                  <a href="order/order-list" class="juicy"><img src="${rSrcPath}/images/ordersheet.png" class="img2"/></a>
-                  <a href="${pageContext.servletContext.contextPath}" class="juicy"><img src="${rSrcPath}/images/management.png" class="img2"/></a>
                   <a href="${pageContext.servletContext.contextPath}" class="juicy"><img src="${rSrcPath}/images/ordersheet.png" class="img2"/></a>
                   <a href="${contextPath}/member/edit" class="juicy"><img src="${rSrcPath}/images/management.png" class="img2"/></a>
                   </div>
