@@ -57,7 +57,7 @@
   color: #fcfcfc;
 }
 .table > tbody > tr.fontfont  {
-  font-size: 1.01em;
+  font-size: 1.007em;
 }
 .table > tbody > tr.fontfont > td.textFont > span#textColor2  {
   background-color: #1a1c1a;
