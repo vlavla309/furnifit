@@ -52,6 +52,7 @@ box-shadow: none!important;
 }
 
 </style>
+<<<<<<< HEAD
 
 
 <!-- blog -->
@@ -79,6 +80,50 @@ box-shadow: none!important;
     <div class="col-md-12 information-grid pdbotton" data-wow-delay=".5s">
       <c:forEach items="${list}" var="article">
         <div class="information-info col-md-4 articleDiv" ">
+=======
+	
+	
+	<!-- blog -->
+		<div class="blog">
+			<!-- container -->
+			<div class="container">
+				<div class="blog-heading w3layouts">
+					
+					<strong><font style="font-size: 23pt; color: #8A4B08">공유배치도 게시판</font></strong>
+					<p>회원들이 작성한 배치도를 공유할수 있는 게시판입니다.</p>
+                      <div class="form-inline" ><br>
+                <select style="margin-left: 600px; width: 80px; height: 27px; border-radius: 10px" >
+                  <option value="">정렬</option>
+                  <option value="">최신순</option>
+                  <option value="">추천순</option>
+                  <option value="">조회순</option>
+                </select>
+              </div>
+				</div>
+        
+        <div class="gallery-grids" >
+          <div class="col-md-4 gallery-grid wow fadeInUp animated" data-wow-delay=".5s" style="border: 1px dashed; border-color: #B45F04;">
+            <div class="grid">
+              <figure class="effect-apollo">
+                <a class="example-image-link" href="images/g1.jpg" data-lightbox="example-set" data-title="">
+                  <img src="images/g1.jpg" alt="" />
+                </a>
+   
+              </figure>
+              <p> <a href="#">공유배치도입니다.</a>&nbsp;&nbsp;&nbsp;<span><a href="#">날짜</a></span></p>
+              <a>♥</a>
+            </div>
+          </div>
+          
+          <div class="clearfix"> </div>
+          <script src="js/lightbox-plus-jquery.min.js"> </script>
+        </div>
+        
+          <!-- 검색 -->
+          <br>
+          <br>
+          <br>
+>>>>>>> 635d3a851c89ca7bfb4eae07d2c0ffada61ec377
           <br>
 
           <div class="information-grid-info articleDiv2" >

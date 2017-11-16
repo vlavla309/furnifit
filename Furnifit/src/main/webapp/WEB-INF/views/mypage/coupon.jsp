@@ -48,6 +48,22 @@
   }
 }
 </style>
+<style>
+.table > thead > tr.colorcolor {
+  /* background-color: #005f91; */
+  background-color: #042856;
+}
+.table > thead > tr.colorcolor > th.textColor {
+  color: #fcfcfc;
+}
+.table > tbody > tr.fontfont  {
+  font-size: 1.007em;
+}
+.table > tbody > tr.fontfont > td.textFont > span#textColor2  {
+  background-color: #1a1c1a;
+}
+
+</style>
 
 	<!-- blog -->
 		<div class="blog">
@@ -64,36 +80,24 @@
                   </span>
                 </p>
                 <br><br><br><br>
-
+                
                 <table class="table table-striped">
                   <caption></caption>
                   <thead>
-                  <tr>
-                    <th>serial</th>
-                    <th>할인율</th>
-                    <th>유효기간</th>
-                    <th>쿠폰상태</th>
+                  <tr class="colorcolor">
+                    <th class="textColor">serial</th>
+                    <th class="textColor">할인율</th>
+                    <th class="textColor">유효기간</th>
+                    <th class="textColor">쿠폰상태</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>12123</td>
-                    <td>10%</td>
-                    <td>17.11.01 ~ 18.03.21</td>
-                    <td>모릅니다.</td>
-                  </tr>
-                  <tr>
-                    <td>12312</td>
-                    <td>데이터2</td>
-                    <td>데이터3</td>
-                    <td>데이터4</td>
-                  </tr>
                   <c:forEach items="${coupons}" var="coupon">
-                  <tr>
+                  <tr class="fontfont">
                     <td>${coupon.serial}</td>
                     <td>${coupon.discountRate}%</td>
                     <td>${coupon.expirationDate}</td>
-                    <td><span class="badge bg-red">${coupon.status }</span></td>
+                    <td class="textFont"><span id="textColor2" class="badge bg-red">${coupon.status }</span></td>
                   </tr>
             </c:forEach> 
                   </tbody>

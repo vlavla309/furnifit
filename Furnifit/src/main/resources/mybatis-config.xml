@@ -3,7 +3,7 @@
                           "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <!-- MyBatis XML 설정 파일(MyBatis설정의 중앙 허브 역할) -->
-<configuration>
+<configuration> 
 	<typeAliases>
 		<typeAlias type="com.furnifit.member.domain.Member" alias="member"/>
 		<typeAlias type="com.furnifit.member.domain.Coupon" alias="coupon"/>
@@ -12,8 +12,8 @@
 		<typeAlias type="com.furnifit.orderitems.domain.Orderitems" alias="Orderitems"/>
 		<typeAlias type="com.furnifit.orders.domain.Orders" alias="Orders"/>
 		<typeAlias type="com.furnifit.article.domain.Article" alias="Article"/>
+		<typeAlias type="com.furnifit.wishlist.domain.Wishlist" alias="Wishlist"/>
 		<typeAlias type="com.furnifit.planitem.domain.PlanItem" alias="PlanItem"/>
 		<typeAlias type="com.furnifit.article.domain.Furniture" alias="Furniture"/>
-
 	</typeAliases>
 </configuration>

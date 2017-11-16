@@ -49,16 +49,18 @@ li { list-style-type: none; }
         <div class="table-responsive">
           <table class="table">
             <tbody>
+              <c:forEach items="${list}" var="item">
               <tr>
                 <td><strong class="table-font">가로</strong></td>
-                <td><input type="text" class="btn form-control table-text"></td>
+                <td><input type="text" class="btn form-control table-text">${itemlist.width}</td>
                 <td><strong class="table-font">세로</strong></td>
-                <td><input type="text" class="btn form-control table-text"></td>
+                <td><input type="text" class="btn form-control table-text">${itemlist.height}</td>
                 <td><strong class="table-font">높이</strong></td>
-                <td><input type="text" class="btn form-control table-text"></td>
+                <td><input type="text" class="btn form-control table-text">${itemlist.length}</td>
                 <td><strong class="table-font">평수</strong></td>
-                <td><input type="text" class="btn form-control table-text"></td>
+                <td><input type="text" class="btn form-control table-text">${itemlist.acreage}</td>
               </tr>
+              </c:forEach>
             </tbody>
           </table>
         </div>
@@ -70,7 +72,7 @@ li { list-style-type: none; }
         <div class="table-responsive">
           <table class="table">
             <tbody>
-              <tr><td class="text-center"><img alt="" src="images/10.jpg" class="img-size"></td></tr>
+              <tr><td class="text-center"><img alt="" src="${itemlist.image}" class="img-size"></td></tr>
             </tbody>
           </table>
         </div>
