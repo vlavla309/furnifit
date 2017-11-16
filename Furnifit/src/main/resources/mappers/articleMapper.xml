@@ -6,6 +6,11 @@
 
 	
 	<insert id="create" parameterType="Article">
+
+	 <selectKey keyProperty="articleId" resultType="int" order="BEFORE">
+             select articles_seq.nextval
+             FROM DUAL
+      </selectKey>
 	
 	
 	 INSERT INTO articles
@@ -16,7 +21,7 @@
 	 			  content	 
 	 			 )
 	 VALUES      (
-	 			  articles_seq.nextval,
+	 			  #{articleId},
 	 			  #{email},
 	 			  #{planitemId},
 	 			  #{title},
