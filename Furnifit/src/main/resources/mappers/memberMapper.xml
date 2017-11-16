@@ -52,13 +52,5 @@
         FROM members
         WHERE email = #{email} AND passwd = #{passwd}
     </select>
-<<<<<<< HEAD
-	
-	
-	
-	
-	
-=======
-    
->>>>>>> 2c102aa86cd3811ac3afd65204bf8447ea52e3e3
+
 </mapper>
