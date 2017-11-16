@@ -51,13 +51,13 @@ li { list-style-type: none; }
             <tbody>
               <tr>
                 <td><strong class="table-font">가로</strong></td>
-                <td><input type="text" class="btn form-control table-text"></td>
+                <td><input type="text" class="btn form-control table-text">${itemlist.width}</td>
                 <td><strong class="table-font">세로</strong></td>
-                <td><input type="text" class="btn form-control table-text"></td>
+                <td><input type="text" class="btn form-control table-text">${itemlist.height}</td>
                 <td><strong class="table-font">높이</strong></td>
-                <td><input type="text" class="btn form-control table-text"></td>
+                <td><input type="text" class="btn form-control table-text">${itemlist.length}</td>
                 <td><strong class="table-font">평수</strong></td>
-                <td><input type="text" class="btn form-control table-text"></td>
+                <td><input type="text" class="btn form-control table-text">${itemlist.acreage}</td>
               </tr>
             </tbody>
           </table>
