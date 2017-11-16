@@ -62,7 +62,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="top-header-right-info">
                           <ul>
                           <c:choose>
-                            <c:when test="${empty login }">
+                            <c:when test="${empty login }"> 
                               <li><a href="${contextPath}/member/login">Login</a></li>
                               <li><a href="${contextPath}/member/register">Sign up</a></li>
                             </c:when>
