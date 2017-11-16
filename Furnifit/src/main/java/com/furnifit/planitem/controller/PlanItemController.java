@@ -1,4 +1,4 @@
-package com.furnifit.orders.controller;
+package com.furnifit.planitem.controller;
 
 import java.util.List;
 
@@ -29,9 +29,9 @@ import com.furnifit.product.service.ProductService;
  */
 @Controller
 @RequestMapping("/mypage/order")
-public class OrdersController {
+public class PlanItemController {
 	
-	Logger logger = Logger.getLogger(OrdersController.class);
+	Logger logger = Logger.getLogger(PlanItemController.class);
 	
 	@Inject
 	private OrdersService ordersService;

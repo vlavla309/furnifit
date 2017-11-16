@@ -83,11 +83,16 @@ $(function() {
           url : 'order/'+orderId+'/'+productId,
           type : 'delete',
           success : function(data) {
-        	  alert("성공");
+        	  if($(event.target).val() == $(event.target).parent().parent().val()){
+        		  $("#delete").remove();
+        	  }
           }
       });
     });
-   
+    
+    $(document).on("click", "#goOrder", function(){  
+    	alert("주문이 완료되었습니다.");
+    });
     
     // 주문하기
    	/*$("#goOrder").click(function() {
@@ -137,7 +142,7 @@ $(function() {
               </thead>
               <tbody>
                 <c:forEach items="${list}" var="item">
-                  <tr>
+                  <tr value="${item.productId}">
                     <td colspan="2">
                         <c:forEach items="${product.imgs}" var="img">
                           <c:if test="${item.productId == img.productId && img.orderNo==0}">
@@ -161,7 +166,6 @@ $(function() {
                       </c:if>
                     </c:if>
                     </c:forEach>
-                    
                     
                   </tr>
                  </c:forEach>
@@ -205,7 +209,7 @@ $(function() {
                 <div class="table-responsive">
                   <table class="table">
                     <tbody>
-                      <tr><br><br><td><p class="text-muted"><strong>${list.size()}개의 가구를 주문합니다.</strong></p></td></tr>
+                      <tr><br><br><td><p class="text-muted"><strong>${list.size()}종류의 가구를 주문합니다.</strong></p></td></tr>
                       <tr><td style="color: red"><h3>총 합계</h3></td></tr>
                       <tr><td><h3><span id="total">원</span></h3></td></tr>
                     </tbody>
@@ -216,7 +220,7 @@ $(function() {
           </div>
         </div>
         <div class="box-footer text-center">
-            <button type="submit" class="btn btn-primary" id="goOrder">주문하기</button>
+            <button type="submit" class="btn btn-primary" id="goOrder"><a href="mypage/order">주문하기</a></button>
         </div>
       </div>
       <!-- /.box -->

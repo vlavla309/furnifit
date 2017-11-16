@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -13,15 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.furnifit.member.dao.CouponDao;
 import com.furnifit.member.domain.Coupon;
+import com.furnifit.member.domain.Member;
 import com.furnifit.member.service.CouponService;
 import com.furnifit.orderitems.domain.Orderitems;
 import com.furnifit.orderitems.service.OrderitemsService;
-import com.furnifit.product.dao.ProductDao;
 import com.furnifit.product.domain.Product;
 import com.furnifit.product.service.ProductService;
 import com.furnifit.productimg.dao.ProductImageDao;
@@ -51,8 +49,12 @@ public class OrderitemsController {
 	
 	/** 주문할 가구 리스트  */
 	@RequestMapping(value = "", method=RequestMethod.GET)
-	public String listAll(Model model) throws Exception {
-		List<Orderitems> list = itemsService.listAll();
+	public String listAll(Model model, HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();   
+		Member member = (Member) session.getAttribute("login");
+		
+		List<Orderitems> list = itemsService.listAll(member.getEmail());
 		for (Orderitems orderitems : list) {
 			logger.info(orderitems);
 		}
@@ -67,9 +69,7 @@ public class OrderitemsController {
 			logger.info(productImg);
 		}
 		
-		String email = "dd@naver.com";
-		
-		List<Coupon> couponList =  couponService.read(email);
+		List<Coupon> couponList =  couponService.read(member.getEmail());
 		
 		model.addAttribute("list", list);
 		model.addAttribute("prolist", proList);
@@ -103,14 +103,6 @@ public class OrderitemsController {
 		public void read(@RequestParam("productId") int productId, Model model)throws Exception{
 			model.addAttribute(itemsService.read(productId));
 		}*/
-	
-	
-	// 주문서 작성 페이지
-//	@RequestMapping(value = "", method=RequestMethod.GET)
-//	public void formGet(@ModelAttribute("dto") Orderitems dto, Model model) throws Exception {
-//		model.addAttribute("title", "Login - FurniFit");
-//	}
-	
 	
 //	@RequestMapping(value = "", method=RequestMethod.GET)
 //	public void createGET(Orderitems items, Model model) throws Exception {

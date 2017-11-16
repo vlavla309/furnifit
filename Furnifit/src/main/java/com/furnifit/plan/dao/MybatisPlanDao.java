@@ -1,4 +1,4 @@
-package com.furnifit.orderitems.dao;
+package com.furnifit.plan.dao;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +17,7 @@ import com.furnifit.orderitems.domain.Orderitems;
  *
  */
 @Repository
-public class MybatisOrderitemsDao implements OrderitemsDao {
+public class MybatisPlanDao implements PlanDao {
 	
 	private static final String NAMESPACE = "com.furnifit.orderitems.dao.OrderitemsDao";
 		

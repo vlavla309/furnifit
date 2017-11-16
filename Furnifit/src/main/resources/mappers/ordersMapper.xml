@@ -24,5 +24,4 @@
 		WHERE  orderId = #{orderId}
 	</select>
 	
-	
 </mapper>

@@ -34,8 +34,8 @@ public class OrderitemsServiceImpl implements OrderitemsService {
 	
 	// 회원별 주문할 리스트
 	@Override
-	public List<Orderitems> listAll() throws Exception {
-		return dao.listAll();
+	public List<Orderitems> listAll(String email) throws Exception {
+		return dao.listAll(email);
 	}
 	
 	// 주문할 가구 삭제
