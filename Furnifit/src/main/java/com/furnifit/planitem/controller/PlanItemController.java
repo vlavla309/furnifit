@@ -37,11 +37,8 @@ public class PlanItemController {
 	@RequestMapping(value = "", method=RequestMethod.GET)
 	public String listAll(Model model, HttpServletRequest request) throws Exception {
 		
-		
 		HttpSession session = request.getSession();   
 		Member member = (Member) session.getAttribute("login");
-		
-//		String email = "aa@naver.com";
 		
 		List<PlanItem> itemList = itemService.listAll(member.getEmail());
 		for (PlanItem items : itemList) {
