@@ -48,7 +48,7 @@
 		<interceptor>
 			<mapping path="/"/>
 			<mapping path="/home/home"/>
-			
+			<mapping path="/mypage/coupon"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>
