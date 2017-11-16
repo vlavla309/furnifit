@@ -43,24 +43,24 @@
                 </select>
               </div>
 				</div>
-      
-            
-            <div class="information-grid-info">
-              <span class="badge badge-danger">Sale 40%</span>
-              <h4><a href="${contextPath}/product/${product.productId}">${product.name}</a></h4>
-              <hr>
-              <p>
-                <strong>&#8361; ${product.price} </strong> <br>
-                ${product.width} * ${product.length} * ${product.height} <small>(가로
-                  * 세로 * 높이 mm)</small>
-              </p>
-              <h3>
-                <span class="label label-danger"><i class="fa fa-heart"
-                  aria-hidden="true"></i></span>
-              </h3>
-              <!-- <span class="label label-danger"><i class="fa fa-heart-o" aria-hidden="true"></i></span> -->
+        
+        <div class="gallery-grids" >
+          <div class="col-md-4 gallery-grid wow fadeInUp animated" data-wow-delay=".5s" style="border: 1px dashed; border-color: #B45F04;">
+            <div class="grid">
+              <figure class="effect-apollo">
+                <a class="example-image-link" href="images/g1.jpg" data-lightbox="example-set" data-title="">
+                  <img src="images/g1.jpg" alt="" />
+                </a>
+   
+              </figure>
+              <p> <a href="#">공유배치도입니다.</a>&nbsp;&nbsp;&nbsp;<span><a href="#">날짜</a></span></p>
+              <a>♥</a>
             </div>
-  
+          </div>
+          
+          <div class="clearfix"> </div>
+          <script src="js/lightbox-plus-jquery.min.js"> </script>
+        </div>
         
           <!-- 검색 -->
           <br>

@@ -64,15 +64,7 @@ public class ArticleController {
 		
 		logger.info(article);
 		service.create(article);
-		return "redirect:/article/list";
-	}
-	
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String listAll(Model model) throws Exception {
-		 model.addAttribute("list", service.listAll());
-		 logger.info("전체리스트");
-		 
-		 return "article/list";
+		return "redirect:/article/register";
 	}
 	
 	
