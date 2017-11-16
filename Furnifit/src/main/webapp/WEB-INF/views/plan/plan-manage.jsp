@@ -53,7 +53,7 @@ li { list-style-type: none; }
         <div class="table-responsive" >
           <table class="table text-center">
             <tbody>
-              <tr><td><img class="img-size" alt="" src="images/10.jpg"></td></tr>
+              <tr><td><img class="img-size" alt="" src="images/user.png"></td></tr>
             </tbody>
           </table>
           <table class="table text-left">

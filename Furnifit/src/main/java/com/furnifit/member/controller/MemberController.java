@@ -3,7 +3,6 @@ package com.furnifit.member.controller;
 import java.util.Date;
 
 import javax.inject.Inject;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.util.WebUtils;
 
 import com.furnifit.member.domain.LoginDTO;
 import com.furnifit.member.domain.Member;
@@ -91,10 +89,13 @@ public class MemberController {
 	// 회원정보 수정 처리
 	@RequestMapping(value = "/edit", method=RequestMethod.POST)
 	public String editSignup(Member member, HttpSession session) throws Exception {
+		/*System.out.println(member);
+		String email = member.getEmail();
 		log.debug("회원정보 수정 처리");
-		Member loginMember = (Member) session.getAttribute("member");
-		String email = loginMember.getEmail();
-		
+		Member loginMember = (Member) session.getAttribute("member");*/
+		/*String email = loginMember.getEmail();*/
+		// System.out.println(loginMember);
+		/*
 		if(member.getPhone() == null) {
 			member.setPhone(loginMember.getPhone());
 		}
@@ -104,14 +105,14 @@ public class MemberController {
 		if(member.getName() == null) {
 			member.setName(loginMember.getName());
 		}
+		*/
+		//member.setEmail(email);
 		
-		member.setEmail(email);
 		int check = memberService.update(member);
 		if(check == 1) {
 			session.setAttribute("member", member);
 		}
-		
-		return "/";
+		return "redirect: /one";
 	}
 	
 	// 회원 탈퇴

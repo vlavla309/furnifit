@@ -32,13 +32,13 @@
 	</select>
 	
 	<insert id="create" parameterType="Member">
-		INSERT INTO members(email, passwd, name, phone)
+		INSERT INTO members(email, passwd, name, phone) 
 		VALUES (#{email}, #{passwd}, #{name}, #{phone})
 	</insert>
 	
 	<update id="update" parameterType="Member">
 		UPDATE members
-		SET passwd = #{passwd}, phone = #{phone}, name = #{name}
+		SET email = #{email}, passwd = #{passwd}, name = #{name}, phone = #{phone}
 		WHERE email = #{email}
 	</update>
 	
@@ -52,8 +52,13 @@
         FROM members
         WHERE email = #{email} AND passwd = #{passwd}
     </select>
+<<<<<<< HEAD
 	
 	
 	
 	
+	
+=======
+    
+>>>>>>> 2c102aa86cd3811ac3afd65204bf8447ea52e3e3
 </mapper>

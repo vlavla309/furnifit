@@ -10,6 +10,7 @@
 		<typeAlias type="com.furnifit.product.domain.Product" alias="Product"/>
 		<typeAlias type="com.furnifit.productimg.domain.ProductImg" alias="ProductImg"/>
 		<typeAlias type="com.furnifit.orderitems.domain.Orderitems" alias="Orderitems"/>
+		<typeAlias type="com.furnifit.orders.domain.Orders" alias="Orders"/>
 		<typeAlias type="com.furnifit.article.domain.Article" alias="Article"/>
 		<typeAlias type="com.furnifit.planitem.domain.PlanItem" alias="PlanItem"/>
 		<typeAlias type="com.furnifit.article.domain.Furniture" alias="Furniture"/>

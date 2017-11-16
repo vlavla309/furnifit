@@ -28,8 +28,7 @@ public class MybatisProductImgDao implements ProductImageDao {
 
 	@Override
 	public List<ProductImg> productImg(int productId) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlsession.selectList(namespace+".productimg", productId);
 	}
 
 }
