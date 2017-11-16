@@ -11,4 +11,6 @@ public interface CouponService {
 	
 	public List<Coupon> read(String email) throws Exception;
 	
+	public List<Coupon> readAvailable(String email) throws Exception;
+	
 }

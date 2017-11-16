@@ -17,33 +17,38 @@ import com.furnifit.orders.domain.Orders;
 @Repository
 public class MybatisOrdersDao implements OrdersDao {
 	
-	private static final String NAMESPACE = "com.furnifit.order.dao.OrderDao";
+	private static final String NAMESPACE = "com.furnifit.orders.dao.OrdersDao";
 	
 	@Inject
 	private SqlSession sqlSession;
 
+//	@Override
+//	public void create(Orders order) throws Exception {
+//		sqlSession.insert(NAMESPACE+".create", order);
+//	}
+//	
+//	@Override
+//	public Orders read(String email) throws Exception {
+//		return sqlSession.selectOne(NAMESPACE+".read", email);
+//	}
+
 	@Override
-	public void create(Orders order) throws Exception {
-		sqlSession.insert(NAMESPACE+".create", order);
+	public Orders read(int orderId) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".read", orderId);
 	}
 	
-	@Override
-	public Orders read(String email) throws Exception {
-		return sqlSession.selectOne(NAMESPACE+".read", email);
-	}
-
 	@Override
 	public List<Orders> listAll(String email) throws Exception {
 		return sqlSession.selectList(NAMESPACE+".listAll", email);
 	}
 	
-	@Override
-	public void delete(int orderId) throws Exception {
-		sqlSession.delete(NAMESPACE+".delete", orderId);
-	}
-
-	@Override
-	public void update(Orders order) throws Exception {
-		sqlSession.update(NAMESPACE+".update", order);
-	}
+//	@Override
+//	public void delete(int orderId) throws Exception {
+//		sqlSession.delete(NAMESPACE+".delete", orderId);
+//	}
+//
+//	@Override
+//	public void update(Orders order) throws Exception {
+//		sqlSession.update(NAMESPACE+".update", order);
+//	}
 }

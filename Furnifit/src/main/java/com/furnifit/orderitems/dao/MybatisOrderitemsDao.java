@@ -1,6 +1,8 @@
 package com.furnifit.orderitems.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -42,8 +44,12 @@ public class MybatisOrderitemsDao implements OrderitemsDao {
 	
 	// 주문할 가구 삭제
 	@Override
-	public void delete(int orderId) throws Exception {
-		sqlSession.delete(NAMESPACE+".delete", orderId);
+	public void delete(int orderId, int productId) throws Exception {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("orderId", orderId);
+		map.put("productId", productId);
+		
+		sqlSession.delete(NAMESPACE+".delete", map);
 	}
 
 	// 가구의 수량 변경

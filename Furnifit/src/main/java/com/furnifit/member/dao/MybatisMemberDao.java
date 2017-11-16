@@ -47,6 +47,7 @@ public class MybatisMemberDao implements MemberDao {
 		return sqlSession.update(NAMESPACE + ".update", member);
 	}
 	
+	
 	@Override
 	public void delete(String email) {
 		sqlSession.delete(NAMESPACE + ".delete", email);

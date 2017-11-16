@@ -21,7 +21,7 @@ public interface OrderitemsService {
 	public List<Orderitems> listAll() throws Exception;
 	
 	// 주문할 가구 삭제
-	public void delete(int orderId) throws Exception;
+	public void delete(int orderId, int productId) throws Exception;
 	
 	// 가구의 수량 변경
 	public void update(Orderitems items) throws Exception;
