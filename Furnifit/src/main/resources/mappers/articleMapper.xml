@@ -69,6 +69,7 @@
 	 		title,
 	 		content
 	 FROM   articles
+	 ORDER BY article_id DESC
  
    </select>
    

@@ -64,7 +64,7 @@ public class ArticleController {
 		
 		logger.info(article);
 		service.create(article);
-		return "redirect:/article/list";
+		return "redirect:/article";
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
