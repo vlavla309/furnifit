@@ -76,18 +76,6 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>12123</td>
-                    <td>10%</td>
-                    <td>17.11.01 ~ 18.03.21</td>
-                    <td>모릅니다.</td>
-                  </tr>
-                  <tr>
-                    <td>12312</td>
-                    <td>데이터2</td>
-                    <td>데이터3</td>
-                    <td>데이터4</td>
-                  </tr>
                   <c:forEach items="${coupons}" var="coupon">
                   <tr>
                     <td>${coupon.serial}</td>
