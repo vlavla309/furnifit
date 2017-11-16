@@ -50,11 +50,19 @@
 </style>
 <style>
 .table > thead > tr.colorcolor {
-  background-color: #005f91;
+  /* background-color: #005f91; */
+  background-color: #042856;
 }
 .table > thead > tr.colorcolor > th.textColor {
   color: #fcfcfc;
 }
+.table > tbody > tr.fontfont  {
+  font-size: 1.01em;
+}
+.table > tbody > tr.fontfont > td.textFont > span#textColor2  {
+  background-color: #1a1c1a;
+}
+
 </style>
 
 	<!-- blog -->
@@ -85,11 +93,11 @@
                   </thead>
                   <tbody>
                   <c:forEach items="${coupons}" var="coupon">
-                  <tr>
+                  <tr class="fontfont">
                     <td>${coupon.serial}</td>
                     <td>${coupon.discountRate}%</td>
                     <td>${coupon.expirationDate}</td>
-                    <td><span class="badge bg-red">${coupon.status }</span></td>
+                    <td class="textFont"><span id="textColor2" class="badge bg-red">${coupon.status }</span></td>
                   </tr>
             </c:forEach> 
                   </tbody>
