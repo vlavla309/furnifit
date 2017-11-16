@@ -48,6 +48,14 @@
   }
 }
 </style>
+<style>
+.table > thead > tr.colorcolor {
+  background-color: #005f91;
+}
+.table > thead > tr.colorcolor > th.textColor {
+  color: #fcfcfc;
+}
+</style>
 
 	<!-- blog -->
 		<div class="blog">
@@ -64,15 +72,15 @@
                   </span>
                 </p>
                 <br><br><br><br>
-
+                
                 <table class="table table-striped">
                   <caption></caption>
                   <thead>
-                  <tr>
-                    <th>serial</th>
-                    <th>할인율</th>
-                    <th>유효기간</th>
-                    <th>쿠폰상태</th>
+                  <tr class="colorcolor">
+                    <th class="textColor">serial</th>
+                    <th class="textColor">할인율</th>
+                    <th class="textColor">유효기간</th>
+                    <th class="textColor">쿠폰상태</th>
                   </tr>
                   </thead>
                   <tbody>
