@@ -12,6 +12,7 @@
 		<typeAlias type="com.furnifit.orderitems.domain.Orderitems" alias="Orderitems"/>
 		<typeAlias type="com.furnifit.orders.domain.Orders" alias="Orders"/>
 		<typeAlias type="com.furnifit.article.domain.Article" alias="Article"/>
+		<typeAlias type="com.furnifit.article.domain.Replies" alias="Replies"/>
 		<typeAlias type="com.furnifit.wishlist.domain.Wishlist" alias="Wishlist"/>
 		<typeAlias type="com.furnifit.planitem.domain.PlanItem" alias="PlanItem"/>
 		<typeAlias type="com.furnifit.plan.domain.Plan" alias="Plan"/>
