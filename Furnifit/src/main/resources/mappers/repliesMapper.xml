@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.furnifit.article.dao.RepliesDao">
+
+	<select id="list" resultType="Replies">
+		SELECT * FROM replies
+		WHERE reply_id = #{reply_id}
+		ORDER BY article_id DESC
+	</select>
+	
+	<insert id="create">
+		INSERT INTO replies (reply_id, content)
+		VALUES(#{reply_id}, #{content})
+	</insert>
+	
+	<update id="update">
+		UPDATE replies 
+		SET content=#{content}
+		WHERE article_id=#{article_id}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM replies
+		WHERE article_id=#{article_id}
+	</delete>
+	<!-- 
+	<select id="listPage" resultType="Replies">
+		SELECT * FROM replies
+		WHERE reply_id = #{reply_id}
+		ORDER BY article_id DESC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	 -->
+	 <select id="listPage" resultType="Replies">
+  	 	<![CDATA[
+ 			SELECT reply_id, article_id, email, content regdate
+ 			FROM ( SELECT 
+     			   rownum rn, reply_id, article_id, email, content regdate
+     			   FROM replies
+   				   WHERE reply_id = #{reply_id} and article_id > 0 and rownum <= #{cri.page} * #{cri.perPageNum} )
+			WHERE rn > ( #{cri.page} -1) * #{cri.perPageNum}
+  		]]> 
+ 	 </select>
+ 	 <!-- SELECT /*+INDEX_DESC(tbl_reply pk_reply))*/ -->
+ 	 
+	<select id="count" resultType="int">
+		SELECT count(reply_id) FROM replies
+		WHERE reply_id = #{reply_id}
+	</select>
+
+
+
+
+
+</mapper>
