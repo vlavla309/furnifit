@@ -30,7 +30,6 @@
 	 		email,
 	 		planitem_id AS "planitemId",
 	 		likecnt,
-	 		viewcnt,
 	 		To_char(regdate, 'YYYY-MM-DD') regdate,
 	 		title,
 	 		content	
@@ -51,6 +50,16 @@
 				 #{path},
 				 sysdate)
 	</insert>
+	
+		<!-- 게시물에대한 첨부파일 리스트 가져오기 -->
+	<select id="getAttach" parameterType="int" resultType="ArticleImg">
+	SELECT name,
+		   path,
+		   article_id AS "articleId"
+	FROM  article_img
+	WHERE article_id = #{articleId}
+	ORDER BY regdate DESC
+	</select>
 	
 	<!-- 게시판 전체리스트 -->
 	   <!-- 전체 리스트 -->
@@ -108,6 +117,25 @@
     FROM  products
     WHERE product_id = #{value}
    </select>
+   
+   
+   <!-- 게시글 수정 -->
+   <update id="artUpdate" parameterType="Article">
+       	UPDATE articles
+     	<set>
+			<if test="title != null">title = #{title},</if>
+			<if test="content != null">content = #{content},</if>
+			<if test="viewcnt != null">viewcnt = #{viewcnt}</if>
+		</set>
+		WHERE article_id = #{article_id}
+   </update>
+   
+   
+   <!-- 게시글 삭제 -->
+   <delete id="artDelete" parameterType="int">
+    DELETE FROM articles
+    WHERE article_id = #{article_id}
+   </delete>
 
 	
 	

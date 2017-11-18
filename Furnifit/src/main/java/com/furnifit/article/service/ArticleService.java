@@ -61,5 +61,17 @@ public interface ArticleService {
 	 */
 	public Product readProduct(int productId);
 	
+	/**
+	 * 게시글 수정
+	 * @param article
+	 */
+	public void artUpdate(Article article);
+	
+	
+	/**
+	 * 게시글 삭제
+	 * @param articleId
+	 */
+	public void artDelete(int articleId);
 	
 }

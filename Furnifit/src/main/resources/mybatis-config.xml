@@ -15,5 +15,6 @@
 		<typeAlias type="com.furnifit.wishlist.domain.Wishlist" alias="Wishlist"/>
 		<typeAlias type="com.furnifit.planitem.domain.PlanItem" alias="PlanItem"/>
 		<typeAlias type="com.furnifit.article.domain.Furniture" alias="Furniture"/>
+		<typeAlias type="com.furnifit.article.domain.ArticleImg" alias="ArticleImg"/>
 	</typeAliases>
 </configuration>

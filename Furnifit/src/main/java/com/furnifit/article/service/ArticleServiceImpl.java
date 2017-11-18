@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.furnifit.article.dao.ArticleDao;
 import com.furnifit.article.domain.Article;
+import com.furnifit.article.domain.ArticleImg;
 import com.furnifit.article.domain.Furniture;
 import com.furnifit.planitem.domain.PlanItem;
 import com.furnifit.product.domain.Product;
@@ -59,6 +60,13 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public Article read(int articleId) throws Exception {
 		Article article = articleDao.read(articleId);
+		
+		article.setImages(articleDao.getAttach(articleId));
+		
+		for (ArticleImg img : article.getImages()) {
+			logger.info(img);
+		}
+		
 		return article;
 	}
 
@@ -81,6 +89,22 @@ public class ArticleServiceImpl implements ArticleService {
 	public Product readProduct(int productId) {
 		return articleDao.readProduct(productId);
 	}
+
+	@Override
+	public void artUpdate(Article article) {
+		articleDao.artUpdate(article);
+		
+	}
+
+	@Override
+	public void artDelete(int articleId) {
+		articleDao.artDelete(articleId);
+		
+	}
+
+	
+	
+	
 	
 	
 	
