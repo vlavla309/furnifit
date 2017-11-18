@@ -17,5 +17,6 @@
 		<typeAlias type="com.furnifit.planitem.domain.PlanItem" alias="PlanItem"/>
 		<typeAlias type="com.furnifit.plan.domain.Plan" alias="Plan"/>
 		<typeAlias type="com.furnifit.article.domain.Furniture" alias="Furniture"/>
+		<typeAlias type="com.furnifit.article.domain.ArticleImg" alias="ArticleImg"/>
 	</typeAliases>
 </configuration>

@@ -136,7 +136,7 @@ box-shadow: none;
 	<!-- blog -->
 		<div class="blog"  style="background-color: white" >
 			<!-- container -->
-			<div class="container" style="width: 900px; border: 2px solid; border-color: #F6E3CE; padding: 40px"  >
+			<div class="container" style="width: 900px; border: 3px solid; border-color: #F6E3CE; padding: 40px"  >
 				<form id='registerForm' role="form" method="post">
         <div class="blog-heading w3layouts" style="margin-top: 30px" >
 				

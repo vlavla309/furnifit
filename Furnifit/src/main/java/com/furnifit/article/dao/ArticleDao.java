@@ -1,13 +1,21 @@
 package com.furnifit.article.dao;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
 import com.furnifit.article.domain.Article;
+import com.furnifit.article.domain.ArticleImg;
 import com.furnifit.article.domain.Furniture;
 import com.furnifit.planitem.domain.PlanItem;
 import com.furnifit.product.domain.Product;
 
+/**
+ *
+ *
+ * @author 박보라
+ *
+ */
 /**
  *
  *
@@ -69,6 +77,27 @@ public interface ArticleDao {
 	 */
 	public Product readProduct(int productId);
 	
+	
+	/**
+	 * 게시글 수정
+	 * @param article
+	 */
+	public void artUpdate(Article article);
+	
+	
+	/**
+	 * 게시글 삭제
+	 * @param articleId
+	 */
+	public void artDelete(int articleId);
+	
+	
+	/**
+	 * 게시글번호로 게시글해당첨부파일 리스트 가져오기
+	 * @param articleId
+	 * @return
+	 */
+	public List<ArticleImg> getAttach(int articleId);
 	
 	
 
