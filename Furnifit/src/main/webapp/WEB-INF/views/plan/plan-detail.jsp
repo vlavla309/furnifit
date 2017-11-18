@@ -72,7 +72,7 @@ li { list-style-type: none; }
         <div class="table-responsive">
           <table class="table">
             <tbody>
-              <tr><td class="text-center"><img alt="" src="${itemlist.image}" class="img-size"></td></tr>
+              <tr><td class="text-center"><img alt="" src="${rSrcPath}/images/11.jpg" class="img-size"></td></tr>
             </tbody>
           </table>
         </div>
