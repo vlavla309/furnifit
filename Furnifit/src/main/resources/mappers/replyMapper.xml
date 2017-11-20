@@ -2,29 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.furnifit.article.dao.RepliesDao">
+<mapper namespace="com.furnifit.reply.dao.ReplyDao">
 
-	<select id="list" resultType="Replies">
+	<select id="list" resultType="Reply">
 		SELECT * FROM replies
-		WHERE reply_id = #{reply_id}
-		ORDER BY article_id DESC
+		WHERE reply_id AS replyId= #{reply_id} AS replyId
+		ORDER BY article_id AS articleId DESC
 	</select>
 	
 	<insert id="create">
-		INSERT INTO replies (reply_id, content)
-		VALUES(#{reply_id}, #{content})
+		INSERT INTO replies (reply_id AS replyId, content)
+		VALUES(#{reply_id} AS replyId, #{content})
 	</insert>
 	
 	<update id="update">
 		UPDATE replies 
 		SET content=#{content}
-		WHERE article_id=#{article_id}
+		WHERE article_id AS articleId=#{article_id} AS articleId
 	</update>
 	
 	<delete id="delete">
 		DELETE FROM replies
-		WHERE article_id=#{article_id}
+		WHERE article_id AS articleId=#{article_id} AS articleId
 	</delete>
+	
 	<!-- 
 	<select id="listPage" resultType="Replies">
 		SELECT * FROM replies
@@ -33,7 +34,7 @@
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	 -->
-	 <select id="listPage" resultType="Replies">
+	 <select id="listPage" resultType="Reply">
   	 	<![CDATA[
  			SELECT reply_id, article_id, email, content regdate
  			FROM ( SELECT 

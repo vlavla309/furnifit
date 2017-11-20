@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/header.jsp" %>
 <style>
 .align {
@@ -315,74 +316,18 @@ for (i = 0; i < acc.length; i++) {
   color: white;  width: 17%; height:40px; font-size: 13pt">좋아요♥&nbsp;<font style="font-size: 11pt">[0]</font></button>
         
  
-<script>
-$(document).ready(function(){
-  
-  var formObj = $("form[role='form']");
-  
-  console.log(formObj);
-  
-  $("#modifyBtn").on("click", function(){
-    formObj.attr("action", "/article/modifyPage");
-    formObj.attr("method", "get");    
-    formObj.submit();
-  });
-  
-/*  $("#removeBtn").on("click", function(){
-    formObj.attr("action", "/sboard/removePage");
-    formObj.submit();
-  }); */
-
-  
-  $("#deleteBtn").on("click", function(){
-    
-   /* var replyCnt =  $("#replycntSmall").html();
-    
-    if(replyCnt > 0 ){
-      alert("댓글이 달린 게시물을 삭제할 수 없습니다.");
-      return;
-    } */
-    
-    var arr = [];
-    $(".uploadedList li").each(function(index){
-       arr.push($(this).attr("data-src"));
-    });
-    
-    if(arr.length > 0){
-      $.post("/deleteAllFiles",{files:arr}, function(){
-        
-      });
-    }
-    
-    formObj.attr("action", "/article/deletePage");
-    formObj.submit();
-  }); 
-  
-  $("#listBtn ").on("click", function(){
-    formObj.attr("method", "get");
-    formObj.attr("action", "/article/list");
-    formObj.submit();
-  });
-  
-    
-  
-});
-</script>
-
-
           
           <!-- 댓글 -->
      
           <br>
           <br>
           <br>
-          <form>
- <table style="width: 30px; margin: 0 auto;  text-align: center " >
-      <tr>
-        <td><input type="hidden" name=""  />
-          <textarea name="contents" rows="2" cols="100"
-            style="resize: none; border-style: solid; font-size: 11pt" 
-            >댓글을 작성해주세요.</textarea></td>
+          <form id="replyForm" action="${contextPath}/replies" method="post">
+          <table style="width: 30px; margin: 0 auto;  text-align: center " >
+          <tr>
+          
+          <textarea name="contents" rows="2" cols="100" style="resize: none; border-style: solid; font-size: 11pt">
+			댓글을 작성해주세요.</textarea></td>
             &nbsp;&nbsp;&nbsp;&nbsp;
         <td><input class="replybtn" type="submit" value="등록"
           style="width: 50px; height: 33px; font-size: 11pt"></td>
@@ -391,10 +336,6 @@ $(document).ready(function(){
      
     </table>
     </form>
-    
-
- 
-
 <br/>&nbsp;<br/>
 <form name="myForm" method="post" action="">
 <table width="600" border="0" cellpadding="0" cellspacing="0"  align="center">
@@ -404,9 +345,32 @@ $(document).ready(function(){
 
 <br/>
 
+<c:forEach items="${reply}" var="reply">
 <table width="780" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr><td width="600" colspan="2" height="3" bgcolor="#B40404"></td></tr>
-  
+    
+    <tr height="25">
+            <td width="50%" align="left" style="color:#B40404;  font-weight: bold">&nbsp;&nbsp;이름</td>
+            <td width="50%" align="right" style="color:#B40404;  font-weight: bold" >2017.11.13&nbsp;<input id="deletebtn" type="button" value="삭제"></td>
+    </tr>
+    </tr>
+    <tr><td width="600" colspan="2" height="1" bgcolor="#B40404"></td></tr>
+        <tr height="60">
+            <td align="left" style="padding: 5px 5px 5px 5px; color:#585858;  font-weight: bold" valign="top">댓글 내용</td>
+        </tr>
+    <tr><td width="600" colspan="2" height="3" bgcolor="#B40404"></td></tr>
+
+</table>  
+</c:forEach> 
+
+
+
+
+
+<table width="780" border="0" cellpadding="0" cellspacing="0" align="center">
+    <tr><td width="600" colspan="2" height="3" bgcolor="#B40404"></td></tr>
+    
+        
         <tr height="25">
             <td width="50%" align="left" style="color:#B40404;  font-weight: bold">&nbsp;&nbsp;보라보라얍</td>
            
@@ -422,7 +386,7 @@ $(document).ready(function(){
         <tr><td width="600" colspan="2" height="3" bgcolor="#B40404"></td></tr>
 
 </table>
- 
+
           
           
           
@@ -441,6 +405,10 @@ $(document).ready(function(){
          
       
 	<!-- //blog -->
+
+  
+    
+    
 <%@ include file="../include/footer.jsp" %>
 
 </body>
