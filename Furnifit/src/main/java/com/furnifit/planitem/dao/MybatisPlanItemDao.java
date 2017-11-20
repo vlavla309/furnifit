@@ -43,5 +43,10 @@ public class MybatisPlanItemDao implements PlanItemDao {
 		
 		sqlSession.delete(NAMESPACE+".delete", map);
 	}
+
+	@Override
+	public PlanItem read(int planItemId){
+		return sqlSession.selectOne(NAMESPACE + ".read", planItemId);
+	}
 	
 }

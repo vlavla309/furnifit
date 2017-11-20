@@ -69,29 +69,6 @@ public interface ArticleDao {
 	
 	
 	/**
-	 * 상세게시글에 해당하는 배치도항목 정보 가져오기
-	 * @param planitemId
-	 * @return
-	 */
-	public PlanItem readPlanItem(int planitemId);
-	
-	
-	/**
-	 * 배치도항목에 해당하는 가구번호목록(리스트) 가져오기 
-	 * @param planitemId
-	 * @return
-	 */
-	public List<Furniture> readFurniture(int planitemId);
-	
-	/**
-	 * 가구번호에 대한 가구(상품)정보 가져오기
-	 * @param productId
-	 * @return
-	 */
-	public Product readProduct(int productId);
-	
-	
-	/**
 	 * 게시글 수정
 	 * @param article
 	 */

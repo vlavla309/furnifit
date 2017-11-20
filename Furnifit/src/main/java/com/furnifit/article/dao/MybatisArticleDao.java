@@ -55,29 +55,10 @@ public class MybatisArticleDao implements ArticleDao {
 
 
 	@Override
-	public PlanItem readPlanItem(int planitemId) {
-		return sqlSession.selectOne(namespace + ".readPlanItem", planitemId);
-	}
-
-
-	@Override
-	public List<Furniture> readFurniture(int planitemId) {
-		return sqlSession.selectList(namespace + ".readFurniture", planitemId);
-	}
-
-
-	@Override
-	public Product readProduct(int productId) {
-		return sqlSession.selectOne(namespace + ".readProduct", productId);
-	}
-
-
-	@Override
 	public void artUpdate(Article article) {
 		sqlSession.update(namespace + ".artUpdate", article);
 		
 	}
-
 
 	@Override
 	public void artDelete(int articleId) {

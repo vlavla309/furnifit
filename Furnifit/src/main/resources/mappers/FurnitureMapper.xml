@@ -4,6 +4,9 @@
 
 <mapper namespace="com.furnifit.furniture.dao.FurnitureDao">
 	<select id="list" resultType="Furniture">
-		select planitem_id as "planitemId", product_id as "productId" from furnitures
+	SELECT planitem_id AS "planitemId",
+   		  product_id AS "productId"
+    FROM  furnitures
+    WHERE planitem_id = #{value}
 	</select>
 </mapper>
