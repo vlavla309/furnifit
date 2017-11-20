@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.furnifit.brand.dao.BrandDao;
+import com.furnifit.brand.doamin.Brand;
+import com.furnifit.category.dao.CategoryDao;
+import com.furnifit.category.doamin.Category;
 import com.furnifit.color.dao.ColorDao;
 import com.furnifit.color.domain.Color;
 import com.furnifit.product.domain.Product;
@@ -48,11 +52,19 @@ public class ProductController {
 	@Inject
 	private ColorDao colordao;
 	
+	@Inject
+	private BrandDao branddao;
+	
+	@Inject
+	private CategoryDao categorys;
+	
 	@RequestMapping(value="", method= RequestMethod.GET)
 	public String list(Model model) {
 		List<Product> list = productsrv.list();
 		List<Wishlist> wishlist = wishsrv.read();
 		List<Color> colorlist = colordao.list();
+		List<Brand> brandlist = branddao.list();
+		List<Category> categorylist = categorys.list();
 		
 		/*
 		for (Product product : list) {
@@ -71,6 +83,8 @@ public class ProductController {
 		model.addAttribute("list",list);
 		model.addAttribute("wishlist",wishlist);
 		model.addAttribute("colorlist", colorlist);
+		model.addAttribute("brandlist", brandlist);
+		model.addAttribute("categorylist", categorylist);
 		return "product/list";
 	}
 	
