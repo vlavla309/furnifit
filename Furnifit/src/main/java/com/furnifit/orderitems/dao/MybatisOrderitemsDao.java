@@ -1,7 +1,6 @@
 package com.furnifit.orderitems.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -30,8 +29,9 @@ public class MybatisOrderitemsDao implements OrderitemsDao {
 */	
 	// 주문할 가구 등록
 	@Override
-	public void create(Map<String, String> map) {
-		sqlSession.insert(NAMESPACE + ".create", map);
+//		public void create(Map<String, String> map) {
+	public void create(Orderitems items) {
+		sqlSession.insert(NAMESPACE + ".create", items);
 	}
 	
 	// 가구 정보 상세보기

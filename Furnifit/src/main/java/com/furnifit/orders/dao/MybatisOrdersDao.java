@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.furnifit.common.web.Params;
 import com.furnifit.orderitems.domain.Orderitems;
 import com.furnifit.orders.domain.Orders;
 
@@ -30,8 +31,19 @@ public class MybatisOrdersDao implements OrdersDao {
 	
 	@Override
 	public List<Orders> listAll(String email) throws Exception {
+//		public List<Orders> listAll(String email, Params params) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".listAll", email);
 	}
+	
+	/** 게시글 리스트(+페이징) */
+//	@Override
+//	public List<Orders> listPage(int page) throws Exception {
+//		if (page <= 0) {
+//			page = 1;
+//		}
+//		page = (page - 1) * 10;
+//		return sqlSession.selectList(namespace + ".listPage", page);
+//	}
 	
 	@Override
 	public List<Orderitems> read(int orderId) throws Exception {

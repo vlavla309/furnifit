@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.furnifit.orderitems.dao.OrderitemsDao;
 import com.furnifit.orderitems.domain.Orderitems;
 import com.furnifit.orders.dao.OrdersDao;
 import com.furnifit.orders.domain.Orders;
@@ -20,6 +21,9 @@ public class OrdersServiceImpl implements OrdersService {
 	
 	@Inject
 	private OrdersDao dao;
+	
+	@Inject
+	private OrderitemsDao orderitemsdao;
 
 //	@Override
 //	public void create(Orders order) throws Exception {

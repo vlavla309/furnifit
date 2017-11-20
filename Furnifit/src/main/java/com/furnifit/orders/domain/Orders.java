@@ -13,6 +13,11 @@ public class Orders{
 	
 	public Orders() {}
 	
+	public Orders(String email, int price) {
+		this.email = email;
+		this.price = price;
+	}
+	
 	public Orders(int orderId, String email, int price, String regdate) {
 		super();
 		this.orderId = orderId;

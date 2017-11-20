@@ -135,7 +135,7 @@ $(function() {
     $(document).on("click", "#goOrder", function(event){  
     	event.preventDefault(); 
     	var productid = $(this).attr('value');
-    	alert(productid)
+    	//alert(productid)
     	
     	//alert("주문이 완료되었습니다.");
     });
@@ -147,12 +147,12 @@ $(function() {
 
 
 <!-- blog -->
+<form id='registerForm' role="form" method="post">
 <div class="blog">
   <!-- container -->
   <div class="container">
     <div class="col-md-12" >
       <div class="box">
-        <form method="post" action="order-address.leaf">
           <h1>주문서 작성</h1><br>
           <div class="table-responsive">
             <table class="table">
@@ -182,10 +182,11 @@ $(function() {
                     <c:forEach items="${prolist}" var="product">
                      <c:if test="${not doneLoop}">
                      <c:if test="${product.productId == item.productId}">
+                        <input type="hidden" name = "productId" value=${item.productId}>
                         <td colspan="7">${product.name}</td>
-                        <td><input type="number" class="count" value="${item.amount}"></td>
+                        <td><input type="number" name="amount" class="count" value="${item.amount}"></td>
                         <td>${product.price}원</td>
-                        <td name ="totalPrice">${product.price}원</td>
+                        <td name ="price">${product.price}원</td>
                         <td><a href="#" name="addWishlist" class="btn btn-default" value="${item.productId}">WishList</a></td>
                         <td><a href="${item.orderId}" class="deleteOrder" value="${product.productId}"><i class="fa fa-trash-o"></i></a></td>
                        <c:set var="doneLoop" value="true"/>
@@ -197,7 +198,6 @@ $(function() {
                 </tbody>
               </table>
             </div>
-          </form>
         </div>
       </div>
 
@@ -253,6 +253,7 @@ $(function() {
     </div>
     <!-- /.col-md-9 -->
   </div>
+  </form>
   <!-- /.container -->
 <!-- //blog -->
 <%@ include file="../include/footer.jsp"%>

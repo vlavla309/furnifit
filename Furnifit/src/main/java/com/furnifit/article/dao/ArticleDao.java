@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.furnifit.article.domain.Article;
 import com.furnifit.article.domain.ArticleImg;
-import com.furnifit.article.domain.Furniture;
+import com.furnifit.furniture.domain.Furniture;
 import com.furnifit.planitem.domain.PlanItem;
 import com.furnifit.product.domain.Product;
 

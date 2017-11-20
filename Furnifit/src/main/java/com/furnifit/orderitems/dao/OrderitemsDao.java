@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.furnifit.orderitems.domain.Orderitems;
+import com.furnifit.product.domain.Product;
 
 
 /**
@@ -19,7 +20,8 @@ public interface OrderitemsDao {
 	 */
 	
 	// 주문할 가구 등록
-	public void create(Map<String, String> map);
+//	public void create(Map<String, String> map);
+	public void create(Orderitems items);
 	
 	// 회원별 주문할 리스트
 	public List<Orderitems> listAll(int orderId) throws Exception;
