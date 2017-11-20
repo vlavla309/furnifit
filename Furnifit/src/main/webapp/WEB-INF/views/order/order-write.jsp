@@ -79,38 +79,35 @@ $(function() {
     	var orderId = $(this).attr("href");
     	var productId = $(this).attr("value");
     	
-     $.ajax({
-          url : 'order/'+orderId+'/'+productId,
-          type : 'delete',
-          success : function(data) {
-        	  if($(event.target).val() == $(event.target).parent().parent().val()){
-        		  $("#delete").remove();
-        	  }
-          }
-      });
+    
     });
     
+    // 위시리스트
+    var wishbtn = $("a[name=addWishlist]");
+    
+    wishbtn.click(function() {
+      event.preventDefault(); 
+   	  var productid = $(this).attr('value')
+   	  alert(productid)
+      $.ajax({
+        url :'${contextPath}/wishlist/'+productid,
+        type : 'POST',
+        success : function(request) {
+          console.log(request);
+          alert("위시리스트 성공");
+        },
+        error : function(request) {
+          console.log(request);
+          alert("이미 위시리스트에 있습니다.");
+        }
+      })
+    })
+    
+ 	// 주문
     $(document).on("click", "#goOrder", function(){  
     	alert("주문이 완료되었습니다.");
     });
     
-    // 주문하기
-   	/*$("#goOrder").click(function() {
-   		$(this).attr('href', "orquantityquantityderitem_create.leaf?product_code=" + codes + "&quantity="+ quantitys);
-   		
-   		$.ajax({
-			url :$.ajax({
-				url : "/mypage/order/{orderId}",
-				data : {
-					'type' : 'BUY',
-					'content' : codes
-				},
-				success : function(msg) {
-					console.log(msg);
-				}
-			}) 
-		})
-   	})*/
 });
 
 
@@ -160,7 +157,12 @@ $(function() {
                         <td><input type="number" class="count" name="quantity" value="${item.amount}"></td>
                         <td>${product.price}원</td>
                         <td name ="totalPrice">${product.price}원</td>
-                        <td><button type="submit" class="btn btn-primary2">wishList</button></td>
+                        <td>
+                        
+                        <a href="#" name="addWishlist" class="btn btn-default" value="${item.productId}">WishList</a>
+                        
+                        </td>
+                        
                         <td><a href="${item.orderId}" class="deleteOrder" value="${item.productId}"><i class="fa fa-trash-o"></i></a></td>
                        <c:set var="doneLoop" value="true"/>
                       </c:if>

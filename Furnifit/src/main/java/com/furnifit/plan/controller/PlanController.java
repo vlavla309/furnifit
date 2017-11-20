@@ -1,4 +1,4 @@
-package com.furnifit.planitem.controller;
+package com.furnifit.plan.controller;
 
 import java.util.List;
 
@@ -9,13 +9,12 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.furnifit.member.domain.Member;
-import com.furnifit.planitem.domain.PlanItem;
-import com.furnifit.planitem.service.PlanItemService;
+import com.furnifit.plan.domain.Plan;
+import com.furnifit.plan.service.PlanService;
 
 
 /**
@@ -24,30 +23,29 @@ import com.furnifit.planitem.service.PlanItemService;
  *
  */
 @Controller
-@RequestMapping("/mypage/itemlist")
-public class PlanItemController {
+@RequestMapping("/mypage/planlist")
+public class PlanController {
 	
-	Logger logger = Logger.getLogger(PlanItemController.class);
+	Logger logger = Logger.getLogger(PlanController.class);
 	
 	@Inject
-	private PlanItemService itemService;
+	private PlanService planService;
 	
-	
-	/** 회원별 배치도 항목 리스트 */
+	/** 회원별 배치도목록 리스트 */
 	@RequestMapping(value = "", method=RequestMethod.GET)
 	public String listAll(Model model, HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();   
 		Member member = (Member) session.getAttribute("login");
 		
-		List<PlanItem> itemList = itemService.listAll(member.getEmail());
-		for (PlanItem items : itemList) {
-			logger.info(items);
+		List<Plan> planlist = planService.listAll(member.getEmail());
+		for (Plan plan : planlist) {
+			logger.info(plan);
 		}
 		
-		model.addAttribute("itemlist", itemList);
+		model.addAttribute("planlist", planlist);
 //		model.addAttribute("member", member);
-		return "plan/plan-detail";
+		return "plan/plan-manage";
 	}
 
 	
@@ -65,10 +63,10 @@ public class PlanItemController {
 //	}
 	
 	
-	/** 배치도 항목 삭제 */
-	@RequestMapping(value = "/{planId}/{planitemId}", method = RequestMethod.DELETE)
-	public String remove(@PathVariable("planId") int planId, @PathVariable("planitemId") int planitemId)throws Exception{
-		itemService.delete(planId, planitemId);
-		return "redirect:/plan/plan-manage";	
-	}
+//	/** 배치도 항목 삭제 */
+//	@RequestMapping(value = "/{planId}/{planitemId}", method = RequestMethod.DELETE)
+//	public String remove(@PathVariable("planId") int planId, @PathVariable("planitemId") int planitemId)throws Exception{
+//		itemService.delete(planId, planitemId);
+//		return "redirect:/plan/plan-manage";	
+//	}
 }

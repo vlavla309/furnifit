@@ -4,7 +4,7 @@
 
 <!-- MyBatis XML 설정 파일(MyBatis설정의 중앙 허브 역할) -->
 <configuration> 
-	<typeAliases>
+	<typeAliases> 
 		<typeAlias type="com.furnifit.member.domain.Member" alias="member"/>
 		<typeAlias type="com.furnifit.member.domain.Coupon" alias="coupon"/>
 		<typeAlias type="com.furnifit.product.domain.Product" alias="Product"/>
@@ -14,9 +14,11 @@
 		<typeAlias type="com.furnifit.article.domain.Article" alias="Article"/>
 		<typeAlias type="com.furnifit.wishlist.domain.Wishlist" alias="Wishlist"/>
 		<typeAlias type="com.furnifit.planitem.domain.PlanItem" alias="PlanItem"/>
+		<typeAlias type="com.furnifit.plan.domain.Plan" alias="Plan"/>
 		<typeAlias type="com.furnifit.article.domain.Furniture" alias="Furniture"/>
 		<typeAlias type="com.furnifit.color.domain.Color" alias="Color"/>
 		<typeAlias type="com.furnifit.brand.doamin.Brand" alias="Brand"/>
 		<typeAlias type="com.furnifit.category.doamin.Category" alias="Category"/>
+		<typeAlias type="com.furnifit.article.domain.ArticleImg" alias="ArticleImg"/>
 	</typeAliases>
 </configuration>

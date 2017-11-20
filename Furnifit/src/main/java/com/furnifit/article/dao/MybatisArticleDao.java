@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.furnifit.article.domain.Article;
+import com.furnifit.article.domain.ArticleImg;
 import com.furnifit.article.domain.Furniture;
 import com.furnifit.planitem.domain.PlanItem;
 import com.furnifit.product.domain.Product;
@@ -69,6 +70,30 @@ public class MybatisArticleDao implements ArticleDao {
 	public Product readProduct(int productId) {
 		return sqlSession.selectOne(namespace + ".readProduct", productId);
 	}
+
+
+	@Override
+	public void artUpdate(Article article) {
+		sqlSession.update(namespace + ".artUpdate", article);
+		
+	}
+
+
+	@Override
+	public void artDelete(int articleId) {
+		sqlSession.delete(namespace + ".artDelete", articleId);
+		
+	}
+
+
+	@Override
+	public List<ArticleImg> getAttach(int articleId) {
+		return sqlSession.selectList(namespace + ".getAttach", articleId);
+	}
+	
+	
+	
+	
 	
 	
 	

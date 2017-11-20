@@ -79,7 +79,13 @@ public class OrdersController {
 			logger.info(orderitems);
 		}
 		
+		List<Product> proList = proService.list();
+		for (Product product : proList) {
+			logger.info(product);
+		}
+		
 		model.addAttribute("list", list);
+		model.addAttribute("prolist", proList);
 		return "order/order-info";
 	}
 

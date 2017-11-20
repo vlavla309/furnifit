@@ -1,6 +1,7 @@
 package com.furnifit.article.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Article {
 	
@@ -14,11 +15,12 @@ public class Article {
 	private String title;
 	private String content; 
 	private String[] files;
+	private List<ArticleImg> images;
 	
 	public Article() {}
 
 	public Article(int articleId, String email, int planitemId, int likecnt, int viewcnt, String regdate, String title,
-			String content, String[] files) {
+			String content, String[] files, List<ArticleImg> images) {
 		this.articleId = articleId;
 		this.email = email;
 		this.planitemId = planitemId;
@@ -28,6 +30,7 @@ public class Article {
 		this.title = title;
 		this.content = content;
 		this.files = files;
+		this.images = images;
 	}
 
 	public int getArticleId() {
@@ -102,285 +105,28 @@ public class Article {
 	public void setFiles(String[] files) {
 		this.files = files;
 	}
+	
+	
+
+	public List<ArticleImg> getImages() {
+		return images;
+	}
+
+	public void setImages(List<ArticleImg> images) {
+		this.images = images;
+	}
 
 	@Override
 	public String toString() {
 		return "Article [articleId=" + articleId + ", email=" + email + ", planitemId=" + planitemId + ", likecnt="
 				+ likecnt + ", viewcnt=" + viewcnt + ", regdate=" + regdate + ", title=" + title + ", content="
-				+ content + ", files=" + Arrays.toString(files) + "]";
+				+ content + ", files=" + Arrays.toString(files) + ", images=" + images + "]";
 	}
 
 	
+
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 
 }

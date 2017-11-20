@@ -49,6 +49,7 @@ li { list-style-type: none; }
         <div class="table-responsive">
           <table class="table">
             <tbody>
+              <c:forEach items="${list}" var="item">
               <tr>
                 <td><strong class="table-font">가로</strong></td>
                 <td><input type="text" class="btn form-control table-text">${itemlist.width}</td>
@@ -59,6 +60,7 @@ li { list-style-type: none; }
                 <td><strong class="table-font">평수</strong></td>
                 <td><input type="text" class="btn form-control table-text">${itemlist.acreage}</td>
               </tr>
+              </c:forEach>
             </tbody>
           </table>
         </div>
@@ -70,7 +72,7 @@ li { list-style-type: none; }
         <div class="table-responsive">
           <table class="table">
             <tbody>
-              <tr><td class="text-center"><img alt="" src="images/10.jpg" class="img-size"></td></tr>
+              <tr><td class="text-center"><img alt="" src="${rSrcPath}/images/11.jpg" class="img-size"></td></tr>
             </tbody>
           </table>
         </div>

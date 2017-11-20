@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../include/header.jsp" %>
 <style>
 .align {
   text-align: center;
   border: 1px dashed;
   border-color: #F5D0A9;
+}
+.align2 {
+  text-align: center;
 }
 
 button.accordion {
@@ -41,6 +45,14 @@ div.panel {
   border: 2;
   border-style: hidden;
   border-radius: 10px;
+}
+
+.artContent{
+text-align:center; 
+border: 0px solid; 
+font-weight: bold;
+resize: none; 
+border-color: #F6E3CE"
 }
 
 .button2 {
@@ -104,7 +116,7 @@ font-size: 12pt;
 box-shadow: none;
 }
 
-#topbtn{
+.topbtn{
 border-style:hidden; 
 border-radius:10px; 
 background-color: #B40404;
@@ -113,22 +125,53 @@ width: 60px;
 height: 29px; 
 font-size: 9pt
 }
+.articleImg{
+width: 450px;
+margin: auto;
+display: block;
+}
+
+.articleImg img{
+width : 100%;
+height: auto;
+}
 
 
 </style>
+    <style type="text/css">
+    .popup {position: absolute;}
+    .back { background-color: gray; opacity:0.5; width: 100%; height: 300%; overflow:hidden;  z-index:1101;}
+    .front { 
+       z-index:1110; opacity:1; boarder:1px; margin: auto; 
+      }
+     .show{
+       position:relative;
+       max-width: 1200px; 
+       max-height: 800px; 
+       overflow: auto;       
+     } 
+    
+    </style>
 <body>
+
+<!-- hidden -->
+  
+    <div class='popup back' style="display:none;"></div>
+    <div id="popup_front" class='popup front' style="display:none;">
+     <img id="popup_img">
+    </div>
 	
 	
 	<!-- blog -->
 		<div class="blog"  style="background-color: white" >
 			<!-- container -->
-			<div class="container" style="width: 900px; border: 2px solid; border-color: #F6E3CE; padding: 40px"  >
+			<div class="container" style="width: 900px; border: 3px solid; border-color: #F6E3CE; padding: 40px"  >
         
         <div class="box-footer" style="float: right">
         
-         <button type="submit" id="topbtn" >MODIFY</button>
-            <button type="submit"  id="topbtn">DELETE</button>
-            <button type="submit"  id="topbtn" >LIST</button>
+         <button type="submit" class="topbtn" id="modifyBtn" >MODIFY</button>
+            <button type="submit"  class="topbtn" id="deleteBtn">DELETE</button>
+            <button type="submit"  class="topbtn" id="listBtn">LIST</button>
 
  
   </div>
@@ -151,18 +194,18 @@ font-size: 9pt
                <table id="shareForm">
                <tr >
                <div class="alert alert-warning" role="alert">
-				<strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;<input type="text" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
+				<strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;<input type="text" readonly="readonly"  value="&nbsp;${planItem.name}" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
 						</div>
                </tr>
                
                <tr>
               <div class="alert alert-warning" role="alert">
-        <strong id="shareInfo">평 수 :</strong>&nbsp;&nbsp;<input id="m" type="text">x <input id="m" type="text" >x <input  id="m" type="text">
+        <strong id="shareInfo">평 수 :</strong>&nbsp;&nbsp;<input readonly="readonly"  value="${planItem.length}" id="m" type="text">x <input readonly="readonly" value="${planItem.width}"  id="m" type="text" >x <input readonly="readonly"  value="${planItem.height}" id="m" type="text">
             </div>
                </tr>
                <tr>
                <div class="alert alert-warning" role="alert">
-        <strong id="shareInfo">작성자 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
+        <strong id="shareInfo">작성자 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input readonly="readonly"  value="${login.email}"  type="text" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
             </div>
                </tr>
                <tr>
@@ -190,43 +233,36 @@ font-size: 9pt
 <button class="accordion" class="col-md-2" style="margin-left: 60%; margin-top: 10px">&nbsp;자세히보기 ▼</button>
 
 
-
 <div class="bs-docs-example wow fadeInUp animated panel" data-wow-delay=".5s" style="background-color: #F7F2E0">
             <table class="table table-hover">
               <thead>
-                <tr>
-                  <th>#</th>
-                  <th>상품 번호</th>
-                  <th>상품명</th>
-                  <th>사이트바로가기</th>
+                <tr >
+                  <th class="align2">상품번호</th>
+                  <th class="align2">상품명</th>
+                  <th class="align2">상품가격</th>
+                  <th class="align2">사이트바로가기</th>
                 </tr>
               </thead>
-              <tbody>
+               <c:forEach var="product" items="${product}" >
+              <tbody style="text-align: cennter">
+                
                 <tr>
-                  <td>1</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
+                  <td class="align2">${product.productId }</td>
+                  <td class="align2">${product.name }</td>
+                  <td class="align2">${product.price }</td>
+                  <td class="align2">${product.brand }</td>
                 </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td colspan="2">Larry the Bird</td>
-                  <td>@twitter</td>
-                </tr>
+               
               </tbody>
+               </c:forEach>
             </table>
+            
+             
           </div>
           <br>
           <br>
           <br>
           <br>
-          
 
 
 
@@ -248,15 +284,16 @@ for (i = 0; i < acc.length; i++) {
 }
 </script>   
 
-
 <!-- 파일첨부할곳 -->
-  	<div class="row" style="margin: 0 auto">
-                <div style="border: 0px; width: 100%; height: 200%; border-color: #F6E3CE; margin-left: 10%">
-                  <img src="images/home.PNG" width="40%"  alt="" />
-                  <img src="images/room.PNG" width="40%"  alt="" />
-                </div>
-              	
-					</div>  
+
+
+          <div class="box box-primary"  >
+        <c:forEach items="${article.images}" var="articleImg">
+                   <div class="articleImg">
+         <img  src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"   >
+                    </div>
+                  </c:forEach>
+              	</div>
           <br>
           <br>
           <br>
@@ -265,17 +302,10 @@ for (i = 0; i < acc.length; i++) {
           
           <!-- 글쓸곳 -->
               <div class="row" style="text-align: center;">
-                <textarea name="contents" rows="9" cols="50"
-            style="border: 0px solid; resize: none; text-align: center"
-            >  
-                        하하
-			호호
-			히히
-			헤헤
-			헤헷
-			ㅋㅋㅋ
-			ㅎㅎㅎ
-            </textarea>
+              <br>
+                <textarea name="content" rows="6" cols="62" readonly="readonly"
+            class="artContent" 
+            >${article.content }</textarea>
                 
           </div>  
           <br>
@@ -283,11 +313,63 @@ for (i = 0; i < acc.length; i++) {
           
           <button style="border-style:hidden; margin-left:42%; border-radius:5px; font-weight:bold; background-color: #DF0101;
   color: white;  width: 17%; height:40px; font-size: 13pt">좋아요♥&nbsp;<font style="font-size: 11pt">[0]</font></button>
-            
+        
+ 
+<script>
+$(document).ready(function(){
+  
+  var formObj = $("form[role='form']");
+  
+  console.log(formObj);
+  
+  $("#modifyBtn").on("click", function(){
+    formObj.attr("action", "/article/modifyPage");
+    formObj.attr("method", "get");    
+    formObj.submit();
+  });
+  
+/*  $("#removeBtn").on("click", function(){
+    formObj.attr("action", "/sboard/removePage");
+    formObj.submit();
+  }); */
 
-          
-          
-          
+  
+  $("#deleteBtn").on("click", function(){
+    
+   /* var replyCnt =  $("#replycntSmall").html();
+    
+    if(replyCnt > 0 ){
+      alert("댓글이 달린 게시물을 삭제할 수 없습니다.");
+      return;
+    } */
+    
+    var arr = [];
+    $(".uploadedList li").each(function(index){
+       arr.push($(this).attr("data-src"));
+    });
+    
+    if(arr.length > 0){
+      $.post("/deleteAllFiles",{files:arr}, function(){
+        
+      });
+    }
+    
+    formObj.attr("action", "/article/deletePage");
+    formObj.submit();
+  }); 
+  
+  $("#listBtn ").on("click", function(){
+    formObj.attr("method", "get");
+    formObj.attr("action", "/article/list");
+    formObj.submit();
+  });
+  
+    
+  
+});
+</script>
+
+
           
           <!-- 댓글 -->
      

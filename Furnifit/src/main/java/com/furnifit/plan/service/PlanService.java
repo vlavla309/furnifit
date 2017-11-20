@@ -1,22 +1,19 @@
-package com.furnifit.plan.dao;
+package com.furnifit.plan.service;
 
 import java.util.List;
 
+import com.furnifit.orders.domain.Orders;
 import com.furnifit.plan.domain.Plan;
-
+import com.furnifit.planitem.domain.PlanItem;
 
 /**
- * Orderitems Dao 인터페이스 
+ * PlanItem Service 클래스
  * @author 손정화
  *
  */
-public interface PlanDao {
+public interface PlanService {
 	
-	/**
-	 * orderitems 추가
-	 * @param orderitems
-	 */
-	
+
 	// 주문별 배치도 정보 상세보기
 	public Plan read(int planitemId) throws Exception;
 	
