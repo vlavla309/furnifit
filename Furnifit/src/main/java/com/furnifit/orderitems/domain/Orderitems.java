@@ -1,5 +1,10 @@
 package com.furnifit.orderitems.domain;
 
+/**
+ *
+ * @author 손정화
+ *
+ */
 public class Orderitems{
 	private int productId;
 	private int orderId;

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.furnifit.article.domain.Furniture;
 import com.furnifit.member.domain.Member;
 import com.furnifit.planitem.domain.PlanItem;
 import com.furnifit.planitem.service.PlanItemService;
@@ -32,38 +33,26 @@ public class PlanItemController {
 	@Inject
 	private PlanItemService itemService;
 	
+//	@Inject
+//	private Furniture furniture;
 	
 	/** 회원별 배치도 항목 리스트 */
-	@RequestMapping(value = "", method=RequestMethod.GET)
-	public String listAll(Model model, HttpServletRequest request) throws Exception {
+	@RequestMapping(value = "/{planId}/{planitemId}", method=RequestMethod.GET)
+	public String listAll(@PathVariable("planId") int planId, @PathVariable("planitemId") int planitemId, Model model, HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();   
 		Member member = (Member) session.getAttribute("login");
 		
-		List<PlanItem> itemList = itemService.listAll(member.getEmail());
+		List<PlanItem> itemList = itemService.listAll(planId, planitemId);
 		for (PlanItem items : itemList) {
 			logger.info(items);
 		}
 		
+		
 		model.addAttribute("itemlist", itemList);
-//		model.addAttribute("member", member);
 		return "plan/plan-detail";
 	}
 
-	
-	/** 게시글 삭제 */
-//	@RequestMapping(value = "/removePage", method = RequestMethod.POST)
-//	public String remove(@RequestParam("bno") int bno, SearchCriteria cri, RedirectAttributes rttr)throws Exception{
-//		boardService.delete(bno);
-//		rttr.addAttribute("page", cri.getPage());
-//		rttr.addAttribute("perPageNum", cri.getPerPageNum());
-//		rttr.addAttribute("searchType", cri.getSearchType());
-//		rttr.addAttribute("keyword", cri.getKeyword());
-//		rttr.addFlashAttribute("msg", "SUCCESS");
-//		
-//		return "redirect:/sboard/list";
-//	}
-	
 	
 	/** 배치도 항목 삭제 */
 	@RequestMapping(value = "/{planId}/{planitemId}", method = RequestMethod.DELETE)

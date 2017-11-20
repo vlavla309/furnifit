@@ -1,5 +1,10 @@
 package com.furnifit.orders.domain;
 
+/**
+ *
+ * @author 손정화
+ *
+ */
 public class Orders{
 	private int orderId;
 	private String email;

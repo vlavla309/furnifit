@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.furnifit.plan.dao.PlanDao;
 import com.furnifit.plan.domain.Plan;
-import com.furnifit.planitem.dao.PlanItemDao;
 import com.furnifit.planitem.domain.PlanItem;
 
 /**
@@ -28,8 +27,8 @@ public class PlanServiceImpl implements PlanService {
 	}
 	
 	@Override
-	public Plan read(int planitemId) throws Exception {
-		return dao.read(planitemId);
+	public List<PlanItem> read(int planId, int planitemId) throws Exception {
+		return dao.read(planId, planitemId);
 	}
 	
 }

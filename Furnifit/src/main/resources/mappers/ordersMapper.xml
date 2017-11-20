@@ -4,6 +4,22 @@
                         
 <mapper namespace="com.furnifit.orders.dao.OrdersDao">
 	
+	<!-- 주문 생성 -->
+	<insert id="create" parameterType="Orders">
+		<selectKey keyProperty="orderId" resultType="int" order="BEFORE">
+			select orders_seq.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO orders
+				    (order_id AS "orderId",
+					 email,
+					 price,
+					 regdate)
+		VALUES 		(#{orderId},
+					 #{email},
+					 #{price},
+				     #{regdate})
+	</insert>
+	
 	<!-- 회원별 주문할 리스트 -->
 	<select id="listAll" parameterType="String" resultType="Orders">
 		SELECT order_id AS "orderId",
@@ -14,14 +30,24 @@
 		WHERE  email = #{email}
 	</select>
 	
-	<!-- 주문내역 상세보기 -->
-	<select id="read" parameterType="int" resultType="Orders">
+	<!-- 주문내역 상세보기(orderitems)  -->
+	<select id="read" parameterType="int" resultType="Orderitems">
+		SELECT product_id AS "productId",
+			   order_id AS "orderId",
+			   amount
+		FROM   orderitems
+		WHERE  order_id = #{value}
+	</select>
+	
+	<!-- 주문내역 상세보기(orderitems)  -->
+	<select id="price" parameterType="int" resultType="Orders">
 		SELECT order_id AS "orderId",
 			   email,
 			   price,
 			   regdate
 		FROM   orders
-		WHERE  orderId = #{orderId}
+		WHERE  order_id = #{value}
 	</select>
 	
 </mapper>
+
