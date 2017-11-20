@@ -66,20 +66,6 @@ public class ProductController {
 		List<Brand> brandlist = branddao.list();
 		List<Category> categorylist = categorys.list();
 		
-		/*
-		for (Product product : list) {
-			logger.info(product);
-		}
-		
-		List<ProductImg> imglist = imgdao.list();
-		for (ProductImg productImg : imglist) {
-			logger.info(productImg);
-		}
-		
-		model.addAttribute("list",list);
-		model.addAttribute("uploadPath", uploadPath);
-		model.addAttribute("imglist", imglist);
-		*/
 		model.addAttribute("list",list);
 		model.addAttribute("wishlist",wishlist);
 		model.addAttribute("colorlist", colorlist);
@@ -90,19 +76,7 @@ public class ProductController {
 	
 	@RequestMapping(value="/{productid}", method= RequestMethod.GET)
 	public String read(Model model, @PathVariable("productid") int productid) {
-		/*
-		Product product = productsrv.read(productid);
-		logger.info("[read] : "+product);
-		List<ProductImg> imglist = imgdao.productImg(productid);
-		for (ProductImg productImg : imglist) {
-			logger.info(productImg);
-		}
-		model.addAttribute("product", product);
-		model.addAttribute("imglist", imglist);
-		*/
-		Product product = productsrv.read(productid);
-		logger.info("[read] : "+product);
-		model.addAttribute("product", product);
+		model.addAttribute("product", productsrv.read(productid));
 		return "product/read";
 	}
 	
@@ -111,7 +85,6 @@ public class ProductController {
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String regist(Product product) {
-		logger.info("-------------------------------------------regist 시작");
 		productsrv.create(product);
 		logger.info("[ ProductController --> regist ] : "+ product);
 		return "redirect:/product/register";
