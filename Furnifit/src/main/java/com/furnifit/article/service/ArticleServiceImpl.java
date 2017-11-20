@@ -94,10 +94,32 @@ public class ArticleServiceImpl implements ArticleService {
 	public void artUpdate(Article article) {
 		articleDao.artUpdate(article);
 		
+		int articleId = article.getArticleId();
+		articleDao.deleteAttach(articleId);
+		 
+		String[] files = article.getFiles();
+		
+		if(files == null) {return;}
+		
+		for (String fullName : files) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			File f = new File(fullName);
+			String fileName = f.getName();
+			String filePath = f.getParent();
+			logger.info("----filename : " + fileName + " --> filePath : " + filePath+" ----");
+			map.put("name", fileName.replace("s_", ""));
+			map.put("path", filePath);
+			map.put("articleId", article.getArticleId());
+			
+			articleDao.replaceAttach(map);
+		}
+		
+		
 	}
 
 	@Override
 	public void artDelete(int articleId) {
+		articleDao.deleteAttach(articleId);
 		articleDao.artDelete(articleId);
 		
 	}

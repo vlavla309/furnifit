@@ -7,8 +7,16 @@
   border: 1px dashed;
   border-color: #F5D0A9;
 }
-.align2{
-text-align: center;
+.align2 {
+  text-align: center;
+}
+
+.fileDrop {
+  width: 80%;
+  height: 100px;
+  border: 1px dotted gray;
+  background-color: lightslategrey;
+  margin: auto;
 }
 
 #acreage{
@@ -21,6 +29,9 @@ font-size:11pt;
 color: #F7BE81;
 text-align: center;
 }
+
+
+
 
 button.accordion {
     background-color: #8A0808;
@@ -58,12 +69,20 @@ div.panel {
   border-radius: 10px;
 }
 
-.fileDrop {
-  width: 80%;
-  height: 100px;
-  border: 1px dotted gray;
-  background-color: lightslategrey;
-  margin: auto;
+.artTitle{
+text-align:center; 
+font-weight:bold; 
+width: 55%; 
+height: 40px; 
+border: 1px solid #F5D0A9;
+}
+
+.artContent{
+text-align:center; 
+font-weight: bold;
+resize: none; 
+border: 1px solid;
+border-color: #F5D0A9;
 }
 
 .button2 {
@@ -126,6 +145,27 @@ height: 25px;
 font-size: 12pt;
 box-shadow: none;
 }
+
+.topbtn{
+border-style:hidden; 
+border-radius:10px; 
+background-color: #B40404;
+color: white;  
+width: 60px; 
+height: 29px; 
+font-size: 9pt
+}
+.articleImg{
+width: 150px;
+margin: auto;
+display: block;
+}
+
+.articleImg img{
+width : 100%;
+height: auto;
+}
+
 .button3{
   width: 80px;
   height: 28px;
@@ -133,25 +173,44 @@ box-shadow: none;
   color: white;
   border: 2;
   border-style: hidden;
-
-}
-
-
+  border-radius: 10px;
 
 </style>
+    <style type="text/css">
+    .popup {position: absolute;}
+    .back { background-color: gray; opacity:0.5; width: 100%; height: 300%; overflow:hidden;  z-index:1101;}
+    .front { 
+       z-index:1110; opacity:1; boarder:1px; margin: auto; 
+      }
+     .show{
+       position:relative;
+       max-width: 1200px; 
+       max-height: 800px; 
+       overflow: auto;       
+     } 
+    
+    </style>
 <body>
-<!-- hidden -->
-<input type="hidden" value="${pageContext.servletContext.contextPath }" name="path" id ="path">
 
+<!-- hidden -->
+  
+    <div class='popup back' style="display:none;"></div>
+    <div id="popup_front" class='popup front' style="display:none;">
+     <img id="popup_img">
+    </div>
 	
 	
 	<!-- blog -->
 		<div class="blog"  style="background-color: white" >
 			<!-- container -->
+      
 			<div class="container" style="width: 900px; border: 3px solid; border-color: #F6E3CE; padding: 40px"  >
-				<form id='registerForm' role="form" method="post" action="${contextPath}/article">
-        <input type="hidden" name="planitemId" value="${planItem.planitemId}">
-        <div class="blog-heading w3layouts" style="margin-top: 30px" >
+        
+  <br>
+
+ 
+  
+				<div class="blog-heading w3layouts" style="margin-top: 30px" >
 				
 				
 				<!-- 여기서 내용을 채운다 -->
@@ -166,23 +225,23 @@ box-shadow: none;
                <table id="shareForm">
                <tr >
                <div class="alert alert-warning" role="alert">
-				<strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;<input type="text" readonly="readonly"  value="${planItem.name}" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
+				<strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;<input type="text" readonly="readonly"  value="&nbsp;${planItem.name}" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
 						</div>
                </tr>
                
                <tr>
               <div class="alert alert-warning" role="alert">
-        <strong id="shareInfo">평 수 :</strong>&nbsp;&nbsp;<input id="m" readonly="readonly"  value="${planItem.length}" type="text">x <input id="m" readonly="readonly" value="${planItem.width}" type="text" >x <input  id="m" readonly="readonly"  value="${planItem.height}" type="text">
-            &nbsp;&nbsp;&nbsp; <strong id="shareInfo">(&nbsp;평 수 :&nbsp;</strong><input readonly="readonly" value="${planItem.acreage}"  id="acreage" type="text"> <strong id="shareInfo">평&nbsp;)</strong>
+        <strong id="shareInfo">방크기 :</strong><input readonly="readonly"  value="${planItem.length}" id="m" type="text">x <input readonly="readonly" value="${planItem.width}"  id="m" type="text" >x <input readonly="readonly"  value="${planItem.height}" id="m" type="text">
+             &nbsp;&nbsp; <strong id="shareInfo">(&nbsp;평&nbsp;&nbsp;수  :&nbsp;</strong><input readonly="readonly" value="${planItem.acreage}"  id="acreage" type="text"> <strong id="shareInfo">평&nbsp;)</strong>
             </div>
                </tr>
                <tr>
                <div class="alert alert-warning" role="alert">
-        <strong id="shareInfo">작성자 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" readonly="readonly" name="email"  value="${login.email}" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
+        <strong id="shareInfo">작성자 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input readonly="readonly"  value="${login.email}"  type="text" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
             </div>
                </tr>
                <tr>
-                             </tr>
+                               </tr>
                
                </table>
                <br>
@@ -196,18 +255,17 @@ box-shadow: none;
                 
                	<div class="row" style="margin-left: 26%">
                 <div style="border: 1px ; float: left; width: 400px;  height: 260px; border-color: #B40404; padding: 10px; margin: 0 auto;">
-                  <img src="${planItem.image}" width="105%"  alt="" />
+                  <img src="images/plan.PNG" width="105%"  alt="" />
                 </div>
 			
 					</div> 
   
   <!-- 자세히보기-가구목록  -->
 <br>
-<button type="button" class="accordion" class="col-md-2" style="margin-left: 60%; margin-top: 10px">&nbsp;자세히보기 ▼</button>
+<button class="accordion" class="col-md-2" style="margin-left: 60%; margin-top: 10px">&nbsp;자세히보기 ▼</button>
 
 
-
-<div class="bs-docs-example wow fadeInUp animated panel" data-wow-delay=".5s" style="background-color: #F7F2E0">
+<div class="bs-docs-example wow fadeInUp animated panel" data-wow-delay=".5s" style="background-color: white">
             <table class="table table-hover">
               <thead>
                 <tr >
@@ -230,13 +288,89 @@ box-shadow: none;
               </tbody>
                </c:forEach>
             </table>
+            
+             
           </div>
           <br>
           <br>
           <br>
           <br>
           
-            
+<!-- 파일첨부할곳 -->
+
+ <p>
+    <div class="form-group">
+              <label for="exampleInputEmail1">File DROP Here</label>
+              <div class="fileDrop"></div>
+            </div>
+          </div>
+
+          <!-- /.box-body -->
+
+          <div class="box-footer">
+            <div>
+              <hr>
+            </div>
+
+
+            <ul class="mailbox-attachments clearfix uploadedList">
+                    <c:forEach items="${article.images}" var="articleImg">
+                   <div class="articleImg">
+                   <li>
+  <span class="mailbox-attachment-icon has-img"><img src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"></span>
+  <div class="mailbox-attachment-info">
+  <a href="${articleImg.path}/${articleImg.name}" 
+     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw  fa-times "></i></a>
+  </span>
+  </div>
+</li> 
+                    </div>
+                  </c:forEach>
+            </ul>
+
+          <br>
+          <br>
+          <br>
+          <br>
+
+
+
+          <div class="box box-primary"  >
+
+              	</div>
+          <br>
+          <br>
+          <br>
+          <br>
+
+          
+          <!-- 글쓸곳 -->
+              <div class="row" style="text-align: center;">
+                   <input type="text" value="${article.title }" name="title" class="artTitle" readonly="readonly">
+              <p>
+              <br>
+              <br>
+                <textarea name="content" rows="8" cols="55" 
+            class="artContent" 
+            >${article.content }</textarea>
+                
+          </div>  
+          <br>
+          <br>
+                <br>     
+  
+  
+            <div style="margin-left: 40%">
+          
+                <button type="submit" class="button3" id="modifyBtn">저장하기</button>
+                <button type="reset" class="button3" id="cancelBtn">취소</button>
+          </div>
+       
+				</div>
+       
+        
+			</div>
+      </div>
 <script>
 var acc = document.getElementsByClassName("accordion");
 var i;
@@ -252,59 +386,37 @@ for (i = 0; i < acc.length; i++) {
         }
     }
 }
-</script>   
+</script> 
+     
+<script>
 
 
-<!-- 파일첨부할곳 -->
+$("#modifyBtn").on("click",function(){
+    
+    var title = $(".artTitle").val();
+    var content = $(".artContent").html();
+    
+    
+    $.ajax({
+      type:'put',
+      url:'${contextPath}/article/update/${article.articleId}',
+      headers: { 
+            "Content-Type": "application/json",
+            "X-HTTP-Method-Override": "PUT" },
+      data:JSON.stringify({replytext:replytext}), 
+      dataType:'text', 
+      success:function(result){
+        console.log("result: " + result);
+        if(result == 'success'){
+          alert("수정 되었습니다.");
+          getPage("/replies/"+bno+"/"+replyPage );
+        }
+    }});
+});
+	
+	
+</script>
 
- <p>
-  	<div class="form-group">
-							<label for="exampleInputEmail1">File DROP Here</label>
-							<div class="fileDrop"></div>
-						</div>
-					</div>
-
-					<!-- /.box-body -->
-
-					<div class="box-footer">
-						<div>
-							<hr>
-						</div>
-
-						<ul class="mailbox-attachments clearfix uploadedList">
-						</ul>
-
-          <br>
-          <br>
-          <br>
-          <br>
-
-          
-          <!-- 글쓸곳 -->
-              <div class="row" style="text-align: center;">
-              <input type="text" name="title" style="width: 55%; height:40px; border: 3px solid #F6E3CE" required="required" placeholder="&nbsp;&nbsp;&nbsp;제목을 입력해주세요.">
-              <p>
-              <br>
-                <textarea name="content" rows="8" cols="55"
-            style="border: 3px solid; resize: none; border-color: #F6E3CE" required="required" placeholder="&nbsp;&nbsp;&nbsp;글을 작성해주세요."
-            ></textarea>
-                
-          </div>  
-          <br>
-          <br>
-          <div style="margin-left: 40%">
-          
-                <button type="submit" class="button3">저장하기</button>
-                <button type="reset" class="button3" onclick="article/list.jsp">취소</button>
-          </div>
-          
-         
-				</div>
-       
-        </form>
-			</div>
-      </div>
-      
                 
                <script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/js/artupload.js"></script>
 <script
@@ -397,6 +509,15 @@ for (i = 0; i < acc.length; i++) {
       }
     });
   });
+</script>
+<script>
+$(document).ready(function(){
+	
+	
+	
+	});
+
+
 </script>
   
 

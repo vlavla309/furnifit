@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -66,7 +68,7 @@ public class ArticleController {
 		return "article/register";
 	}
 	
-	@RequestMapping(value = "/register/{planitemId}", method = RequestMethod.POST)
+	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String registPOST(Article article) throws Exception {
 		
 		logger.info(article);
@@ -90,6 +92,8 @@ public class ArticleController {
 	}
 	
 	
+	
+	
 	@RequestMapping(value = "/{articleId}", method = RequestMethod.GET)
 	public String read(@PathVariable int articleId,Furniture furniture,Product product, Model model) throws Exception {
 		 Article article = service.read(articleId);
@@ -110,6 +114,41 @@ public class ArticleController {
 		 
 		 return "article/detail";
 
+	}
+	
+	@RequestMapping(value = "/update/{articleId}", method = RequestMethod.GET)
+	public String updatePage(@PathVariable int articleId,Furniture furniture,Product product, Model model) throws Exception {
+		 Article article = service.read(articleId);
+		 
+		 PlanItem planItem = service.readPlanItem(article.getPlanitemId());
+		 
+		 List<Product> prdList = new ArrayList<Product>();
+		 List<Furniture> list = service.readFurniture(article.getPlanitemId());
+		 for (Furniture f : list) {
+			prdList.add(service.readProduct(f.getProductId()));
+		}
+		 
+		 model.addAttribute("product",prdList); 
+		 model.addAttribute("planItem", planItem);
+		 model.addAttribute("article", article);
+		 
+		 return "article/modify";
+
+	}
+	
+	@RequestMapping(value = "/{articleId}", method = {RequestMethod.PATCH, RequestMethod.PUT})
+	public ResponseEntity<String> update(Article article) throws Exception {
+		
+		ResponseEntity<String> entity = null;
+		try {
+			service.artUpdate(article);
+			
+			entity = new ResponseEntity<String>("success",HttpStatus.OK);
+			
+		} catch (Exception e) {
+			entity = new ResponseEntity<String>( "fail",HttpStatus.BAD_REQUEST);
+		}
+		 return entity;
 	}
 
 	

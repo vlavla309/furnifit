@@ -90,6 +90,23 @@ public class MybatisArticleDao implements ArticleDao {
 	public List<ArticleImg> getAttach(int articleId) {
 		return sqlSession.selectList(namespace + ".getAttach", articleId);
 	}
+
+
+	@Override
+	public void deleteAttach(int articleId) {
+		sqlSession.delete(namespace + ".deleteAttach", articleId);
+		
+	}
+
+
+	@Override
+	public void replaceAttach(Map<String, Object> map) {
+		
+		sqlSession.insert(namespace+ ".replaceAttach", map);
+		
+	}
+	
+	
 	
 	
 	

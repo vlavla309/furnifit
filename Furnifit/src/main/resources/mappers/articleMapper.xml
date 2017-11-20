@@ -6,19 +6,28 @@
 
 	
 	<insert id="create" parameterType="Article">
+
+	 <selectKey keyProperty="articleId" resultType="int" order="BEFORE">
+             select articles_seq.nextval
+             FROM DUAL
+      </selectKey>
 	
 	
 	 INSERT INTO articles
 	 			 (article_id ,
 	 			  email,
-	 			  planitem_id, 
+	 			  planitem_id,
+	 			  likecnt,
+	 			  viewcnt, 
 	 			  title,
 	 			  content	 
 	 			 )
 	 VALUES      (
-	 			  articles_seq.nextval,
+	 			  #{articleId},
 	 			  #{email},
 	 			  #{planitemId},
+	 			  #{likecnt},
+	 			  #{viewcnt},
 	 			  #{title},
 	 			  #{content})
 	 			  
@@ -60,6 +69,24 @@
 	WHERE article_id = #{articleId}
 	ORDER BY regdate DESC
 	</select>
+	
+	<!-- 게시글 첨부이미지파일 삭제(수정시) -->
+	<delete id="deleteAttach" parameterType="int">
+	DELETE FROM article_img
+	WHERE article_id = #{articleId}
+	</delete>
+	
+		<!--게시글 첨부이미지 파일 수정 업로드 -->
+	<insert id="replaceAttach">
+	INSERT into article_img
+				(name,
+				 article_id,
+				 path)
+	VALUES (#{name},
+			#{articleId},
+			#{path})
+	</insert>
+	
 	
 	<!-- 게시판 전체리스트 -->
 	   <!-- 전체 리스트 -->
