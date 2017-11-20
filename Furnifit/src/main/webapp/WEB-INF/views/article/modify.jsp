@@ -11,6 +11,20 @@
   text-align: center;
 }
 
+#acreage{
+width:4%;  
+height: 14%; 
+background-color: transparent; 
+font-weight:bold; 
+border: none; 
+font-size:11pt; 
+color: #F7BE81;
+text-align: center;
+}
+
+
+
+
 button.accordion {
     background-color: #8A0808;
     color: white;
@@ -47,12 +61,20 @@ div.panel {
   border-radius: 10px;
 }
 
+.artTitle{
+text-align:center; 
+font-weight:bold; 
+width: 55%; 
+height: 40px; 
+border: 1px solid #F5D0A9;
+}
+
 .artContent{
 text-align:center; 
-border: 0px solid; 
 font-weight: bold;
 resize: none; 
-border-color: #F6E3CE"
+border: 1px solid;
+border-color: #F5D0A9;
 }
 
 .button2 {
@@ -67,7 +89,6 @@ border-color: #F6E3CE"
 #shareForm tr td{
 padding: 3px;
 }
-
 #shareInfo{
 color: #DF0101;
 font-size: 9pt;
@@ -83,18 +104,6 @@ font-size:11pt;
 color: #F7BE81;
 text-align: center;
 }
-
-#acreage{
-width:4%;  
-height: 14%; 
-background-color: transparent; 
-font-weight:bold; 
-border: none; 
-font-size:11pt; 
-color: #F7BE81;
-text-align: center;
-}
-
 
 ul.dropdown-menu {
     top: 1.5cm;
@@ -129,7 +138,7 @@ font-size: 12pt;
 box-shadow: none;
 }
 
-#topbtn{
+.topbtn{
 border-style:hidden; 
 border-radius:10px; 
 background-color: #B40404;
@@ -149,6 +158,14 @@ width : 100%;
 height: auto;
 }
 
+.button3{
+  width: 80px;
+  height: 28px;
+  background-color: #61210B;
+  color: white;
+  border: 2;
+  border-style: hidden;
+  border-radius: 10px;
 
 </style>
     <style type="text/css">
@@ -168,27 +185,29 @@ height: auto;
 <body>
 
 <!-- hidden -->
-
-<form role="form" >
- 
- </form>  
+  
+    <div class='popup back' style="display:none;"></div>
+    <div id="popup_front" class='popup front' style="display:none;">
+     <img id="popup_img">
+    </div>
+	
+	
 	<!-- blog -->
 		<div class="blog"  style="background-color: white" >
 			<!-- container -->
+      
 			<div class="container" style="width: 900px; border: 3px solid; border-color: #F6E3CE; padding: 40px"  >
         
-        <div class="box-footer" style="float: right">
-        
-         <a href="${contextPath }/article/update/${article.articleId}" type="button"><button type="submit" id="topbtn" class="modifyBtn" >MODIFY</button></a>
-         <button type="submit"  id="topbtn" class="deleteBtn">DELETE</button>
-         <button type="submit"  id="topbtn" class="listBtn">LIST</button>
-  
-  </div>
   <br>
+
+ 
+  
 				<div class="blog-heading w3layouts" style="margin-top: 30px" >
 				
 				
 				<!-- 여기서 내용을 채운다 -->
+      
+   
 				
                 </div>
                 <div class="gallery-grids" >
@@ -204,8 +223,8 @@ height: auto;
                
                <tr>
               <div class="alert alert-warning" role="alert">
-        <strong id="shareInfo">방크기 :</strong>&nbsp;&nbsp;<input readonly="readonly"  value="${planItem.length}" id="m" type="text">x <input readonly="readonly" value="${planItem.width}"  id="m" type="text" >x <input readonly="readonly"  value="${planItem.height}" id="m" type="text">
-              &nbsp;&nbsp;&nbsp; <strong id="shareInfo">(&nbsp;평 수 :&nbsp;</strong><input readonly="readonly" value="${planItem.acreage}"  id="acreage" type="text"> <strong id="shareInfo">평&nbsp;)</strong>
+        <strong id="shareInfo">방크기 :</strong><input readonly="readonly"  value="${planItem.length}" id="m" type="text">x <input readonly="readonly" value="${planItem.width}"  id="m" type="text" >x <input readonly="readonly"  value="${planItem.height}" id="m" type="text">
+             &nbsp;&nbsp; <strong id="shareInfo">(&nbsp;평&nbsp;&nbsp;수  :&nbsp;</strong><input readonly="readonly" value="${planItem.acreage}"  id="acreage" type="text"> <strong id="shareInfo">평&nbsp;)</strong>
             </div>
                </tr>
                <tr>
@@ -269,7 +288,6 @@ height: auto;
           <br>
           <br>
 
- 
 
 <!-- 파일첨부할곳 -->
 
@@ -289,116 +307,31 @@ height: auto;
           
           <!-- 글쓸곳 -->
               <div class="row" style="text-align: center;">
-       
-                <textarea name="content" rows="8" cols="55" readonly="readonly"
+                   <input type="text" value="${article.title }" name="title" class="artTitle" readonly="readonly">
+              <p>
+              <br>
+              <br>
+                <textarea name="content" rows="8" cols="55" 
             class="artContent" 
             >${article.content }</textarea>
                 
           </div>  
           <br>
           <br>
+                <br>     
+  
+  
+            <div style="margin-left: 40%">
           
-          <button style="border-style:hidden; margin-left:42%; border-radius:5px; font-weight:bold; background-color: #DF0101;
-  color: white;  width: 17%; height:40px; font-size: 13pt">좋아요♥&nbsp;<font style="font-size: 11pt">[0]</font></button>
+                <button type="submit" class="button3" id="modifyBtn">저장하기</button>
+                <button type="reset" class="button3" id="cancelBtn">취소</button>
+          </div>
+       
+				</div>
+       
         
-     
-          <!-- 댓글 -->
-     
-          <br>
-          <br>
-          <br>
-         
- <table style="width: 30px; margin: 0 auto;  text-align: center " >
-      <tr>
-        <td><input type="hidden" name=""  />
-          <textarea name="contents" rows="2" cols="100"
-            style="resize: none; border-style: solid; font-size: 11pt" 
-            >댓글을 작성해주세요.</textarea></td>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-        <td><input class="replybtn" type="submit" value="등록"
-          style="width: 50px; height: 33px; font-size: 11pt"></td>
-
-      </tr>
-     
-    </table>
-   
-    
-
- 
-
-<br/>&nbsp;<br/>
-
-<table width="600" border="0" cellpadding="0" cellspacing="0"  align="center">
- 
-</table>
-
-
-<br/>
-
-<table width="780" border="0" cellpadding="0" cellspacing="0" align="center">
-    <tr><td width="600" colspan="2" height="3" bgcolor="#B40404"></td></tr>
-  
-        <tr height="25">
-            <td width="50%" align="left" style="color:#B40404;  font-weight: bold">&nbsp;&nbsp;보라보라얍</td>
-           
-            <td width="50%" align="right" style="color:#B40404;  font-weight: bold" >2017.11.13&nbsp;<input id="deletebtn" type="button" value="삭제"
-         ></td>
-        </tr>
-        <tr><td width="600" colspan="2" height="1" bgcolor="#B40404"></td></tr>
-        <tr height="60">
-            <td align="left" style="padding: 5px 5px 5px 5px; color:#585858;  font-weight: bold" valign="top">
-                          하이루 방가루
-            </td>
-        </tr>
-        <tr><td width="600" colspan="2" height="3" bgcolor="#B40404"></td></tr>
-
-          </table>
-     
-		    </div>
-		 </div>
+			</div>
       </div>
-   
-     <script>
-$(document).ready(function(){
-  
-  var formObj = $("form[role='form']");
-    
-    
-  $(".listBtn").on("click", function(){
-    formObj.attr("method", "get");
-    formObj.attr("action", "/one/article");
-    formObj.submit();
-  }); 
-  
-});
-  
-</script>
-
-<script>
-        
-          $(".deleteBtn").on("click",function(){
-              
-              var rno = $(".modal-title").html();
-              var replytext = $("#replytext").val();
-              
-              $.ajax({
-                type:'delete',
-                url:'/replies/'+rno,
-                headers: { 
-                      "Content-Type": "application/json",
-                      "X-HTTP-Method-Override": "DELETE" },
-                dataType:'text', 
-                success:function(result){
-                  console.log("result: " + result);
-                  if(result == 'SUCCESS'){
-                    alert("삭제 되었습니다.");
-                    getPage("/replies/"+bno+"/"+replyPage );
-                  }
-              }});
-          });
-
-</script> 
-
 <script>
 var acc = document.getElementsByClassName("accordion");
 var i;
@@ -414,7 +347,35 @@ for (i = 0; i < acc.length; i++) {
         }
     }
 }
-</script>  
+</script> 
+     
+<script>
+
+
+$("#modifyBtn").on("click",function(){
+    
+    var title = $(".artTitle").val();
+    var content = $(".artContent").html();
+    
+    $.ajax({
+      type:'put',
+      url:'${contextPath}/article/update/${article.articleId}',
+      headers: { 
+            "Content-Type": "application/json",
+            "X-HTTP-Method-Override": "PUT" },
+      data:JSON.stringify({replytext:replytext}), 
+      dataType:'text', 
+      success:function(result){
+        console.log("result: " + result);
+        if(result == 'SUCCESS'){
+          alert("수정 되었습니다.");
+          getPage("/replies/"+bno+"/"+replyPage );
+        }
+    }});
+});
+	
+	
+</script>
 
        
          
