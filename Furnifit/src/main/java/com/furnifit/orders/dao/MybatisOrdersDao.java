@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.furnifit.orderitems.domain.Orderitems;
 import com.furnifit.orders.domain.Orders;
 
 /**
@@ -22,24 +23,24 @@ public class MybatisOrdersDao implements OrdersDao {
 	@Inject
 	private SqlSession sqlSession;
 
-//	@Override
-//	public void create(Orders order) throws Exception {
-//		sqlSession.insert(NAMESPACE+".create", order);
-//	}
-//	
-//	@Override
-//	public Orders read(String email) throws Exception {
-//		return sqlSession.selectOne(NAMESPACE+".read", email);
-//	}
-
 	@Override
-	public Orders read(int orderId) throws Exception {
-		return sqlSession.selectOne(NAMESPACE+".read", orderId);
+	public void create(Orders order) throws Exception {
+		sqlSession.insert(NAMESPACE + ".create", order);
 	}
 	
 	@Override
 	public List<Orders> listAll(String email) throws Exception {
-		return sqlSession.selectList(NAMESPACE+".listAll", email);
+		return sqlSession.selectList(NAMESPACE + ".listAll", email);
+	}
+	
+	@Override
+	public List<Orderitems> read(int orderId) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".read", orderId);
+	}
+	
+	@Override
+	public List<Orders> price(int orderId) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".price", orderId);
 	}
 	
 //	@Override

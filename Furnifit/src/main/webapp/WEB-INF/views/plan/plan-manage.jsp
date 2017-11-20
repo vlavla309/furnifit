@@ -53,14 +53,14 @@ li { list-style-type: none; }
         <div class="table-responsive" >
           <table class="table text-center">
             <tbody>
-              <tr><td><img class="img-size" alt="" src="images/user.png"></td></tr>
+              <tr><td><img class="img-size" alt="" src="${rSrcPath}/images/user.png"></td></tr>
             </tbody>
           </table>
           <table class="table text-left">
             <tbody>
-              <tr><td>이메일 : bangry@naver.com</td></tr>
-              <tr><td>이름 : 방그리</td></tr>
-              <tr><td>쿠폰 : 2개 보유</td></tr>
+              <tr><td>이메일 : ${login.email}</td></tr>
+              <tr><td>이름 : ${login.name}</td></tr>
+              <tr><td>쿠폰 : ${couponlist.size()}개 보유</td></tr>
             </tbody>
           </table>
         </div>
@@ -71,106 +71,18 @@ li { list-style-type: none; }
       <div class="box">
         <form method="post" action="order-address.leaf">
           <div class="text-center" id="box">
+          <c:forEach items="${planlist}" var="plan">
             <dl>
-              <dt class="accordion">1 / bangry님의 배치도 / 2017-11-13</dt>
+              <dt class="accordion">${plan.planId} / ${plan.email}님의 배치도 / ${plan.regdate}</dt>
+               <c:forEach items="${itemlist}" var="item">
                 <dd>
                   <ul>
-                    <li><a href="#">1) 내방 (30&nbsp;X&nbsp;40&nbsp;X&nbsp;100)</a></li>
-                    <li><a href="#">2) 거실 (30&nbsp;X&nbsp;40&nbsp;X&nbsp;100)</a></li>
-                    <li><a href="#">3) 주방 (30&nbsp;X&nbsp;40&nbsp;X&nbsp;100)</a></li>
+                    <li><a href="#">1) ${item.name}</a></li>
                   </ul>
                 </dd>
-              <dt class="accordion">2 / bangry님의 배치도 / 2017-11-13</dt>
-                <dd>
-                  <ul>
-                    <li><a href="#">방리스트1~~</a></li>
-                    <li><a href="#">방리스트2~~</a></li>
-                    <li><a href="#">방리스트3~~</a></li>
-                    <li><a href="#">방리스트4~~</a></li>
-                  </ul>
-                </dd>
-              <dt class="accordion">3 / bangry님의 배치도 / 2017-11-13</dt>
-                <dd>
-                  <ul>
-                    <li><a href="#">방리스트1~~</a></li>
-                    <li><a href="#">방리스트2~~</a></li>
-                    <li><a href="#">방리스트3~~</a></li>
-                    <li><a href="#">방리스트4~~</a></li>
-                  </ul>
-                </dd>
-              <dt class="accordion">4 / bangry님의 배치도 / 2017-11-13</dt>
-              <dd>
-                <ul>
-                  <li><a href="#">방리스트1~~</a></li>
-                  <li><a href="#">방리스트2~~</a></li>
-                  <li><a href="#">방리스트3~~</a></li>
-                  <li><a href="#">방리스트4~~</a></li>
-                </ul>
-              </dd>
-              <dt class="accordion">5 / bangry님의 배치도 / 2017-11-13</dt>
-              <dd>
-                <ul>
-                  <li><a href="#">방리스트1~~</a></li>
-                  <li><a href="#">방리스트2~~</a></li>
-                  <li><a href="#">방리스트3~~</a></li>
-                  <li><a href="#">방리스트4~~</a></li>
-                </ul>
-              </dd>
-              <dt class="accordion">6 / bangry님의 배치도 / 2017-11-13</dt>
-              <dd>
-                <ul>
-                  <li><a href="#">방리스트1~~</a></li>
-                  <li><a href="#">방리스트2~~</a></li>
-                  <li><a href="#">방리스트3~~</a></li>
-                  <li><a href="#">방리스트4~~</a></li>
-                </ul>
-              </dd>
-              <dt class="accordion">7 / bangry님의 배치도 / 2017-11-13</dt>
-              <dd>
-                <ul>
-                  <li><a href="#">방리스트1~~</a></li>
-                  <li><a href="#">방리스트2~~</a></li>
-                  <li><a href="#">방리스트3~~</a></li>
-                  <li><a href="#">방리스트4~~</a></li>
-                </ul>
-              </dd>
-              <dt class="accordion">8 / bangry님의 배치도 / 2017-11-13</dt>
-              <dd>
-                <ul>
-                  <li><a href="#">방리스트1~~</a></li>
-                  <li><a href="#">방리스트2~~</a></li>
-                  <li><a href="#">방리스트3~~</a></li>
-                  <li><a href="#">방리스트4~~</a></li>
-                </ul>
-              </dd>
-              <dt class="accordion">9 / bangry님의 배치도 / 2017-11-13</dt>
-              <dd>
-                <ul>
-                  <li><a href="#">방리스트1~~</a></li>
-                  <li><a href="#">방리스트2~~</a></li>
-                  <li><a href="#">방리스트3~~</a></li>
-                  <li><a href="#">방리스트4~~</a></li>
-                </ul>
-              </dd>
-              <dt class="accordion">10 / bangry님의 배치도 / 2017-11-13</dt>
-              <dd>
-                <ul>
-                  <li><a href="#">방리스트1~~</a></li>
-                  <li><a href="#">방리스트2~~</a></li>
-                  <li><a href="#">방리스트3~~</a></li>
-                  <li><a href="#">방리스트4~~</a></li>
-                </ul>
-              </dd>
-              <dt class="accordion">11 / bangry님의 배치도 / 2017-11-13</dt>
-              <dd>
-                <ul>
-                  <li><a href="#">방리스트1~~</a></li>
-                  <li><a href="#">방리스트2~~</a></li>
-                  <li><a href="#">방리스트3~~</a></li>
-                  <li><a href="#">방리스트4~~</a></li>
-                </ul>
-              </dd>
+                </c:forEach>
             </dl>
+            </c:forEach>
           </div>
         </form>
       </div>

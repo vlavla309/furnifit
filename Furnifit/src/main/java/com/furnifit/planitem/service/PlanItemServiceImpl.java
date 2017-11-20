@@ -1,6 +1,8 @@
 package com.furnifit.planitem.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -22,8 +24,8 @@ public class PlanItemServiceImpl implements PlanItemService {
 
 	
 	@Override
-	public List<PlanItem> listAll(String email) throws Exception {
-		return dao.listAll(email);
+	public List<PlanItem> listAll(int planId, int planitemId) throws Exception {
+		return dao.listAll(planId, planitemId);
 	}
 	
 	@Override

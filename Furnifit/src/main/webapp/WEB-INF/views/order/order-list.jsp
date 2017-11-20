@@ -56,10 +56,10 @@ li { list-style-type: none; }
         <div class="table-responsive" >
           <table class="table">
             <tbody>
-              <tr><td>이메일 : ${member.email}</td></tr>
-              <tr><td>이름 : ${member.name}</td></tr>
-              <tr><td>쿠폰 : 2개 보유</td></tr>
-              <tr><td>주문내역 : 2회</td></tr>
+              <tr><td>이메일 : ${login.email}</td></tr>
+              <tr><td>이름 : ${login.name}</td></tr>
+              <tr><td>쿠폰 : ${couponlist.size()}개 보유</td></tr>
+              <tr><td>주문내역 : ${orderlist.size()}회</td></tr>
             </tbody>
           </table>
           </div>
@@ -73,7 +73,7 @@ li { list-style-type: none; }
            <c:forEach items="${orderlist}" var="list">
             <dl>
               <dt class="accordion">${list.orderId} / ${list.email}님의 주문목록 / ${list.regdate}
-              <div class="text-right"><button type="submit" class="btn btn-primary text-right"><a href="${list.orderId}">상세보기</a></button></div></dt>
+              <div class="text-right"><button type="submit" class="btn btn-default text-right"><a href="order/${list.orderId}">상세보기</a></button></div></dt>
             </dl>
             </c:forEach>
           </div>
