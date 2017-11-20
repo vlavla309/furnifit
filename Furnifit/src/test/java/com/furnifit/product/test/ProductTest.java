@@ -1,3 +1,4 @@
+package com.furnifit.product.test;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
