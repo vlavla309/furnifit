@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.furnifit.member.domain.Member;
 import com.furnifit.wishlist.service.WishlistService;
 
+/**
+ * @author 한수진
+ *
+ */
 @Controller
 @RequestMapping("/wishlist")
 public class WishlistController {

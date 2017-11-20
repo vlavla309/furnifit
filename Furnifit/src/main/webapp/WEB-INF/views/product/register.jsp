@@ -76,7 +76,7 @@
 
 						<div class="form-group">
 							<label for="lenght">lenght</label> <input type="text"
-								name="lenght" class="form-control"
+								name="length" class="form-control"
 								placeholder="Enter lenght....">
 						</div>
 
