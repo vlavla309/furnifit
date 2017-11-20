@@ -140,7 +140,7 @@ box-shadow: none;
 
 </style>
 <body>
-<!-- hidden -->4
+<!-- hidden -->
 <input type="hidden" value="${pageContext.servletContext.contextPath }" name="path" id ="path">
 
 	
@@ -316,7 +316,7 @@ for (i = 0; i < acc.length; i++) {
   <div class="mailbox-attachment-info">
   <a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
   <a href="{{fullName}}" 
-     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
+     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw  fa-times "></i></a>
   </span>
   </div>
 </li>                

@@ -11,6 +11,14 @@
   text-align: center;
 }
 
+.fileDrop {
+  width: 80%;
+  height: 100px;
+  border: 1px dotted gray;
+  background-color: lightslategrey;
+  margin: auto;
+}
+
 #acreage{
 width:4%;  
 height: 14%; 
@@ -148,7 +156,7 @@ height: 29px;
 font-size: 9pt
 }
 .articleImg{
-width: 450px;
+width: 150px;
 margin: auto;
 display: block;
 }
@@ -287,17 +295,48 @@ height: auto;
           <br>
           <br>
           <br>
-
-
+          
 <!-- 파일첨부할곳 -->
+
+ <p>
+    <div class="form-group">
+              <label for="exampleInputEmail1">File DROP Here</label>
+              <div class="fileDrop"></div>
+            </div>
+          </div>
+
+          <!-- /.box-body -->
+
+          <div class="box-footer">
+            <div>
+              <hr>
+            </div>
+
+
+            <ul class="mailbox-attachments clearfix uploadedList">
+                    <c:forEach items="${article.images}" var="articleImg">
+                   <div class="articleImg">
+                   <li>
+  <span class="mailbox-attachment-icon has-img"><img src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"></span>
+  <div class="mailbox-attachment-info">
+  <a href="${articleImg.path}/${articleImg.name}" 
+     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw  fa-times "></i></a>
+  </span>
+  </div>
+</li> 
+                    </div>
+                  </c:forEach>
+            </ul>
+
+          <br>
+          <br>
+          <br>
+          <br>
+
 
 
           <div class="box box-primary"  >
-        <c:forEach items="${article.images}" var="articleImg">
-                   <div class="articleImg">
-         <img  src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"   >
-                    </div>
-                  </c:forEach>
+
               	</div>
           <br>
           <br>
@@ -357,6 +396,7 @@ $("#modifyBtn").on("click",function(){
     var title = $(".artTitle").val();
     var content = $(".artContent").html();
     
+    
     $.ajax({
       type:'put',
       url:'${contextPath}/article/update/${article.articleId}',
@@ -367,7 +407,7 @@ $("#modifyBtn").on("click",function(){
       dataType:'text', 
       success:function(result){
         console.log("result: " + result);
-        if(result == 'SUCCESS'){
+        if(result == 'success'){
           alert("수정 되었습니다.");
           getPage("/replies/"+bno+"/"+replyPage );
         }
@@ -376,6 +416,110 @@ $("#modifyBtn").on("click",function(){
 	
 	
 </script>
+
+                
+               <script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/js/artupload.js"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
+<script id="template" type="text/x-handlebars-template">
+<li>
+  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  <div class="mailbox-attachment-info">
+  <a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+  <a href="{{fullName}}" 
+     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw  fa-times "></i></a>
+  </span>
+  </div>
+</li>                
+</script>
+
+
+<script>
+  var template = Handlebars.compile($("#template").html());
+
+  $(".fileDrop").on("dragenter dragover", function(event) {
+    event.preventDefault();
+  });
+
+  $(".fileDrop").on("drop", function(event) {
+    event.preventDefault();
+
+    var files = event.originalEvent.dataTransfer.files;
+
+    var file = files[0];
+
+    var formData = new FormData();
+
+    formData.append("file", file);
+
+    $.ajax({
+      url : '${pageContext.servletContext.contextPath }/uploadajaxart',
+      data : formData,
+      dataType : 'text',
+      processData : false,
+      contentType : false,
+      type : 'POST',
+      success : function(data) {
+        var fileInfo = getFileInfo(data);
+
+        var html = template(fileInfo);
+
+        $(".uploadedList").append(html);
+      }
+    });
+  });
+
+  $("#registerForm").submit(
+      function(event) {
+        event.preventDefault();
+
+        var that = $(this);
+
+        var str = "";
+        $(".uploadedList .delbtn").each(
+            function(index) {
+              str += "<input type='hidden' name='files[" + index
+                  + "]' value='" + $(this).attr("href")
+                  + "'> ";
+            });
+
+        that.append(str);
+
+        that.get(0).submit();
+      });
+
+  $(".uploadedList").on("click", ".delbtn", function(event) {
+
+    event.preventDefault();
+
+    var that = $(this);
+
+    $.ajax({
+      url : "${pageContext.servletContext.contextPath }/deletefileart",
+      type : "post",
+      data : {
+        fileName : $(this).attr("href")
+      },
+      dataType : "text",
+      success : function(result) {
+        if (result == 'deleted') {
+          that.closest("li").remove();
+        }
+      }
+    });
+  });
+</script>
+<script>
+$(document).ready(function(){
+	
+	
+	
+	});
+
+
+</script>
+  
 
        
          

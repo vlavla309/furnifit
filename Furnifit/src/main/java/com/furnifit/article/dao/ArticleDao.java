@@ -42,10 +42,23 @@ public interface ArticleDao {
 	
 	
 	/**
-	 * 게시판 이미지 업로드
+	 * 게시글 이미지 업로드
 	 * @param map
 	 */
 	public void addAttach(Map<String, Object> map); 
+	
+	
+	/**
+	 * 게시글 첨부이미지 삭제(수정시)
+	 * @param articleId
+	 */
+	public void deleteAttach(int articleId);
+	
+	/**
+	 * 게시글 첨부이미지 파일 수정 업로드
+	 * @param map
+	 */
+	public void replaceAttach(Map<String, Object> map);
 	
 	
 	/**

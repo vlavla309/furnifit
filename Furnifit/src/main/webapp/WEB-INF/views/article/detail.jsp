@@ -10,6 +10,17 @@
 .align2 {
   text-align: center;
 }
+.likeArt{
+border-style:hidden; 
+margin-left:42%; 
+border-radius:5px; 
+font-weight:bold; 
+background-color: #DF3A01;
+color: white;  
+width: 18%; 
+height:36px; 
+font-size: 13pt;
+}
 
 button.accordion {
     background-color: #8A0808;
@@ -298,8 +309,7 @@ height: auto;
           <br>
           <br>
           
-          <button style="border-style:hidden; margin-left:42%; border-radius:5px; font-weight:bold; background-color: #DF0101;
-  color: white;  width: 17%; height:40px; font-size: 13pt">좋아요♥&nbsp;<font style="font-size: 11pt">[0]</font></button>
+          <button class="likeArt">좋아요♥&nbsp;<font size="2px">[${article.likecnt }]</font></button>
         
      
           <!-- 댓글 -->
@@ -357,6 +367,16 @@ height: auto;
 		    </div>
 		 </div>
       </div>
+      
+<script id="templateAttach" type="text/x-handlebars-template">
+<li data-src='{{fullName}}'>
+  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  <div class="mailbox-attachment-info">
+  <a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+  </span>
+  </div>
+</li>                
+</script>  
    
      <script>
 $(document).ready(function(){
@@ -368,7 +388,7 @@ $(document).ready(function(){
     formObj.attr("method", "get");
     formObj.attr("action", "/one/article");
     formObj.submit();
-  }); 
+  });
   
 });
   

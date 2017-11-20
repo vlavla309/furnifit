@@ -70,6 +70,24 @@
 	ORDER BY regdate DESC
 	</select>
 	
+	<!-- 게시글 첨부이미지파일 삭제(수정시) -->
+	<delete id="deleteAttach" parameterType="int">
+	DELETE FROM article_img
+	WHERE article_id = #{articleId}
+	</delete>
+	
+		<!--게시글 첨부이미지 파일 수정 업로드 -->
+	<insert id="replaceAttach">
+	INSERT into article_img
+				(name,
+				 article_id,
+				 path)
+	VALUES (#{name},
+			#{articleId},
+			#{path})
+	</insert>
+	
+	
 	<!-- 게시판 전체리스트 -->
 	   <!-- 전체 리스트 -->
    <select id="listAll" resultType="Article">
