@@ -35,8 +35,8 @@ public class PlanController {
 	
 	@Inject
 	private PlanService planService;
-	@Inject
-	private PlanItemService itemService;
+//	@Inject
+//	private PlanItemService itemService;
 	@Inject
 	private CouponService couponService;
 	
@@ -51,7 +51,6 @@ public class PlanController {
 		for (Plan plan : planlist) {
 			logger.info(plan);
 		}
-		
 		
 		List<Coupon> couponList =  couponService.read(member.getEmail());
 		

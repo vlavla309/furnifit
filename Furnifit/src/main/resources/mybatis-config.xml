@@ -15,10 +15,10 @@
 		<typeAlias type="com.furnifit.wishlist.domain.Wishlist" alias="Wishlist"/>
 		<typeAlias type="com.furnifit.planitem.domain.PlanItem" alias="PlanItem"/>
 		<typeAlias type="com.furnifit.plan.domain.Plan" alias="Plan"/>
-		<typeAlias type="com.furnifit.article.domain.Furniture" alias="Furniture"/>
 		<typeAlias type="com.furnifit.color.domain.Color" alias="Color"/>
 		<typeAlias type="com.furnifit.brand.doamin.Brand" alias="Brand"/>
 		<typeAlias type="com.furnifit.category.doamin.Category" alias="Category"/>
 		<typeAlias type="com.furnifit.article.domain.ArticleImg" alias="ArticleImg"/>
+		<typeAlias type="com.furnifit.furniture.domain.Furniture" alias="Furniture"/>
 	</typeAliases>
 </configuration>

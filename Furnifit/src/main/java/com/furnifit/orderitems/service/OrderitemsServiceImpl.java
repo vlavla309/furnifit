@@ -28,8 +28,9 @@ public class OrderitemsServiceImpl implements OrderitemsService {
 
 	// 주문할 가구 등록
 	@Override
-	public void create(Map<String, String> map) {
-		dao.create(map);
+//	public void create(Map<String, String> map) {
+	public void create(Orderitems items) {
+		dao.create(items);
 	}
 	
 	// 회원별 주문항목 리스트

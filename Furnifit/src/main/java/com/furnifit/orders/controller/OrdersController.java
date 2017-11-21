@@ -51,19 +51,26 @@ public class OrdersController {
 	
 	/** 주문생성 */
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public String create(Orders orders) throws Exception {
+	public String create(Orders orders, Orderitems orderitem) throws Exception {
 		logger.info("-------------------------------------------create 시작");
-		ordersService.create(orders);
+//		ordersService.create(orders);
 		logger.info(orders);
-		return "redirect:/order/order-write";
+		logger.info(orderitem);
+		return "redirect:/order/order-list";
 	}
 	
 	/** 주문내역 목록  */
 	@RequestMapping(value = "", method=RequestMethod.GET)
 	public String listAll(Model model, HttpServletRequest request) throws Exception {
+//		public String listAll(@ModelAttribute("params") Params params, Model model, HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();   
 		Member member = (Member) session.getAttribute("login");
+		
+		/*PageBuilder pageBuilder = new PageBuilder();
+		pageBuilder.setParams(params);
+		pageBuilder.setTotalPageCount(ordersService.listAll(member.getEmail());
+	*/
 		
 		List<Orders> orderList = ordersService.listAll(member.getEmail());
 		for (Orders orders : orderList) {
@@ -86,6 +93,7 @@ public class OrdersController {
 		model.addAttribute("prolist", proList);
 		model.addAttribute("imglist", imgList);
 		model.addAttribute("couponlist", couponList);
+//		model.addAttribute("pageBuilder", pageBuilder);
 		return "order/order-list";
 	}
 	

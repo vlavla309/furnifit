@@ -10,14 +10,12 @@
 			select orders_seq.NEXTVAL FROM DUAL
 		</selectKey>
 		INSERT INTO orders
-				    (order_id AS "orderId",
+				    (order_id,
 					 email,
-					 price,
-					 regdate)
+					 price)
 		VALUES 		(#{orderId},
 					 #{email},
-					 #{price},
-				     #{regdate})
+					 #{price})
 	</insert>
 	
 	<!-- 회원별 주문할 리스트 -->
