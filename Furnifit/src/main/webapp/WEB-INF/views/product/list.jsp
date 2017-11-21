@@ -3,7 +3,7 @@
 <%@ include file="../include/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
 <style>
  
 .information-grid-info {
@@ -44,27 +44,11 @@ th {
 	width: 15%;
 }
 
-#search {
-	float: right;
-	margin-top: 9px;
-	width: 250px;
-}
-
-.search {
-	padding: 5px 0;
-	width: 230px;
-	height: 30px;
-	position: relative;
-	left: 10px;
-	float: left;
-	line-height: 22px;
-}
-
 .pdbotton {
 	padding-bottom: 15px;
 }
 
-.branddelete, .branda, .categorya{
+.categorydelete, .branddelete, .branda, .categorya{
 padding:0.5em;
 border-radius: 0.5em;
 }
@@ -77,6 +61,7 @@ color:white!important;
 .colorUncheck{
 display:none;
 }
+
 </style>
 
 <script>
@@ -104,9 +89,12 @@ display:none;
 		/* color 버튼을 누르면 조건검색 리스트에 추가됨. ajax는 추후에!, 클래스 속성을 btnd로 변경한 후에 icon delete를 추가로 해준다. */
 		$(document).on("click", ".colorBtn", function(event) {
 			event.preventDefault();
+			
 			$(this).children().first().toggleClass("colorUncheck");
 			$(this).attr('class','btn btn-default colordelete')
-			$('#filter').append("<input type =\"text\" name =\"color\" value=\""+$(this).attr('id')+"\"/>")
+			$('#filter').append("<input type =\"text\" name =\"colors\" value=\""+$(this).attr('id')+"\"/>")
+			
+			to_ajax();
 			
 		});
 		
@@ -115,20 +103,26 @@ display:none;
 			event.preventDefault();
 			$(this).attr('class','btn btn-default colorBtn')
 			$(this).children().first().toggleClass("colorUncheck");
-			alert($(this).attr('id'))
 			$('#filter :input[value="'+$(this).attr('id')+'"]').remove();
+			to_ajax();
 		});
-
+		
+		
 		/* brand 버튼을 누르면 조건검색 리스트에 추가됨. ajax는 추후에! */
 		$(document).on(	"click", ".branda",function(event) {
 			event.preventDefault();
 			$(this).attr('class','branddelete')
 			$(this).toggleClass("paramActive");
+			$('#filter').append("<input type =\"text\" name =\"brands\" value=\""+$(this).text()+"\"/>")
+			to_ajax();
 		});
-		
+
+		/* 브랜드 버튼 체크를 해제하고, 아래에 form에서  input 제거!, ajax는 추후 */
 		$(document).on(	"click", ".branddelete",function(event) {
 			event.preventDefault();
 			$(this).attr('class','branda')
+			$('#filter :input[value="'+$(this).text()+'"]').remove();
+			to_ajax();
 		});
 		
 		/* category 버튼을 누르면 조건검색 리스트에 추가됨. ajax는 추후에! */
@@ -136,9 +130,73 @@ display:none;
 			event.preventDefault();
 			$(".categorya").removeClass("paramActive");
 			$(this).toggleClass("paramActive");
+			$('#cate').val($(this).text())
+			to_ajax();
 		});
 		
+		/* 가격 적용하기 버튼을 누르면, 조건검색 리스트에 추가됨. ajax는 추후에! */
+		$(document).on("click", ".pricebtna",function(event) {
+			if($('.pricebtna').text()=='적용하기'){
+				$('.pricebtna').text('취소하기')
+				$('.price').attr("disabled", true);
+				$('#min').val($('#minprice').val())
+				$('#max').val($('#maxprice').val())
+				to_ajax();
+			}else{
+				$('.pricebtna').text('적용하기')
+				$(".price").removeAttr('disabled');
+				to_ajax();
+			}
+		});
 		
+		/* 사이즈 버튼을 누르면  조건검색 리스트에 추가됨. ajax는 추후에! */
+		/* 사이즈는 최대값만 넣을 수 있음. 최대값보다 작은 상품들을 보여줌. */
+		$(document).on("click", ".sizebtn",function(event) {
+			if($('.sizebtn').text()=='적용하기'){
+				$('.sizebtn').text('취소하기')
+				$('.size').attr("disabled", true);
+				$('input[name=maxWidth]').val($('#w').val())
+				$('input[name=maxLength]').val($('#l').val())
+				$('input[name=maxHeight]').val($('#d').val())
+				to_ajax();
+			}else{
+				$('.sizebtn').text('적용하기')
+				$(".size").removeAttr('disabled');
+				to_ajax();
+			}
+		});
+		
+		/* search버튼을 누르면, 검색! ajax는 추후에  */
+		$(document).on("click", ".btn-sm",function(event) {
+			$('input[name=keyword]').val($('#keyword').val())
+			to_ajax();
+		});
+		
+		$('.target').change(function() {
+			$('input[name=sort]').val($(this).val())
+			to_ajax();
+		});
+
+		/* ajax실행 함수  */
+		function to_ajax(){
+	        var formData = $("#filter").serialize();
+	        console.log(formData);
+	        $.ajax({
+				url : '${contextPath}/product/',
+				type : 'post',
+				data : formData,
+				success : function(data) {
+					console.log(data.result);
+					console.log(data.list);
+				},
+				error: function(data) {
+					console.log(data)
+				}
+			
+			});
+		
+		}
+
 		/* 위시리스트를 누르면, 저장이되고 버튼의 클래스 속성을 변경한다. 또한 비어있는 하트를 채워진 하트로 바꿈. */
 		$(document).on("click", ".wishbtn", function(event) {
 			event.preventDefault();
@@ -170,7 +228,7 @@ display:none;
 				}
 			});
 		});
-
+		
 	});
 </script>
 <!-- blog -->
@@ -183,9 +241,17 @@ display:none;
 					<td colspan="2">
 						<ul>
 							<li>
+								<div class="col-md-2">
+									<select class="form-control input-sm target">
+										<option value="total">전체</option>
+										<option value="height">높은가격순</option>
+										<option value="row">낮은가격순</option>
+										<option value="new">신상품순</option>
+									</select>
+								</div>
 								<div class="col-md-3">
-									<input type="text" class="form-control input-sm" maxlength="64"
-										placeholder="카테고리 내 검색" />
+									<input type="text" class="form-control input-sm  maxlength="64"
+										placeholder="카테고리 내 검색" id="keyword"/>
 								</div>
 								<button type="submit" class="btn btn-sm">Search</button>
 							</li>
@@ -210,9 +276,10 @@ display:none;
 					<th scope="row">가격</th>
 					<td colspan="2">
 						<ul>
-							<li>~6만원</li>
-							<li>6만원~24만원</li>
-							<li>24~</li>
+							<li><input type="number" name = "minprice" id="minprice" class="price" value="0" placeholder="min price"></li>
+							<li>~</li> 
+							<li><input type="number" name = "maxprice" id="maxprice" class="price" value="10000" placeholder="max price"></li>
+							<li><button type="submit" class="btn btn-sm pricebtna">적용하기</button></li>
 						</ul>
 					</td>
 				</tr>
@@ -220,13 +287,14 @@ display:none;
 					<th scope="row">사이즈</th>
 					<td colspan="2">
 						<ul>
-							<li><input type="text" placeholder="가로" style="width: 50px;">
+							<li><input type="number" placeholder="가로" id = "w" class="size" style="width: 50px;">
 							</li>
 							<li>*</li>
-							<li><input type="text" placeholder="세로" style="width: 50px;">
+							<li><input type="number" placeholder="세로" id="l" class="size" style="width: 50px;">
 							</li>
 							<li>*</li>
-							<li><input type="text" placeholder="높이" style="width: 50px;"></li>
+							<li><input type="number" placeholder="높이" id = "d" class="size" style="width: 50px;"></li>
+							<li><button type="submit" class="btn btn-sm sizebtn">적용하기</button></li>
 						</ul>
 					</td>
 				</tr>
@@ -240,7 +308,14 @@ display:none;
 			</tbody>
 		</table>
 		<form name ="filter" id = "filter">
-		
+			<input type="text" name = "sort" value="0">
+			<input type="text" name = "keyword" value="0">
+			<input type="text" name = "category" value="0" id="cate">
+			<input type="text" name = "minPrice" value="0" id="min">
+			<input type="text" name = "maxPrice" value="0" id="max">
+			<input type="number" name="maxWidth" value="0">
+			<input type="number" name="maxLength" value="0">
+			<input type="number" name="maxHeight" value="0">
 		</form>
 		<div class="information-grids agile-info" id="wrapper">
 			<c:forEach items="${list}" var="product">

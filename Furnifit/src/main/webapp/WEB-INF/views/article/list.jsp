@@ -85,7 +85,7 @@ box-shadow: none!important;
               <span class="label label1" >&nbsp;<i
                 class="fa fa-heart " aria-hidden="true"></i>&nbsp;&nbsp;${article.likecnt }
               </span>&nbsp; <span class="label label2"><i
-                class="fa fa-eye " aria-hidden="true"></i>&nbsp;&nbsp;20</span>
+                class="fa fa-eye " aria-hidden="true"></i>&nbsp;&nbsp;${article.viewcnt }</span>
             </h3>
            
           </div>
