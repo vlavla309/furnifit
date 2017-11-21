@@ -122,5 +122,49 @@
     DELETE FROM articles
     WHERE article_id = #{article_id}
    </delete>
+   
+   <!-- 한페이지당 출력할 게시글들 가져오기 -->
+   	<select id="listByParams" parameterType="ArticleParams" resultType="Article">
+		SELECT article_id  AS "articleId",
+			   email,
+			   planitem_id AS "planitemId",
+			   likecnt,
+			   viewcnt,
+			   regdate,
+			   title,
+			   content
+		FROM (SELECT CEIL(rownum / #{pageSize}) request_page,
+						article_id,
+			 		    email,
+			  		    planitem_id ,
+			  		    likecnt,
+			 		    viewcnt,
+					    regdate,
+			   		    title,
+			   		    content
+						FROM (SELECT article_id,
+									 email,
+			  						 a.planitem_id,
+			  		   				 likecnt,
+			 		 			     viewcnt,
+					   				 regdate,
+			   		   				 title,
+			   		   				 content
+									 FROM articles a, 
+									 	  planitems p
+									 <where>
+									 and  a.planitem_id = p.planitem_id
+									   <choose>
+         							   <when test="acreage == 'xs'"> and acreage BETWEEN 1 and 2 </when>
+         							   <when test="acreage == 'ss'"> and acreage BETWEEN 3 and 4 </when>
+         							   <when test="acreage == 'mm'"> and (acreage BETWEEN 5 and 7) </when>
+         							   <when test="acreage == 'll'"> and acreage BETWEEN 8 and 9 </when>
+         							   <when test="acreage =='xl'">  and acreage >= 10 </when>
+         							   </choose>
+         							   </where>								 
+									 ORDER BY regdate DESC))
+									 WHERE request_page = #{page}
+	</select>
+	
 	
 </mapper>

@@ -23,6 +23,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.furnifit.article.domain.Article;
 import com.furnifit.article.service.ArticleService;
+import com.furnifit.common.web.ArticleParams;
+import com.furnifit.common.web.PageBuilder;
 import com.furnifit.furniture.domain.Furniture;
 import com.furnifit.member.domain.Member;
 import com.furnifit.planitem.domain.PlanItem;
@@ -33,6 +35,10 @@ import com.furnifit.product.domain.Product;
 @RequestMapping("/article")
 @Controller
 public class ArticleController {
+	
+	private final int PAGE_SIZE = 9;
+	
+	private final int PAGI_SIZE = 5;
 	
 	private static final Logger logger = Logger.getLogger(ArticleController.class);
 	
@@ -77,9 +83,17 @@ public class ArticleController {
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String listAll(Model model) throws Exception {
-		 model.addAttribute("list", service.listAll());
-		 logger.info("전체리스트");
+	public String listAll(ArticleParams params,Model model) throws Exception {
+		params.setPageSize(PAGE_SIZE);
+		params.setPagiSize(PAGI_SIZE);
+		
+		List<Article> articles=service.listByParams(params);		
+		model.addAttribute("list", articles);
+		
+		PageBuilder pb = new PageBuilder();
+		pb.setParams(params);
+		pb.build();
+		model.addAttribute("pb", pb);
 		 
 		 return "article/list";
 	}
@@ -88,7 +102,7 @@ public class ArticleController {
 	@RequestMapping(value="/{articleId}", method = RequestMethod.DELETE)
 	public ResponseEntity<String> delete(@PathVariable("articleId")int articleId){
 		
-		logger.info("삭제컨트롤러");
+		
 		ResponseEntity<String> entity = null;
 		
 		try {

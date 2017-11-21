@@ -143,21 +143,21 @@ box-shadow: none;
 <!-- hidden -->
 <input type="hidden" value="${pageContext.servletContext.contextPath }" name="path" id ="path">
 
-	
-	
-	<!-- blog -->
-		<div class="blog"  style="background-color: white" >
-			<!-- container -->
-			<div class="container" style="width: 900px; border: 3px solid; border-color: #F6E3CE; padding: 40px"  >
-				<form id='registerForm' role="form" method="post" action="${contextPath}/article">
+   
+   
+   <!-- blog -->
+      <div class="blog"  style="background-color: white" >
+         <!-- container -->
+         <div class="container" style="width: 900px; border: 3px solid; border-color: #F6E3CE; padding: 40px"  >
+            <form id='registerForm' role="form" method="post" action="${contextPath}/article">
         <input type="hidden" name="planitemId" value="${planItem.planitemId}">
         <div class="blog-heading w3layouts" style="margin-top: 30px" >
-				
-				
-				<!-- 여기서 내용을 채운다 -->
+            
+            
+            <!-- 여기서 내용을 채운다 -->
       
    
-				
+            
                 </div>
                 <div class="gallery-grids" >
                 
@@ -166,8 +166,8 @@ box-shadow: none;
                <table id="shareForm">
                <tr >
                <div class="alert alert-warning" role="alert">
-				<strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;<input type="text" readonly="readonly"  value="${planItem.name}" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
-						</div>
+            <strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;<input type="text" readonly="readonly"  value="${planItem.name}" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
+                  </div>
                </tr>
                
                <tr>
@@ -194,12 +194,12 @@ box-shadow: none;
                 <br>
 
                 
-               	<div class="row" style="margin-left: 26%">
+                  <div class="row" style="margin-left: 26%">
                 <div style="border: 1px ; float: left; width: 400px;  height: 260px; border-color: #B40404; padding: 10px; margin: 0 auto;">
                   <img src="${planItem.image}" width="105%"  alt="" />
                 </div>
-			
-					</div> 
+         
+               </div> 
   
   <!-- 자세히보기-가구목록  -->
 <br>
@@ -207,7 +207,7 @@ box-shadow: none;
 
 
 
-<div class="bs-docs-example wow fadeInUp animated panel" data-wow-delay=".5s" style="background-color: #F7F2E0">
+<div class="bs-docs-example wow fadeInUp animated panel" data-wow-delay=".5s" style="background-color: white">
             <table class="table table-hover">
               <thead>
                 <tr >
@@ -258,21 +258,21 @@ for (i = 0; i < acc.length; i++) {
 <!-- 파일첨부할곳 -->
 
  <p>
-  	<div class="form-group">
-							<label for="exampleInputEmail1">File DROP Here</label>
-							<div class="fileDrop"></div>
-						</div>
-					</div>
+     <div class="form-group">
+                     <label for="exampleInputEmail1">File DROP Here</label>
+                     <div class="fileDrop"></div>
+                  </div>
+               </div>
 
-					<!-- /.box-body -->
+               <!-- /.box-body -->
 
-					<div class="box-footer">
-						<div>
-							<hr>
-						</div>
+               <div class="box-footer">
+                  <div>
+                     <hr>
+                  </div>
 
-						<ul class="mailbox-attachments clearfix uploadedList">
-						</ul>
+                  <ul class="mailbox-attachments clearfix uploadedList">
+                  </ul>
 
           <br>
           <br>
@@ -299,10 +299,10 @@ for (i = 0; i < acc.length; i++) {
           </div>
           
          
-				</div>
+            </div>
        
         </form>
-			</div>
+         </div>
       </div>
       
                 
@@ -375,6 +375,7 @@ for (i = 0; i < acc.length; i++) {
         that.append(str);
 
         that.get(0).submit();
+        alert("글이 등록되었습니다.");
       });
 
   $(".uploadedList").on("click", ".delbtn", function(event) {
@@ -403,7 +404,7 @@ for (i = 0; i < acc.length; i++) {
        
          
       
-	<!-- //blog -->
+   <!-- //blog -->
 <%@ include file="../include/footer.jsp" %>
 
 </body>

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.furnifit.article.domain.Article;
 import com.furnifit.article.domain.ArticleImg;
+import com.furnifit.common.web.ArticleParams;
 import com.furnifit.furniture.domain.Furniture;
 import com.furnifit.planitem.domain.PlanItem;
 import com.furnifit.product.domain.Product;
@@ -86,6 +87,18 @@ public class MybatisArticleDao implements ArticleDao {
 		sqlSession.insert(namespace+ ".replaceAttach", map);
 		
 	}
+
+
+	@Override
+	public List<Article> listByParams(ArticleParams params) {	
+		
+		return sqlSession.selectList(namespace + ".listByParams", params);
+	}
+
+
+	
+	
+	
 	
 	
 	

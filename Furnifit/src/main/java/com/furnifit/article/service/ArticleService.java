@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.furnifit.article.domain.Article;
+import com.furnifit.common.web.ArticleParams;
 import com.furnifit.furniture.domain.Furniture;
 import com.furnifit.planitem.domain.PlanItem;
 import com.furnifit.product.domain.Product;
 
 public interface ArticleService {
-
+	
 	
 	/**
 	 * 게시글 등록
@@ -74,4 +75,11 @@ public interface ArticleService {
 	 */
 	public void artDelete(int articleId);
 	
+	
+	/**
+	 * 한페이지당 출력할 게시글들 가져오기
+	 * @param page
+	 * @return
+	 */
+	public List<Article> listByParams(ArticleParams params);
 }

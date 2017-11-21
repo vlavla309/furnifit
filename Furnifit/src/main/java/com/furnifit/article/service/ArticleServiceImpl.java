@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.furnifit.article.dao.ArticleDao;
 import com.furnifit.article.domain.Article;
 import com.furnifit.article.domain.ArticleImg;
+import com.furnifit.common.web.ArticleParams;
 import com.furnifit.furniture.dao.FurnitureDao;
 import com.furnifit.furniture.domain.Furniture;
 import com.furnifit.planitem.dao.PlanItemDao;
@@ -24,7 +25,6 @@ import com.furnifit.product.domain.Product;
 @Service
 public class ArticleServiceImpl implements ArticleService {
 
-	
 	private static final Logger logger = Logger.getLogger(ArticleServiceImpl.class);
 	
 	@Inject
@@ -137,6 +137,12 @@ public class ArticleServiceImpl implements ArticleService {
 		
 	}
 
+	@Override
+	public List<Article> listByParams(ArticleParams params) {
+		return articleDao.listByParams(params);
+	}
+
+	
 	
 	
 	

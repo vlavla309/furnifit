@@ -20,5 +20,7 @@
 		<typeAlias type="com.furnifit.category.doamin.Category" alias="Category"/>
 		<typeAlias type="com.furnifit.article.domain.ArticleImg" alias="ArticleImg"/>
 		<typeAlias type="com.furnifit.furniture.domain.Furniture" alias="Furniture"/>
+		<typeAlias type="com.furnifit.common.web.ArticleParams" alias="ArticleParams"/>
+		<typeAlias type="com.furnifit.common.web.PageBuilder" alias="PageBuilder"/>
 	</typeAliases>
 </configuration>

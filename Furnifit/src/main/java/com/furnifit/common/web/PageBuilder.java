@@ -9,9 +9,9 @@ public class PageBuilder {
 
 	private Params params;            /** 요청 파라메터 */
 
-	private int totalRowCount;        /** 테이블로부터 검색된 행의 수 */
+	private int totalRowCount;        /** 테이블로부터 검색된 행의 수(게시글수) */
 	private int totalPageCount;       /** 연산에 따른 전체페이지 수 */
-	private int listNo;               /** 목록 번호 */
+	private int listNo;               /** 목록 번호(페이지(ex: 1~6 =1, 2~10 =2) 묶음했을시에 차례번호 */
 	private int currentStartPage;     /** 현재 목록의 시작페이지 번호 */
 	private int currentEndPage;       /** 현재 목록의 마지막페이지 번호 */
 	private int previousStartPage;    /** 이전 목록의 시작페이지 번호 */
@@ -45,6 +45,7 @@ public class PageBuilder {
 
 	public void setTotalRowCount(int totalRowCount) {
 		this.totalRowCount = totalRowCount;
+		
 	}
 
 	public int getTotalPageCount() {
@@ -162,7 +163,7 @@ public class PageBuilder {
 		// 조건검색이 있는 경우
 		if(params instanceof ArticleParams) {
 			ArticleParams aParams= (ArticleParams) params;
-			queryString += aParams.getSort() != null ? "&sort=" + aParams.getSort() :"" +  aParams.getAcreage() != null ? "&acrege=" + aParams.getAcreage():"";
+			queryString += aParams.getSort() != null ? "&sort=" + aParams.getSort() :"" +  aParams.getAcreage() != null ? "&acreage=" + aParams.getAcreage():"";
 		}
 
 		return queryString;

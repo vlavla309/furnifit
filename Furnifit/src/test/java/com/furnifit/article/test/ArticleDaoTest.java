@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.furnifit.article.dao.ArticleDao;
 import com.furnifit.article.domain.Article;
+import com.furnifit.common.web.ArticleParams;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/*.xml" }) 
@@ -48,6 +49,20 @@ public class ArticleDaoTest {
 		}
 	}
 	
+	@Test
+	public void listPage() throws Exception {
+		int page = 1;
+		ArticleParams params = new ArticleParams();
+		params.setPageSize(9);
+		params.setAcreage("mm");
+		
+		List<Article> list = dao.listByParams(params);
+		
+		for (Article article : list) {
+		
+			logger.info("article아이디" + article.getPlanitemId());
+		}
+	}
 	
 	
 	

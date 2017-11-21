@@ -183,10 +183,10 @@ height: auto;
 <form role="form" >
  
  </form>  
-	<!-- blog -->
-		<div class="blog"  style="background-color: white" >
-			<!-- container -->
-			<div class="container" style="width: 900px; border: 3px solid; border-color: #F6E3CE; padding: 40px"  >
+   <!-- blog -->
+      <div class="blog"  style="background-color: white" >
+         <!-- container -->
+         <div class="container" style="width: 900px; border: 3px solid; border-color: #F6E3CE; padding: 40px"  >
          
                   
         <div class="box-footer" style="float: right">
@@ -200,11 +200,11 @@ height: auto;
   
   </div>
   <br>
-				<div class="blog-heading w3layouts" style="margin-top: 30px" >
-				
-				
-				<!-- 여기서 내용을 채운다 -->
-				
+            <div class="blog-heading w3layouts" style="margin-top: 30px" >
+            
+            
+            <!-- 여기서 내용을 채운다 -->
+            
                 </div>
                 <div class="gallery-grids" >
                 
@@ -213,8 +213,8 @@ height: auto;
                <table id="shareForm">
                <tr >
                <div class="alert alert-warning" role="alert">
-				<strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;<input type="text" readonly="readonly"  value="&nbsp;${planItem.name}" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
-						</div>
+            <strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;<input type="text" readonly="readonly"  value="&nbsp;${planItem.name}" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
+                  </div>
                </tr>
                
                <tr>
@@ -241,12 +241,12 @@ height: auto;
                 <br>
 
                 
-               	<div class="row" style="margin-left: 26%">
+                  <div class="row" style="margin-left: 26%">
                 <div style="border: 1px ; float: left; width: 400px;  height: 260px; border-color: #B40404; padding: 10px; margin: 0 auto;">
                   <img src="images/plan.PNG" width="105%"  alt="" />
                 </div>
-			
-					</div> 
+         
+               </div> 
   
   <!-- 자세히보기-가구목록  -->
 <br>
@@ -295,7 +295,7 @@ height: auto;
          <img  src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"   >
                     </div>
                   </c:forEach>
-              	</div>
+                 </div>
           <br>
           <br>
           <br>
@@ -328,7 +328,7 @@ height: auto;
                        >댓글을 작성해주세요.</textarea></td>
                      &nbsp;&nbsp;&nbsp;&nbsp;
                      <td><input class="replybtn" type="submit" value="등록"
-       	            style="width: 50px; height: 33px; font-size: 11pt"></td>
+                      style="width: 50px; height: 33px; font-size: 11pt"></td>
                   </tr>
             </table>
 
@@ -391,7 +391,7 @@ $(document).ready(function(){
         
 $(".deleteBtn").on("click",function(){
      
-	
+   
     $.ajax({
       type:'delete',
       url:'${contextPath}/article/${article.articleId}',
@@ -432,7 +432,7 @@ for (i = 0; i < acc.length; i++) {
        
          
       
-	<!-- //blog -->
+   <!-- //blog -->
 <%@ include file="../include/footer.jsp" %>
 
 </body>

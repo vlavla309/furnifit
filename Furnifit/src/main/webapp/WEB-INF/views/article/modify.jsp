@@ -198,25 +198,25 @@ height: auto;
     <div id="popup_front" class='popup front' style="display:none;">
      <img id="popup_img">
     </div>
-	
-	
-	<!-- blog -->
-		<div class="blog"  style="background-color: white" >
-			<!-- container -->
+   
+   
+   <!-- blog -->
+      <div class="blog"  style="background-color: white" >
+         <!-- container -->
       
-			<div class="container" style="width: 900px; border: 3px solid; border-color: #F6E3CE; padding: 40px"  >
+         <div class="container" style="width: 900px; border: 3px solid; border-color: #F6E3CE; padding: 40px"  >
         
   <br>
 
  
   
-				<div class="blog-heading w3layouts" style="margin-top: 30px" >
-				
-				
-				<!-- 여기서 내용을 채운다 -->
+            <div class="blog-heading w3layouts" style="margin-top: 30px" >
+            
+            
+            <!-- 여기서 내용을 채운다 -->
       
    
-				
+            
                 </div>
                 <div class="gallery-grids" >
                 
@@ -225,8 +225,8 @@ height: auto;
                <table id="shareForm">
                <tr >
                <div class="alert alert-warning" role="alert">
-				<strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;<input type="text" readonly="readonly"  value="&nbsp;${planItem.name}" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
-						</div>
+            <strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;<input type="text" readonly="readonly"  value="&nbsp;${planItem.name}" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
+                  </div>
                </tr>
                
                <tr>
@@ -253,12 +253,12 @@ height: auto;
                 <br>
 
                 
-               	<div class="row" style="margin-left: 26%">
+                  <div class="row" style="margin-left: 26%">
                 <div style="border: 1px ; float: left; width: 400px;  height: 260px; border-color: #B40404; padding: 10px; margin: 0 auto;">
                   <img src="" width="105%"  alt="" />
                 </div>
-			
-					</div> 
+         
+               </div> 
   
   <!-- 자세히보기-가구목록  -->
 <br>
@@ -337,7 +337,7 @@ height: auto;
 
           <div class="box box-primary"  >
 
-              	</div>
+                 </div>
           <br>
           <br>
           <br>
@@ -366,10 +366,10 @@ height: auto;
                 <button type="reset" class="button3" id="cancelBtn">취소</button>
           </div>
        
-				</div>
+            </div>
        
         
-			</div>
+         </div>
       </div>
 <script>
 var acc = document.getElementsByClassName("accordion");
@@ -384,7 +384,7 @@ for (i = 0; i < acc.length; i++) {
         } else {
             panel.style.display = "block";
         }
-    }
+    } 
 }
 </script> 
      
@@ -417,8 +417,8 @@ $("#modifyBtn").on("click",function(){
 
 
 
-	
-	
+   
+   
 </script>
 
                 
@@ -496,8 +496,8 @@ $("#modifyBtn").on("click",function(){
 </script>
 <script>
 $(".uploadedList").on("click", ".delbtn", function(event){
-	  event.preventDefault();
-	  $(this).parent().parent().parent().remove();
+     event.preventDefault(); 
+     $(this).parent().parent().parent().remove();
 });
 </script>
   
@@ -505,7 +505,7 @@ $(".uploadedList").on("click", ".delbtn", function(event){
        
          
       
-	<!-- //blog -->
+   <!-- //blog -->
 <%@ include file="../include/footer.jsp" %>
 
 </body>
