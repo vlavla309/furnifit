@@ -39,12 +39,18 @@ public class MybatisOrderitemsDao implements OrderitemsDao {
 //	public Orderitems read(int productId) throws Exception {
 //		return sqlSession.selectOne(NAMESPACE+".read", productId);
 //	}
+	
+	@Override
+	public List<Orderitems> read(int orderId) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".read", orderId);
+	}
 
 	
 	// 회원별 주문할 리스트
 	@Override
-	public List<Orderitems> listAll(int orderId) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".listAll", orderId);
+	public List<Orderitems> listAll() throws Exception {
+//		public List<Orderitems> listAll(int orderId) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".listAll");
 	}
 	
 	// 주문할 가구 삭제

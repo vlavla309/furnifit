@@ -88,7 +88,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public PlanItem readPlanItem(int planitemId) {
+	public PlanItem readPlanItem(int planitemId) throws Exception {
 		return planitemDao.read(planitemId);
 	}
 

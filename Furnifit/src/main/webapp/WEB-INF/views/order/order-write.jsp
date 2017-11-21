@@ -46,29 +46,23 @@ select{width: 200px; height: 30px}
 <script>
 
 $(function() {
+	totalSum();
+	
 	// 초기 합계
-  	var sum = 0;
-    var price = $(".count").parent().next().next();
-    for (var i = 0; i < price.length; i++) {
-      sum = sum +  parseInt($(price[i]).text());
-    }  
-    $("#total").text(sum + "원");
+	function totalSum(){
+    	var sum = 0;
+        var price = $(".count").parent().next().next();
+        for (var i = 0; i < price.length; i++) {
+          sum = sum +  parseInt($(price[i]).text());
+        }  
+        $("#total").text(sum + "원");
+	}
 	
-	
-  // 수량 변경에 따른 합계 & 총 합계
-  $(".count").bind('keyup mouseup', function (event) {
-	// 수량 * 가격
-    $(event.target).parent().next().next().text( parseInt($(event.target).val())*parseInt($(event.target).parent().next().text())+"원")
-   
-    // 총 합계
-    var sum = 0;
-      var price = $(".count").parent().next().next();
-      for (var i = 0; i < price.length; i++) {
-        sum = sum +  parseInt($(price[i]).text());
-      }  
-      $("#total").text(sum + "원");   // document.getElementById("total").innerHTML = sum + "원";
-      
-  });
+    // 수량 변경에 따른 합계 & 총 합계
+    $(".count").bind('keyup mouseup', function (event) {
+      $(event.target).parent().next().next().text( parseInt($(event.target).val())*parseInt($(event.target).parent().next().text())+"원")
+      totalSum(); 
+    });
   
     
     // select 쿠폰선택
@@ -88,12 +82,7 @@ $(function() {
           $("#total").text(sum + "원");
  	   }else{
    		 $("#coupon").text("적용된 쿠폰이 없습니다.");
-          var sum = 0;
-          var price = $(".count").parent().next().next();
-          for (var i = 0; i < price.length; i++) {
-             sum = sum +  parseInt($(price[i]).text());
-          }  
-          $("#total").text(sum + "원");
+   		 totalSum();
    	   }
    }); 
     
@@ -103,11 +92,10 @@ $(function() {
     	var proId =  $(this).parent().parent().attr("value");
     	var productId = $(this).attr("value");
     	
-    	alert(proId+"---"+productId)
-    	
     	if(proId == productId){
-    		$(".delete").remove();
+    		$("#delete").remove();
     	}
+    	totalSum();
     });
     
     // 위시리스트
@@ -122,7 +110,7 @@ $(function() {
         type : 'POST',
         success : function(request) {
           console.log(request);
-          alert("위시리스트 성공");
+          alert("위시리스트에 추가 되었습니다.");
         },
         error : function(request) {
           console.log(request);
@@ -147,7 +135,7 @@ $(function() {
 
 
 <!-- blog -->
-<form id='registerForm' role="form" method="post">
+<form role="form" method="get">
 <div class="blog">
   <!-- container -->
   <div class="container">
@@ -169,7 +157,7 @@ $(function() {
               </thead>
               <tbody>
                 <c:forEach items="${itemlist}" var="item">
-                 <tr value="${item.productId}" class="delete">
+                 <tr value="${item.productId}" id="delete">
                     <td colspan="2">
                         <c:forEach items="${imglist}" var="img">
                           <c:if test="${item.productId == img.productId && img.orderNo==0}">
@@ -182,13 +170,13 @@ $(function() {
                     <c:forEach items="${prolist}" var="product">
                      <c:if test="${not doneLoop}">
                      <c:if test="${product.productId == item.productId}">
-                        <input type="hidden" name = "productId" value=${item.productId}>
+                        <input type="hidden" name="productId" value="${item.productId}">
                         <td colspan="7">${product.name}</td>
-                        <td><input type="number" name="amount" class="count" value="${item.amount}"></td>
+                        <td><input type="number" class="count" min="1" value="1" name="amount"></td>
                         <td>${product.price}원</td>
                         <td name ="price">${product.price}원</td>
                         <td><a href="#" name="addWishlist" class="btn btn-default" value="${item.productId}">WishList</a></td>
-                        <td><a href="${item.orderId}" class="deleteOrder" value="${product.productId}"><i class="fa fa-trash-o"></i></a></td>
+                        <td><a href="#" class="deleteOrder" value="${product.productId}"><i class="fa fa-trash-o"></i></a></td>
                        <c:set var="doneLoop" value="true"/>
                       </c:if>
                     </c:if>
@@ -246,14 +234,14 @@ $(function() {
           </div>
         </div>
         <div class="box-footer text-center">
-            <button type="submit" class="btn btn-primary" id="goOrder"><a href="mypage/order" value="${product.productId}">주문하기</a></button>
+          <button type="submit" class="btn btn-default">주문하기</button>
         </div>
       </div>
       <!-- /.box -->
     </div>
     <!-- /.col-md-9 -->
   </div>
-  </form>
   <!-- /.container -->
 <!-- //blog -->
+</form>
 <%@ include file="../include/footer.jsp"%>

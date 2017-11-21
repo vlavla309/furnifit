@@ -28,16 +28,28 @@
 		WHERE  email = #{email}
 	</select>
 	
-	<!-- 주문내역 상세보기(orderitems)  -->
-	<select id="read" parameterType="int" resultType="Orderitems">
-		SELECT product_id AS "productId",
-			   order_id AS "orderId",
-			   amount
-		FROM   orderitems
-		WHERE  order_id = #{value}
+	<!-- 게시글 리스트(+페이징) -->
+	<select id="listPage" resultType="Orders">
+		SELECT order_id AS "orderId",
+			   email,
+			   price,
+			   TO_CHAR(regdate, 'YYYY-MM-DD') regdate
+		FROM   (SELECT CEIL(rownum / 10) request_page,
+							order_id,
+			   				email,
+			   				price,
+							regdate
+							FROM   (SELECT order_id,
+						   				   email,
+						   				   price,
+										   regdate
+								    FROM      orders
+								    ORDER BY  order_id DESC))
+		WHERE   request_page = #{page}
 	</select>
 	
-	<!-- 주문내역 상세보기(orderitems)  -->
+	
+	<!--  -->
 	<select id="price" parameterType="int" resultType="Orders">
 		SELECT order_id AS "orderId",
 			   email,

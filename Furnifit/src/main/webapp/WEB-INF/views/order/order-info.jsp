@@ -83,7 +83,7 @@
         </div>
       </div>
       <div class="box-footer text-center">
-          <button type="submit" class="btn btn-primary" style="height: 40px">목록으로</button>
+          <a href="${contextPath}/mypage/order" class="btn btn-default">목록으로</a>
       </div>
       <!-- /.box -->
       <!-- /.col-md-9 -->
