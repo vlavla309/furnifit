@@ -82,17 +82,27 @@ public class ProductController {
 	@ResponseBody
 	public Map<String, Object> list(Model model, ProductParams params) {
 		
-		ResponseEntity<String> entity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		
 		logger.info("파람스 " +params);
-		try{
-			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-		}catch (Exception e) {
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		
+		List<Product> list = productsrv.searchlist(params);
+		List<Wishlist> wishlist = wishsrv.read();
+		List<Color> colorlist = colordao.list();
+		List<Brand> brandlist = branddao.list();
+		List<Category> categorylist = categorys.list();
+		
+		logger.info(list.size());
+		for (Product product : list) {
+			logger.info("product print"+product);
 		}
+		
+		map.put("list", list);
+		map.put("wishlist",wishlist);
+		map.put("colorlist", colorlist);
+		map.put("brandlist", brandlist);
+		map.put("categorylist", categorylist);
 		map.put("result", "SUCCESS");
-		map.put("list", params);
+		
 		
 		return map;
 	}

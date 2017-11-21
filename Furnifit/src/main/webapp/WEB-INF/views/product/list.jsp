@@ -139,13 +139,17 @@ display:none;
 			if($('.pricebtna').text()=='적용하기'){
 				$('.pricebtna').text('취소하기')
 				$('.price').attr("disabled", true);
+				
 				$('#min').val($('#minprice').val())
 				$('#max').val($('#maxprice').val())
+				
+				if($('#minprice').val() == 0) $('#min').val("0")
+				if($('#maxprice').val() == 0) $('#max').val("0")
+				
 				to_ajax();
 			}else{
 				$('.pricebtna').text('적용하기')
 				$(".price").removeAttr('disabled');
-				to_ajax();
 			}
 		});
 		
@@ -155,9 +159,15 @@ display:none;
 			if($('.sizebtn').text()=='적용하기'){
 				$('.sizebtn').text('취소하기')
 				$('.size').attr("disabled", true);
+				
 				$('input[name=maxWidth]').val($('#w').val())
 				$('input[name=maxLength]').val($('#l').val())
 				$('input[name=maxHeight]').val($('#d').val())
+				
+				if($('#w').val() == 0) $('input[name=maxWidth]').val("0")
+				if($('#l').val() == 0) $('input[name=maxLength]').val("0")
+				if($('#d').val() == 0) $('input[name=maxHeight]').val("0")
+				
 				to_ajax();
 			}else{
 				$('.sizebtn').text('적용하기')
@@ -188,6 +198,8 @@ display:none;
 				success : function(data) {
 					console.log(data.result);
 					console.log(data.list);
+					console.log(data.wishlist);
+					console.log(data.colorlist);
 				},
 				error: function(data) {
 					console.log(data)
@@ -245,7 +257,7 @@ display:none;
 									<select class="form-control input-sm target">
 										<option value="total">전체</option>
 										<option value="height">높은가격순</option>
-										<option value="row">낮은가격순</option>
+										<option value="low">낮은가격순</option>
 										<option value="new">신상품순</option>
 									</select>
 								</div>
@@ -276,9 +288,9 @@ display:none;
 					<th scope="row">가격</th>
 					<td colspan="2">
 						<ul>
-							<li><input type="number" name = "minprice" id="minprice" class="price" value="0" placeholder="min price"></li>
+							<li><input type="number" id="minprice" class="price" value="0" placeholder="min price"></li>
 							<li>~</li> 
-							<li><input type="number" name = "maxprice" id="maxprice" class="price" value="10000" placeholder="max price"></li>
+							<li><input type="number"  id="maxprice" class="price" value="10000" placeholder="max price"></li>
 							<li><button type="submit" class="btn btn-sm pricebtna">적용하기</button></li>
 						</ul>
 					</td>
@@ -308,14 +320,14 @@ display:none;
 			</tbody>
 		</table>
 		<form name ="filter" id = "filter">
-			<input type="text" name = "sort" value="0">
-			<input type="text" name = "keyword" value="0">
-			<input type="text" name = "category" value="0" id="cate">
+			<input type="text" name = "sort" value="">
+			<input type="text" name = "keyword" value="">
+			<input type="text" name = "category" value="" id="cate">
 			<input type="text" name = "minPrice" value="0" id="min">
 			<input type="text" name = "maxPrice" value="0" id="max">
-			<input type="number" name="maxWidth" value="0">
-			<input type="number" name="maxLength" value="0">
-			<input type="number" name="maxHeight" value="0">
+			<input type="text" name="maxWidth" value="0">
+			<input type="text" name="maxLength" value="0">
+			<input type="text" name="maxHeight" value="0">
 		</form>
 		<div class="information-grids agile-info" id="wrapper">
 			<c:forEach items="${list}" var="product">

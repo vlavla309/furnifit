@@ -7,7 +7,7 @@ import java.util.Arrays;
  * @author 김형주
  */
 public class ProductParams extends Params {
-	String sort; //정렬 방식
+	String sort; //정렬 방식 //
 	String keyword; //검색어 검색
 	String category; //카테고리(상품품목)
 	String[] brands; //브랜드 검색

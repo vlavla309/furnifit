@@ -44,8 +44,9 @@
 		sysdate)
 	</insert>
 
-	<select id="list" resultType="Product">
-		SELECT product_id  AS "productId", 
+	<select id="listAll" resultType="Product">
+		SELECT product_id AS
+		"productId",
 		category,
 		NAME,
 		brand,
@@ -57,9 +58,80 @@
 		description
 		FROM products
 	</select>
-	
+
+	<select id="list" resultType="Product" parameterType="ProductParams">
+		SELECT product_id AS "productId",
+		category,
+		NAME,
+		brand,
+		price,
+		color,
+		width,
+		length,
+		height,
+		description,
+		regdate
+		FROM products
+		<choose>
+			<when test="category != null">
+				where category = #{category}
+			</when>
+			<otherwise>
+				where category = '선반'
+			</otherwise>
+		</choose>
+		
+		<!-- brand -->
+		<if test="brands != null">
+			AND brand in
+			<foreach item="item" index="index" collection="brands" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		
+		<!-- color -->
+		<if test="colors != null">
+			AND color in
+			<foreach item="item" index="index" collection="colors" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		
+		<!-- 키워드 검색 -->
+		<if test="keyword != null"> and name like '%'||#{keyword}||'%' </if>
+		
+		<!-- 가격 -->
+		<if test="maxPrice != 0 "> and #{maxPrice} > price </if>
+		<if test="minPrice != 0 "> and price > #{minPrice} </if>
+		
+		<!-- 가구사이즈 -->
+		<if test="maxWidth != 0 "> 
+			and #{maxWidth} >= WIDTH
+		</if>
+		<if test="maxHeight != 0"> 
+			and #{maxHeight} >= HEIGHT
+		</if>
+		<if test="maxLength != 0 ">
+			and #{maxLength} >= length
+		</if>
+		
+		<!-- 정렬 -->
+		<if test="sort.equalsIgnoreCase('low')">
+			order by price 
+		</if>
+		<if test="sort.equalsIgnoreCase('height')">
+			order by price desc
+		</if>
+		<if test="sort.equalsIgnoreCase('new')">
+			order by regdate desc
+		</if>
+	</select>
+
 	<select id="read" resultType="Product" parameterType="int">
-		SELECT product_id  AS "productId",
+		SELECT
+		product_id AS "productId",
 		category,
 		NAME,
 		brand,
@@ -71,7 +143,8 @@
 		description,
 		REGDATE
 		FROM products
-		where product_id = #{value}
+		where product_id =
+		#{value}
 	</select>
 
 </mapper>
