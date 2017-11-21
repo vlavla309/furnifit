@@ -255,7 +255,7 @@ height: auto;
                 
                	<div class="row" style="margin-left: 26%">
                 <div style="border: 1px ; float: left; width: 400px;  height: 260px; border-color: #B40404; padding: 10px; margin: 0 auto;">
-                  <img src="images/plan.PNG" width="105%"  alt="" />
+                  <img src="" width="105%"  alt="" />
                 </div>
 			
 					</div> 
@@ -399,7 +399,7 @@ $("#modifyBtn").on("click",function(){
     
     $.ajax({
       type:'put',
-      url:'${contextPath}/article/update/${article.articleId}',
+      url:'${contextPath}/article/${article.articleId}',
       headers: { 
             "Content-Type": "application/json",
             "X-HTTP-Method-Override": "PUT" },
@@ -413,6 +413,10 @@ $("#modifyBtn").on("click",function(){
         }
     }});
 });
+
+
+
+
 	
 	
 </script>
@@ -489,35 +493,12 @@ $("#modifyBtn").on("click",function(){
         that.get(0).submit();
       });
 
-  $(".uploadedList").on("click", ".delbtn", function(event) {
-
-    event.preventDefault();
-
-    var that = $(this);
-
-    $.ajax({
-      url : "${pageContext.servletContext.contextPath }/deletefileart",
-      type : "post",
-      data : {
-        fileName : $(this).attr("href")
-      },
-      dataType : "text",
-      success : function(result) {
-        if (result == 'deleted') {
-          that.closest("li").remove();
-        }
-      }
-    });
-  });
 </script>
 <script>
-$(document).ready(function(){
-	
-	
-	
-	});
-
-
+$(".uploadedList").on("click", ".delbtn", function(event){
+	  event.preventDefault();
+	  $(this).parent().parent().parent().remove();
+});
 </script>
   
 

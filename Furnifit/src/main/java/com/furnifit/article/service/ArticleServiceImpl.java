@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import org.apache.log4j.Logger;
 import org.apache.log4j.pattern.FullLocationPatternConverter;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.furnifit.article.dao.ArticleDao;
 import com.furnifit.article.domain.Article;
@@ -90,6 +91,7 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleDao.readProduct(productId);
 	}
 
+	@Transactional
 	@Override
 	public void artUpdate(Article article) {
 		articleDao.artUpdate(article);
@@ -116,7 +118,7 @@ public class ArticleServiceImpl implements ArticleService {
 		
 		
 	}
-
+	
 	@Override
 	public void artDelete(int articleId) {
 		articleDao.deleteAttach(articleId);

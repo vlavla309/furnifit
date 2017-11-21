@@ -44,7 +44,7 @@ public class ArticleController {
 	
 	
 	@RequestMapping(value = "/register/{planitemId}", method = RequestMethod.GET)
-	public String registGET(@PathVariable int planitemId,Furniture furniture, Product product,Model model) {
+	public String registGET(@PathVariable int planitemId,Furniture furniture, Product product,HttpServletRequest request,Model model) {
 	    PlanItem planitm = service.readPlanItem(planitemId);
 		model.addAttribute("planItem", planitm);
 		
@@ -60,8 +60,8 @@ public class ArticleController {
 		model.addAttribute("product",prdList);	
 		logger.info(prdList);
 		
-	//	HttpSession session =  request.getSession();
-		//Member member = (Member)session.getAttribute("login");
+		HttpSession session =  request.getSession();
+		Member member = (Member)session.getAttribute("login");
 		
 
 
@@ -85,20 +85,30 @@ public class ArticleController {
 	}
 	
 	
-	@RequestMapping(value = "/{articleId}", method = RequestMethod.DELETE)
-	public String remove(@PathVariable int articleId) throws Exception {
-		service.artDelete(articleId);
-			 return "redirect:/article/list";
+	@RequestMapping(value="/{articleId}", method = RequestMethod.DELETE)
+	public ResponseEntity<String> delete(@PathVariable("articleId")int articleId){
+		
+		logger.info("삭제컨트롤러");
+		ResponseEntity<String> entity = null;
+		
+		try {
+			service.artDelete(articleId);
+			entity = new ResponseEntity<String>("success",HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		return entity;
 	}
 	
 	
 	
 	
 	@RequestMapping(value = "/{articleId}", method = RequestMethod.GET)
-	public String read(@PathVariable int articleId,Furniture furniture,Product product, Model model) throws Exception {
+	public String read(@PathVariable int articleId,Furniture furniture,Product product,HttpServletRequest request, Model model) throws Exception {
 		 Article article = service.read(articleId);
-		 //article.setViewcnt(article.getViewcnt()+1);
-		// service.artUpdate(article);
+		// article.setViewcnt(article.getViewcnt() +1);
+		 //service.artUpdate(article);
 		 
 		 PlanItem planItem = service.readPlanItem(article.getPlanitemId());
 		 
@@ -107,10 +117,12 @@ public class ArticleController {
 		 for (Furniture f : list) {
 			prdList.add(service.readProduct(f.getProductId()));
 		}
+		
 		 
 		 model.addAttribute("product",prdList); 
 		 model.addAttribute("planItem", planItem);
 		 model.addAttribute("article", article);
+		 
 		 
 		 return "article/detail";
 
