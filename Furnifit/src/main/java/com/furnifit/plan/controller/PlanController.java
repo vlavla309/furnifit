@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -35,8 +34,8 @@ public class PlanController {
 	
 	@Inject
 	private PlanService planService;
-//	@Inject
-//	private PlanItemService itemService;
+	@Inject
+	private PlanItemService itemService;
 	@Inject
 	private CouponService couponService;
 	
@@ -52,17 +51,45 @@ public class PlanController {
 			logger.info(plan);
 		}
 		
+		List<PlanItem> itemList = itemService.listAll();
+		for (PlanItem planItem : itemList) {
+			logger.info(planItem);
+		}
+		
 		List<Coupon> couponList =  couponService.read(member.getEmail());
 		
 		model.addAttribute("planlist", planlist);
+		model.addAttribute("itemlist", itemList);
 		model.addAttribute("couponlist", couponList);
 		
 		return "plan/plan-manage";
 	}
 
 	
+	/*@RequestMapping(value = "/{articleId}", method = RequestMethod.GET)
+	public String read(@PathVariable int articleId,Furniture furniture,Product product, Model model) throws Exception {
+		 Article article = service.read(articleId);
+		 //article.setViewcnt(article.getViewcnt()+1);
+		// service.artUpdate(article);
+		 
+		 PlanItem planItem = service.readPlanItem(article.getPlanitemId());
+		 
+		 List<Product> prdList = new ArrayList<Product>();
+		 List<Furniture> list = service.readFurniture(article.getPlanitemId());
+		 for (Furniture f : list) {
+			prdList.add(service.readProduct(f.getProductId()));
+		}
+		 
+		 model.addAttribute("product",prdList); 
+		 model.addAttribute("planItem", planItem);
+		 model.addAttribute("article", article);
+		 
+		 return "article/detail";
+
+	}*/
+	
 	/** 주문별 배치도 정보 상세보기 */
-	@RequestMapping(value="/{planId}/{planitemId}", method= RequestMethod.GET)
+	/*@RequestMapping(value="/{planId}/{planitemId}", method= RequestMethod.GET)
 	public String read(Model model, @PathVariable("planId") int planId, @PathVariable("planitemId") int planitemId) throws Exception {
 		
 		List<PlanItem> itemList = planService.read(planId, planitemId);
@@ -72,7 +99,7 @@ public class PlanController {
 		model.addAttribute("itemlist", itemList);
 		
 		return "plan/plan-detail";
-	}
+	}*/
 	
 	
 	/** 게시글 삭제 */

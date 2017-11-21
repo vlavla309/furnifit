@@ -3,6 +3,7 @@ package com.furnifit.product.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.furnifit.common.web.ProductParams;
 import com.furnifit.product.domain.Product;
 
 /**
@@ -35,5 +36,12 @@ public interface ProductDao {
 	 * return List<Product>
 	 */
 	public List<Product> list();
+	
+	/**
+	 * 상품 조건검색
+	 * @param params
+	 * @return
+	 */
+	public List<Product> searchlist(ProductParams params);
 	
 }

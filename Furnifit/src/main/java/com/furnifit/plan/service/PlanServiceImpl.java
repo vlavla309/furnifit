@@ -8,10 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.furnifit.plan.dao.PlanDao;
 import com.furnifit.plan.domain.Plan;
-import com.furnifit.planitem.domain.PlanItem;
 
 /**
- * PlanItemServiceImpl 클래스
+ * PlanServiceImpl 클래스
  * @author 손정화
  *
  */
@@ -20,15 +19,14 @@ public class PlanServiceImpl implements PlanService {
 	
 	@Inject
 	private PlanDao dao;
-
+	
+	/**
+	 * 회원별 배치도 목록 리스트
+	 * @param email
+	 * @return List<Plan>
+	 */
 	@Override
 	public List<Plan> listAll(String email) throws Exception {
 		return dao.listAll(email);
 	}
-	
-	@Override
-	public List<PlanItem> read(int planId, int planitemId) throws Exception {
-		return dao.read(planId, planitemId);
-	}
-	
 }

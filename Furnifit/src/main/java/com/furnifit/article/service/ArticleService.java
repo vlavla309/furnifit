@@ -45,7 +45,7 @@ public interface ArticleService {
 	 * @param planitemId
 	 * @return
 	 */
-	public PlanItem readPlanItem(int planitemId);
+	public PlanItem readPlanItem(int planitemId) throws Exception;
 	
 	
 	/**

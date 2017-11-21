@@ -17,8 +17,11 @@ public interface OrderitemsService {
 	public void create(Orderitems items);
 		
 	// 회원별 주문할 리스트
-	public List<Orderitems> listAll(int orderId) throws Exception;
+//	public List<Orderitems> listAll(int orderId) throws Exception;
+	public List<Orderitems> listAll() throws Exception;
 	
+	// 주문내역 상세보기 - orderitems
+	public List<Orderitems> read(int orderId) throws Exception;
 	
 	// 주문할 가구 등록
 //	public void create(Orderitems items) throws Exception;

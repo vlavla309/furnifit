@@ -6,8 +6,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.furnifit.common.web.Params;
 import com.furnifit.orderitems.dao.OrderitemsDao;
-import com.furnifit.orderitems.domain.Orderitems;
 import com.furnifit.orders.dao.OrdersDao;
 import com.furnifit.orders.domain.Orders;
 
@@ -30,10 +30,6 @@ public class OrdersServiceImpl implements OrdersService {
 //		dao.create(order);
 //	}
 	
-	@Override
-	public List<Orderitems> read(int orderId) throws Exception {
-		return dao.read(orderId);
-	} 
 	
 //	@Override
 //	public List<Orders> read(int orderId) throws Exception {
@@ -50,9 +46,21 @@ public class OrdersServiceImpl implements OrdersService {
 		return dao.listAll(email);
 	}
 	
+	
+	/** 게시글 리스트(+페이징) */
+	@Override
+	public List<Orders> listPage(int page) throws Exception {
+		return dao.listPage(page);
+	}
+	
 	@Override
 	public List<Orders> price(int orderId) throws Exception {
 		return dao.price(orderId);
+	}
+
+	@Override
+	public List<Orders> listParams(Params params) throws Exception {
+		return dao.listParams(params);
 	}
 	
 //	@Override

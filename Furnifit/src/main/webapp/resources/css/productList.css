@@ -1,0 +1,56 @@
+ 
+.information-grid-info {
+	height: 250px;
+}
+
+.colorBtn {
+	border: 1px solid #dadada;
+	height: 30px;
+	width: 30px;
+}
+
+
+.colordelete {
+	border: 1px solid #dadada;
+	height: 30px;
+	width: 30px;
+}
+
+li {
+	list-style: none;
+	display: inline;
+	margin-right: 2em;
+}
+
+table, th, td {
+	border: 1px solid #FBF8EF;
+}
+
+table {
+	width: 80%;
+	padding: 0px;
+}
+
+th {
+	background: #FBF8EF;
+	text-align: center;
+	width: 15%;
+}
+
+.pdbotton {
+	padding-bottom: 15px;
+}
+
+.categorydelete, .branddelete, .branda, .categorya{
+padding:0.5em;
+border-radius: 0.5em;
+}
+
+.paramActive{
+background:	#ac3939;
+color:white!important;
+}
+
+.colorUncheck{
+display:none;
+}

@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import com.furnifit.common.web.ProductParams;
 import com.furnifit.product.dao.ProductDao;
 import com.furnifit.product.domain.Product;
 import com.furnifit.productimg.dao.ProductImageDao;
@@ -78,6 +79,15 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> list() {
 		List<Product> products=productdao.list();
+		for (Product product : products) {
+			product.setImgs(imgDao.productImg(product.getProductId()));
+		}
+		return products;
+	}
+
+	@Override
+	public List<Product> searchlist(ProductParams params) {
+		List<Product> products=productdao.searchlist(params);
 		for (Product product : products) {
 			product.setImgs(imgDao.productImg(product.getProductId()));
 		}

@@ -192,7 +192,7 @@
 							str += "<input type='hidden' name='files[" + index
 									+ "]' value='" + $(this).attr("href")
 									+ "'> ";
-						});
+				});
 
 				that.append(str);
 
