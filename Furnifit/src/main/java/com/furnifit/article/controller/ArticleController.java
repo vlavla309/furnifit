@@ -5,21 +5,28 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.furnifit.article.domain.Article;
 import com.furnifit.article.service.ArticleService;
 import com.furnifit.common.web.ArticleParams;
 import com.furnifit.common.web.PageBuilder;
 import com.furnifit.furniture.domain.Furniture;
+import com.furnifit.member.domain.Member;
 import com.furnifit.planitem.domain.PlanItem;
 import com.furnifit.product.domain.Product;
 
@@ -43,7 +50,7 @@ public class ArticleController {
 	
 	
 	@RequestMapping(value = "/register/{planitemId}", method = RequestMethod.GET)
-	public String registGET(@PathVariable int planitemId,Furniture furniture, Product product,Model model) throws Exception {
+	public String registGET(@PathVariable int planitemId,Furniture furniture, Product product,HttpServletRequest request,Model model) {
 	    PlanItem planitm = service.readPlanItem(planitemId);
 		model.addAttribute("planItem", planitm);
 		
