@@ -26,8 +26,12 @@ public class MybatisPlanItemDao implements PlanItemDao {
 
 	
 	@Override
-	public List<PlanItem> listAll(String email) throws Exception {
-		return sqlSession.selectList(NAMESPACE+".listAll", email);
+	public List<PlanItem> listAll(int planId, int planitemId) throws Exception {
+		Map<String, Integer> map = new HashMap<>();
+		
+		map.put("planId", planId);
+		map.put("planitemId", planitemId);
+		return sqlSession.selectList(NAMESPACE + ".listAll", map);
 	}
 	
 	@Override
@@ -39,4 +43,10 @@ public class MybatisPlanItemDao implements PlanItemDao {
 		
 		sqlSession.delete(NAMESPACE+".delete", map);
 	}
+
+	@Override
+	public PlanItem read(int planItemId){
+		return sqlSession.selectOne(NAMESPACE + ".read", planItemId);
+	}
+	
 }

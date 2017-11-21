@@ -7,19 +7,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.furnifit.furniture.dao.FurnitureDao;
+import com.furnifit.furniture.domain.Furniture;
 import com.furnifit.member.domain.Coupon;
 import com.furnifit.member.domain.Member;
 import com.furnifit.member.service.CouponService;
 import com.furnifit.orderitems.domain.Orderitems;
 import com.furnifit.orderitems.service.OrderitemsService;
+import com.furnifit.orders.domain.Orders;
+import com.furnifit.orders.service.OrdersService;
 import com.furnifit.product.domain.Product;
 import com.furnifit.product.service.ProductService;
 import com.furnifit.productimg.dao.ProductImageDao;
@@ -40,26 +43,67 @@ public class OrderitemsController {
 	@Inject
 	private OrderitemsService itemsService;
 	@Inject
+	private OrdersService ordersService;
+	@Inject
 	private ProductService proService;
 	@Inject
-	//private Product product;
 	private ProductImageDao imgDao;
 	@Inject
 	private CouponService couponService;
+	@Inject
+	private FurnitureDao furnidao;
 	
-	/** 주문할 가구 리스트  */
+	
+	/*@RequestMapping(value = "/{productId}", method=RequestMethod.POST)
+	public ResponseEntity<String> create(@PathVariable("productId") int productId, HttpSession session) {
+		ResponseEntity<String> entity = null;
+		Map<String, String> map = new HashMap<>();
+		Member member = (Member) session.getAttribute("login");
+		map.put("email", member.getEmail());
+		map.put("productId", productId+"");
+		try {
+			itemsService.create(map);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}*/
+	
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public String create(Orderitems items, Orders order, RedirectAttributes rttr) throws Exception{
+		logger.info("등록 post : " + items.toString());
+		itemsService.create(items);
+		ordersService.create(order);
+		
+		rttr.addFlashAttribute("msg", "success");
+		
+		return "redirect:/order/order-list";
+	}
+	
+	/*@RequestMapping(value = "", method = RequestMethod.POST)
+	public String create(Orderitems items) {
+		itemsService.create(items);
+		logger.info(items);
+		return "redirect:/order/order-list";
+	}*/
+	
+	
+	/** 주문할 가구항목 리스트  */
 	@RequestMapping(value = "", method=RequestMethod.GET)
-	public String listAll(Model model, HttpServletRequest request) throws Exception {
+	public String createGet(Model model, HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();   
 		Member member = (Member) session.getAttribute("login");
 		
-		List<Orderitems> list = itemsService.listAll(member.getEmail());
-		for (Orderitems orderitems : list) {
-			logger.info(orderitems);
+		List<Furniture> itemlist = furnidao.list(1);
+		for (Furniture furni : itemlist) {
+			logger.info(furni);
 		}
 		
 		List<Product> proList = proService.list();
+		
+		
 		for (Product product : proList) {
 			logger.info(product);
 		}
@@ -71,7 +115,7 @@ public class OrderitemsController {
 		
 		List<Coupon> couponList =  couponService.read(member.getEmail());
 		
-		model.addAttribute("list", list);
+		model.addAttribute("itemlist", itemlist);
 		model.addAttribute("prolist", proList);
 		model.addAttribute("imglist", imgList);
 		model.addAttribute("couponlist", couponList);
@@ -81,7 +125,7 @@ public class OrderitemsController {
 	
 	
 	/** 주문할 가구 삭제 */
-	@RequestMapping(value = "/{orderId}/{productId}", method = RequestMethod.DELETE)
+	/*@RequestMapping(value = "/{orderId}/{productId}", method = RequestMethod.DELETE)
 	public ResponseEntity<String> remove(@PathVariable("orderId") int orderId, @PathVariable("productId") int productId)throws Exception{
 		ResponseEntity<String> entity = null;
 		try {
@@ -91,32 +135,6 @@ public class OrderitemsController {
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		return entity;
-	}
-	
-	
-	
-	
-	
-	
-	/** 가구 정보 상세보기 */
-	/*	@RequestMapping(value = "", method = RequestMethod.GET)
-		public void read(@RequestParam("productId") int productId, Model model)throws Exception{
-			model.addAttribute(itemsService.read(productId));
-		}*/
-	
-//	@RequestMapping(value = "", method=RequestMethod.GET)
-//	public void createGET(Orderitems items, Model model) throws Exception {
-//		logger.info("----------create get");
-//	}
-//	
-//	@RequestMapping(value = "", method=RequestMethod.POST)
-//	public String createPOST(Orderitems items, Model model) throws Exception {
-//		logger.info("----------create post");
-//		
-//		itemsService.create(items);
-//		model.addAttribute("create", "success");
-//		
-//		return "redirect:/order/order-list";
-//	}
+	}*/
 	
 }

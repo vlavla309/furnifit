@@ -9,12 +9,17 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.furnifit.member.domain.Coupon;
 import com.furnifit.member.domain.Member;
+import com.furnifit.member.service.CouponService;
 import com.furnifit.plan.domain.Plan;
 import com.furnifit.plan.service.PlanService;
+import com.furnifit.planitem.domain.PlanItem;
+import com.furnifit.planitem.service.PlanItemService;
 
 
 /**
@@ -30,6 +35,10 @@ public class PlanController {
 	
 	@Inject
 	private PlanService planService;
+//	@Inject
+//	private PlanItemService itemService;
+	@Inject
+	private CouponService couponService;
 	
 	/** 회원별 배치도목록 리스트 */
 	@RequestMapping(value = "", method=RequestMethod.GET)
@@ -43,11 +52,28 @@ public class PlanController {
 			logger.info(plan);
 		}
 		
+		List<Coupon> couponList =  couponService.read(member.getEmail());
+		
 		model.addAttribute("planlist", planlist);
-//		model.addAttribute("member", member);
+		model.addAttribute("couponlist", couponList);
+		
 		return "plan/plan-manage";
 	}
 
+	
+	/** 주문별 배치도 정보 상세보기 */
+	@RequestMapping(value="/{planId}/{planitemId}", method= RequestMethod.GET)
+	public String read(Model model, @PathVariable("planId") int planId, @PathVariable("planitemId") int planitemId) throws Exception {
+		
+		List<PlanItem> itemList = planService.read(planId, planitemId);
+		for (PlanItem items : itemList) {
+			logger.info(items);
+		}
+		model.addAttribute("itemlist", itemList);
+		
+		return "plan/plan-detail";
+	}
+	
 	
 	/** 게시글 삭제 */
 //	@RequestMapping(value = "/removePage", method = RequestMethod.POST)

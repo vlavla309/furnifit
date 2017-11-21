@@ -46,40 +46,68 @@ select{width: 200px; height: 30px}
 <script>
 
 $(function() {
-  
-  // 수량에 따른 합계 & 총 합계
+	// 초기 합계
+  	var sum = 0;
+    var price = $(".count").parent().next().next();
+    for (var i = 0; i < price.length; i++) {
+      sum = sum +  parseInt($(price[i]).text());
+    }  
+    $("#total").text(sum + "원");
+	
+	
+  // 수량 변경에 따른 합계 & 총 합계
   $(".count").bind('keyup mouseup', function (event) {
+	// 수량 * 가격
     $(event.target).parent().next().next().text( parseInt($(event.target).val())*parseInt($(event.target).parent().next().text())+"원")
-  
+   
+    // 총 합계
     var sum = 0;
       var price = $(".count").parent().next().next();
       for (var i = 0; i < price.length; i++) {
         sum = sum +  parseInt($(price[i]).text());
       }  
       $("#total").text(sum + "원");   // document.getElementById("total").innerHTML = sum + "원";
+      
   });
   
-  var sum = 0;
-    var price = $(".count").parent().next().next();
-    for (var i = 0; i < price.length; i++) {
-      sum = sum +  parseInt($(price[i]).text());
-    }  
-    $("#total").text(sum + "원");
     
-    
-  // select 쿠폰선택
+    // select 쿠폰선택
+ 	$("#coupon").text("적용된 쿠폰이 없습니다.");
     $("select[name=sale]").bind('change', function (event) {
-        $("#coupon").text($("select[name=sale]").val().split(".")[0]+"이 적용되었습니다.");
-        });
-    
+ 	    var rate = $(this).val();
+ 		var sel = document.getElementById("sel");
+ 	  	var selVal = sel.options[sel.selectedIndex].value;
+ 	  	
+ 		if(selVal != "---쿠폰 선택---"){
+     	 $("#coupon").text(rate.split(".")[0]+"% 쿠폰이 적용되었습니다.");
+     	  var sum = 0;
+          var price = $(".count").parent().next().next();
+          for (var i = 0; i < price.length; i++) {
+          	sum = Math.floor(sum +  parseInt($(price[i]).text()) * ((100 - rate) * 0.01));
+          }  
+          $("#total").text(sum + "원");
+ 	   }else{
+   		 $("#coupon").text("적용된 쿠폰이 없습니다.");
+          var sum = 0;
+          var price = $(".count").parent().next().next();
+          for (var i = 0; i < price.length; i++) {
+             sum = sum +  parseInt($(price[i]).text());
+          }  
+          $("#total").text(sum + "원");
+   	   }
+   }); 
     
     // 삭제
     $(document).on("click", ".deleteOrder", function(event){   
     	event.preventDefault(); 
-    	var orderId = $(this).attr("href");
+    	var proId =  $(this).parent().parent().attr("value");
     	var productId = $(this).attr("value");
     	
-    
+    	alert(proId+"---"+productId)
+    	
+    	if(proId == productId){
+    		$(".delete").remove();
+    	}
     });
     
     // 위시리스트
@@ -104,25 +132,27 @@ $(function() {
     })
     
  	// 주문
-    $(document).on("click", "#goOrder", function(){  
-    	alert("주문이 완료되었습니다.");
+    $(document).on("click", "#goOrder", function(event){  
+    	event.preventDefault(); 
+    	var productid = $(this).attr('value');
+    	//alert(productid)
+    	
+    	//alert("주문이 완료되었습니다.");
     });
     
 });
-
-
 
 </script>
 
 
 
 <!-- blog -->
+<form id='registerForm' role="form" method="post">
 <div class="blog">
   <!-- container -->
   <div class="container">
     <div class="col-md-12" >
       <div class="box">
-        <form method="post" action="order-address.leaf">
           <h1>주문서 작성</h1><br>
           <div class="table-responsive">
             <table class="table">
@@ -138,43 +168,36 @@ $(function() {
                 </tr>
               </thead>
               <tbody>
-                <c:forEach items="${list}" var="item">
-                  <tr value="${item.productId}">
+                <c:forEach items="${itemlist}" var="item">
+                 <tr value="${item.productId}" class="delete">
                     <td colspan="2">
-                        <c:forEach items="${product.imgs}" var="img">
+                        <c:forEach items="${imglist}" var="img">
                           <c:if test="${item.productId == img.productId && img.orderNo==0}">
                             <img src="${rSrcPath}/productimg/${img.path}/${img.name}"
                               alt="" class="img-responsive" style="height: 100px; width: auto"/>    
                           </c:if>
                          </c:forEach>
                     </td>
-                    
                     <c:set var="doneLoop" value="false"/>
                     <c:forEach items="${prolist}" var="product">
                      <c:if test="${not doneLoop}">
                      <c:if test="${product.productId == item.productId}">
+                        <input type="hidden" name = "productId" value=${item.productId}>
                         <td colspan="7">${product.name}</td>
-                        <td><input type="number" class="count" name="quantity" value="${item.amount}"></td>
+                        <td><input type="number" name="amount" class="count" value="${item.amount}"></td>
                         <td>${product.price}원</td>
-                        <td name ="totalPrice">${product.price}원</td>
-                        <td>
-                        
-                        <a href="#" name="addWishlist" class="btn btn-default" value="${item.productId}">WishList</a>
-                        
-                        </td>
-                        
-                        <td><a href="${item.orderId}" class="deleteOrder" value="${item.productId}"><i class="fa fa-trash-o"></i></a></td>
+                        <td name ="price">${product.price}원</td>
+                        <td><a href="#" name="addWishlist" class="btn btn-default" value="${item.productId}">WishList</a></td>
+                        <td><a href="${item.orderId}" class="deleteOrder" value="${product.productId}"><i class="fa fa-trash-o"></i></a></td>
                        <c:set var="doneLoop" value="true"/>
                       </c:if>
                     </c:if>
                     </c:forEach>
-                    
                   </tr>
                  </c:forEach>
                 </tbody>
               </table>
             </div>
-          </form>
         </div>
       </div>
 
@@ -184,9 +207,10 @@ $(function() {
             <div class="col-sm-12">
               <div class="form-group">
                 <label for="firstname">쿠폰 상세정보&nbsp;</label>
-                <select name=sale>
+                <select name=sale id=sel>
+                  <option>---쿠폰 선택---</option>
                  <c:forEach items="${couponlist}" var="coupon">
-                    <option> ${coupon.discountRate}% 할인쿠폰</option>
+                    <option value="${coupon.discountRate}" class="rate"> ${coupon.discountRate}% 할인쿠폰</option>
                  </c:forEach>
                 </select><br><br>
                 <div class="box coupon">
@@ -211,7 +235,7 @@ $(function() {
                 <div class="table-responsive">
                   <table class="table">
                     <tbody>
-                      <tr><br><br><td><p class="text-muted"><strong>${list.size()}종류의 가구를 주문합니다.</strong></p></td></tr>
+                      <tr><br><br><td><p class="text-muted"><strong>${itemlist.size()}종류의 가구를 주문합니다.</strong></p></td></tr>
                       <tr><td style="color: red"><h3>총 합계</h3></td></tr>
                       <tr><td><h3><span id="total">원</span></h3></td></tr>
                     </tbody>
@@ -222,13 +246,14 @@ $(function() {
           </div>
         </div>
         <div class="box-footer text-center">
-            <button type="submit" class="btn btn-primary" id="goOrder"><a href="mypage/order">주문하기</a></button>
+            <button type="submit" class="btn btn-primary" id="goOrder"><a href="mypage/order" value="${product.productId}">주문하기</a></button>
         </div>
       </div>
       <!-- /.box -->
     </div>
     <!-- /.col-md-9 -->
   </div>
+  </form>
   <!-- /.container -->
 <!-- //blog -->
 <%@ include file="../include/footer.jsp"%>

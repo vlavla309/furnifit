@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,8 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.furnifit.article.domain.Article;
-import com.furnifit.article.domain.Furniture;
 import com.furnifit.article.service.ArticleService;
+import com.furnifit.furniture.domain.Furniture;
 import com.furnifit.member.domain.Member;
 import com.furnifit.planitem.domain.PlanItem;
 import com.furnifit.product.domain.Product;
@@ -42,7 +44,7 @@ public class ArticleController {
 	
 	
 	@RequestMapping(value = "/register/{planitemId}", method = RequestMethod.GET)
-	public String registGET(@PathVariable int planitemId,Furniture furniture, Product product,Model model) {
+	public String registGET(@PathVariable int planitemId,Furniture furniture, Product product,HttpServletRequest request,Model model) {
 	    PlanItem planitm = service.readPlanItem(planitemId);
 		model.addAttribute("planItem", planitm);
 		
@@ -58,15 +60,15 @@ public class ArticleController {
 		model.addAttribute("product",prdList);	
 		logger.info(prdList);
 		
-	//	HttpSession session =  request.getSession();
-		//Member member = (Member)session.getAttribute("login");
+		HttpSession session =  request.getSession();
+		Member member = (Member)session.getAttribute("login");
 		
 
 
 		return "article/register";
 	}
 	
-	@RequestMapping(value = "/register/{planitemId}", method = RequestMethod.POST)
+	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String registPOST(Article article) throws Exception {
 		
 		logger.info(article);
@@ -83,18 +85,52 @@ public class ArticleController {
 	}
 	
 	
-	@RequestMapping(value = "/{articleId}", method = RequestMethod.DELETE)
-	public String remove(@PathVariable int articleId) throws Exception {
-		service.artDelete(articleId);
-			 return "redirect:/article/list";
+	@RequestMapping(value="/{articleId}", method = RequestMethod.DELETE)
+	public ResponseEntity<String> delete(@PathVariable("articleId")int articleId){
+		
+		logger.info("삭제컨트롤러");
+		ResponseEntity<String> entity = null;
+		
+		try {
+			service.artDelete(articleId);
+			entity = new ResponseEntity<String>("success",HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		return entity;
 	}
 	
 	
+	
+	
 	@RequestMapping(value = "/{articleId}", method = RequestMethod.GET)
-	public String read(@PathVariable int articleId,Furniture furniture,Product product, Model model) throws Exception {
+	public String read(@PathVariable int articleId,Furniture furniture,Product product,HttpServletRequest request, Model model) throws Exception {
 		 Article article = service.read(articleId);
-		 //article.setViewcnt(article.getViewcnt()+1);
-		// service.artUpdate(article);
+		// article.setViewcnt(article.getViewcnt() +1);
+		 //service.artUpdate(article);
+		 
+		 PlanItem planItem = service.readPlanItem(article.getPlanitemId());
+		 
+		 List<Product> prdList = new ArrayList<Product>();
+		 List<Furniture> list = service.readFurniture(article.getPlanitemId());
+		 for (Furniture f : list) {
+			prdList.add(service.readProduct(f.getProductId()));
+		}
+		
+		 
+		 model.addAttribute("product",prdList); 
+		 model.addAttribute("planItem", planItem);
+		 model.addAttribute("article", article);
+		 
+		 
+		 return "article/detail";
+
+	}
+	
+	@RequestMapping(value = "/update/{articleId}", method = RequestMethod.GET)
+	public String updatePage(@PathVariable int articleId,Furniture furniture,Product product, Model model) throws Exception {
+		 Article article = service.read(articleId);
 		 
 		 PlanItem planItem = service.readPlanItem(article.getPlanitemId());
 		 
@@ -108,8 +144,23 @@ public class ArticleController {
 		 model.addAttribute("planItem", planItem);
 		 model.addAttribute("article", article);
 		 
-		 return "article/detail";
+		 return "article/modify";
 
+	}
+	
+	@RequestMapping(value = "/{articleId}", method = {RequestMethod.PATCH, RequestMethod.PUT})
+	public ResponseEntity<String> update(Article article) throws Exception {
+		
+		ResponseEntity<String> entity = null;
+		try {
+			service.artUpdate(article);
+			
+			entity = new ResponseEntity<String>("success",HttpStatus.OK);
+			
+		} catch (Exception e) {
+			entity = new ResponseEntity<String>( "fail",HttpStatus.BAD_REQUEST);
+		}
+		 return entity;
 	}
 
 	

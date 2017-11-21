@@ -1,4 +1,4 @@
-package com.furnifit.article.domain;
+package com.furnifit.furniture.domain;
 
 public class Furniture {
 	

@@ -11,6 +11,17 @@
 text-align: center;
 }
 
+#acreage{
+width:4%;  
+height: 14%; 
+background-color: transparent; 
+font-weight:bold; 
+border: none; 
+font-size:11pt; 
+color: #F7BE81;
+text-align: center;
+}
+
 button.accordion {
     background-color: #8A0808;
     color: white;
@@ -131,13 +142,15 @@ box-shadow: none;
 <body>
 <!-- hidden -->
 <input type="hidden" value="${pageContext.servletContext.contextPath }" name="path" id ="path">
+
 	
 	
 	<!-- blog -->
 		<div class="blog"  style="background-color: white" >
 			<!-- container -->
 			<div class="container" style="width: 900px; border: 3px solid; border-color: #F6E3CE; padding: 40px"  >
-				<form id='registerForm' role="form" method="post">
+				<form id='registerForm' role="form" method="post" action="${contextPath}/article">
+        <input type="hidden" name="planitemId" value="${planItem.planitemId}">
         <div class="blog-heading w3layouts" style="margin-top: 30px" >
 				
 				
@@ -160,6 +173,7 @@ box-shadow: none;
                <tr>
               <div class="alert alert-warning" role="alert">
         <strong id="shareInfo">평 수 :</strong>&nbsp;&nbsp;<input id="m" readonly="readonly"  value="${planItem.length}" type="text">x <input id="m" readonly="readonly" value="${planItem.width}" type="text" >x <input  id="m" readonly="readonly"  value="${planItem.height}" type="text">
+            &nbsp;&nbsp;&nbsp; <strong id="shareInfo">(&nbsp;평 수 :&nbsp;</strong><input readonly="readonly" value="${planItem.acreage}"  id="acreage" type="text"> <strong id="shareInfo">평&nbsp;)</strong>
             </div>
                </tr>
                <tr>
@@ -268,10 +282,10 @@ for (i = 0; i < acc.length; i++) {
           
           <!-- 글쓸곳 -->
               <div class="row" style="text-align: center;">
-              <input type="text" name="title" style="width: 60%; height:40px; border: 3px solid #F6E3CE" required="required" placeholder="&nbsp;&nbsp;&nbsp;제목을 입력해주세요.">
+              <input type="text" name="title" style="width: 55%; height:40px; border: 3px solid #F6E3CE" required="required" placeholder="&nbsp;&nbsp;&nbsp;제목을 입력해주세요.">
               <p>
               <br>
-                <textarea name="content" rows="9" cols="62"
+                <textarea name="content" rows="8" cols="55"
             style="border: 3px solid; resize: none; border-color: #F6E3CE" required="required" placeholder="&nbsp;&nbsp;&nbsp;글을 작성해주세요."
             ></textarea>
                 
@@ -302,7 +316,7 @@ for (i = 0; i < acc.length; i++) {
   <div class="mailbox-attachment-info">
   <a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
   <a href="{{fullName}}" 
-     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
+     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw  fa-times "></i></a>
   </span>
   </div>
 </li>                

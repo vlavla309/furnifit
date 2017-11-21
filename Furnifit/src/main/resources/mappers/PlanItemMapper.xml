@@ -3,22 +3,34 @@
                         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
                         
 <mapper namespace="com.furnifit.planitem.dao.PlanItemDao">
+	
+	<!-- 배치도항목 조회 -->
+	<select id="read" resultType="PlanItem" parameterType="int">
+	SELECT planitem_id AS "planitemId",
+   		  plan_id AS "planId",
+   		  width,
+   		  height,
+   		  length,
+   		  acreage,
+   		  image,
+   		  name
+    FROM  planitems
+    WHERE planitem_id = #{value}
+    </select>
 
 	<!-- 회원별 배치도 항목 리스트 -->
-	<select id="listAll" resultType="PlanItem" parameterType="String">
-	
-		SELECT i.planitem_id AS "planitemId",
-		       i.plan_id AS "planId",
-		       i.width,
-		       i.height,
-		       i.length,
-		       i.acreage,
-		       i.image,
-		       i.name	
-		FROM   planitems i JOIN plans p
-		ON     i.plan_id = p.plan_id
-		WHERE  p.email = #{email}
-		
+	<select id="listAll" resultType="PlanItem" parameterType="map">
+		SELECT planitem_id AS "planitemId",
+		       plan_id AS "planId",
+		       width,
+		       height,
+		       length,
+		       acreage,
+		       image,
+		       name	
+		FROM   planitems
+		WHERE  planitem_id = #{planitemId}
+		AND    plan_id = #{planId}
 	</select>
 	
 	<!-- 배치도 삭제 -->

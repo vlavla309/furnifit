@@ -38,6 +38,33 @@ li { list-style-type: none; }
 }
 </style>
 
+<script>
+
+$(function() {
+  // 위시리스트
+  var wishbtn = $("a[name=addWishlist]");
+  
+  wishbtn.click(function() {
+    event.preventDefault(); 
+  	  var planitemid = $(this).attr('value')
+  	  alert(planitemid)
+    $.ajax({
+      url :'${contextPath}/wishlist/'+planitemid,
+      type : 'POST',
+      success : function(request) {
+        console.log(request);
+        alert("위시리스트 성공");
+      },
+      error : function(request) {
+        console.log(request);
+        alert("이미 위시리스트에 있습니다.");
+      }
+    })
+  })
+});
+
+</script>
+
 
 <!-- blog -->
 <div class="blog">
@@ -49,16 +76,16 @@ li { list-style-type: none; }
         <div class="table-responsive">
           <table class="table">
             <tbody>
-              <c:forEach items="${list}" var="item">
+              <c:forEach items="${itemlist}" var="item">
               <tr>
                 <td><strong class="table-font">가로</strong></td>
-                <td><input type="text" class="btn form-control table-text">${itemlist.width}</td>
+                <td><input type="text" disabled class="btn form-control table-text" value="${item.width}"></td>
                 <td><strong class="table-font">세로</strong></td>
-                <td><input type="text" class="btn form-control table-text">${itemlist.height}</td>
+                <td><input type="text" disabled class="btn form-control table-text" value="${item.height}"></td>
                 <td><strong class="table-font">높이</strong></td>
-                <td><input type="text" class="btn form-control table-text">${itemlist.length}</td>
+                <td><input type="text" disabled class="btn form-control table-text" value="${item.length}"></td>
                 <td><strong class="table-font">평수</strong></td>
-                <td><input type="text" class="btn form-control table-text">${itemlist.acreage}</td>
+                <td><input type="text" disabled class="btn form-control table-text" value="${item.acreage}"></td>
               </tr>
               </c:forEach>
             </tbody>
@@ -86,24 +113,19 @@ li { list-style-type: none; }
               </tr>
             </thead>
             <tbody>
+            <c:forEach items="${itemlist}" var="item">
               <tr>
-                <td colspan="2"><img alt="" src="/uploadphoto/${item.productImage }">001</td>
-                <td colspan="8" value="${item.productCode }">침대</td>
-                <td class="float-right"><button type="submit" class="btn btn-primary2">쇼핑몰로 가기</button></td>
-                <td class="float-right"><button type="submit" class="btn btn-primary3">WISHLIST</button></td>
+                <td colspan="2">${item.planitemId}</td>
+                <td colspan="8">${item.name}</td>
+                <td class="float-right"><a href="#" name="addWishlist" class="btn btn-default" value="${item.planitemId}">WishList</a></td>
+                <td class="float-right"><a href="#" class="btn btn-default">쇼핑몰로 가기</a></td>
+                <!-- <td class="float-right"><button type="submit" class="btn btn-primary2">쇼핑몰로 가기</button></td> -->
+                <!-- <td class="float-right"><button type="submit" class="btn btn-primary3">WISHLIST</button></td>  -->
+                
+                
+               
               </tr>
-              <tr>
-                <td colspan="2"><img alt="" src="/uploadphoto/${item.productImage }">002</td>
-                <td colspan="8" value="${item.productCode }">옷장</td>
-                <td class="float-right"><button type="submit" class="btn btn-primary2">쇼핑몰로 가기</button></td>
-                <td class="float-right"><button type="submit" class="btn btn-primary3">WISHLIST</button></td>
-              </tr>
-              <tr>
-                <td colspan="2"><img alt="" src="/uploadphoto/${item.productImage }">003</td>
-                <td colspan="8" value="${item.productCode }">책상</td>
-                <td class="float-right"><button type="submit" class="btn btn-primary2">쇼핑몰로 가기</button></td>
-                <td class="float-right"><button type="submit" class="btn btn-primary3">WISHLIST</button></td>
-              </tr>
+              </c:forEach>
             </tbody>
           </table>
         </div>

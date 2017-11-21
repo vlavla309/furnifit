@@ -29,7 +29,7 @@ box-shadow: none!important;
 }
 .articleDiv2{
  padding: 1em;
- box-shadow: 0 -1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24)
+ box-shadow: 0 -1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
 }
 .label {
    padding: 2px 3px;
@@ -78,14 +78,14 @@ box-shadow: none!important;
           <div class="information-grid-info articleDiv2" >
             <img src="images/room.PNG" width="105%" alt="" />
             <p>
-              <strong><font style="font-size: 12pt">${article.title }</font></strong>
+              <a href="${contextPath}/article/${article.articleId}"><strong><font style="font-size: 12pt; color: #3B0B0B">${article.title }</font></strong></a>
               <br> <small>${article.regdate }</small>
             </p>
             <h3>
               <span class="label label1" >&nbsp;<i
                 class="fa fa-heart " aria-hidden="true"></i>&nbsp;&nbsp;${article.likecnt }
               </span>&nbsp; <span class="label label2"><i
-                class="fa fa-eye " aria-hidden="true"></i>&nbsp;&nbsp;20</span>
+                class="fa fa-eye " aria-hidden="true"></i>&nbsp;&nbsp;${article.viewcnt }</span>
             </h3>
            
           </div>

@@ -1,5 +1,10 @@
 package com.furnifit.orders.domain;
 
+/**
+ *
+ * @author 손정화
+ *
+ */
 public class Orders{
 	private int orderId;
 	private String email;
@@ -7,6 +12,11 @@ public class Orders{
 	private String regdate;
 	
 	public Orders() {}
+	
+	public Orders(String email, int price) {
+		this.email = email;
+		this.price = price;
+	}
 	
 	public Orders(int orderId, String email, int price, String regdate) {
 		super();

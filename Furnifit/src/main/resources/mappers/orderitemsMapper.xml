@@ -7,39 +7,23 @@
 	<!-- 주문할 가구 등록 -->
 	<insert id="create" parameterType="Orderitems">
 		INSERT INTO orderitems
-					(product_id AS "productId",
-					 order_id AS "orderId",
+					(product_id
+					 order_id
 				 	 amount)
 		VALUES 		(#{productId},
 					 #{orderId},
 					 #{amount})
 	</insert>
-
-	<!-- 가구 정보 상세보기 -->
-	<select id="read" parameterType="int" resultType="Orderitems">
+	
+	<!-- 회원별 주문할 리스트 -->
+	<select id="listAll" resultType="Orderitems" parameterType="int">
 		SELECT product_id AS "productId",
 			   order_id AS "orderId",
 			   amount
 		FROM   orderitems
-		WHERE  productId = #{productId}
+		WHERE  order_id = #{value}
 	</select>
-	
-	<!-- 회원별 주문할 리스트 -->
-	<select id="listAll" resultType="Orderitems" parameterType="String">
-		SELECT i.product_id AS "productId",
-			   i.order_id AS "orderId",
-			   i.amount
-		FROM   orderitems i JOIN orders o
-		ON     i.order_id = o.order_id 
-		WHERE  o.email = #{email}
-	</select>
-	
-	<!-- 주문할 가구 삭제 -->
-	<delete id="delete" parameterType="int">
-		DELETE FROM orderitems
-		WHERE  order_id = #{orderId}
-	</delete>
-	
+
 	<!-- 가구의 수량 변경 -->
 	<update id="update" parameterType="Orderitems">
 		UPDATE orderitems
@@ -48,3 +32,5 @@
 	    </set>
 	</update>
 </mapper>
+
+

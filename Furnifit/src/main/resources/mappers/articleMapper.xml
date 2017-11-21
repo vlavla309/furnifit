@@ -6,19 +6,28 @@
 
 	
 	<insert id="create" parameterType="Article">
+
+	 <selectKey keyProperty="articleId" resultType="int" order="BEFORE">
+             select articles_seq.nextval
+             FROM DUAL
+      </selectKey>
 	
 	
 	 INSERT INTO articles
 	 			 (article_id ,
 	 			  email,
-	 			  planitem_id, 
+	 			  planitem_id,
+	 			  likecnt,
+	 			  viewcnt, 
 	 			  title,
 	 			  content	 
 	 			 )
 	 VALUES      (
-	 			  articles_seq.nextval,
+	 			  #{articleId},
 	 			  #{email},
 	 			  #{planitemId},
+	 			  #{likecnt},
+	 			  #{viewcnt},
 	 			  #{title},
 	 			  #{content})
 	 			  
@@ -61,6 +70,24 @@
 	ORDER BY regdate DESC
 	</select>
 	
+	<!-- 게시글 첨부이미지파일 삭제(수정시) -->
+	<delete id="deleteAttach" parameterType="int">
+	DELETE FROM article_img
+	WHERE article_id = #{articleId}
+	</delete>
+	
+		<!--게시글 첨부이미지 파일 수정 업로드 -->
+	<insert id="replaceAttach">
+	INSERT into article_img
+				(name,
+				 article_id,
+				 path)
+	VALUES (#{name},
+			#{articleId},
+			#{path})
+	</insert>
+	
+	
 	<!-- 게시판 전체리스트 -->
 	   <!-- 전체 리스트 -->
    <select id="listAll" resultType="Article">
@@ -76,48 +103,7 @@
 	 ORDER BY article_id DESC
  
    </select>
-   
-   
-	<!-- 상세게시글에 해당하는 배치도항목 정보 가져오기 -->
-   <select id="readPlanItem" parameterType="int" resultType="PlanItem">
-   SELECT planitem_id AS "planitemId",
-   		  plan_id AS "planId",
-   		  width,
-   		  height,
-   		  length,
-   		  acreage,
-   		  image,
-   		  name
-    FROM  planitems
-    WHERE planitem_id = #{value}
-   </select>
-   
-   <!-- 배치도항목에 해당하는 가구번호목록(리스트) 가져오기 -->
-    <select id="readFurniture" parameterType="int" resultType="Furniture">
-   SELECT planitem_id AS "planitemId",
-   		  product_id AS "productId"
-    FROM  furnitures
-    WHERE planitem_id = #{value}
-   </select>
-   
-   
-   <!-- 가구번호에 대한 가구(상품)정보 가져오기 -->
-   <select id="readProduct" parameterType="int" resultType="Product">
-   SELECT product_id AS "productId",
-   		  category,
-   		  name,
-   		  brand,
-   		  price,
-   		  color,
-   		  width,
-   		  length,
-   		  height,
-   		  description,
-   		  To_char(regdate, 'YYYY-MM-DD') regdate	  
-    FROM  products
-    WHERE product_id = #{value}
-   </select>
-   
+
    
    <!-- 게시글 수정 -->
    <update id="artUpdate" parameterType="Article">
@@ -136,9 +122,5 @@
     DELETE FROM articles
     WHERE article_id = #{article_id}
    </delete>
-
-	
-	
-	
 	
 </mapper>

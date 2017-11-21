@@ -5,27 +5,28 @@
 <mapper namespace="com.furnifit.plan.dao.PlanDao">
 
 	<!-- 가구 정보 상세보기 -->
-	<select id="read" parameterType="int" resultType="Plan">
-		SELECT p.plan_id AS "planId",
-			   p.email,
-			   p.name,
-			   p.regdate
-		FROM   plans p JOIN planitems i
-		  ON   i.plan_id = p.plan_id
-		WHERE  i.planitem_id = #{value}
+	<select id="read" parameterType="map" resultType="PlanItem">
+		SELECT planitem_id AS "planitemId",
+		       plan_id AS "planId",
+		       width,
+		       height,
+		       length,
+		       acreage,
+		       image,
+		       name	
+		FROM   planitems
+		WHERE  plan_id = #{planId}
+		AND    planitem_id = #{planitemId}
 	</select>
 	
 	<!-- 회원별 배치도목록 리스트 -->
 	<select id="listAll" resultType="Plan" parameterType="String">
-	
-		SELECT p.plan_id AS "planId",
-			   p.email,
-			   p.name,
-			   p.regdate
-		FROM   plans p JOIN planitems i
-		  ON   i.plan_id = p.plan_id
-		WHERE  p.email = #{email}
-		
+		SELECT plan_id AS "planId",
+			   email,
+			   name,
+			   regdate
+		FROM   plans
+		WHERE  email = #{email}
 	</select>
 	
 </mapper>

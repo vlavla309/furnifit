@@ -10,6 +10,17 @@
 .align2 {
   text-align: center;
 }
+.likeArt{
+border-style:hidden; 
+margin-left:42%; 
+border-radius:5px; 
+font-weight:bold; 
+background-color: #DF3A01;
+color: white;  
+width: 18%; 
+height:36px; 
+font-size: 13pt;
+}
 
 button.accordion {
     background-color: #8A0808;
@@ -67,6 +78,7 @@ border-color: #F6E3CE"
 #shareForm tr td{
 padding: 3px;
 }
+
 #shareInfo{
 color: #DF0101;
 font-size: 9pt;
@@ -82,6 +94,18 @@ font-size:11pt;
 color: #F7BE81;
 text-align: center;
 }
+
+#acreage{
+width:4%;  
+height: 14%; 
+background-color: transparent; 
+font-weight:bold; 
+border: none; 
+font-size:11pt; 
+color: #F7BE81;
+text-align: center;
+}
+
 
 ul.dropdown-menu {
     top: 1.5cm;
@@ -116,7 +140,7 @@ font-size: 12pt;
 box-shadow: none;
 }
 
-.topbtn{
+#topbtn{
 border-style:hidden; 
 border-radius:10px; 
 background-color: #B40404;
@@ -155,36 +179,31 @@ height: auto;
 <body>
 
 <!-- hidden -->
-  
-    <div class='popup back' style="display:none;"></div>
-    <div id="popup_front" class='popup front' style="display:none;">
-     <img id="popup_img">
-    </div>
-	
-	
+
+<form role="form" >
+ 
+ </form>  
 	<!-- blog -->
 		<div class="blog"  style="background-color: white" >
 			<!-- container -->
 			<div class="container" style="width: 900px; border: 3px solid; border-color: #F6E3CE; padding: 40px"  >
-        
+         
+                  
         <div class="box-footer" style="float: right">
-        
-         <button type="submit" class="topbtn" id="modifyBtn" >MODIFY</button>
-            <button type="submit"  class="topbtn" id="deleteBtn">DELETE</button>
-            <button type="submit"  class="topbtn" id="listBtn">LIST</button>
-
- 
+        <c:if test="${article.email == login.email}">
+                  <a href="${contextPath }/article/update/${article.articleId}" type="button"><button type="submit" id="topbtn" class="modifyBtn" >MODIFY</button></a>
+         <button type="submit"  id="topbtn" class="deleteBtn">DELETE</button>
+                  </c:if>
+       <button type="submit"  id="topbtn" class="listBtn">LIST</button>
+         
+         
+  
   </div>
   <br>
-
- 
-  
 				<div class="blog-heading w3layouts" style="margin-top: 30px" >
 				
 				
 				<!-- 여기서 내용을 채운다 -->
-      
-   
 				
                 </div>
                 <div class="gallery-grids" >
@@ -200,7 +219,8 @@ height: auto;
                
                <tr>
               <div class="alert alert-warning" role="alert">
-        <strong id="shareInfo">평 수 :</strong>&nbsp;&nbsp;<input readonly="readonly"  value="${planItem.length}" id="m" type="text">x <input readonly="readonly" value="${planItem.width}"  id="m" type="text" >x <input readonly="readonly"  value="${planItem.height}" id="m" type="text">
+        <strong id="shareInfo">방크기 :</strong>&nbsp;&nbsp;<input readonly="readonly"  value="${planItem.length}" id="m" type="text">x <input readonly="readonly" value="${planItem.width}"  id="m" type="text" >x <input readonly="readonly"  value="${planItem.height}" id="m" type="text">
+              &nbsp;&nbsp;&nbsp; <strong id="shareInfo">(&nbsp;평 수 :&nbsp;</strong><input readonly="readonly" value="${planItem.acreage}"  id="acreage" type="text"> <strong id="shareInfo">평&nbsp;)</strong>
             </div>
                </tr>
                <tr>
@@ -233,7 +253,7 @@ height: auto;
 <button class="accordion" class="col-md-2" style="margin-left: 60%; margin-top: 10px">&nbsp;자세히보기 ▼</button>
 
 
-<div class="bs-docs-example wow fadeInUp animated panel" data-wow-delay=".5s" style="background-color: #F7F2E0">
+<div class="bs-docs-example wow fadeInUp animated panel" data-wow-delay=".5s" style="background-color: white">
             <table class="table table-hover">
               <thead>
                 <tr >
@@ -264,8 +284,133 @@ height: auto;
           <br>
           <br>
 
+ 
 
+      <!-- 파일첨부할곳 -->
+          <div class="box box-primary"  >
+        <c:forEach items="${article.images}" var="articleImg">
+        <br>
+        <br>
+                   <div class="articleImg">
+         <img  src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"   >
+                    </div>
+                  </c:forEach>
+              	</div>
+          <br>
+          <br>
+          <br>
+          <br>
 
+          
+          <!-- 글쓸곳 -->
+              <div class="row" style="text-align: center;">
+       
+                <textarea name="content" rows="8" cols="55" readonly="readonly"
+            class="artContent" 
+            >${article.content }</textarea>
+                
+          </div>  
+          <br>
+          <br>
+          
+          <button class="likeArt">좋아요♥&nbsp;<font size="2px">[${article.likecnt }]</font></button>
+   
+         <br>
+         <br>
+         <br>
+
+        <!-- 댓글 -->         
+              <table style="width: 30px; margin: 0 auto;  text-align: center " >
+                  <tr>
+                    <td><input type="hidden" name=""  />
+                    <textarea name="contents" rows="2" cols="100"
+                     style="resize: none; border-style: solid; font-size: 11pt" 
+                       >댓글을 작성해주세요.</textarea></td>
+                     &nbsp;&nbsp;&nbsp;&nbsp;
+                     <td><input class="replybtn" type="submit" value="등록"
+       	            style="width: 50px; height: 33px; font-size: 11pt"></td>
+                  </tr>
+            </table>
+
+              <br/>
+              <br/>
+
+              <table width="600" border="0" cellpadding="0" cellspacing="0"  align="center">
+ 
+              </table>
+              <br/>
+
+   <table width="780" border="0" cellpadding="0" cellspacing="0" align="center">
+     <tr><td width="600" colspan="2" height="3" bgcolor="#B40404"></td></tr>
+  
+     <tr height="25">
+      <td width="50%" align="left" style="color:#B40404;  font-weight: bold">&nbsp;&nbsp;보라보라얍</td>
+      <td width="50%" align="right" style="color:#B40404;  font-weight: bold" >2017.11.13&nbsp;<input id="deletebtn" type="button" value="삭제"
+       ></td>
+     </tr>
+     <tr><td width="600" colspan="2" height="1" bgcolor="#B40404"></td></tr>
+     <tr height="60">
+      <td align="left" style="padding: 5px 5px 5px 5px; color:#585858;  font-weight: bold" valign="top">
+                 하이루 방가루
+      </td>
+     </tr>
+     <tr><td width="600" colspan="2" height="3" bgcolor="#B40404"></td></tr>
+
+   </table>
+     
+ </div>
+</div>
+</div>
+      
+<script id="templateAttach" type="text/x-handlebars-template">
+<li data-src='{{fullName}}'>
+  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  <div class="mailbox-attachment-info">
+  <a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+  </span>
+  </div>
+</li>                
+</script>  
+   
+<script>
+$(document).ready(function(){
+  
+  var formObj = $("form[role='form']");
+    
+    
+  $(".listBtn").bind("click", function(){
+    formObj.attr("method", "get");
+    formObj.attr("action", "/one/article");
+    formObj.submit();
+  });
+  
+});
+</script>
+
+<script>
+        
+$(".deleteBtn").on("click",function(){
+     
+	
+    $.ajax({
+      type:'delete',
+      url:'${contextPath}/article/${article.articleId}',
+      headers: { 
+               "Content-Type": "application/json",
+               "X-HTTP-Method-Override": "DELETE" },
+      dataType:'text', 
+      success:function(result){
+      console.log("result: " + result);
+      if(result == 'success'){
+      alert("삭제 되었습니다.");
+      $(".listBtn").trigger("click");
+      
+
+         } 
+       }
+    });
+});
+</script> 
 
 <script>
 var acc = document.getElementsByClassName("accordion");
@@ -282,160 +427,7 @@ for (i = 0; i < acc.length; i++) {
         }
     }
 }
-</script>   
-
-<!-- 파일첨부할곳 -->
-
-
-          <div class="box box-primary"  >
-        <c:forEach items="${article.images}" var="articleImg">
-                   <div class="articleImg">
-         <img  src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"   >
-                    </div>
-                  </c:forEach>
-              	</div>
-          <br>
-          <br>
-          <br>
-          <br>
-
-          
-          <!-- 글쓸곳 -->
-              <div class="row" style="text-align: center;">
-              <br>
-                <textarea name="content" rows="6" cols="62" readonly="readonly"
-            class="artContent" 
-            >${article.content }</textarea>
-                
-          </div>  
-          <br>
-          <br>
-          
-          <button style="border-style:hidden; margin-left:42%; border-radius:5px; font-weight:bold; background-color: #DF0101;
-  color: white;  width: 17%; height:40px; font-size: 13pt">좋아요♥&nbsp;<font style="font-size: 11pt">[0]</font></button>
-        
- 
-<script>
-$(document).ready(function(){
-  
-  var formObj = $("form[role='form']");
-  
-  console.log(formObj);
-  
-  $("#modifyBtn").on("click", function(){
-    formObj.attr("action", "/article/modifyPage");
-    formObj.attr("method", "get");    
-    formObj.submit();
-  });
-  
-/*  $("#removeBtn").on("click", function(){
-    formObj.attr("action", "/sboard/removePage");
-    formObj.submit();
-  }); */
-
-  
-  $("#deleteBtn").on("click", function(){
-    
-   /* var replyCnt =  $("#replycntSmall").html();
-    
-    if(replyCnt > 0 ){
-      alert("댓글이 달린 게시물을 삭제할 수 없습니다.");
-      return;
-    } */
-    
-    var arr = [];
-    $(".uploadedList li").each(function(index){
-       arr.push($(this).attr("data-src"));
-    });
-    
-    if(arr.length > 0){
-      $.post("/deleteAllFiles",{files:arr}, function(){
-        
-      });
-    }
-    
-    formObj.attr("action", "/article/deletePage");
-    formObj.submit();
-  }); 
-  
-  $("#listBtn ").on("click", function(){
-    formObj.attr("method", "get");
-    formObj.attr("action", "/article/list");
-    formObj.submit();
-  });
-  
-    
-  
-});
-</script>
-
-
-          
-          <!-- 댓글 -->
-     
-          <br>
-          <br>
-          <br>
-          <form>
- <table style="width: 30px; margin: 0 auto;  text-align: center " >
-      <tr>
-        <td><input type="hidden" name=""  />
-          <textarea name="contents" rows="2" cols="100"
-            style="resize: none; border-style: solid; font-size: 11pt" 
-            >댓글을 작성해주세요.</textarea></td>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-        <td><input class="replybtn" type="submit" value="등록"
-          style="width: 50px; height: 33px; font-size: 11pt"></td>
-
-      </tr>
-     
-    </table>
-    </form>
-    
-
- 
-
-<br/>&nbsp;<br/>
-<form name="myForm" method="post" action="">
-<table width="600" border="0" cellpadding="0" cellspacing="0"  align="center">
- 
-</table>
-</form>
-
-<br/>
-
-<table width="780" border="0" cellpadding="0" cellspacing="0" align="center">
-    <tr><td width="600" colspan="2" height="3" bgcolor="#B40404"></td></tr>
-  
-        <tr height="25">
-            <td width="50%" align="left" style="color:#B40404;  font-weight: bold">&nbsp;&nbsp;보라보라얍</td>
-           
-            <td width="50%" align="right" style="color:#B40404;  font-weight: bold" >2017.11.13&nbsp;<input id="deletebtn" type="button" value="삭제"
-         ></td>
-        </tr>
-        <tr><td width="600" colspan="2" height="1" bgcolor="#B40404"></td></tr>
-        <tr height="60">
-            <td align="left" style="padding: 5px 5px 5px 5px; color:#585858;  font-weight: bold" valign="top">
-                          하이루 방가루
-            </td>
-        </tr>
-        <tr><td width="600" colspan="2" height="3" bgcolor="#B40404"></td></tr>
-
-</table>
- 
-          
-          
-          
-          
-          
-          
-                 
-				</div>
-       
-        
-			</div>
-      </div>
-  
+</script>  
 
        
          
