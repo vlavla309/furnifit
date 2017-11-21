@@ -3,7 +3,7 @@
 <%@ include file="../include/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
 <style>
  
 .information-grid-info {
@@ -89,9 +89,11 @@ display:none;
 		/* color 버튼을 누르면 조건검색 리스트에 추가됨. ajax는 추후에!, 클래스 속성을 btnd로 변경한 후에 icon delete를 추가로 해준다. */
 		$(document).on("click", ".colorBtn", function(event) {
 			event.preventDefault();
+			
 			$(this).children().first().toggleClass("colorUncheck");
 			$(this).attr('class','btn btn-default colordelete')
 			$('#filter').append("<input type =\"text\" name =\"colors\" value=\""+$(this).attr('id')+"\"/>")
+			
 			to_ajax();
 			
 		});
@@ -104,7 +106,8 @@ display:none;
 			$('#filter :input[value="'+$(this).attr('id')+'"]').remove();
 			to_ajax();
 		});
-
+		
+		
 		/* brand 버튼을 누르면 조건검색 리스트에 추가됨. ajax는 추후에! */
 		$(document).on(	"click", ".branda",function(event) {
 			event.preventDefault();
@@ -169,16 +172,30 @@ display:none;
 			to_ajax();
 		});
 		
-		$('.target').change(function() { 
-			alert('Handler for .change() called.'); 
+		$('.target').change(function() {
+			$('input[name=sort]').val($(this).val())
+			to_ajax();
 		});
 
 		/* ajax실행 함수  */
 		function to_ajax(){
-	        var json_str = JSON.stringify($("form[name=filter]").serializeArray());
-	        console.log(json_str)
-
-	    }
+	        var formData = $("#filter").serialize();
+	        console.log(formData);
+	        $.ajax({
+				url : '${contextPath}/product/',
+				type : 'post',
+				data : formData,
+				success : function(data) {
+					console.log(data.result);
+					console.log(data.list);
+				},
+				error: function(data) {
+					console.log(data)
+				}
+			
+			});
+		
+		}
 
 		/* 위시리스트를 누르면, 저장이되고 버튼의 클래스 속성을 변경한다. 또한 비어있는 하트를 채워진 하트로 바꿈. */
 		$(document).on("click", ".wishbtn", function(event) {
@@ -226,10 +243,10 @@ display:none;
 							<li>
 								<div class="col-md-2">
 									<select class="form-control input-sm target">
-										<option>전체</option>
-										<option>높은가격순</option>
-										<option>낮은가격순</option>
-										<option>신상품순</option>
+										<option value="total">전체</option>
+										<option value="height">높은가격순</option>
+										<option value="row">낮은가격순</option>
+										<option value="new">신상품순</option>
 									</select>
 								</div>
 								<div class="col-md-3">
@@ -291,6 +308,7 @@ display:none;
 			</tbody>
 		</table>
 		<form name ="filter" id = "filter">
+			<input type="text" name = "sort" value="0">
 			<input type="text" name = "keyword" value="0">
 			<input type="text" name = "category" value="0" id="cate">
 			<input type="text" name = "minPrice" value="0" id="min">
