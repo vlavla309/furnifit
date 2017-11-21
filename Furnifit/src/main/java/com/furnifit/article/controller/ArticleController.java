@@ -50,9 +50,9 @@ public class ArticleController {
 	
 	
 	@RequestMapping(value = "/register/{planitemId}", method = RequestMethod.GET)
-	public String registGET(@PathVariable int planitemId,Furniture furniture, Product product,HttpServletRequest request,Model model) {
+	public String registGET(@PathVariable int planitemId,Furniture furniture, Product product,HttpServletRequest request,Model model) throws Exception {
 	    PlanItem planitm = service.readPlanItem(planitemId);
-		model.addAttribute("planItem", planitm);
+		model.addAttribute("planItem", planitm);  
 		
 		
 		List<Product> prdList = new ArrayList<Product>();
