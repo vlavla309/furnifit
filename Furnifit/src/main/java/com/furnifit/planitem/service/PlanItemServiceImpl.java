@@ -1,8 +1,6 @@
 package com.furnifit.planitem.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -21,15 +19,36 @@ public class PlanItemServiceImpl implements PlanItemService {
 	
 	@Inject
 	private PlanItemDao dao;
-
 	
+	
+	/**
+	 * 배치도 상세정보 조회
+	 * @param planitemId
+	 * @return PlanItem
+	 */
 	@Override
-	public List<PlanItem> listAll(int planId, int planitemId) throws Exception {
-		return dao.listAll(planId, planitemId);
+	public PlanItem read(int planItemId) throws Exception {
+		return dao.read(planItemId);
 	}
 	
+	/**
+	 * 배치도 항목 리스트
+	 * @param
+	 * @return List<PlanItem>
+	 */
 	@Override
-	public void delete(int planId, int planitemId) throws Exception {
-		dao.delete(planId, planitemId);
+	public List<PlanItem> listAll() throws Exception {
+		return dao.listAll();
+	}
+	
+	/**
+	 * 배치도 항목 삭제
+	 * @param planitemId
+	 * @return
+	 */
+	@Override
+	public void delete(int planitemId) throws Exception {
+		dao.delete(planitemId);
 	}
 }
+

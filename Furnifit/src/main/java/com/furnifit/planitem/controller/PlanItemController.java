@@ -13,10 +13,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.furnifit.brand.dao.BrandDao;
+import com.furnifit.brand.doamin.Brand;
+import com.furnifit.furniture.dao.FurnitureDao;
 import com.furnifit.furniture.domain.Furniture;
 import com.furnifit.member.domain.Member;
+import com.furnifit.orderitems.dao.OrderitemsDao;
+import com.furnifit.orderitems.domain.Orderitems;
+import com.furnifit.orderitems.service.OrderitemsService;
 import com.furnifit.planitem.domain.PlanItem;
 import com.furnifit.planitem.service.PlanItemService;
+import com.furnifit.product.domain.Product;
+import com.furnifit.product.service.ProductService;
 
 
 /**
@@ -32,32 +40,62 @@ public class PlanItemController {
 	
 	@Inject
 	private PlanItemService itemService;
+	@Inject
+	private FurnitureDao furniDao;
+	@Inject
+	private ProductService proService;
+	@Inject
+	private BrandDao brandDao;
+
 	
-//	@Inject
-//	private Furniture furniture;
-	
-	/** 회원별 배치도 항목 리스트 */
-	@RequestMapping(value = "/{planId}/{planitemId}", method=RequestMethod.GET)
-	public String listAll(@PathVariable("planId") int planId, @PathVariable("planitemId") int planitemId, Model model, HttpServletRequest request) throws Exception {
+	/** 배치도 상세정보 조회 */
+	@RequestMapping(value = "/{planitemId}", method=RequestMethod.GET)
+	public String read(Model model, @PathVariable("planitemId") int planItemId, HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();   
 		Member member = (Member) session.getAttribute("login");
 		
-		List<PlanItem> itemList = itemService.listAll(planId, planitemId);
-		for (PlanItem items : itemList) {
-			logger.info(items);
+		// 치수, 평수
+		PlanItem planitemList = itemService.read(planItemId);
+		logger.info(planitemList);
+		
+		// 가구정보
+		List<Product> proList = proService.list();
+		for (Product product : proList) {
+			logger.info(product);
+		}
+		List<Furniture> furniList = furniDao.list(planItemId);
+		for (Furniture furni : furniList) {
+			logger.info(furni);
 		}
 		
+		// 쇼핑몰 링크
+		List<Brand> brandList = brandDao.list();
+		for (Brand brand : brandList) {
+			logger.info(brand);
+		}
 		
-		model.addAttribute("itemlist", itemList);
+		model.addAttribute("planitemlist", planitemList);
+		model.addAttribute("prolist", proList);
+		model.addAttribute("furnilist", furniList);
+		model.addAttribute("brandlist", brandList);
 		return "plan/plan-detail";
 	}
 
-	
 	/** 배치도 항목 삭제 */
-	@RequestMapping(value = "/{planId}/{planitemId}", method = RequestMethod.DELETE)
-	public String remove(@PathVariable("planId") int planId, @PathVariable("planitemId") int planitemId)throws Exception{
-		itemService.delete(planId, planitemId);
+	@RequestMapping(value = "/{planitemId}", method = RequestMethod.DELETE)
+	public String remove(@PathVariable("planitemId") int planitemId)throws Exception{
+		itemService.delete(planitemId);
 		return "redirect:/plan/plan-manage";	
 	}
+	
+	
+	/** 상세보기 */
+//	@RequestMapping(value="", method= RequestMethod.GET)
+//	public String read(Model model) {
+//		
+//		return null;
+//	}
+	
+	
 }

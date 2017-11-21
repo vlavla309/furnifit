@@ -15,13 +15,21 @@
 					 #{amount})
 	</insert>
 	
-	<!-- 회원별 주문할 리스트 -->
-	<select id="listAll" resultType="Orderitems" parameterType="int">
+	<!-- 주문내역 상세보기(orderitems)  -->
+	<select id="read" parameterType="int" resultType="Orderitems">
 		SELECT product_id AS "productId",
 			   order_id AS "orderId",
 			   amount
 		FROM   orderitems
 		WHERE  order_id = #{value}
+	</select>
+	
+	<!-- 회원별 주문할 리스트 -->
+	<select id="listAll" resultType="Orderitems">
+		SELECT product_id AS "productId",
+			   order_id AS "orderId",
+			   amount
+		FROM   orderitems
 	</select>
 
 	<!-- 가구의 수량 변경 -->

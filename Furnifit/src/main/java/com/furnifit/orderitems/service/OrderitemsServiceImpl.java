@@ -35,9 +35,15 @@ public class OrderitemsServiceImpl implements OrderitemsService {
 	
 	// 회원별 주문항목 리스트
 	@Override
-	public List<Orderitems> listAll(int orderId) throws Exception {
-		return dao.listAll(orderId);
+	public List<Orderitems> listAll() throws Exception {
+//		public List<Orderitems> listAll(int orderId) throws Exception {
+		return dao.listAll();
 	}
+	
+	@Override
+	public List<Orderitems> read(int orderId) throws Exception {
+		return dao.read(orderId);
+	} 
 	
 	// 가구 정보 상세보기
 //	@Override

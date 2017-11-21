@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.furnifit.common.web.Params;
-import com.furnifit.orderitems.domain.Orderitems;
 import com.furnifit.orders.domain.Orders;
 
 /**
@@ -36,23 +35,24 @@ public class MybatisOrdersDao implements OrdersDao {
 	}
 	
 	/** 게시글 리스트(+페이징) */
-//	@Override
-//	public List<Orders> listPage(int page) throws Exception {
-//		if (page <= 0) {
-//			page = 1;
-//		}
-//		page = (page - 1) * 10;
-//		return sqlSession.selectList(namespace + ".listPage", page);
-//	}
-	
 	@Override
-	public List<Orderitems> read(int orderId) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".read", orderId);
+	public List<Orders> listPage(int page) throws Exception {
+		if (page <= 0) {
+			page = 1;
+		}
+		page = (page - 1) * 10;
+		return sqlSession.selectList(NAMESPACE + ".listPage", page);
 	}
+	
 	
 	@Override
 	public List<Orders> price(int orderId) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".price", orderId);
+	}
+
+	@Override
+	public List<Orders> listParams(Params params) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".listParams", params);
 	}
 	
 //	@Override

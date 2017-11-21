@@ -1,5 +1,9 @@
 package com.furnifit.planitem.domain;
 
+/**
+ * @author 박보라
+ *
+ */
 public class PlanItem {
 	
 	private int planitemId;
@@ -11,9 +15,7 @@ public class PlanItem {
 	private String image;
 	private String name;
 	
-	
 	public PlanItem() {}
-
 
 	public PlanItem(int planitemId, int planId, int width, int height, int length, int acreage, String image, String name) {
 		this.planitemId = planitemId;
@@ -96,9 +98,6 @@ public class PlanItem {
 		this.name = name;
 	}
 
-	
-	
-
 	public String getImage() {
 		return image;
 	}
@@ -108,14 +107,10 @@ public class PlanItem {
 		this.image = image;
 	}
 
-
 	@Override
 	public String toString() {
 		return "PlanItem [planitemId=" + planitemId + ", planId=" + planId + ", width=" + width + ", height=" + height
 				+ ", length=" + length + ", acreage=" + acreage + ", image=" + image + ", name=" + name + "]";
 	}
-
-
-	
 
 }

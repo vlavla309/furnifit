@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.furnifit.common.web.PageBuilder;
+import com.furnifit.common.web.Params;
 import com.furnifit.member.domain.Coupon;
 import com.furnifit.member.domain.Member;
 import com.furnifit.member.service.CouponService;
@@ -53,24 +55,20 @@ public class OrdersController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String create(Orders orders, Orderitems orderitem) throws Exception {
 		logger.info("-------------------------------------------create 시작");
-//		ordersService.create(orders);
-		logger.info(orders);
-		logger.info(orderitem);
+		ordersService.create(orders);
+		itemService.create(orderitem);
 		return "redirect:/order/order-list";
 	}
+	
+	
 	
 	/** 주문내역 목록  */
 	@RequestMapping(value = "", method=RequestMethod.GET)
 	public String listAll(Model model, HttpServletRequest request) throws Exception {
-//		public String listAll(@ModelAttribute("params") Params params, Model model, HttpServletRequest request) throws Exception {
-		
+//		public String listAll(Model model, HttpServletRequest request, Params params) throws Exception {
+	
 		HttpSession session = request.getSession();   
 		Member member = (Member) session.getAttribute("login");
-		
-		/*PageBuilder pageBuilder = new PageBuilder();
-		pageBuilder.setParams(params);
-		pageBuilder.setTotalPageCount(ordersService.listAll(member.getEmail());
-	*/
 		
 		List<Orders> orderList = ordersService.listAll(member.getEmail());
 		for (Orders orders : orderList) {
@@ -89,11 +87,37 @@ public class OrdersController {
 		
 		List<Coupon> couponList =  couponService.read(member.getEmail());
 		
+		
+		
+		//-----------------------------
+//		logger.info(params.toString());
+//		
+//		model.addAttribute("list", ordersService.listParams(params));
+//		PageBuilder pageBuilder = new PageBuilder();
+//		pageBuilder.setParams(params);
+//		pageBuilder.setTotalRowCount(131);
+//		
+//		model.addAttribute("pageBuilder", pageBuilder);
+		
+		/*String pageNo = request.getParameter("page");
+        if(pageNo==null) pageNo = "1";
+        int page = Integer.parseInt(pageNo);
+        
+        Params params = new Params(page, 10, 10);
+        PageBuilder pageBuilder = new PageBuilder(params);
+        pageBuilder.build();
+        
+        logger.info("params---------:" + params);
+        logger.info("pageBuilder---------:" + pageBuilder);
+        
+        model.addAttribute("pageBuilder", pageBuilder);*/
+		
+		
 		model.addAttribute("orderlist", orderList);
 		model.addAttribute("prolist", proList);
 		model.addAttribute("imglist", imgList);
 		model.addAttribute("couponlist", couponList);
-//		model.addAttribute("pageBuilder", pageBuilder);
+		
 		return "order/order-list";
 	}
 	
@@ -106,7 +130,7 @@ public class OrdersController {
 		HttpSession session = request.getSession();   
 		Member member = (Member) session.getAttribute("login");
 		
-		List<Orderitems> itemList = ordersService.read(orderId);
+		List<Orderitems> itemList = itemService.read(orderId);
 		for (Orderitems items : itemList) {
 			logger.info(items);
 		}
@@ -126,12 +150,23 @@ public class OrdersController {
 			logger.info(price);
 		}
 		
+		List<ProductImg> imgList = imgDao.list();
+		for (ProductImg productImg : imgList) {
+			logger.info(productImg);
+		}
+		
 		model.addAttribute("prolist", proList);
 		model.addAttribute("itemlist", itemList);
 		model.addAttribute("orderlist", orderList);
 		model.addAttribute("pricelist", priceList);
+		model.addAttribute("imglist", imgList);
 		
 		return "order/order-info";
 	}
 
 }
+//public String listAll(@ModelAttribute("params") Params params, Model model, HttpServletRequest request) throws Exception {
+/*PageBuilder pageBuilder = new PageBuilder();
+pageBuilder.setParams(params);
+pageBuilder.setTotalPageCount(ordersService.listAll(member.getEmail());
+*/
