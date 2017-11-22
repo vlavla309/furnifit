@@ -7,7 +7,8 @@
 	<!-- 주문 생성 -->
 	<insert id="create" parameterType="Orders">
 		<selectKey keyProperty="orderId" resultType="int" order="BEFORE">
-			select orders_seq.NEXTVAL FROM DUAL
+			SELECT orders_seq.nextval
+			FROM   DUAL
 		</selectKey>
 		INSERT INTO orders
 				    (order_id,
@@ -18,7 +19,7 @@
 					 #{price})
 	</insert>
 	
-	<!-- 회원별 주문할 리스트 -->
+	<!-- 주문목록 리스트 -->
 	<select id="listAll" parameterType="String" resultType="Orders">
 		SELECT order_id AS "orderId",
 			   email,
@@ -56,7 +57,7 @@
 	</select>
 	
 	
-	<!--  -->
+	<!-- 총합계 금액 반환 -->
 	<select id="price" parameterType="int" resultType="Orders">
 		SELECT order_id AS "orderId",
 			   email,

@@ -61,27 +61,29 @@ public class OrderitemsController {
 		for (Furniture furniture : list) {
 			logger.info(furniture);
 		}
+		model.addAttribute("itemlist", list);
 		
 		List<Product> product1 = proService.list();
 		for (Product product : product1) {
 			logger.info(product);
 		}
+		model.addAttribute("prolist", product1);	
 		
 		List<ProductImg> imgList = imgDao.list();
 		for (ProductImg productImg : imgList) {
 			logger.info(productImg);
 		}
-		
-		List<Coupon> couponList =  couponService.read(member.getEmail());
-		for (Coupon coupon : couponList) {
-			logger.info(coupon);
-		}
-		
-		model.addAttribute("itemlist", list);
-		model.addAttribute("prolist", product1);	
 		model.addAttribute("imglist", imgList);
-		model.addAttribute("couponlist", couponList);
 		
+		
+//		List<Coupon> couponList =  couponService.read(member.getEmail());
+//		for (Coupon coupon : couponList) {
+//			logger.info(coupon);
+//		}
+//		model.addAttribute("couponlist", couponList);		
+		
+		
+
 		return "order/order-write";
 	}
 	
