@@ -116,7 +116,7 @@
                   </div>
                   <div class="juicy">
                   <a href="${contextPath}/mypage/coupon" class="juicy"><img src="${rSrcPath}/images/coupon.png" class="img2"/></a>
-                  <a href="${pageContext.servletContext.contextPath}" class="juicy"><img src="${rSrcPath}/images/wishlist.png" class="img2"/></a>
+                  <a href="${contextPath}/wishlist" class="juicy"><img src="${rSrcPath}/images/wishlist.png" class="img2"/></a>
                   <a href="${pageContext.servletContext.contextPath}" data-toggle="modal" data-target="#myModal" class="juicy" id="modalmodal"><img src="${rSrcPath}/images/withdraw.png" class="img2"/></a>
                   </div>
                   <!-- Modal -->

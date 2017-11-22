@@ -72,8 +72,10 @@ li { list-style-type: none; }
           <div class="text-center" id="box">
            <c:forEach items="${orderlist}" var="list">
             <dl>
-              <dt class="accordion">${list.orderId} / ${list.email}님의 주문목록 / ${list.regdate}
-              <div class="text-right"><button type="submit" class="btn btn-default text-right"><a href="order/${list.orderId}">상세보기</a></button></div></dt>
+              <c:if test="${list.email == login.email}">
+                <dt class="accordion">${list.orderId} / ${list.email}님의 주문목록 / ${list.regdate}
+                <div class="text-right"><button type="submit" class="btn btn-default text-right"><a href="order/${list.orderId}">상세보기</a></button></div></dt>
+              </c:if>
             </dl>
             </c:forEach>
           </div>

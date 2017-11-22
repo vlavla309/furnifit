@@ -14,12 +14,6 @@ public class CouponServiceImpl implements CouponService {
 	
 	@Inject
 	private CouponDao daodao;
-/*	
-	@Override
-	public List<Coupon> read(String email) throws Exception {
-		return daodao.read(email);
-	}
-*/
 	
 	@Override
 	public List<Coupon> read(String email) throws Exception {
@@ -31,10 +25,9 @@ public class CouponServiceImpl implements CouponService {
 		return daodao.readAvailable(email);
 	}
 
-	
 	@Override
-	public List<Coupon> couponAvailable() throws Exception {
-		return daodao.couponAvailable();
+	public void couponUpdate(Coupon coupon) throws Exception {
+		daodao.couponUpdate(coupon);
 	}
 	
 }

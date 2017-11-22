@@ -1,6 +1,5 @@
 package com.furnifit.member.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,13 +16,6 @@ public class MybatisCouponDao implements CouponDao {
 
 	@Inject
 	private SqlSession sqlSession;
-/*
-	@Override
-	public List<Coupon> read(String email) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".read", email);
-	}
-	*/
-	
 
 	@Override
 	public List<Coupon> read(String email) throws Exception {
@@ -31,16 +23,13 @@ public class MybatisCouponDao implements CouponDao {
 		
 	}
 
-
 	@Override
 	public List<Coupon> readAvailable(String email) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".readAvailable", email);
 	}
 
-
 	@Override
-	public List<Coupon> couponAvailable() throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".couponAvailable");
+	public void couponUpdate(Coupon coupon) throws Exception {
+		sqlSession.update(NAMESPACE + ".couponUpdate", coupon);
 	}
-	
 }

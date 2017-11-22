@@ -34,7 +34,7 @@ public class MybatisOrderitemsDao implements OrderitemsDao {
 	
 	/**
 	 * 주문서 리스트 조회
-	 * @param 
+	 * @param email
 	 * @return List<Orderitems>
 	 */
 	@Override

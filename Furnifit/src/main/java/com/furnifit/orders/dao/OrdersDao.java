@@ -47,5 +47,5 @@ public interface OrdersDao {
 	 * @return List<Orders>
 	 */
 	public List<Orders> price(int orderId) throws Exception;
-	
+
 }

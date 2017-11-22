@@ -81,9 +81,11 @@ $(function() {
           	sum = Math.floor(sum +  parseInt($(price[i]).text()) * ((100 - rate) * 0.01));
           }  
           $("#total").text(sum + "원");
+          $("input[name=price]").val(sum);
  	   }else{
    		 $("#coupon").text("적용된 쿠폰이 없습니다.");
    		 totalSum();
+   		 $("input[name=price]").val(sum);
    	   }
    }); 
     
@@ -119,34 +121,6 @@ $(function() {
         }
       })
     })
-    
- 	// 주문
-    /* $(document).on("click", "#goOrder", function(event){  
-    	event.preventDefault(); 
-    	var productid = $(this).attr('value');
-    	
-    	var pPrice = $(this).parent().siblings().filter("p.price");
-        var price = pPrice.html();
-        var priceNum = price.split("원")[0];
-    	
-    	
-    	
-    	$.ajax({
-        url : "cart_create.leaf",
-        data : {
-          ''	
-        	
-          'product_code' : $(this).attr('value'),
-          'ctm_no' : "${cookie.customer.value}",
-          'cart_quantity' : 1,
-          'cart_price' : priceNum
-        },
-        success : function(request) {
-          console.log(request);
-          alert("주문이 완료되었습니다.");
-        }
-      });
-    }); */
     
 });
     
@@ -217,7 +191,7 @@ $(function() {
               <div class="form-group">
                 <label for="firstname">쿠폰 상세정보&nbsp;</label>
                 <select name=sale id=sel>
-                  <option>---쿠폰 선택---</option>
+                  <option selected>---쿠폰 선택---</option>
                    <c:forEach items="${couponlist}" var="coupon">
                       <option value="${coupon.discountRate}" class="rate" name="discountRate"> ${coupon.discountRate}% 할인쿠폰</option>
                    </c:forEach>

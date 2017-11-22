@@ -11,20 +11,24 @@
     	WHERE e.email = #{email}
     </select>
     
-    <select id="readAvailable" parameterType="String" resultType="coupon">
-    	SELECT e.serial, c.discount_rate*100 AS discountRate, TO_CHAR(e.expiration_date, 'YYYY-MM-DD') AS expirationDate , e.status
-    	FROM coupones c JOIN offer_coupones e
-    	ON c.coupone_id = e.coupone_id
-    	WHERE e.email = #{email} AND e.status = "사용가능"
-    </select>
-	
-	
-	<select id="couponAvailable" resultType="coupon">
+    <select id="readAvailable" parameterType="String" resultType="Coupon">
     	SELECT e.serial, c.discount_rate*100 AS discountRate, TO_CHAR(e.expiration_date, 'YYYY-MM-DD') AS expirationDate , e.status
     	FROM   coupones c JOIN offer_coupones e
     	ON     c.coupone_id = e.coupone_id
     	WHERE  e.status = '사용가능'
-    	AND    e.expiration_date >= SYSDATE
+    	AND    e.email = #{email}
+    	AND    e.expiration_date > SYSDATE-1
     	ORDER BY c.discount_rate ASC
     </select>
+	
+   <!-- 사용된 쿠폰 used_date, status 변경 -->
+   <update id="couponUpdate" parameterType="Coupon">
+       	UPDATE offer_coupones
+     	<set>
+			<if test="used_date != null">used_date = #{userDate},</if>
+			<if test="status != null">status = #{status},</if>
+		</set>
+		WHERE serial = #{serial}
+   </update>
+	
 </mapper>
