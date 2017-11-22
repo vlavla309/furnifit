@@ -27,10 +27,19 @@ public interface OrdersDao {
 //	public List<Orders> listAll(String email, Params params) throws Exception;
 	
 	
-	/** 게시글 리스트(+페이징) */
-	public List<Orders> listPage(int page)throws Exception;
-	public List<Orders> listParams(Params params)throws Exception;
+	/**
+	 * 주문목록 리스트(+페이징)
+	 * @param params
+	 * @return List<Orders>
+	 */
+	public List<Orders> listByParams(Params params) throws Exception;
 	
+	/**
+	 * 출력페이지 계산을 위한 행의 수 반환 
+	 * @param 
+	 * @return int
+	 */
+	public int pageCount();
 	
 	public List<Orders> price(int orderId) throws Exception;
 }

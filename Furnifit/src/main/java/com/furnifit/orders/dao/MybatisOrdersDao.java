@@ -35,14 +35,14 @@ public class MybatisOrdersDao implements OrdersDao {
 	}
 	
 	/** 게시글 리스트(+페이징) */
-	@Override
+	/*@Override
 	public List<Orders> listPage(int page) throws Exception {
 		if (page <= 0) {
 			page = 1;
 		}
 		page = (page - 1) * 10;
 		return sqlSession.selectList(NAMESPACE + ".listPage", page);
-	}
+	}*/
 	
 	
 	@Override
@@ -51,9 +51,23 @@ public class MybatisOrdersDao implements OrdersDao {
 	}
 
 	@Override
+	public List<Orders> listByParams(Params params) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".listByParams", params);
+	}
+
+	@Override
+	public int pageCount() {
+		return sqlSession.selectOne(NAMESPACE + ".pageCount");
+	}
+
+	
+	
+	
+	
+	/*@Override
 	public List<Orders> listParams(Params params) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".listParams", params);
-	}
+	}*/
 	
 //	@Override
 //	public void delete(int orderId) throws Exception {

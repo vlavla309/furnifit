@@ -82,8 +82,27 @@ li { list-style-type: none; }
 
       <div class="box">
         <div class="box-footer">
-        
-            
+          
+           <!-- Paging -->
+      		<div class="text-center">
+			   <ul class="pagination">
+				<c:if test="${pageBuilder.isShowPrevious()}">
+					<li><a href="${pageBuilder.getQueryString(pageBuilder.currentStartPage -1)}">&laquo;</a></li>
+				</c:if>
+
+				<c:forEach begin="${pageBuilder.currentStartPage}" end="${pageBuilder.currentEndPage}" var="pageList">
+					<li
+						<c:out value="${pageBuilder.params.page == pageList?'class =active':''}"/>>
+						<a href="${pageBuilder.getQueryString(pageList)}">${pageList}</a>
+					</li>
+				</c:forEach>
+
+				<c:if test="${pageBuilder.isShowNext()}">
+					<li><a href="${pageBuilder.getQueryString(pageBuilder.currentEndPage +1)}">&raquo;</a></li>
+				</c:if>
+   		     </ul>
+  		   </div>
+          <!-- /.Paging --> 
           
         </div>
       </div>

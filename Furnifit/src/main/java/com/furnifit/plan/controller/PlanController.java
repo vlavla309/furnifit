@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.furnifit.common.web.PageBuilder;
+import com.furnifit.common.web.Params;
 import com.furnifit.member.domain.Coupon;
 import com.furnifit.member.domain.Member;
 import com.furnifit.member.service.CouponService;
@@ -30,6 +32,9 @@ import com.furnifit.planitem.service.PlanItemService;
 @RequestMapping("/mypage/planlist")
 public class PlanController {
 	
+	private final int PAGE_SIZE = 10;  /** 페이지에 출력할 행의 수 */
+	private final int PAGI_SIZE = 10;  /** 페이지에 출력할 페이지 수 (<< >> 생성)*/
+	
 	Logger logger = Logger.getLogger(PlanController.class);
 	
 	@Inject
@@ -41,15 +46,29 @@ public class PlanController {
 	
 	/** 회원별 배치도목록 리스트 */
 	@RequestMapping(value = "", method=RequestMethod.GET)
-	public String listAll(Model model, HttpServletRequest request) throws Exception {
+	public String listAll(Model model, HttpServletRequest request, Params params) throws Exception {
+		params.setPageSize(PAGE_SIZE);
+		params.setPagiSize(PAGI_SIZE);
 		
 		HttpSession session = request.getSession();   
 		Member member = (Member) session.getAttribute("login");
 		
-		List<Plan> planlist = planService.listAll(member.getEmail());
+		int totalRowCount = planService.pageCount();
+		
+		List<Plan> planlist = planService.listByParams(params);
 		for (Plan plan : planlist) {
 			logger.info(plan);
 		}
+		model.addAttribute("planlist", planlist);
+		
+		PageBuilder pageBuilder = new PageBuilder(params, totalRowCount);
+		pageBuilder.build();
+		model.addAttribute("pageBuilder", pageBuilder);
+		
+		/*List<Plan> planlist = planService.listAll(member.getEmail());
+		for (Plan plan : planlist) {
+			logger.info(plan);
+		}*/
 		
 		List<PlanItem> itemList = itemService.listAll();
 		for (PlanItem planItem : itemList) {
@@ -58,7 +77,7 @@ public class PlanController {
 		
 		List<Coupon> couponList =  couponService.read(member.getEmail());
 		
-		model.addAttribute("planlist", planlist);
+		
 		model.addAttribute("itemlist", itemList);
 		model.addAttribute("couponlist", couponList);
 		

@@ -48,10 +48,10 @@ public class OrdersServiceImpl implements OrdersService {
 	
 	
 	/** 게시글 리스트(+페이징) */
-	@Override
+	/*@Override
 	public List<Orders> listPage(int page) throws Exception {
 		return dao.listPage(page);
-	}
+	}*/
 	
 	@Override
 	public List<Orders> price(int orderId) throws Exception {
@@ -59,8 +59,13 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	@Override
-	public List<Orders> listParams(Params params) throws Exception {
-		return dao.listParams(params);
+	public List<Orders> listByParams(Params params) throws Exception {
+		return dao.listByParams(params);
+	}
+
+	@Override
+	public int pageCount() {
+		return dao.pageCount();
 	}
 	
 //	@Override
