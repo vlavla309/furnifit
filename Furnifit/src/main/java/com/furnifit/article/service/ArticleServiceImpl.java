@@ -139,8 +139,17 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public List<Article> listByParams(ArticleParams params) {
+		
 		return articleDao.listByParams(params);
 	}
+
+	@Override
+	public int listSearchCount(ArticleParams params) {
+		return articleDao.listSearchCount(params);
+		
+	}
+	
+	
 
 	
 	

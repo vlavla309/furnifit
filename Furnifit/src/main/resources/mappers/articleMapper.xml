@@ -113,7 +113,7 @@
 			<if test="content != null">content = #{content},</if>
 			<if test="viewcnt != null">viewcnt = #{viewcnt}</if>
 		</set>
-		WHERE article_id = #{article_id}
+		WHERE article_id = #{articleId}
    </update>
    
    
@@ -132,7 +132,8 @@
 			   viewcnt,
 			   regdate,
 			   title,
-			   content
+			   content,
+			   image AS "planitemImg"
 		FROM (SELECT CEIL(rownum / #{pageSize}) request_page,
 						article_id,
 			 		    email,
@@ -141,15 +142,17 @@
 			 		    viewcnt,
 					    regdate,
 			   		    title,
-			   		    content
+			   		    content,
+			   		    image
 						FROM (SELECT article_id,
 									 email,
 			  						 a.planitem_id,
 			  		   				 likecnt,
 			 		 			     viewcnt,
-					   				 regdate,
+					   				 To_char(regdate, 'YYYY-MM-DD') regdate,
 			   		   				 title,
-			   		   				 content
+			   		   				 content,
+			   		   				 p.image 
 									 FROM articles a, 
 									 	  planitems p
 									 <where>
@@ -157,14 +160,47 @@
 									   <choose>
          							   <when test="acreage == 'xs'"> and acreage BETWEEN 1 and 2 </when>
          							   <when test="acreage == 'ss'"> and acreage BETWEEN 3 and 4 </when>
-         							   <when test="acreage == 'mm'"> and (acreage BETWEEN 5 and 7) </when>
+         							   <when test="acreage == 'mm'"> and acreage BETWEEN 5 and 7 </when>
          							   <when test="acreage == 'll'"> and acreage BETWEEN 8 and 9 </when>
          							   <when test="acreage =='xl'">  and acreage >= 10 </when>
-         							   </choose>
-         							   </where>								 
-									 ORDER BY regdate DESC))
+         							   </choose> 
+         							   </where>        							   								 
+									 ORDER BY 									 
+									 <choose>
+									 <when test="sort == 'like'"> likecnt DESC </when>
+									 <when test="sort == 'view'"> viewcnt DESC </when>
+									 <otherwise> regdate DESC</otherwise>									 
+									 </choose> ))									 
 									 WHERE request_page = #{page}
 	</select>
 	
+			
+  	<!-- 검색 데이터 개수 -->
+  	<select id="listSearchCount" parameterType="ArticleParams" resultType="int">
+  		SELECT count(article_id)
+  		FROM articles a, planitems p
+  		<where>
+		and  a.planitem_id = p.planitem_id
+		and article_id > 0
+		<choose>
+        <when test="acreage == 'xs'"> and acreage BETWEEN 1 and 2 </when>
+        <when test="acreage == 'ss'"> and acreage BETWEEN 3 and 4 </when>
+        <when test="acreage == 'mm'"> and acreage BETWEEN 5 and 7 </when>
+        <when test="acreage == 'll'"> and acreage BETWEEN 8 and 9 </when>
+        <when test="acreage =='xl'">  and acreage >= 10 </when>
+        </choose> 
+        </where>        							   								 
+		ORDER BY 									 
+		<choose>
+		<when test="sort == 'like'"> likecnt DESC </when>
+		<when test="sort == 'view'"> viewcnt DESC </when>
+		<otherwise> regdate DESC</otherwise>									 
+		</choose> 									 
+	
+  		
+  	</select>
+	
+	
+
 	
 </mapper>

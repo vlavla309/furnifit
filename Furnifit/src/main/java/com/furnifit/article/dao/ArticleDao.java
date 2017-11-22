@@ -97,6 +97,13 @@ public interface ArticleDao {
 	 */
 	public List<Article> listByParams(ArticleParams params);
 	
+	/**
+	 * 검색시 해당 게시글수 가져오기
+	 * @param params
+	 * @return
+	 */
+	public int listSearchCount(ArticleParams params);
+	
 	
 
 }

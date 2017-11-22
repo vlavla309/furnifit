@@ -149,11 +149,14 @@ width: 60px;
 height: 29px; 
 font-size: 9pt
 }
+
+
 .articleImg{
 width: 450px;
 margin: auto;
 display: block;
 }
+
 
 .articleImg img{
 width : 100%;
@@ -241,12 +244,14 @@ height: auto;
                 <br>
 
                 
-                  <div class="row" style="margin-left: 26%">
-                <div style="border: 1px ; float: left; width: 400px;  height: 260px; border-color: #B40404; padding: 10px; margin: 0 auto;">
-                  <img src="images/plan.PNG" width="105%"  alt="" />
-                </div>
+                     
+        <br>
+        <br>
+                   <div class="planimgDiv" >
+        <img src="${rSrcPath }/${planItem.image}" style="width:100%;"  alt="" />
+                    </div>
+                 
          
-               </div> 
   
   <!-- 자세히보기-가구목록  -->
 <br>
