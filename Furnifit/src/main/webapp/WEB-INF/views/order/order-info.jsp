@@ -59,7 +59,7 @@
               <c:forEach items="${pricelist}" var="price">
                 <tr>
                   <th colspan="10" class="text-center" style="color: red;"><h3>총 합계</h3></th>
-                  <th colspan="2" class="text-left"><span id="total"><h3>${price.price}</h3></span></th>
+                  <th colspan="2" class="text-left"><span id="total"><h3>${price.price}원</h3></span></th>
                 </tr>
                 </c:forEach>
               </tfoot>

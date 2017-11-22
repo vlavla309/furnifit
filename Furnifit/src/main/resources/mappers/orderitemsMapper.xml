@@ -7,8 +7,8 @@
 	<!-- 주문항목 생성 -->
 	<insert id="create" parameterType="Orderitems">
 		INSERT INTO orderitems
-					(product_id
-					 order_id
+					(product_id,
+					 order_id,
 				 	 amount)
 		VALUES 		(#{productId},
 					 #{orderId},
