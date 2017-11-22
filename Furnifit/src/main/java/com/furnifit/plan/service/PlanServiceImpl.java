@@ -22,7 +22,7 @@ public class PlanServiceImpl implements PlanService {
 	private PlanDao dao;
 	
 	/**
-	 * 회원별 배치도 목록 리스트
+	 * 배치도 목록 리스트
 	 * @param email
 	 * @return List<Plan>
 	 */

@@ -54,7 +54,7 @@ public class OrdersController {
 	private ProductImageDao imgDao;
 	
 	
-	/** 주문생성 */
+	/** 주문 생성 */
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String create(Orders orders, Orderitems orderitem) throws Exception {
 		logger.info("-------------------------------------------create 시작");
@@ -64,8 +64,7 @@ public class OrdersController {
 	}
 	
 	
-	
-	/** 주문내역 목록  */
+	/** 주문목록 리스트  */
 	@RequestMapping(value = "", method=RequestMethod.GET)
 	public String listAll(Model model, HttpServletRequest request, Params params) throws Exception {
 		params.setPageSize(PAGE_SIZE);
@@ -106,10 +105,9 @@ public class OrdersController {
 		
 		return "order/order-list";
 	}
+
 	
-	
-	
-	/** 주문내역 상세보기  */
+	/** 주문항목 상세보기  */
 	@RequestMapping(value ="/{orderId}", method=RequestMethod.GET)
 	public String read(@PathVariable("orderId") int orderId, Model model, HttpServletRequest request, Params params) throws Exception {
 		
@@ -126,16 +124,11 @@ public class OrdersController {
 			logger.info(product);
 		}
 		
-		
 		List<Orders> orderList = ordersService.listByParams(params);
 		for (Orders orders : orderList) {
 			logger.info(orders);
 		}
 		model.addAttribute("orderlist", orderList);
-		/*List<Orders> orderList = ordersService.listAll(member.getEmail());
-		for (Orders orders : orderList) {
-			logger.info(orders);
-		}*/
 		
 		List<Orders> priceList = ordersService.price(orderId);
 		for (Orders price : priceList) {

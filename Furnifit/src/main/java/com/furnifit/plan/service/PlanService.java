@@ -13,7 +13,7 @@ import com.furnifit.plan.domain.Plan;
 public interface PlanService {
 	
 	/**
-	 * 회원별 배치도 목록 리스트
+	 * 배치도 목록 리스트
 	 * @param email
 	 * @return List<Plan>
 	 */
@@ -32,4 +32,5 @@ public interface PlanService {
 	 * @return int
 	 */
 	public int pageCount();
+	
 }

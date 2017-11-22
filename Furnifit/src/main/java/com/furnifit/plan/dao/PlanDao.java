@@ -14,7 +14,7 @@ import com.furnifit.plan.domain.Plan;
 public interface PlanDao {
 	
 	/**
-	 * 회원별 배치도목록 리스트
+	 * 배치도목록 리스트
 	 * @param email
 	 * @return List<Plan>
 	 */

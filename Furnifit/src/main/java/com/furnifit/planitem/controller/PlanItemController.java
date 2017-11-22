@@ -18,9 +18,6 @@ import com.furnifit.brand.doamin.Brand;
 import com.furnifit.furniture.dao.FurnitureDao;
 import com.furnifit.furniture.domain.Furniture;
 import com.furnifit.member.domain.Member;
-import com.furnifit.orderitems.dao.OrderitemsDao;
-import com.furnifit.orderitems.domain.Orderitems;
-import com.furnifit.orderitems.service.OrderitemsService;
 import com.furnifit.planitem.domain.PlanItem;
 import com.furnifit.planitem.service.PlanItemService;
 import com.furnifit.product.domain.Product;
@@ -88,14 +85,4 @@ public class PlanItemController {
 		itemService.delete(planitemId);
 		return "redirect:/plan/plan-manage";	
 	}
-	
-	
-	/** 상세보기 */
-//	@RequestMapping(value="", method= RequestMethod.GET)
-//	public String read(Model model) {
-//		
-//		return null;
-//	}
-	
-	
 }

@@ -25,7 +25,7 @@ public class MybatisPlanDao implements PlanDao {
 
 	
 	/**
-	 * 회원별 배치도 목록 리스트
+	 * 배치도 목록 리스트
 	 * @param email
 	 * @return List<Plan>
 	 */
@@ -53,5 +53,4 @@ public class MybatisPlanDao implements PlanDao {
 	public int pageCount() {
 		return sqlSession.selectOne(NAMESPACE + ".pageCount");
 	}
-	
 }
