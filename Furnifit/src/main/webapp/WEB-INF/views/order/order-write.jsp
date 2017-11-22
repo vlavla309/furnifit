@@ -219,7 +219,7 @@ $(function() {
                 <select name=sale id=sel>
                   <option>---쿠폰 선택---</option>
                    <c:forEach items="${couponlist}" var="coupon">
-                      <option value="${coupon.discountRate}" class="rate"> ${coupon.discountRate}% 할인쿠폰</option>
+                      <option value="${coupon.discountRate}" class="rate" name="discountRate"> ${coupon.discountRate}% 할인쿠폰</option>
                    </c:forEach>
                 </select><br><br>
                 <div class="box coupon">

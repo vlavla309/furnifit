@@ -63,7 +63,9 @@ public class OrderitemsController {
 		List<Furniture> list = furniDao.list(planitemId);
 		List<Product> product1 = proService.list();
 		List<ProductImg> imgList = imgDao.list();
-		List<Coupon> couponList =  couponService.read(member.getEmail());
+//		List<Coupon> couponList =  couponService.read(member.getEmail());
+
+		List<Coupon> couponList =  couponService.couponAvailable();
 		
 		model.addAttribute("prolist", product1);	
 		model.addAttribute("itemlist", list);

@@ -18,4 +18,13 @@
     	WHERE e.email = #{email} AND e.status = "사용가능"
     </select>
 	
+	
+	<select id="couponAvailable" resultType="coupon">
+    	SELECT e.serial, c.discount_rate*100 AS discountRate, TO_CHAR(e.expiration_date, 'YYYY-MM-DD') AS expirationDate , e.status
+    	FROM   coupones c JOIN offer_coupones e
+    	ON     c.coupone_id = e.coupone_id
+    	WHERE  e.status = '사용가능'
+    	AND    e.expiration_date >= SYSDATE
+    	ORDER BY c.discount_rate ASC
+    </select>
 </mapper>
