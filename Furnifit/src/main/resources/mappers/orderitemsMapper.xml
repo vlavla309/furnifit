@@ -4,7 +4,7 @@
                         
 <mapper namespace="com.furnifit.orderitems.dao.OrderitemsDao">
 	
-	<!-- 주문할 가구 등록 -->
+	<!-- 주문항목 생성 -->
 	<insert id="create" parameterType="Orderitems">
 		INSERT INTO orderitems
 					(product_id
@@ -15,7 +15,7 @@
 					 #{amount})
 	</insert>
 	
-	<!-- 주문내역 상세보기(orderitems)  -->
+	<!-- 주문항목 상세보기  -->
 	<select id="read" parameterType="int" resultType="Orderitems">
 		SELECT product_id AS "productId",
 			   order_id AS "orderId",
@@ -24,7 +24,7 @@
 		WHERE  order_id = #{value}
 	</select>
 	
-	<!-- 회원별 주문할 리스트 -->
+	<!-- 주문항목 리스트 -->
 	<select id="listAll" resultType="Orderitems">
 		SELECT product_id AS "productId",
 			   order_id AS "orderId",
@@ -32,13 +32,6 @@
 		FROM   orderitems
 	</select>
 
-	<!-- 가구의 수량 변경 -->
-	<update id="update" parameterType="Orderitems">
-		UPDATE orderitems
-		<set>
-	        <if test="amount != null">amount = #{amount}</if>
-	    </set>
-	</update>
 </mapper>
 
 

@@ -120,16 +120,36 @@ $(function() {
     })
     
  	// 주문
-    $(document).on("click", "#goOrder", function(event){  
+    /* $(document).on("click", "#goOrder", function(event){  
     	event.preventDefault(); 
     	var productid = $(this).attr('value');
-    	//alert(productid)
     	
-    	//alert("주문이 완료되었습니다.");
-    });
+    	var pPrice = $(this).parent().siblings().filter("p.price");
+        var price = pPrice.html();
+        var priceNum = price.split("원")[0];
+    	
+    	
+    	
+    	$.ajax({
+        url : "cart_create.leaf",
+        data : {
+          ''	
+        	
+          'product_code' : $(this).attr('value'),
+          'ctm_no' : "${cookie.customer.value}",
+          'cart_quantity' : 1,
+          'cart_price' : priceNum
+        },
+        success : function(request) {
+          console.log(request);
+          alert("주문이 완료되었습니다.");
+        }
+      });
+    }); */
     
 });
-
+    
+    
 </script>
 
 
@@ -197,9 +217,7 @@ $(function() {
                 <label for="firstname">쿠폰 상세정보&nbsp;</label>
                 <select name=sale id=sel>
                   <option>---쿠폰 선택---</option>
-                 <c:forEach items="${couponlist}" var="coupon">
-                    <option value="${coupon.discountRate}" class="rate"> ${coupon.discountRate}% 할인쿠폰</option>
-                 </c:forEach>
+                 
                 </select><br><br>
                 <div class="box coupon">
                   <div class="table-responsive" style="margin-left: 20px">
