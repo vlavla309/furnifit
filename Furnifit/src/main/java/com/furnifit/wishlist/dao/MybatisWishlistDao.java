@@ -39,8 +39,8 @@ private static final String namespace = "com.furnifit.wishlist.dao.WishlistDao";
 	}
 
 	@Override
-	public List<Wishlist> userwishlist(Map<String, String> map) {
-		return sqlsession.selectList(namespace+".userwishlist",map);
+	public List<Wishlist> userwishlist(String email) {
+		return sqlsession.selectList(namespace+".userwishlist",email);
 	}
 
 }

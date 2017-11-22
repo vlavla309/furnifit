@@ -40,8 +40,8 @@ public class WishlistServiceImpl implements WishlistService {
 	}
 
 	@Override
-	public List<Wishlist> userwishlist(Map<String, String> map) {
-		return wishdao.userwishlist(map);
+	public List<Wishlist> userwishlist(String email) {
+		return wishdao.userwishlist(email);
 	}
 
 }

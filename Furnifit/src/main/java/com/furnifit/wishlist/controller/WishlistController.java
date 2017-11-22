@@ -1,6 +1,7 @@
 package com.furnifit.wishlist.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -10,11 +11,13 @@ import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.furnifit.member.domain.Member;
+import com.furnifit.wishlist.domain.Wishlist;
 import com.furnifit.wishlist.service.WishlistService;
 
 /**
@@ -60,6 +63,21 @@ public class WishlistController {
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		return entity;
+	}
+	
+	@RequestMapping(value="/mypage/wishlist", method=RequestMethod.GET)
+	public String mypagewishlist(Model model, HttpSession session) {
+		Member member = (Member) session.getAttribute("login");
+		List<Wishlist> wishlist = wishlistservice.userwishlist(member.getEmail());
+		
+		for (Wishlist wishlist2 : wishlist) {
+			logger.info(wishlist2);
+		}
+		
+		model.addAttribute("wishlist",wishlist);
+		
+		return "mypage/wishlist";
+		
 	}
 
 }
