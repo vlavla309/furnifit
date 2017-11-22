@@ -83,6 +83,7 @@ public class ProductController {
 	public Map<String, Object> list(Model model, ProductParams params) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		logger.info(params);
 		
 		List<Product> list = productsrv.searchlist(params);
 		List<Wishlist> wishlist = wishsrv.read();

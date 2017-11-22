@@ -212,6 +212,7 @@ var find = false;
 		/* search버튼을 누르면, 검색! ajax는 추후에  */
 		$(document).on("click", ".btn-sm",function(event) {
 			$('input[name=keyword]').val($('#keyword').val())
+			$('#keyword').val("")
 			to_ajax();
 		});
 		
@@ -237,6 +238,7 @@ var find = false;
 				data : formData,
 				success : function(data) {
 					console.log(data)
+					$('input[name=keyword]').val("")
 					var html = template(data);
 					$('.information-grids').empty();
 					$('.information-grids').append(html);
@@ -301,7 +303,7 @@ var find = false;
 							<li>
 								<div class="col-md-2">
 									<select class="form-control input-sm target">
-										<option value="total">전체</option>
+										<option value="total">정렬</option>
 										<option value="height">높은가격순</option>
 										<option value="low">낮은가격순</option>
 										<option value="new">신상품순</option>
@@ -320,6 +322,7 @@ var find = false;
 					<th scope="row">카테고리</th>
 					<td>
 						<ul id = "category">
+							<li><a class="categorya">전체</a></li>
 							<c:forEach items="${categorylist}" var="category">
 								<li><a class="categorya">${category.name}</a></li>
 							</c:forEach>
@@ -379,8 +382,8 @@ var find = false;
 			</tbody>
 		</table>
 		<form name ="filter" id = "filter">
-			<input type="hidden" name = "sort" value="">
-			<input type="hidden" name = "keyword" value="">
+			<input type="hidden" value="" name = "sort" >
+			<input type="hidden" value="" name = "keyword" >
 			<input type="hidden" name = "category" value="" id="cate">
 			<input type="hidden" name = "minPrice" value="0" id="min">
 			<input type="hidden" name = "maxPrice" value="0" id="max">
