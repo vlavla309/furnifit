@@ -20,7 +20,6 @@ import com.furnifit.member.domain.Member;
 import com.furnifit.member.service.CouponService;
 import com.furnifit.orderitems.domain.Orderitems;
 import com.furnifit.orderitems.service.OrderitemsService;
-import com.furnifit.orders.service.OrdersService;
 import com.furnifit.product.domain.Product;
 import com.furnifit.product.service.ProductService;
 import com.furnifit.productimg.dao.ProductImageDao;
@@ -41,8 +40,6 @@ public class OrderitemsController {
 	@Inject
 	private OrderitemsService itemsService;
 	@Inject
-	private OrdersService ordersService;
-	@Inject
 	private ProductService proService;
 	@Inject
 	private ProductImageDao imgDao;
@@ -51,22 +48,8 @@ public class OrderitemsController {
 	@Inject
 	private FurnitureDao furniDao;
 	
-	
-	
-	/** 게시글 등록 */
-	/*@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public void registGET() throws Exception{
-		logger.info("regist get");
-	}
-	@RequestMapping(value ="/register", method = RequestMethod.POST)
-	public String registPOST(Board board, RedirectAttributes rttr)throws Exception{
-		logger.info("regist post" + board.toString());
-		boardService.create(board);
-		rttr.addFlashAttribute("msg", "SUCCESS");
-		
-		return "redirect:/sboard/list";
-	}*/
-	
+
+	/** 주문항목 생성 */
 	@RequestMapping(value = "/{planitemId}", method = RequestMethod.GET)
 	public String registGET(@PathVariable("planitemId") int planitemId, Model model,  HttpServletRequest request) throws Exception {
 		
@@ -111,9 +94,20 @@ public class OrderitemsController {
 	
 	
 	
-	
-	
-	/** 주문할 가구항목 리스트  */
+	/** 주문항목 생성 */
+	/*@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public void registGET() throws Exception{
+		logger.info("regist get");
+	}
+	@RequestMapping(value ="/register", method = RequestMethod.POST)
+	public String registPOST(Board board, RedirectAttributes rttr)throws Exception{
+		logger.info("regist post" + board.toString());
+		boardService.create(board);
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		return "redirect:/sboard/list";
+	}*/
+	/** 주문항목 리스트 조회  */
 	/*@RequestMapping(value = "", method=RequestMethod.GET)
 	public String listAll(Model model, HttpServletRequest request) throws Exception {
 		

@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.furnifit.common.web.PageBuilder;
+import com.furnifit.common.web.Params;
 import com.furnifit.member.domain.Coupon;
 import com.furnifit.member.domain.Member;
 import com.furnifit.member.service.CouponService;
@@ -30,6 +32,9 @@ import com.furnifit.planitem.service.PlanItemService;
 @RequestMapping("/mypage/planlist")
 public class PlanController {
 	
+	private final int PAGE_SIZE = 10;  /** 페이지에 출력할 행의 수 */
+	private final int PAGI_SIZE = 10;  /** 페이지에 출력할 페이지 수 (<< >> 생성)*/
+	
 	Logger logger = Logger.getLogger(PlanController.class);
 	
 	@Inject
@@ -39,17 +44,26 @@ public class PlanController {
 	@Inject
 	private CouponService couponService;
 	
-	/** 회원별 배치도목록 리스트 */
+	/** 배치도목록 리스트 */
 	@RequestMapping(value = "", method=RequestMethod.GET)
-	public String listAll(Model model, HttpServletRequest request) throws Exception {
+	public String listAll(Model model, HttpServletRequest request, Params params) throws Exception {
+		params.setPageSize(PAGE_SIZE);
+		params.setPagiSize(PAGI_SIZE);
 		
 		HttpSession session = request.getSession();   
 		Member member = (Member) session.getAttribute("login");
 		
-		List<Plan> planlist = planService.listAll(member.getEmail());
+		int totalRowCount = planService.pageCount();
+		
+		List<Plan> planlist = planService.listByParams(params);
 		for (Plan plan : planlist) {
 			logger.info(plan);
 		}
+		model.addAttribute("planlist", planlist);
+		
+		PageBuilder pageBuilder = new PageBuilder(params, totalRowCount);
+		pageBuilder.build();
+		model.addAttribute("pageBuilder", pageBuilder);
 		
 		List<PlanItem> itemList = itemService.listAll();
 		for (PlanItem planItem : itemList) {
@@ -58,7 +72,7 @@ public class PlanController {
 		
 		List<Coupon> couponList =  couponService.read(member.getEmail());
 		
-		model.addAttribute("planlist", planlist);
+		
 		model.addAttribute("itemlist", itemList);
 		model.addAttribute("couponlist", couponList);
 		
@@ -66,57 +80,7 @@ public class PlanController {
 	}
 
 	
-	/*@RequestMapping(value = "/{articleId}", method = RequestMethod.GET)
-	public String read(@PathVariable int articleId,Furniture furniture,Product product, Model model) throws Exception {
-		 Article article = service.read(articleId);
-		 //article.setViewcnt(article.getViewcnt()+1);
-		// service.artUpdate(article);
-		 
-		 PlanItem planItem = service.readPlanItem(article.getPlanitemId());
-		 
-		 List<Product> prdList = new ArrayList<Product>();
-		 List<Furniture> list = service.readFurniture(article.getPlanitemId());
-		 for (Furniture f : list) {
-			prdList.add(service.readProduct(f.getProductId()));
-		}
-		 
-		 model.addAttribute("product",prdList); 
-		 model.addAttribute("planItem", planItem);
-		 model.addAttribute("article", article);
-		 
-		 return "article/detail";
-
-	}*/
-	
-	/** 주문별 배치도 정보 상세보기 */
-	/*@RequestMapping(value="/{planId}/{planitemId}", method= RequestMethod.GET)
-	public String read(Model model, @PathVariable("planId") int planId, @PathVariable("planitemId") int planitemId) throws Exception {
-		
-		List<PlanItem> itemList = planService.read(planId, planitemId);
-		for (PlanItem items : itemList) {
-			logger.info(items);
-		}
-		model.addAttribute("itemlist", itemList);
-		
-		return "plan/plan-detail";
-	}*/
-	
-	
-	/** 게시글 삭제 */
-//	@RequestMapping(value = "/removePage", method = RequestMethod.POST)
-//	public String remove(@RequestParam("bno") int bno, SearchCriteria cri, RedirectAttributes rttr)throws Exception{
-//		boardService.delete(bno);
-//		rttr.addAttribute("page", cri.getPage());
-//		rttr.addAttribute("perPageNum", cri.getPerPageNum());
-//		rttr.addAttribute("searchType", cri.getSearchType());
-//		rttr.addAttribute("keyword", cri.getKeyword());
-//		rttr.addFlashAttribute("msg", "SUCCESS");
-//		
-//		return "redirect:/sboard/list";
-//	}
-	
-	
-//	/** 배치도 항목 삭제 */
+	/** 배치도 항목 삭제 */
 //	@RequestMapping(value = "/{planId}/{planitemId}", method = RequestMethod.DELETE)
 //	public String remove(@PathVariable("planId") int planId, @PathVariable("planitemId") int planitemId)throws Exception{
 //		itemService.delete(planId, planitemId);
