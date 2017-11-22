@@ -4,67 +4,56 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet" href="${rSrcPath}css/productList.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script id="entry-template" type="text/x-handlebars-template">
 			{{#list}}
 				<div class="col-md-4 information-grid pdbotton" data-wow-delay=".5s">
 					<div class="information-info">
-						{{#this.imgs}}
+						{{#each imgs}}
 							<div class="information-grid-img">
-								<c:if
-									test="${product.productId == img.productId  && img.orderNo==0}">
-									<a href="${contextPath}/product/${product.productId}"><img
-										src="${rSrcPath}/productimg/${img.path}/${img.name}" alt=""
+								{{#ifimg ../this.productId this.productId this.orderNo}}
+										<a href="${contextPath}/product/{{../this.productId}}"><img
+										src="${rSrcPath}/productimg/{{this.path}}/{{this.name}}" alt=""
 										class="img-responsive" style="height: 300px; width: auto" /></a>
-								</c:if>
+								{{/ifimg}}
 							</div>
-						{{/this.imgs}}
+						{{/each}}
 
 						<div class="information-grid-info">
 							<span class="badge badge-danger">Sale 40%</span>
 							<h4>
-								<a href="${contextPath}/product/${product.productId}">${product.name}</a>
+								<a href="${contextPath}/product/{{productId}}">{{name}}</a>
 							</h4>
 							<hr>
 							<p>
-								<strong>&#8361; ${product.price} </strong> <br>
-								${product.width} * ${product.length} * ${product.height} <small>(가로
+								<strong>&#8361; {{price}} </strong> <br>
+								{{width}} * {{length}} * {{height}} <small>(가로
 									* 세로 * 높이 mm)</small>
-							</p>
+							</p>  
 							<h3>
-								<c:choose>
-									<c:when test="${empty login || login eq null }">
-										<a href="${product.productId}" class="wishbtn"> <span
-											class="label label-danger"> <i class="fa fa-heart-o"
-												aria-hidden="true"></i></span>
-										</a>
-									</c:when>
-									<c:otherwise>
-										<!-- 로그인을 하면 -->
-										<c:set var="doneLoop" value="false" />
-										<c:set var="find" value="false" />
-										<c:forEach items="${wishlist}" var="wish" varStatus="status">
-											<c:if test="${not doneLoop}">
-												<c:if
-													test="${(wish.productId==product.productId)&&(wish.email==login.email)}">
-													<a href="${product.productId}" class="wishdeletebtn"> <span
-														class="label label-danger"> <i class="fa fa-heart"
-															aria-hidden="true"></i>
-													</span>
-													</a>
-													<c:set var="doneLoop" value="true" />
-													<c:set var="find" value="true" />
-												</c:if>
-											</c:if>
-										</c:forEach>
-										<c:if test="${not find}">
-											<a href="${product.productId}" class="wishbtn"> <span
-												class="label label-danger"> <i class="fa fa-heart-o"
-													aria-hidden="true"></i></span>
+							{{#iflogin "${login.email}"}}
+    							<a href="{{productId}}" class="wishbtn"> 
+									<span class="label label-danger"> 
+										<i class="fa fa-heart-o" aria-hidden="true"></i>
+									</span>
+								</a>
+							{{else}}
+								{{init}}
+								{{#each ../../wishlist}}
+									{{#ifDoneLoop}}
+										{{#ifwishlist ../../productId productId email}}
+											<a href="{{../productId}}" class="wishdeletebtn"> 
+												<span class="label label-danger"> <i class="fa fa-heart" aria-hidden="true"></i></span>
 											</a>
-										</c:if>
-									</c:otherwise>
-								</c:choose>
+										{{/ifwishlist}}
+									{{/ifDoneLoop}}
+								{{/each}}
+								{{#ifFind}}
+									<a href="{{../productId}}" class="wishbtn"> 
+										<span class="label label-danger"> <i class="fa fa-heart-o" aria-hidden="true"></i></span>
+									</a>
+								{{/ifFind}}
+							{{/iflogin}}
 							</h3>
 						</div>
 						</a>
@@ -73,8 +62,60 @@
 			 {{/list}}
 </script>
 
-
 <script>
+
+/* handlebar image if문 */
+Handlebars.registerHelper('ifimg', function(listProductId, imgProductId, orderNo, options) {
+	if(listProductId === imgProductId && orderNo ===0) {
+	    return options.fn(this);
+	  }
+	  return options.inverse(this);
+});
+
+/* handlebar wishlist에서 로그인한 사용자 구분하는 if문 */
+Handlebars.registerHelper('iflogin', function(login, options) {
+	if(login == null || login == "") {
+		return options.fn(this);
+	  }
+	  return options.inverse(this);
+	  
+});
+
+/* 로그인한 사용자마다 wishlist 구분 */
+Handlebars.registerHelper('ifwishlist', function(listProductId, ProductId, wishlistEmail, options) {
+	if(listProductId === ProductId && wishlistEmail === "${login.email}") {
+		doneLoop = true;
+		find = true;
+		return options.fn(this);
+	 }
+	  return options.inverse(this);
+	  
+});
+
+/* break */
+Handlebars.registerHelper('ifDoneLoop', function(options) {
+	if(!doneLoop) {
+	    return options.fn(this);
+	 }
+	  return options.inverse(this);
+	  
+});
+
+Handlebars.registerHelper('ifFind', function(options) {
+	if(!find) {
+	    return options.fn(this);
+	  }
+	  return options.inverse(this);
+});
+
+Handlebars.registerHelper('init', function(options) {
+	doneLoop = false;
+	find = false;
+    return ""; 
+});
+
+var doneLoop = false;
+var find = false;
 
 	$(function() {
 			
@@ -84,7 +125,7 @@
 			
 			$(this).children().first().toggleClass("colorUncheck");
 			$(this).attr('class','btn btn-default colordelete')
-			$('#filter').append("<input type =\"text\" name =\"colors\" value=\""+$(this).attr('id')+"\"/>")
+			$('#filter').append("<input type =\"hidden\" name =\"colors\" value=\""+$(this).attr('id')+"\"/>")
 			
 			to_ajax();
 			
@@ -105,7 +146,7 @@
 			event.preventDefault();
 			$(this).attr('class','branddelete')
 			$(this).toggleClass("paramActive");
-			$('#filter').append("<input type =\"text\" name =\"brands\" value=\""+$(this).text()+"\"/>")
+			$('#filter').append("<input type =\"hidden\" name =\"brands\" value=\""+$(this).text()+"\"/>")
 			to_ajax();
 		});
 
@@ -220,6 +261,9 @@
 					alert("추가성공")
 					wishbtn.attr('class', 'wishdeletebtn')
 					wishbtn.children().children().attr('class', 'fa fa-heart')
+				},
+				error : function(data){
+					console.log(data)
 				}
 			});
 		});
@@ -236,6 +280,9 @@
 					alert("삭제성공")
 					wishdeletebtn.attr('class', 'wishbtn')
 					wishdeletebtn.children().children().attr('class','fa fa-heart-o')
+				},
+				error : function(data){
+					console.log(data)
 				}
 			});
 		});
@@ -332,14 +379,14 @@
 			</tbody>
 		</table>
 		<form name ="filter" id = "filter">
-			<input type="text" name = "sort" value="">
-			<input type="text" name = "keyword" value="">
-			<input type="text" name = "category" value="" id="cate">
-			<input type="text" name = "minPrice" value="0" id="min">
-			<input type="text" name = "maxPrice" value="0" id="max">
-			<input type="text" name="maxWidth" value="0">
-			<input type="text" name="maxLength" value="0">
-			<input type="text" name="maxHeight" value="0">
+			<input type="hidden" name = "sort" value="">
+			<input type="hidden" name = "keyword" value="">
+			<input type="hidden" name = "category" value="" id="cate">
+			<input type="hidden" name = "minPrice" value="0" id="min">
+			<input type="hidden" name = "maxPrice" value="0" id="max">
+			<input type="hidden" name="maxWidth" value="0">
+			<input type="hidden" name="maxLength" value="0">
+			<input type="hidden" name="maxHeight" value="0">
 		</form>
 		<div class="information-grids agile-info" id="wrapper">
 			<c:forEach items="${list}" var="product">

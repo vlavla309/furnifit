@@ -98,10 +98,6 @@ public class ProductController {
 		
 		map.put("list", list);
 		map.put("wishlist",wishlist);
-		map.put("colorlist", colorlist);
-		map.put("brandlist", brandlist);
-		map.put("categorylist", categorylist);
-		map.put("result", "SUCCESS");
 		
 		
 		return map;
