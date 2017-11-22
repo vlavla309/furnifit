@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../include/header.jsp" %>
+
 <style>
 .align {
   text-align: center;
@@ -199,7 +200,8 @@ height: auto;
      <img id="popup_img">
     </div>
    
-   
+    <form id='registerForm' role="form">
+    <input type="hidden" value="${pageContext.servletContext.contextPath }" name="path" id ="path">
    <!-- blog -->
       <div class="blog"  style="background-color: white" >
          <!-- container -->
@@ -265,7 +267,7 @@ height: auto;
 <button class="accordion" class="col-md-2" style="margin-left: 60%; margin-top: 10px">&nbsp;자세히보기 ▼</button>
 
 
-<div class="bs-docs-example wow fadeInUp animated panel" data-wow-delay=".5s" style="background-color: white">
+    <div class="bs-docs-example wow fadeInUp animated panel" data-wow-delay=".5s" style="background-color: white">
             <table class="table table-hover">
               <thead>
                 <tr >
@@ -317,7 +319,7 @@ height: auto;
                     <c:forEach items="${article.images}" var="articleImg">
                    <div class="articleImg">
                    <li>
-  <span class="mailbox-attachment-icon has-img"><img src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"></span>
+  <span class="mailbox-attachment-icon has-img"><img na src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"></span>
   <div class="mailbox-attachment-info">
   <a href="${articleImg.path}/${articleImg.name}" 
      class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw  fa-times "></i></a>
@@ -346,7 +348,7 @@ height: auto;
           
           <!-- 글쓸곳 -->
               <div class="row" style="text-align: center;">
-                   <input type="text" value="${article.title }" name="title" class="artTitle" readonly="readonly">
+                   <input type="text" value="${article.title }" name="title" class="artTitle" >
               <p>
               <br>
               <br>
@@ -360,7 +362,7 @@ height: auto;
                 <br>     
   
   
-            <div style="margin-left: 40%">
+            <div style="margin-left: 40%" class="buttonList">
           
                 <button type="submit" class="button3" id="modifyBtn">저장하기</button>
                 <button type="reset" class="button3" id="cancelBtn">취소</button>
@@ -371,6 +373,7 @@ height: auto;
         
          </div>
       </div>
+      </form>
 <script>
 var acc = document.getElementsByClassName("accordion");
 var i;
@@ -389,32 +392,47 @@ for (i = 0; i < acc.length; i++) {
 </script> 
      
 <script>
-
+$(function(){
 
 $("#modifyBtn").on("click",function(){
+	 event.preventDefault();
+   
+	 var that = $("#registerForm");
+	 
+    var str = "";
+    $(".uploadedList .delbtn").each(
+        function(index) {
+          str += "<input type='hidden' name='files[" + index
+              + "]' value='" + $(this).attr("href")
+              + "'> ";
+    });
     
-    var title = $(".artTitle").val();
-    var content = $(".artContent").html();
+	 that.append(str);
+	 
+	 to_ajax();
+	 });
+	 
+	
+    function to_ajax(){
+    var formData = $("#registerForm").serialize();
+    console.log(formData);
     
-    
-    $.ajax({
-      type:'put',
+    $.ajax({ 
+      type:'post',
       url:'${contextPath}/article/${article.articleId}',
-      headers: { 
-            "Content-Type": "application/json",
-            "X-HTTP-Method-Override": "PUT" },
-      data:JSON.stringify({replytext:replytext}), 
-      dataType:'text', 
+      data: formData,  
       success:function(result){
         console.log("result: " + result);
         if(result == 'success'){
           alert("수정 되었습니다.");
-          getPage("/replies/"+bno+"/"+replyPage );
-        }
-    }});
+          location.href='${contextPath}/article/${article.articleId}';
+      		  }
+  		  }
+      });
+	}
+
+
 });
-
-
 
 
    
@@ -474,24 +492,7 @@ $("#modifyBtn").on("click",function(){
     });
   });
 
-  $("#registerForm").submit(
-      function(event) {
-        event.preventDefault();
 
-        var that = $(this);
-
-        var str = "";
-        $(".uploadedList .delbtn").each(
-            function(index) {
-              str += "<input type='hidden' name='files[" + index
-                  + "]' value='" + $(this).attr("href")
-                  + "'> ";
-            });
-
-        that.append(str);
-
-        that.get(0).submit();
-      });
 
 </script>
 <script>

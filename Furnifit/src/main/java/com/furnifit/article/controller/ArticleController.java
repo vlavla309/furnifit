@@ -83,15 +83,20 @@ public class ArticleController {
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String listAll(ArticleParams params,Model model) throws Exception {
+	public String listAll(ArticleParams params,Article article,Model model) throws Exception {
+		
 		params.setPageSize(PAGE_SIZE);
 		params.setPagiSize(PAGI_SIZE);
 		
-		List<Article> articles=service.listByParams(params);		
+		List<Article> articles = service.listByParams(params);
+		
 		model.addAttribute("list", articles);
+		
+		
 		
 		PageBuilder pb = new PageBuilder();
 		pb.setParams(params);
+		pb.setTotalRowCount(service.listSearchCount(params));
 		pb.build();
 		model.addAttribute("pb", pb);
 		 
@@ -162,19 +167,16 @@ public class ArticleController {
 
 	}
 	
-	@RequestMapping(value = "/{articleId}", method = {RequestMethod.PATCH, RequestMethod.PUT})
-	public ResponseEntity<String> update(Article article) throws Exception {
-		
-		ResponseEntity<String> entity = null;
-		try {
+	@RequestMapping(value = "/{articleId}", method = {RequestMethod.PATCH, RequestMethod.PUT, RequestMethod.POST})
+	@ResponseBody
+	public String update(Article article,  String content) throws Exception {
+			logger.info("되.." + content);
+			logger.info(article);
 			service.artUpdate(article);
 			
-			entity = new ResponseEntity<String>("success",HttpStatus.OK);
 			
-		} catch (Exception e) {
-			entity = new ResponseEntity<String>( "fail",HttpStatus.BAD_REQUEST);
-		}
-		 return entity;
+		
+		 return "success";
 	}
 
 	
