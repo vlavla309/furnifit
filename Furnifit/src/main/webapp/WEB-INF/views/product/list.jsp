@@ -62,14 +62,10 @@
 			 {{/list}}
 </script>
 
-
-
-
 <script>
 
 /* handlebar image if문 */
 Handlebars.registerHelper('ifimg', function(listProductId, imgProductId, orderNo, options) {
-	console.log("ifimg : "+listProductId, imgProductId, orderNo)
 	if(listProductId === imgProductId && orderNo ===0) {
 	    return options.fn(this);
 	  }
@@ -78,9 +74,7 @@ Handlebars.registerHelper('ifimg', function(listProductId, imgProductId, orderNo
 
 /* handlebar wishlist에서 로그인한 사용자 구분하는 if문 */
 Handlebars.registerHelper('iflogin', function(login, options) {
-	console.log("iflogin : " + login)
 	if(login == null || login == "") {
-	    console.log("로그인 아님!!");
 		return options.fn(this);
 	  }
 	  return options.inverse(this);
@@ -89,9 +83,7 @@ Handlebars.registerHelper('iflogin', function(login, options) {
 
 /* 로그인한 사용자마다 wishlist 구분 */
 Handlebars.registerHelper('ifwishlist', function(listProductId, ProductId, wishlistEmail, options) {
-	console.log(listProductId, ProductId, wishlistEmail);
 	if(listProductId === ProductId && wishlistEmail === "${login.email}") {
-		console.log("ifwishlist 성공? 제발------listProductId : "+ listProductId+" "+ ProductId+" : "+ wishlistEmail)
 		doneLoop = true;
 		find = true;
 		return options.fn(this);
@@ -102,7 +94,6 @@ Handlebars.registerHelper('ifwishlist', function(listProductId, ProductId, wishl
 
 /* break */
 Handlebars.registerHelper('ifDoneLoop', function(options) {
-	console.log("ifDoneLoop --> doneLoop :" + doneLoop)
 	if(!doneLoop) {
 	    return options.fn(this);
 	 }
@@ -111,7 +102,6 @@ Handlebars.registerHelper('ifDoneLoop', function(options) {
 });
 
 Handlebars.registerHelper('ifFind', function(options) {
-	console.log("ifFind --> find : " + find)
 	if(!find) {
 	    return options.fn(this);
 	  }
@@ -135,7 +125,7 @@ var find = false;
 			
 			$(this).children().first().toggleClass("colorUncheck");
 			$(this).attr('class','btn btn-default colordelete')
-			$('#filter').append("<input type =\"text\" name =\"colors\" value=\""+$(this).attr('id')+"\"/>")
+			$('#filter').append("<input type =\"hidden\" name =\"colors\" value=\""+$(this).attr('id')+"\"/>")
 			
 			to_ajax();
 			
@@ -156,7 +146,7 @@ var find = false;
 			event.preventDefault();
 			$(this).attr('class','branddelete')
 			$(this).toggleClass("paramActive");
-			$('#filter').append("<input type =\"text\" name =\"brands\" value=\""+$(this).text()+"\"/>")
+			$('#filter').append("<input type =\"hidden\" name =\"brands\" value=\""+$(this).text()+"\"/>")
 			to_ajax();
 		});
 
@@ -389,14 +379,14 @@ var find = false;
 			</tbody>
 		</table>
 		<form name ="filter" id = "filter">
-			<input type="text" name = "sort" value="">
-			<input type="text" name = "keyword" value="">
-			<input type="text" name = "category" value="" id="cate">
-			<input type="text" name = "minPrice" value="0" id="min">
-			<input type="text" name = "maxPrice" value="0" id="max">
-			<input type="text" name="maxWidth" value="0">
-			<input type="text" name="maxLength" value="0">
-			<input type="text" name="maxHeight" value="0">
+			<input type="hidden" name = "sort" value="">
+			<input type="hidden" name = "keyword" value="">
+			<input type="hidden" name = "category" value="" id="cate">
+			<input type="hidden" name = "minPrice" value="0" id="min">
+			<input type="hidden" name = "maxPrice" value="0" id="max">
+			<input type="hidden" name="maxWidth" value="0">
+			<input type="hidden" name="maxLength" value="0">
+			<input type="hidden" name="maxHeight" value="0">
 		</form>
 		<div class="information-grids agile-info" id="wrapper">
 			<c:forEach items="${list}" var="product">
