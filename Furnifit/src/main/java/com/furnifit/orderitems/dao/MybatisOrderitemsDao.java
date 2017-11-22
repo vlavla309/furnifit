@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.furnifit.orderitems.domain.Orderitems;
 
 /**
- * OrderitemsDao MyBatis 구현 클래스
+ * OrderitemsDaoMyBatis 구현 클래스
  * @author 손정화
  *
  */
@@ -21,51 +21,34 @@ public class MybatisOrderitemsDao implements OrderitemsDao {
 		
 	@Inject
 	private SqlSession sqlSession;
-
-/*	@Override
-	public void create(Orderitems items) throws Exception {
-		sqlSession.insert(NAMESPACE+".create", items);
-	}
-*/	
-	// 주문할 가구 등록
+	
+	/**
+	 * 주문항목 생성
+	 * @param items
+	 * @return
+	 */
 	@Override
-//		public void create(Map<String, String> map) {
 	public void create(Orderitems items) {
 		sqlSession.insert(NAMESPACE + ".create", items);
 	}
 	
-	// 가구 정보 상세보기
-//	@Override
-//	public Orderitems read(int productId) throws Exception {
-//		return sqlSession.selectOne(NAMESPACE+".read", productId);
-//	}
+	/**
+	 * 주문서 리스트 조회
+	 * @param 
+	 * @return List<Orderitems>
+	 */
+	@Override
+	public List<Orderitems> listAll() throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".listAll");
+	}
 	
+	/**
+	 * 주문항목 상세보기
+	 * @param orderId
+	 * @return List<Orderitems>
+	 */
 	@Override
 	public List<Orderitems> read(int orderId) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".read", orderId);
 	}
-
-	
-	// 회원별 주문할 리스트
-	@Override
-	public List<Orderitems> listAll() throws Exception {
-//		public List<Orderitems> listAll(int orderId) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".listAll");
-	}
-	
-	// 주문할 가구 삭제
-//	@Override
-//	public void delete(int orderId, int productId) throws Exception {
-//		Map<String, Integer> map = new HashMap<>();
-//		map.put("orderId", orderId);
-//		map.put("productId", productId);
-//		
-//		sqlSession.delete(NAMESPACE+".delete", map);
-//	}
-//
-//	// 가구의 수량 변경
-//	@Override
-//	public void update(Orderitems items) throws Exception {
-//		sqlSession.update(NAMESPACE+".update", items);
-//	}
 }

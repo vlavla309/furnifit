@@ -56,6 +56,7 @@ $(function() {
           sum = sum +  parseInt($(price[i]).text());
         }  
         $("#total").text(sum + "원");
+        $("input[name=price]").val(sum);
 	}
 	
     // 수량 변경에 따른 합계 & 총 합계
@@ -120,22 +121,42 @@ $(function() {
     })
     
  	// 주문
-    $(document).on("click", "#goOrder", function(event){  
+    /* $(document).on("click", "#goOrder", function(event){  
     	event.preventDefault(); 
     	var productid = $(this).attr('value');
-    	//alert(productid)
     	
-    	//alert("주문이 완료되었습니다.");
-    });
+    	var pPrice = $(this).parent().siblings().filter("p.price");
+        var price = pPrice.html();
+        var priceNum = price.split("원")[0];
+    	
+    	
+    	
+    	$.ajax({
+        url : "cart_create.leaf",
+        data : {
+          ''	
+        	
+          'product_code' : $(this).attr('value'),
+          'ctm_no' : "${cookie.customer.value}",
+          'cart_quantity' : 1,
+          'cart_price' : priceNum
+        },
+        success : function(request) {
+          console.log(request);
+          alert("주문이 완료되었습니다.");
+        }
+      });
+    }); */
     
 });
-
+    
+    
 </script>
 
 
 
 <!-- blog -->
-<form role="form" method="get">
+<form role="form" method="post">
 <div class="blog">
   <!-- container -->
   <div class="container">
@@ -166,13 +187,13 @@ $(function() {
                           </c:if>
                          </c:forEach>
                     </td>
-                    <c:set var="doneLoop" value="false"/>
-                    <c:forEach items="${prolist}" var="product">
+                    <c:set var="doneLoop" value="false"/>    
+                    <c:forEach items="${prolist}" var="product" varStatus="status">
                      <c:if test="${not doneLoop}">
                      <c:if test="${product.productId == item.productId}">
-                        <input type="hidden" name="productId" value="${item.productId}">
+                        <input type="hidden" name="productIds" id="${status.index}" value="${item.productId}">
                         <td colspan="7">${product.name}</td>
-                        <td><input type="number" class="count" min="1" value="1" name="amount"></td>
+                        <td><input type="number" class="count" id="${status.index}" min="1" value="1" name="amounts"></td>
                         <td>${product.price}원</td>
                         <td name ="price">${product.price}원</td>
                         <td><a href="#" name="addWishlist" class="btn btn-default" value="${item.productId}">WishList</a></td>
@@ -197,9 +218,9 @@ $(function() {
                 <label for="firstname">쿠폰 상세정보&nbsp;</label>
                 <select name=sale id=sel>
                   <option>---쿠폰 선택---</option>
-                 <c:forEach items="${couponlist}" var="coupon">
-                    <option value="${coupon.discountRate}" class="rate"> ${coupon.discountRate}% 할인쿠폰</option>
-                 </c:forEach>
+                   <c:forEach items="${couponlist}" var="coupon">
+                      <option value="${coupon.discountRate}" class="rate"> ${coupon.discountRate}% 할인쿠폰</option>
+                   </c:forEach>
                 </select><br><br>
                 <div class="box coupon">
                   <div class="table-responsive" style="margin-left: 20px">
@@ -214,7 +235,6 @@ $(function() {
           </div>
         </div>
       </div><br><br>
-     
       <div class="col-md-3" id="checkout" style="margin-top: 100px">
         <div class="box">
           <div class="col-sm-12">
@@ -223,9 +243,10 @@ $(function() {
                 <div class="table-responsive">
                   <table class="table">
                     <tbody>
+                      <input type="hidden" name="email" value="${login.email}">
                       <tr><br><br><td><p class="text-muted"><strong>${itemlist.size()}종류의 가구를 주문합니다.</strong></p></td></tr>
                       <tr><td style="color: red"><h3>총 합계</h3></td></tr>
-                      <tr><td><h3><span id="total">원</span></h3></td></tr>
+                      <tr><td><h3><span id="total">원</span><input type = "hidden" name="price"></h3></td></tr>
                     </tbody>
                   </table>
                 </div>

@@ -29,4 +29,31 @@
 		WHERE  email = #{email}
 	</select>
 	
+	
+	<!-- 게시글 리스트(+페이징) -->
+	<select id="listByParams" parameterType="Params" resultType="Plan">
+		SELECT plan_id AS "planId",
+			   email,
+			   name,
+			   TO_CHAR(regdate, 'YYYY-MM-DD') regdate
+		FROM   (SELECT CEIL(rownum / #{pageSize}) request_page,
+							plan_id,
+						    email,
+							name,
+							regdate
+							FROM   (SELECT 	plan_id,
+									        email,
+										    name,
+										    regdate
+								    FROM    	plans
+								    ORDER BY  	plan_id DESC))
+		WHERE   request_page = #{page}
+	</select>
+	
+	<!-- 출력페이지 계산을 위한 행의 수 반환  -->
+	<select id="pageCount" resultType="int">
+		SELECT count(plan_id) AS "count"
+		FROM   plans
+	</select>
+	
 </mapper>

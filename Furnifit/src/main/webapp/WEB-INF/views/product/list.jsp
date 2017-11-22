@@ -3,96 +3,129 @@
 <%@ include file="../include/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
-<style>
- 
-.information-grid-info {
-	height: 250px;
-}
+<link rel="stylesheet" href="${rSrcPath}css/productList.css" />
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script id="entry-template" type="text/x-handlebars-template">
+			{{#list}}
+				<div class="col-md-4 information-grid pdbotton" data-wow-delay=".5s">
+					<div class="information-info">
+						{{#each imgs}}
+							<div class="information-grid-img">
+								{{#ifimg ../this.productId this.productId this.orderNo}}
+										<a href="${contextPath}/product/{{../this.productId}}"><img
+										src="${rSrcPath}/productimg/{{this.path}}/{{this.name}}" alt=""
+										class="img-responsive" style="height: 300px; width: auto" /></a>
+								{{/ifimg}}
+							</div>
+						{{/each}}
 
-.colorBtn {
-	border: 1px solid #dadada;
-	height: 30px;
-	width: 30px;
-}
-
-
-.colordelete {
-	border: 1px solid #dadada;
-	height: 30px;
-	width: 30px;
-}
-
-li {
-	list-style: none;
-	display: inline;
-	margin-right: 2em;
-}
-
-table, th, td {
-	border: 1px solid #FBF8EF;
-}
-
-table {
-	width: 80%;
-	padding: 0px;
-}
-
-th {
-	background: #FBF8EF;
-	text-align: center;
-	width: 15%;
-}
-
-.pdbotton {
-	padding-bottom: 15px;
-}
-
-.categorydelete, .branddelete, .branda, .categorya{
-padding:0.5em;
-border-radius: 0.5em;
-}
-
-.paramActive{
-background:	#ac3939;
-color:white!important;
-}
-
-.colorUncheck{
-display:none;
-}
-
-</style>
+						<div class="information-grid-info">
+							<span class="badge badge-danger">Sale 40%</span>
+							<h4>
+								<a href="${contextPath}/product/{{productId}}">{{name}}</a>
+							</h4>
+							<hr>
+							<p>
+								<strong>&#8361; {{price}} </strong> <br>
+								{{width}} * {{length}} * {{height}} <small>(가로
+									* 세로 * 높이 mm)</small>
+							</p>  
+							<h3>
+							{{#iflogin "${login.email}"}}
+    							<a href="{{productId}}" class="wishbtn"> 
+									<span class="label label-danger"> 
+										<i class="fa fa-heart-o" aria-hidden="true"></i>
+									</span>
+								</a>
+							{{else}}
+								{{init}}
+								{{#each ../../wishlist}}
+									{{#ifDoneLoop}}
+										{{#ifwishlist ../../productId productId email}}
+											<a href="{{../productId}}" class="wishdeletebtn"> 
+												<span class="label label-danger"> <i class="fa fa-heart" aria-hidden="true"></i></span>
+											</a>
+										{{/ifwishlist}}
+									{{/ifDoneLoop}}
+								{{/each}}
+								{{#ifFind}}
+									<a href="{{../productId}}" class="wishbtn"> 
+										<span class="label label-danger"> <i class="fa fa-heart-o" aria-hidden="true"></i></span>
+									</a>
+								{{/ifFind}}
+							{{/iflogin}}
+							</h3>
+						</div>
+						</a>
+					</div>
+				</div>
+			 {{/list}}
+</script>
 
 <script>
+
+/* handlebar image if문 */
+Handlebars.registerHelper('ifimg', function(listProductId, imgProductId, orderNo, options) {
+	if(listProductId === imgProductId && orderNo ===0) {
+	    return options.fn(this);
+	  }
+	  return options.inverse(this);
+});
+
+/* handlebar wishlist에서 로그인한 사용자 구분하는 if문 */
+Handlebars.registerHelper('iflogin', function(login, options) {
+	if(login == null || login == "") {
+		return options.fn(this);
+	  }
+	  return options.inverse(this);
+	  
+});
+
+/* 로그인한 사용자마다 wishlist 구분 */
+Handlebars.registerHelper('ifwishlist', function(listProductId, ProductId, wishlistEmail, options) {
+	if(listProductId === ProductId && wishlistEmail === "${login.email}") {
+		doneLoop = true;
+		find = true;
+		return options.fn(this);
+	 }
+	  return options.inverse(this);
+	  
+});
+
+/* break */
+Handlebars.registerHelper('ifDoneLoop', function(options) {
+	if(!doneLoop) {
+	    return options.fn(this);
+	 }
+	  return options.inverse(this);
+	  
+});
+
+Handlebars.registerHelper('ifFind', function(options) {
+	if(!find) {
+	    return options.fn(this);
+	  }
+	  return options.inverse(this);
+});
+
+Handlebars.registerHelper('init', function(options) {
+	doneLoop = false;
+	find = false;
+    return ""; 
+});
+
+var doneLoop = false;
+var find = false;
+
 	$(function() {
-
-		/* color 버튼을 color 테이블에서 불러들임 */
-		<c:forEach items="${colorlist}" var="color">
-			str = "<li><a class=\"btn btn-default colorBtn\" id =\"${color.name}\" style=\"background:${color.rgb}\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:white\" aria-hidden=\"true\"></i></a></li>"
-			if("${color.name}"=="white"){
-				str = "<li><a class=\"btn btn-default colorBtn\" id =\"${color.name}\" style=\"background:${color.rgb}\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:black\" aria-hidden=\"true\"></i></a></li>"
-			}
-			$('#colorul').append(str);
-		</c:forEach>
-
-		/* 브랜드 테이블에있는 데이터 불러들임 */
-		<c:forEach items="${brandlist}" var="brand">
-			$('#brand').append("<li><a class=\"branda\">${brand.name}</a></li>");
-		</c:forEach>
-
-		/* 카테고리 테이블 데이터 불러들임 */
-		<c:forEach items="${categorylist}" var="category">
-			$('#category').append("<li><a class=\"categorya\">${category.name}</a></li>");
-		</c:forEach>
-		
+			
 		/* color 버튼을 누르면 조건검색 리스트에 추가됨. ajax는 추후에!, 클래스 속성을 btnd로 변경한 후에 icon delete를 추가로 해준다. */
 		$(document).on("click", ".colorBtn", function(event) {
 			event.preventDefault();
 			
 			$(this).children().first().toggleClass("colorUncheck");
 			$(this).attr('class','btn btn-default colordelete')
-			$('#filter').append("<input type =\"text\" name =\"colors\" value=\""+$(this).attr('id')+"\"/>")
+			$('#filter').append("<input type =\"hidden\" name =\"colors\" value=\""+$(this).attr('id')+"\"/>")
 			
 			to_ajax();
 			
@@ -113,7 +146,7 @@ display:none;
 			event.preventDefault();
 			$(this).attr('class','branddelete')
 			$(this).toggleClass("paramActive");
-			$('#filter').append("<input type =\"text\" name =\"brands\" value=\""+$(this).text()+"\"/>")
+			$('#filter').append("<input type =\"hidden\" name =\"brands\" value=\""+$(this).text()+"\"/>")
 			to_ajax();
 		});
 
@@ -186,6 +219,13 @@ display:none;
 			$('input[name=sort]').val($(this).val())
 			to_ajax();
 		});
+		
+		
+		//핸들바 템플릿 가져오기
+		var source = $("#entry-template").html(); 
+
+		//핸들바 템플릿 컴파일
+		var template = Handlebars.compile(source);
 
 		/* ajax실행 함수  */
 		function to_ajax(){
@@ -196,10 +236,10 @@ display:none;
 				type : 'post',
 				data : formData,
 				success : function(data) {
-					console.log(data.result);
-					console.log(data.list);
-					console.log(data.wishlist);
-					console.log(data.colorlist);
+					console.log(data)
+					var html = template(data);
+					$('.information-grids').empty();
+					$('.information-grids').append(html);
 				},
 				error: function(data) {
 					console.log(data)
@@ -208,7 +248,7 @@ display:none;
 			});
 		
 		}
-
+		
 		/* 위시리스트를 누르면, 저장이되고 버튼의 클래스 속성을 변경한다. 또한 비어있는 하트를 채워진 하트로 바꿈. */
 		$(document).on("click", ".wishbtn", function(event) {
 			event.preventDefault();
@@ -221,6 +261,9 @@ display:none;
 					alert("추가성공")
 					wishbtn.attr('class', 'wishdeletebtn')
 					wishbtn.children().children().attr('class', 'fa fa-heart')
+				},
+				error : function(data){
+					console.log(data)
 				}
 			});
 		});
@@ -237,6 +280,9 @@ display:none;
 					alert("삭제성공")
 					wishdeletebtn.attr('class', 'wishbtn')
 					wishdeletebtn.children().children().attr('class','fa fa-heart-o')
+				},
+				error : function(data){
+					console.log(data)
 				}
 			});
 		});
@@ -274,6 +320,9 @@ display:none;
 					<th scope="row">카테고리</th>
 					<td>
 						<ul id = "category">
+							<c:forEach items="${categorylist}" var="category">
+								<li><a class="categorya">${category.name}</a></li>
+							</c:forEach>
 						</ul>
 					</td>
 				</tr>
@@ -281,6 +330,9 @@ display:none;
 					<th scope="row">브랜드</th>
 					<td>
 						<ul id="brand">
+							<c:forEach items="${brandlist}" var="brand">
+								<li><a class="branda">${brand.name}</a></li>
+							</c:forEach>
 						</ul>
 					</td>
 				</tr>
@@ -314,20 +366,27 @@ display:none;
 					<th scope="row">색상</th>
 					<td colspan="2">
 						<ul id="colorul">
+							<c:forEach items="${colorlist}" var="color">
+								<li><a class="btn btn-default colorBtn" id ="${color.name}" style="background:${color.rgb}" aria-hidden="true" aria-label="Settings"><i class="fa fa-check  fa-lg colorUncheck"  style="color:white" aria-hidden="true"></i></a></li>
+								<c:if test="${color.name == white}">
+									<li><a class="btn btn-default colorBtn" id ="${color.name}" style="background:${color.rgb}" aria-hidden="true" aria-label="Settings"><i class="fa fa-check  fa-lg colorUncheck"  style="color:black" aria-hidden="true"></i></a></li>
+								</c:if>
+							</c:forEach>
+							
 						</ul>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 		<form name ="filter" id = "filter">
-			<input type="text" name = "sort" value="">
-			<input type="text" name = "keyword" value="">
-			<input type="text" name = "category" value="" id="cate">
-			<input type="text" name = "minPrice" value="0" id="min">
-			<input type="text" name = "maxPrice" value="0" id="max">
-			<input type="text" name="maxWidth" value="0">
-			<input type="text" name="maxLength" value="0">
-			<input type="text" name="maxHeight" value="0">
+			<input type="hidden" name = "sort" value="">
+			<input type="hidden" name = "keyword" value="">
+			<input type="hidden" name = "category" value="" id="cate">
+			<input type="hidden" name = "minPrice" value="0" id="min">
+			<input type="hidden" name = "maxPrice" value="0" id="max">
+			<input type="hidden" name="maxWidth" value="0">
+			<input type="hidden" name="maxLength" value="0">
+			<input type="hidden" name="maxHeight" value="0">
 		</form>
 		<div class="information-grids agile-info" id="wrapper">
 			<c:forEach items="${list}" var="product">

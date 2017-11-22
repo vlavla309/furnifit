@@ -112,10 +112,7 @@ li {
         </div>
       </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
+    <br><br><br><br>
 
     <div class="col-md-9">
       <div class="box">
@@ -123,8 +120,7 @@ li {
           <div class="text-center" id="box">
             <c:forEach items="${planlist}" var="plan">
               <dl>
-                <dt class="accordion">${plan.planId}/
-                  ${plan.email}님의 배치도 / ${plan.regdate}</dt>
+                <dt class="accordion">${plan.planId} / ${plan.email}님의 배치도 / ${plan.regdate}</dt>
                 <dd>
                   <ul>
                     <li><c:forEach items="${itemlist}" var="item">
@@ -142,18 +138,28 @@ li {
 
       <div class="box">
         <div class="box-footer">
+
+           <!-- Paging -->
           <div class="text-center">
             <ul class="pagination">
-              <li class="disabled"><a href="#"
-                aria-label="Previous">«</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-              <li><a href="#" aria-label="Next">»</a></li>
+              <c:if test="${pageBuilder.isShowPrevious()}">
+                <li><a href="${pageBuilder.getQueryString(pageBuilder.currentStartPage -1)}">&laquo;</a></li>
+              </c:if>
+      
+              <c:forEach begin="${pageBuilder.currentStartPage}" end="${pageBuilder.currentEndPage}" var="pageList">
+                <li
+                  <c:out value="${pageBuilder.params.page == pageList?'class =active':''}"/>>
+                  <a href="${pageBuilder.getQueryString(pageList)}">${pageList}</a>
+                </li>
+              </c:forEach>
+      
+              <c:if test="${pageBuilder.isShowNext()}">
+                <li><a href="${pageBuilder.getQueryString(pageBuilder.currentEndPage +1)}">&raquo;</a></li>
+              </c:if>
             </ul>
-          </div>
+         </div>
+          <!-- /.Paging --> 
+
         </div>
       </div>
     </div>

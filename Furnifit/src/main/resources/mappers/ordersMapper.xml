@@ -7,18 +7,20 @@
 	<!-- 주문 생성 -->
 	<insert id="create" parameterType="Orders">
 		<selectKey keyProperty="orderId" resultType="int" order="BEFORE">
-			select orders_seq.NEXTVAL FROM DUAL
+			SELECT orders_seq.nextval FROM DUAL
 		</selectKey>
 		INSERT INTO orders
 				    (order_id,
 					 email,
-					 price)
+					 price,
+					 regdate)
 		VALUES 		(#{orderId},
 					 #{email},
-					 #{price})
+					 #{price},
+					 sysdate)
 	</insert>
 	
-	<!-- 회원별 주문할 리스트 -->
+	<!-- 주문목록 리스트 -->
 	<select id="listAll" parameterType="String" resultType="Orders">
 		SELECT order_id AS "orderId",
 			   email,
@@ -28,28 +30,35 @@
 		WHERE  email = #{email}
 	</select>
 	
-	<!-- 게시글 리스트(+페이징) -->
-	<select id="listPage" resultType="Orders">
+	
+	<!-- 주문목록 리스트(+페이징) -->
+	<select id="listByParams" parameterType="Params" resultType="Orders">
 		SELECT order_id AS "orderId",
 			   email,
 			   price,
-			   TO_CHAR(regdate, 'YYYY-MM-DD') regdate
-		FROM   (SELECT CEIL(rownum / 10) request_page,
+			   regdate
+		FROM   (SELECT CEIL(rownum / #{pageSize}) request_page,
 							order_id,
 			   				email,
 			   				price,
 							regdate
-							FROM   (SELECT order_id,
-						   				   email,
-						   				   price,
-										   regdate
-								    FROM      orders
-								    ORDER BY  order_id DESC))
+							FROM   (SELECT 	order_id,
+						   				   	email,
+						   				   	price,
+										   	regdate
+								    FROM    	orders
+								    ORDER BY  	order_id DESC))
 		WHERE   request_page = #{page}
 	</select>
 	
+	<!-- 출력페이지 계산을 위한 행의 수 반환  -->
+	<select id="pageCount" resultType="int">
+		SELECT count(order_id) AS "count"
+		FROM   orders
+	</select>
 	
-	<!--  -->
+	
+	<!-- 총합계 금액 반환 -->
 	<select id="price" parameterType="int" resultType="Orders">
 		SELECT order_id AS "orderId",
 			   email,

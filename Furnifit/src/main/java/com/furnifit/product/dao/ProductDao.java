@@ -32,7 +32,7 @@ public interface ProductDao {
 	public void addAttach(Map<String, String> map);
 	
 	/**
-	 * 상품리스트 보이기
+	 * 상품 전체 리스트 보이기
 	 * return List<Product>
 	 */
 	public List<Product> list();

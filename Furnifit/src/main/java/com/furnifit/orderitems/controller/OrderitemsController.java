@@ -20,6 +20,7 @@ import com.furnifit.member.domain.Member;
 import com.furnifit.member.service.CouponService;
 import com.furnifit.orderitems.domain.Orderitems;
 import com.furnifit.orderitems.service.OrderitemsService;
+import com.furnifit.orders.domain.Orders;
 import com.furnifit.orders.service.OrdersService;
 import com.furnifit.product.domain.Product;
 import com.furnifit.product.service.ProductService;
@@ -41,8 +42,6 @@ public class OrderitemsController {
 	@Inject
 	private OrderitemsService itemsService;
 	@Inject
-	private OrdersService ordersService;
-	@Inject
 	private ProductService proService;
 	@Inject
 	private ProductImageDao imgDao;
@@ -50,70 +49,47 @@ public class OrderitemsController {
 	private CouponService couponService;
 	@Inject
 	private FurnitureDao furniDao;
+	@Inject
+	private OrdersService ordersrv;
 	
-	
-	
-	/** 게시글 등록 */
-	/*@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public void registGET() throws Exception{
-		logger.info("regist get");
-	}
-	@RequestMapping(value ="/register", method = RequestMethod.POST)
-	public String registPOST(Board board, RedirectAttributes rttr)throws Exception{
-		logger.info("regist post" + board.toString());
-		boardService.create(board);
-		rttr.addFlashAttribute("msg", "SUCCESS");
-		
-		return "redirect:/sboard/list";
-	}*/
-	
+
+	/** 주문항목 생성 */
 	@RequestMapping(value = "/{planitemId}", method = RequestMethod.GET)
 	public String registGET(@PathVariable("planitemId") int planitemId, Model model,  HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();   
 		Member member = (Member) session.getAttribute("login");
 		
-		logger.info("--------------planitemId : "+planitemId);
 		List<Furniture> list = furniDao.list(planitemId);
-		for (Furniture furniture : list) {
-			logger.info(furniture);
-		}
-		
 		List<Product> product1 = proService.list();
-		for (Product product : product1) {
-			logger.info(product);
-		}
-		
 		List<ProductImg> imgList = imgDao.list();
-		for (ProductImg productImg : imgList) {
-			logger.info(productImg);
-		}
-		
 		List<Coupon> couponList =  couponService.read(member.getEmail());
-		for (Coupon coupon : couponList) {
-			logger.info(coupon);
-		}
 		
-		model.addAttribute("itemlist", list);
 		model.addAttribute("prolist", product1);	
+		model.addAttribute("itemlist", list);
 		model.addAttribute("imglist", imgList);
 		model.addAttribute("couponlist", couponList);
-		
 		return "order/order-write";
 	}
 	
-	@RequestMapping(value = "", method = RequestMethod.POST)
-	public String registPOST(Orderitems orderitems) throws Exception {
+	@RequestMapping(value = "/{planitemId}", method = RequestMethod.POST)
+	public String registPOST(@PathVariable("planitemId") int planitemId, Orderitems orderitems, Orders order) throws Exception {
+		logger.info(planitemId);
+		ordersrv.create(order);
+		logger.info(order.getOrderId());
 		logger.info(orderitems);
-		itemsService.create(orderitems);
+		
+		for (int i = 0; i < orderitems.getProductIds().length; i++) {
+			Orderitems item = new Orderitems(orderitems.getProductIds()[i], order.getOrderId(), orderitems.getAmounts()[i]);
+			logger.info(item);
+			itemsService.create(item);
+		}
 		return "redirect:/order/order-list";
 	}
 	
 	
 	
-	
-	
-	/** 주문할 가구항목 리스트  */
+	/** 주문항목 리스트 조회  */
 	/*@RequestMapping(value = "", method=RequestMethod.GET)
 	public String listAll(Model model, HttpServletRequest request) throws Exception {
 		

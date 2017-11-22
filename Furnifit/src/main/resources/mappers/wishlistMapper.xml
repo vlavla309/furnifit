@@ -21,12 +21,10 @@
 		wishlist
 	</select>
 
-	<select id="userwishlist" resultType="map">
-		SELECT email,
-		product_id as "productId"
-		FROM
-		WHERE
-		EMAIL = #{email} and PRODUCT_ID = #{productId}
+	<select id="userwishlist" resultType="Wishlist" parameterType="string">
+		SELECT email, product_id as "productId"
+		FROM wishlist
+		WHERE EMAIL = #{email}
 	</select>
 
 	<delete id="delete" parameterType="map">

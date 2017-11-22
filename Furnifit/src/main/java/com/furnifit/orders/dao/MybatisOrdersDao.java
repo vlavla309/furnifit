@@ -23,45 +23,53 @@ public class MybatisOrdersDao implements OrdersDao {
 	@Inject
 	private SqlSession sqlSession;
 
+	/**
+	 * 주문 생성
+	 * @param order
+	 * @return
+	 */
 	@Override
 	public void create(Orders order) throws Exception {
 		sqlSession.insert(NAMESPACE + ".create", order);
 	}
 	
+	/**
+	 * 주문목록 리스트
+	 * @param email
+	 * @return List<Orders>
+	 */
 	@Override
 	public List<Orders> listAll(String email) throws Exception {
-//		public List<Orders> listAll(String email, Params params) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".listAll", email);
 	}
-	
-	/** 게시글 리스트(+페이징) */
+
+	/**
+	 * 주문목록 리스트(+페이징)
+	 * @param params
+	 * @return List<Orders>
+	 */
 	@Override
-	public List<Orders> listPage(int page) throws Exception {
-		if (page <= 0) {
-			page = 1;
-		}
-		page = (page - 1) * 10;
-		return sqlSession.selectList(NAMESPACE + ".listPage", page);
+	public List<Orders> listByParams(Params params) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".listByParams", params);
 	}
-	
-	
+
+	/**
+	 * 출력페이지 계산을 위한 행의 수 반환 
+	 * @param 
+	 * @return int
+	 */
+	@Override
+	public int pageCount() {
+		return sqlSession.selectOne(NAMESPACE + ".pageCount");
+	}
+
+	/**
+	 * 총합계 금액 반환
+	 * @param orderId
+	 * @return List<Orders>
+	 */
 	@Override
 	public List<Orders> price(int orderId) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".price", orderId);
 	}
-
-	@Override
-	public List<Orders> listParams(Params params) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".listParams", params);
-	}
-	
-//	@Override
-//	public void delete(int orderId) throws Exception {
-//		sqlSession.delete(NAMESPACE+".delete", orderId);
-//	}
-//
-//	@Override
-//	public void update(Orders order) throws Exception {
-//		sqlSession.update(NAMESPACE+".update", order);
-//	}
 }
