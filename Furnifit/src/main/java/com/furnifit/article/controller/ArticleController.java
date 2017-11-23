@@ -64,7 +64,6 @@ public class ArticleController {
 			prdList.add(pro);
 		}
 		model.addAttribute("product",prdList);	
-		logger.info(prdList);
 		
 		HttpSession session =  request.getSession();
 		Member member = (Member)session.getAttribute("login");
@@ -77,21 +76,25 @@ public class ArticleController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String registPOST(Article article) throws Exception {
 		
-		logger.info(article);
 		service.create(article);
 		return "redirect:/article";
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String listAll(ArticleParams params,Model model) throws Exception {
+	public String listAll(ArticleParams params,Article article,Model model) throws Exception {
+		
 		params.setPageSize(PAGE_SIZE);
 		params.setPagiSize(PAGI_SIZE);
 		
-		List<Article> articles=service.listByParams(params);		
+		List<Article> articles = service.listByParams(params);
+		
 		model.addAttribute("list", articles);
+		
+		
 		
 		PageBuilder pb = new PageBuilder();
 		pb.setParams(params);
+		pb.setTotalRowCount(service.listSearchCount(params));
 		pb.build();
 		model.addAttribute("pb", pb);
 		 
@@ -121,8 +124,9 @@ public class ArticleController {
 	@RequestMapping(value = "/{articleId}", method = RequestMethod.GET)
 	public String read(@PathVariable int articleId,Furniture furniture,Product product,HttpServletRequest request, Model model) throws Exception {
 		 Article article = service.read(articleId);
-		// article.setViewcnt(article.getViewcnt() +1);
-		 //service.artUpdate(article);
+		 article.setViewcnt(article.getViewcnt()+1);
+		 service.artUpdate(article);
+		 
 		 
 		 PlanItem planItem = service.readPlanItem(article.getPlanitemId());
 		 
@@ -162,19 +166,15 @@ public class ArticleController {
 
 	}
 	
-	@RequestMapping(value = "/{articleId}", method = {RequestMethod.PATCH, RequestMethod.PUT})
-	public ResponseEntity<String> update(Article article) throws Exception {
-		
-		ResponseEntity<String> entity = null;
-		try {
+	@RequestMapping(value = "/{articleId}", method = {RequestMethod.PATCH, RequestMethod.PUT, RequestMethod.POST})
+	@ResponseBody
+	public String update(Article article,  String content) throws Exception {
+
 			service.artUpdate(article);
 			
-			entity = new ResponseEntity<String>("success",HttpStatus.OK);
 			
-		} catch (Exception e) {
-			entity = new ResponseEntity<String>( "fail",HttpStatus.BAD_REQUEST);
-		}
-		 return entity;
+		
+		 return "success";
 	}
 
 	

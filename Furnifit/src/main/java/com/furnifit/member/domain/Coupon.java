@@ -4,6 +4,7 @@ public class Coupon {
 	private int serial;
 	private int discountRate;
 	private String expirationDate;
+	private String usedDate;
 	private String status;
 	
 	public int getSerial() {
@@ -21,8 +22,14 @@ public class Coupon {
 	public String getExpirationDate() {
 		return expirationDate;
 	}
-	public void setExpiration_date(String expirationDate) {
+	public void setExpirationDate(String expirationDate) {
 		this.expirationDate = expirationDate;
+	}
+	public String getUsedDate() {
+		return usedDate;
+	}
+	public void setUsedDate(String usedDate) {
+		this.usedDate = usedDate;
 	}
 	public String getStatus() {
 		return status;
@@ -30,11 +37,10 @@ public class Coupon {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
 	@Override
 	public String toString() {
 		return "Coupon [serial=" + serial + ", discountRate=" + discountRate + ", expirationDate=" + expirationDate
-				+ ", status=" + status + "]";
+				+ ", usedDate=" + usedDate + ", status=" + status + "]";
 	}
 	
 }

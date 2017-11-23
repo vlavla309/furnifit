@@ -63,7 +63,10 @@ public class OrderitemsController {
 		List<Furniture> list = furniDao.list(planitemId);
 		List<Product> product1 = proService.list();
 		List<ProductImg> imgList = imgDao.list();
-		List<Coupon> couponList =  couponService.read(member.getEmail());
+		List<Coupon> couponList =  couponService.readAvailable(member.getEmail());
+		
+//		Coupon coupon = new Coupon();
+//		couponService.couponUpdate(coupon);
 		
 		model.addAttribute("prolist", product1);	
 		model.addAttribute("itemlist", list);
@@ -86,31 +89,5 @@ public class OrderitemsController {
 		}
 		return "redirect:/order/order-list";
 	}
-	
-	
-	
-	/** 주문항목 리스트 조회  */
-	/*@RequestMapping(value = "", method=RequestMethod.GET)
-	public String listAll(Model model, HttpServletRequest request) throws Exception {
-		
-		HttpSession session = request.getSession();   
-		Member member = (Member) session.getAttribute("login");
-		
-		List<Product> proList = proService.list();
-		for (Product product : proList) {
-			logger.info(product);
-		}
-		
-		List<ProductImg> imgList = imgDao.list();
-		for (ProductImg productImg : imgList) {
-			logger.info(productImg);
-		}
-		List<Coupon> couponList =  couponService.read(member.getEmail());
-		
-		model.addAttribute("prolist", proList);
-		model.addAttribute("imglist", imgList);
-		model.addAttribute("couponlist", couponList);
-		return "order/order-write";
-	}*/
 	
 }	

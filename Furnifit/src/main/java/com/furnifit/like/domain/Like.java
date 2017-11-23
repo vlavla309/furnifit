@@ -1,14 +1,14 @@
-package com.furnifit.article.domain;
+package com.furnifit.like.domain;
 
-public class LikeCnt {
-
+public class Like {
+	
 	private int articleId;
-	private String email;
+	private int email;
 	private String regdate;
 	
-	public LikeCnt() {}
+	public Like() {}
 
-	public LikeCnt(int articleId, String email, String regdate) {
+	public Like(int articleId, int email, String regdate) {
 		this.articleId = articleId;
 		this.email = email;
 		this.regdate = regdate;
@@ -22,11 +22,11 @@ public class LikeCnt {
 		this.articleId = articleId;
 	}
 
-	public String getEmail() {
+	public int getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(int email) {
 		this.email = email;
 	}
 
@@ -40,15 +40,9 @@ public class LikeCnt {
 
 	@Override
 	public String toString() {
-		return "LikeCnt [articleId=" + articleId + ", email=" + email + ", regdate=" + regdate + "]";
+		return "Like [articleId=" + articleId + ", email=" + email + ", regdate=" + regdate + "]";
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
+
 }

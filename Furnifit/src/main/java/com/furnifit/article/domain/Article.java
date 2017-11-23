@@ -3,6 +3,8 @@ package com.furnifit.article.domain;
 import java.util.Arrays;
 import java.util.List;
 
+import com.furnifit.planitem.domain.PlanItem;
+
 public class Article {
 	
 	
@@ -16,11 +18,12 @@ public class Article {
 	private String content; 
 	private String[] files;
 	private List<ArticleImg> images;
+	private String planitemImg;
 	
 	public Article() {}
 
 	public Article(int articleId, String email, int planitemId, int likecnt, int viewcnt, String regdate, String title,
-			String content, String[] files, List<ArticleImg> images) {
+			String content, String[] files, List<ArticleImg> images, String planitemImg) {
 		this.articleId = articleId;
 		this.email = email;
 		this.planitemId = planitemId;
@@ -31,6 +34,7 @@ public class Article {
 		this.content = content;
 		this.files = files;
 		this.images = images;
+		this.planitemImg = planitemImg;
 	}
 
 	public int getArticleId() {
@@ -115,13 +119,25 @@ public class Article {
 	public void setImages(List<ArticleImg> images) {
 		this.images = images;
 	}
+	
+	
+
+	public String getPlanitemImg() {
+		return planitemImg;
+	}
+
+	public void setPlanitemImg(String planitemImg) {
+		this.planitemImg = planitemImg;
+	}
 
 	@Override
 	public String toString() {
 		return "Article [articleId=" + articleId + ", email=" + email + ", planitemId=" + planitemId + ", likecnt="
 				+ likecnt + ", viewcnt=" + viewcnt + ", regdate=" + regdate + ", title=" + title + ", content="
-				+ content + ", files=" + Arrays.toString(files) + ", images=" + images + "]";
+				+ content + ", files=" + Arrays.toString(files) + ", images=" + images + ", planitemImg=" + planitemImg
+				+ "]";
 	}
+
 
 	
 

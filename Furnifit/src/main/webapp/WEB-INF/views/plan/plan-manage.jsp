@@ -120,6 +120,7 @@ li {
           <div class="text-center" id="box">
             <c:forEach items="${planlist}" var="plan">
               <dl>
+               <c:if test="${plan.email == login.email}">
                 <dt class="accordion">${plan.planId} / ${plan.email}님의 배치도 / ${plan.regdate}</dt>
                 <dd>
                   <ul>
@@ -130,6 +131,7 @@ li {
                       </c:forEach></li>
                   </ul>
                 </dd>
+               </c:if>
               </dl>
             </c:forEach>
           </div>

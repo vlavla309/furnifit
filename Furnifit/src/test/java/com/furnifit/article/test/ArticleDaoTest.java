@@ -49,21 +49,48 @@ public class ArticleDaoTest {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void listPage() throws Exception {
 		int page = 1;
 		ArticleParams params = new ArticleParams();
-		params.setPageSize(9);
-		params.setAcreage("mm");
+
+		params.setPageSize(10);
+		params.setSort("view");
 		
 		List<Article> list = dao.listByParams(params);
 		
 		for (Article article : list) {
 		
-			logger.info("article아이디" + article.getPlanitemId());
+			logger.info("article아이디" + article.getArticleId());
 		}
+	}
+	
+//	@Test
+	public void listsearchCount() throws Exception {
+		int page = 1;
+		ArticleParams params = new ArticleParams();
+
+		
+		params.setAcreage("xs");
+		
+		logger.info(dao.listSearchCount(params));
+			
+		}
+	
+	@Test
+	public void artUpdate() throws Exception {
+		
+		Article article = dao.read(24);
+		
+		
+
+		
+		logger.info(article.getViewcnt());
+			
+		}
+	
+	
 	}
 	
 	
 	
-}

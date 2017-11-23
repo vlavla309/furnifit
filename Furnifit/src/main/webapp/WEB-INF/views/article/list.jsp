@@ -16,6 +16,10 @@ border-style: hidden;
 border-radius: 10px;
 }
 
+.artLikecnt{
+width: 34px; 
+}
+
 .button2 {
 width: 90px;
 height: 28px;
@@ -41,34 +45,55 @@ min-width: 20px;
 }
 
 .label1{
-background-color: #DF0101;
-min-width: 30px;
-display: inline-block;
+background-color: #F79F81;
+width: 30%;
+
 }
 
 .label2{
 border: hidden;
-background: white;
-color: black;
+background-color: white;
+color: #610B0B;
 font-size: 10pt;
+font-weight: bold;
 }
 
 .selectBox{
 height: 27px; 
 border-radius: 10px"
 }
+
+.planDiv{
+width: 100%;
+min-height: 80px;
+display: block;
+height: 200px;
+}
+.planDiv img{
+width: 100%;
+height: 100%;
+}
 </style>
 <script>
 $(document).ready(function(){
 	
+	var acreage = "${pb.params.acreage}";
+	var sort = "${pb.params.sort}";
+	
+	$("#acreage").val(acreage).prop("selected", true);
+	$("#sort").val(sort).prop("selected", true);
+	
 	$("#sort").on("change", function(){
 		$("form[name=listForm]").submit();
 	});
+	
 	$("#acreage").on("change", function(){
-		$("form[name=listForm]").submit();
+	
+		$("form[name=listForm]").submit();	
 	});
- 	
+	
 });
+
 </script>
 
 
@@ -76,7 +101,7 @@ $(document).ready(function(){
 <div class="blog">
   <!-- container -->
   <div class="container">
-  <form name="listForm" method="get" action="${contextPath }/article">
+
     <div class="blog-heading w3layouts">
 
       <strong><font style="font-size: 23pt; color: #8A4B08">공유배치도
@@ -86,24 +111,25 @@ $(document).ready(function(){
       <br> 
       <br>
       
-      
+   <form name="listForm" id="listForm"  method="get" action="${contextPath }/article">     
       <input type="hidden" name="page" value="${pb.params.page}"> 
       
       <div class="form-inline col-md-5 col-md-offset-8">
-        <span><select name="acreage" id="acreage" class="selectBox">
-          <option valut="" >평      수</option>
-          <option value="xs" >1 ~ 2평 (㎡)</option>
-          <option value="ss">3 ~ 4평 (㎡)</option>
-          <option value="mm">5 ~ 7평 (㎡)</option>
-          <option value="ll">8 ~ 9평 (㎡)</option>
+        <span><select  name="acreage" id="acreage" class="selectBox">
+          <option value="" >평      수</option>
+          <option value="xs"  >1 ~ 2평 (㎡)</option>
+          <option value="ss" >3 ~ 4평 (㎡)</option>
+          <option value="mm" >5 ~ 7평 (㎡)</option>
+          <option value="ll" >8 ~ 9평 (㎡)</option>
           <option value="xl" >10 ~ 평  (㎡)</option>
         </select>
         <select name="sort" id="sort" class="selectBox" >
-          <option value="new">최신순</option>
+          <option value="">최신순</option>
           <option value="like">추천순</option>
           <option value="view">조회순</option>
         </select></span>        
       </div>
+    </form>
     
       
     </div>
@@ -114,16 +140,18 @@ $(document).ready(function(){
         <div class="information-info col-md-4 articleDiv" ">
           <br>
           <div class="information-grid-info articleDiv2" >
-            <img src="images/room.PNG" width="105%" alt="" />
+          <div class="planDiv">
+            <img src="${rSrcPath }/${article.planitemImg }"  alt="" />
+          </div>  
             <p>
               <a href="${contextPath}/article/${article.articleId}"><strong><font style="font-size: 12pt; color: #3B0B0B">${article.title }</font></strong></a>
               <br> <small>${article.regdate }</small>
             </p>
             <h3>
               <span class="label label1" >&nbsp;<i
-                class="fa fa-heart " aria-hidden="true"></i>&nbsp;&nbsp;${article.likecnt }
-              </span>&nbsp; <span class="label label2"><i
-                class="fa fa-eye " aria-hidden="true"></i>&nbsp;&nbsp;${article.viewcnt }</span>
+                class="fa fa-heart artLikecnt" ></i>${article.likecnt }
+              </span>&nbsp; <span class="label label2" "><i
+                class="fa fa-user " ></i>&nbsp;&nbsp;${article.viewcnt }</span>
             </h3>
            
           </div>

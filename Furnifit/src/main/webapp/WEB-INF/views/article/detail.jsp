@@ -15,9 +15,9 @@ border-style:hidden;
 margin-left:42%; 
 border-radius:5px; 
 font-weight:bold; 
-background-color: #DF3A01;
+background-color: #F79F81;
 color: white;  
-width: 18%; 
+width: 15%; 
 height:36px; 
 font-size: 13pt;
 }
@@ -60,10 +60,14 @@ div.panel {
 
 .artContent{
 text-align:center; 
-border: 0px solid; 
+border: 0px solid;
 font-weight: bold;
 resize: none; 
-border-color: #F6E3CE"
+border-color: #F6E3CE;
+background-color: transparent;
+width: 100%;
+font-size: 12pt;
+color: #610B0B;
 }
 
 .button2 {
@@ -149,11 +153,14 @@ width: 60px;
 height: 29px; 
 font-size: 9pt
 }
+
+
 .articleImg{
 width: 450px;
 margin: auto;
 display: block;
 }
+
 
 .articleImg img{
 width : 100%;
@@ -213,13 +220,13 @@ height: auto;
                <table id="shareForm">
                <tr >
                <div class="alert alert-warning" role="alert">
-            <strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;<input type="text" readonly="readonly"  value="&nbsp;${planItem.name}" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
+            <strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" readonly="readonly"  value="&nbsp;${planItem.name}" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
                   </div>
                </tr>
                
                <tr>
               <div class="alert alert-warning" role="alert">
-        <strong id="shareInfo">방크기 :</strong>&nbsp;&nbsp;<input readonly="readonly"  value="${planItem.length}" id="m" type="text">x <input readonly="readonly" value="${planItem.width}"  id="m" type="text" >x <input readonly="readonly"  value="${planItem.height}" id="m" type="text">
+        <strong id="shareInfo">방크기 :</strong>&nbsp;<input readonly="readonly"  value="${planItem.length}" id="m" type="text">x <input readonly="readonly" value="${planItem.width}"  id="m" type="text" >x <input readonly="readonly"  value="${planItem.height}" id="m" type="text">
               &nbsp;&nbsp;&nbsp; <strong id="shareInfo">(&nbsp;평 수 :&nbsp;</strong><input readonly="readonly" value="${planItem.acreage}"  id="acreage" type="text"> <strong id="shareInfo">평&nbsp;)</strong>
             </div>
                </tr>
@@ -241,12 +248,14 @@ height: auto;
                 <br>
 
                 
-                  <div class="row" style="margin-left: 26%">
-                <div style="border: 1px ; float: left; width: 400px;  height: 260px; border-color: #B40404; padding: 10px; margin: 0 auto;">
-                  <img src="images/plan.PNG" width="105%"  alt="" />
-                </div>
+                     
+        <br>
+        <br>
+                   <div class="planimgDiv" >
+        <img src="${rSrcPath }/${planItem.image}" style="width:100%;"  alt="" />
+                    </div>
+                 
          
-               </div> 
   
   <!-- 자세히보기-가구목록  -->
 <br>
@@ -303,8 +312,7 @@ height: auto;
 
           
           <!-- 글쓸곳 -->
-              <div class="row" style="text-align: center;">
-       
+           <div class="alert alert-warning row" role="alert" style="margin:auto; width: 500px">       
                 <textarea name="content" rows="8" cols="55" readonly="readonly"
             class="artContent" 
             >${article.content }</textarea>
