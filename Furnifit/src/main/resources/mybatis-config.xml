@@ -6,7 +6,7 @@
 <configuration> 
 	<typeAliases> 
 		<typeAlias type="com.furnifit.member.domain.Member" alias="member"/>
-		<typeAlias type="com.furnifit.member.domain.Coupon" alias="coupon"/>
+		<typeAlias type="com.furnifit.member.domain.Coupon" alias="Coupon"/>
 		<typeAlias type="com.furnifit.product.domain.Product" alias="Product"/>
 		<typeAlias type="com.furnifit.productimg.domain.ProductImg" alias="ProductImg"/>
 		<typeAlias type="com.furnifit.orderitems.domain.Orderitems" alias="Orderitems"/>

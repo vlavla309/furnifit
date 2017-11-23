@@ -97,7 +97,19 @@
                     <td>${coupon.serial}</td>
                     <td>${coupon.discountRate}%</td>
                     <td>${coupon.expirationDate}</td>
-                    <td class="textFont"><span id="textColor2" class="badge bg-red">${coupon.status }</span></td>
+                    
+                    <c:choose>
+                      <c:when test="${coupon.status == '사용가능'}">
+                        <td class="textFont"><span class="badge badge-primary">${coupon.status}</span></td>
+                      </c:when>
+                      <c:when test="${coupon.status == '사용완료'}">
+                        <td class="textFont"><span id="textColor2" class="badge">${coupon.status}</span></td>
+                      </c:when>
+                      <c:otherwise>
+                        <td class="textFont"><span class="badge badge-danger">${coupon.status}</span></td>
+                      </c:otherwise>
+                    </c:choose>
+
                   </tr>
             </c:forEach> 
                   </tbody>

@@ -31,7 +31,7 @@ public class MypageController {
 	private CouponService couponService;
 
 	// 마이페이지
-	@RequestMapping(value = "/mypage", method=RequestMethod.GET)
+	@RequestMapping(value = "", method=RequestMethod.GET)
 	public String mypage() {
 		log.debug("마이페이지");
 		return "mypage/mypage";
