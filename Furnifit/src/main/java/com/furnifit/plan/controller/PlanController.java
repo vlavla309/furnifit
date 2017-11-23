@@ -29,7 +29,6 @@ import com.furnifit.planitem.service.PlanItemService;
  *
  */
 @Controller
-@RequestMapping("/mypage/planlist")
 public class PlanController {
 	
 	private final int PAGE_SIZE = 10;  /** 페이지에 출력할 행의 수 */
@@ -45,7 +44,7 @@ public class PlanController {
 	private CouponService couponService;
 	
 	/** 배치도목록 리스트 */
-	@RequestMapping(value = "", method=RequestMethod.GET)
+	@RequestMapping(value = "/mypage/planlist", method=RequestMethod.GET)
 	public String listAll(Model model, HttpServletRequest request, Params params) throws Exception {
 		params.setPageSize(PAGE_SIZE);
 		params.setPagiSize(PAGI_SIZE);
@@ -81,9 +80,24 @@ public class PlanController {
 
 	
 	/** 배치도 항목 삭제 */
-//	@RequestMapping(value = "/{planId}/{planitemId}", method = RequestMethod.DELETE)
+//	@RequestMapping(value = "/mypage/planlist/{planId}/{planitemId}", method = RequestMethod.DELETE)
 //	public String remove(@PathVariable("planId") int planId, @PathVariable("planitemId") int planitemId)throws Exception{
 //		itemService.delete(planId, planitemId);
 //		return "redirect:/plan/plan-manage";	
 //	}
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * 배치도 작성 화면(김형주)
+	 */
+	@RequestMapping(value = "/plan/writer", method=RequestMethod.GET)
+	public String writer() throws Exception {
+		return "plan/writer";
+	}
 }
