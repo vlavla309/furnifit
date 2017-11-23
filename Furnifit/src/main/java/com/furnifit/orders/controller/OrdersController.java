@@ -57,9 +57,12 @@ public class OrdersController {
 	/** 주문 생성 */
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String create(Orders orders, Orderitems orderitem) throws Exception {
-		logger.info("-------------------------------------------create 시작");
+		logger.info(orders);
 		ordersService.create(orders);
 		itemService.create(orderitem);
+//		logger.info(orders.getUseCoupones());
+//		couponService.couponUpdate(orders.getUseCoupones());
+		
 		return "redirect:/order/order-list";
 	}
 	
@@ -67,38 +70,27 @@ public class OrdersController {
 	/** 주문목록 리스트  */
 	@RequestMapping(value = "", method=RequestMethod.GET)
 	public String listAll(Model model, HttpServletRequest request, Params params) throws Exception {
-		params.setPageSize(PAGE_SIZE);
-		params.setPagiSize(PAGI_SIZE);
 		
 		HttpSession session = request.getSession();   
 		Member member = (Member) session.getAttribute("login");
 		
+		// 페이징 리스트
+		params.setPageSize(PAGE_SIZE);
+		params.setPagiSize(PAGI_SIZE);
 		int totalRowCount = ordersService.pageCount();
 		
-		// 페이징 리스트
 		List<Orders> orderList = ordersService.listByParams(params);
-		for (Orders orders : orderList) {
-			logger.info(orders);
-		}
-		model.addAttribute("orderlist", orderList);
 		
 		PageBuilder pageBuilder = new PageBuilder(params, totalRowCount);
 		pageBuilder.build();
-		model.addAttribute("pageBuilder", pageBuilder);
-		
 		
 		List<Product> proList = proService.list();
-		for (Product product : proList) {
-			logger.info(product);
-		}
-		
 		List<ProductImg> imgList = imgDao.list();
-		for (ProductImg productImg : imgList) {
-			logger.info(productImg);
-		}
+//		List<Coupon> couponList =  couponService.read(member.getEmail());
+		List<Coupon> couponList =  couponService.readAvailable(member.getEmail());
 		
-		List<Coupon> couponList =  couponService.read(member.getEmail());
-		
+		model.addAttribute("orderlist", orderList);
+		model.addAttribute("pageBuilder", pageBuilder);
 		model.addAttribute("prolist", proList);
 		model.addAttribute("imglist", imgList);
 		model.addAttribute("couponlist", couponList);
@@ -115,38 +107,18 @@ public class OrdersController {
 		Member member = (Member) session.getAttribute("login");
 		
 		List<Orderitems> itemList = itemService.read(orderId);
-		for (Orderitems items : itemList) {
-			logger.info(items);
-		}
-		
 		List<Product> proList = proService.list();
-		for (Product product : proList) {
-			logger.info(product);
-		}
-		
 		List<Orders> orderList = ordersService.listByParams(params);
-		for (Orders orders : orderList) {
-			logger.info(orders);
-		}
-		model.addAttribute("orderlist", orderList);
-		
 		List<Orders> priceList = ordersService.price(orderId);
-		for (Orders price : priceList) {
-			logger.info(price);
-		}
-		
 		List<ProductImg> imgList = imgDao.list();
-		for (ProductImg productImg : imgList) {
-			logger.info(productImg);
-		}
 		
 		model.addAttribute("prolist", proList);
 		model.addAttribute("itemlist", itemList);
+		model.addAttribute("orderlist", orderList);
 		model.addAttribute("orderlist", orderList);
 		model.addAttribute("pricelist", priceList);
 		model.addAttribute("imglist", imgList);
 		
 		return "order/order-info";
 	}
-
 }

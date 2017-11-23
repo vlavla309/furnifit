@@ -65,9 +65,6 @@ public class OrderitemsController {
 		List<ProductImg> imgList = imgDao.list();
 		List<Coupon> couponList =  couponService.readAvailable(member.getEmail());
 		
-//		Coupon coupon = new Coupon();
-//		couponService.couponUpdate(coupon);
-		
 		model.addAttribute("prolist", product1);	
 		model.addAttribute("itemlist", list);
 		model.addAttribute("imglist", imgList);
@@ -76,10 +73,10 @@ public class OrderitemsController {
 	}
 	
 	@RequestMapping(value = "/{planitemId}", method = RequestMethod.POST)
-	public String registPOST(@PathVariable("planitemId") int planitemId, Orderitems orderitems, Orders order) throws Exception {
-		logger.info(planitemId);
+	public String registPOST(@PathVariable("planitemId") int planitemId, Orderitems orderitems, Orders order, Coupon coupon) throws Exception {
+		logger.info("planitemId : "+planitemId);
 		ordersrv.create(order);
-		logger.info(order.getOrderId());
+		logger.info("order.getOrderId() : "+order.getOrderId());
 		logger.info(orderitems);
 		
 		for (int i = 0; i < orderitems.getProductIds().length; i++) {
@@ -87,6 +84,10 @@ public class OrderitemsController {
 			logger.info(item);
 			itemsService.create(item);
 		}
+		
+		logger.info("coupon.getSerial() : "+coupon.getSerial());
+		couponService.couponUpdate(coupon);
+		
 		return "redirect:/order/order-list";
 	}
 	

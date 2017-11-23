@@ -70,22 +70,33 @@ $(function() {
  	$("#coupon").text("적용된 쿠폰이 없습니다.");
     $("select[name=sale]").bind('change', function (event) {
  	    var rate = $(this).val();
+ 	    var rateht = $(this).val();
+ 	    
  		var sel = document.getElementById("sel");
- 	  	var selVal = sel.options[sel.selectedIndex].value;
+ 	  	var selVal = sel.options[sel.selectedIndex].text;	//var selVal2 = sel.options[sel.selectedIndex].val;
+ 	    var serialNum = 0;
  	  	
  		if(selVal != "---쿠폰 선택---"){
      	 $("#coupon").text(rate.split(".")[0]+"% 쿠폰이 적용되었습니다.");
+     	
+     	  serialNum = selVal.split(")")[0];		// 시리얼번호 split
      	  var sum = 0;
           var price = $(".count").parent().next().next();
           for (var i = 0; i < price.length; i++) {
           	sum = Math.floor(sum +  parseInt($(price[i]).text()) * ((100 - rate) * 0.01));
           }  
           $("#total").text(sum + "원");
+          
           $("input[name=price]").val(sum);
+          $("input[name=useCoupones]").val(serialNum);
+          $("input[name=serial]").val(serialNum);
  	   }else{
    		 $("#coupon").text("적용된 쿠폰이 없습니다.");
    		 totalSum();
+   		 
    		 $("input[name=price]").val(sum);
+   		 $("input[name=useCoupones]").val(serialNum);
+   		 $("input[name=serial]").val(serialNum);
    	   }
    }); 
     
@@ -190,12 +201,15 @@ $(function() {
             <div class="col-sm-12">
               <div class="form-group">
                 <label for="firstname">쿠폰 상세정보&nbsp;</label>
-                <select name=sale id=sel>
+                <select name="sale" id="sel">
                   <option selected>---쿠폰 선택---</option>
                    <c:forEach items="${couponlist}" var="coupon">
-                      <option value="${coupon.discountRate}" class="rate" name="discountRate"> ${coupon.discountRate}% 할인쿠폰</option>
+                      <option value="${coupon.discountRate}" class="rate" name="discountRate">${coupon.serial}) ${coupon.discountRate}% 할인쿠폰</option>
                    </c:forEach>
-                </select><br><br>
+                </select><br><br><input type="hidden" name="useCoupones" value="0">
+                <c:forEach items="${couponlist}" var="coupon">
+                  <input type="hidden" name="serial" value="${coupon.serial}">
+                </c:forEach>
                 <div class="box coupon">
                   <div class="table-responsive" style="margin-left: 20px">
                     <table class="table">
@@ -220,7 +234,7 @@ $(function() {
                       <input type="hidden" name="email" value="${login.email}">
                       <tr><br><br><td><p class="text-muted"><strong>${itemlist.size()}종류의 가구를 주문합니다.</strong></p></td></tr>
                       <tr><td style="color: red"><h3>총 합계</h3></td></tr>
-                      <tr><td><h3><span id="total">원</span><input type = "hidden" name="price"></h3></td></tr>
+                      <tr><td><h3><span id="total">원</span><input type="hidden" name="price"></h3></td></tr>
                     </tbody>
                   </table>
                 </div>

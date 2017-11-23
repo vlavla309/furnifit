@@ -11,6 +11,7 @@
     	WHERE e.email = #{email}
     </select>
     
+    <!-- 사용 가능한 쿠폰 확인  -->
     <select id="readAvailable" parameterType="String" resultType="Coupon">
     	SELECT e.serial, c.discount_rate*100 AS discountRate, TO_CHAR(e.expiration_date, 'YYYY-MM-DD') AS expirationDate , e.status
     	FROM   coupones c JOIN offer_coupones e
@@ -22,12 +23,12 @@
     </select>
 	
    <!-- 사용된 쿠폰 used_date, status 변경 -->
-   <update id="couponUpdate" parameterType="Coupon">
+   <update id="couponUpdate" parameterType="int">
        	UPDATE offer_coupones
      	<set>
-			<if test="used_date != null">used_date = #{userDate},</if>
-			<if test="status != null">status = #{status},</if>
-		</set>
+			<if test="usedDate == null">used_date = SYSDATE,</if>
+			status = '사용완료'
+		</set>  
 		WHERE serial = #{serial}
    </update>
 	

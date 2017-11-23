@@ -70,4 +70,14 @@ public class OrdersServiceImpl implements OrdersService {
 	public List<Orders> price(int orderId) throws Exception {
 		return dao.price(orderId);
 	}
+
+	/**
+	 * 적용한 쿠폰 시리얼 번호 변경
+	 * @param orders
+	 * @return 
+	 */
+	@Override
+	public void serialUpdate(Orders orders) throws Exception {
+		dao.serialUpdate(orders);
+	}
 }

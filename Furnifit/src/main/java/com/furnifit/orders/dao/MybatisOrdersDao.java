@@ -72,4 +72,14 @@ public class MybatisOrdersDao implements OrdersDao {
 	public List<Orders> price(int orderId) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".price", orderId);
 	}
+
+	/**
+	 * 적용한 쿠폰 시리얼 번호 변경
+	 * @param orders
+	 * @return 
+	 */
+	@Override
+	public void serialUpdate(Orders orders) throws Exception {
+		sqlSession.update(NAMESPACE + ".serialUpdate", orders);
+	}
 }
