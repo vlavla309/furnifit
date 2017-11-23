@@ -73,6 +73,16 @@ height: 200px;
 width: 100%;
 height: 100%;
 }
+
+.artBoardTitle{
+font-size: 23pt; 
+color: #8A4B08;
+}
+
+.artListTitle{
+font-size: 12pt;
+color: #3B0B0B;
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -104,7 +114,7 @@ $(document).ready(function(){
 
     <div class="blog-heading w3layouts">
 
-      <strong><font style="font-size: 23pt; color: #8A4B08">공유배치도
+      <strong><font class="artBoardTitle">공유배치도
           게시판</font></strong>
       <p>회원들이 작성한 배치도를 공유할수 있는 게시판입니다.</p>
       <br>
@@ -112,7 +122,6 @@ $(document).ready(function(){
       <br>
       
    <form name="listForm" id="listForm"  method="get" action="${contextPath }/article">     
-      <input type="hidden" name="page" value="${pb.params.page}"> 
       
       <div class="form-inline col-md-5 col-md-offset-8">
         <span><select  name="acreage" id="acreage" class="selectBox">
@@ -141,10 +150,10 @@ $(document).ready(function(){
           <br>
           <div class="information-grid-info articleDiv2" >
           <div class="planDiv">
-            <img src="${rSrcPath }/${article.planitemImg }"  alt="" />
+            <a href="${contextPath}/article/${article.articleId}"><img src="${rSrcPath }/${article.planitemImg }"  alt="" /></a>
           </div>  
             <p>
-              <a href="${contextPath}/article/${article.articleId}"><strong><font style="font-size: 12pt; color: #3B0B0B">${article.title }</font></strong></a>
+              <a href="${contextPath}/article/${article.articleId}"><strong><font class="artListTitle">${article.title }</font></strong></a>
               <br> <small>${article.regdate }</small>
             </p>
             <h3>

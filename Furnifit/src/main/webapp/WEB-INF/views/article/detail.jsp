@@ -186,6 +186,44 @@ display: block;
 width : 100%;
 height: auto;
 }
+.artContainer{
+width: 900px; 
+border: 3px solid; 
+border-color: #F6E3CE; 
+padding: 40px;
+}
+
+.artPlanitemName{
+width:23%;  
+height: 12%; 
+background-color: transparent; 
+font-weight:bold; 
+border: none; 
+font-size:11pt; 
+color: #F7BE81;
+}
+.artPlanitemEmail{
+width:23%;  
+height: 12%; 
+background-color: transparent; 
+font-weight:bold; 
+border: none; 
+font-size:11pt; 
+color: #F7BE81;
+}
+
+.planimgDiv img{
+width: 100%;
+}
+
+.furnitureList{
+background-color: white;
+}
+.artBoxFooter{
+float: right;
+}
+
+
 
 
 </style>
@@ -211,12 +249,12 @@ height: auto;
  
  </form>  
    <!-- blog -->
-      <div class="blog"  style="background-color: white" >
+      <div class="blog"   >
          <!-- container -->
-         <div class="container" style="width: 900px; border: 3px solid; border-color: #F6E3CE; padding: 40px"  >
+         <div class="container artContainer" >
          
                   
-        <div class="box-footer" style="float: right">
+        <div class="box-footer artBoxFooter" >
         <c:if test="${article.email == login.email}">
                   <a href="${contextPath }/article/update/${article.articleId}" type="button"><button type="submit" id="topbtn" class="modifyBtn" >MODIFY</button></a>
          <button type="submit"  id="topbtn" class="deleteBtn">DELETE</button>
@@ -227,7 +265,7 @@ height: auto;
   
   </div>
   <br>
-            <div class="blog-heading w3layouts" style="margin-top: 30px" >
+            <div class="blog-heading w3layouts"  >
             
             
             <!-- 여기서 내용을 채운다 -->
@@ -240,7 +278,7 @@ height: auto;
                <table id="shareForm">
                <tr >
                <div class="alert alert-warning" role="alert">
-            <strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" readonly="readonly"  value="&nbsp;${planItem.name}" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
+            <strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" readonly="readonly"  value="&nbsp;${planItem.name}" class="artPlanitemName">
                   </div>
                </tr>
                
@@ -252,7 +290,7 @@ height: auto;
                </tr>
                <tr>
                <div class="alert alert-warning" role="alert">
-        <strong id="shareInfo">작성자 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input readonly="readonly"  value="${login.email}"  type="text" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
+        <strong id="shareInfo">작성자 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input readonly="readonly"  value="${login.email}"  type="text" class="artPlanitemEmail" >
             </div>
                </tr>
                <tr>
@@ -273,17 +311,17 @@ height: auto;
         <br>
         
                    <div class="planimgDiv" >
-        <img src="${rSrcPath }/${planItem.image}" style="width:100%;"  alt="" />
+        <img src="${rSrcPath }/${planItem.image}"  alt="" />
                     </div>
                  
          
   
   <!-- 자세히보기-가구목록  -->
 <br>
-<button class="accordion" class="col-md-2" style="margin-left: 60%; margin-top: 10px">&nbsp;자세히보기 ▼</button>
+<button class="accordion" class="col-md-2 artDetailView" >&nbsp;자세히보기 ▼</button>
 
 
-<div class="bs-docs-example wow fadeInUp animated panel" data-wow-delay=".5s" style="background-color: white">
+<div class="bs-docs-example wow fadeInUp animated panel furnitureList" data-wow-delay=".5s" >
             <table class="table table-hover">
               <thead>
                 <tr >

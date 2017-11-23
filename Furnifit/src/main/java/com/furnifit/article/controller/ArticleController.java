@@ -178,6 +178,7 @@ public class ArticleController {
 		 for (Furniture f : list) {
 			prdList.add(service.readProduct(f.getProductId()));
 		}
+		
 		 
 		 model.addAttribute("product",prdList); 
 		 model.addAttribute("planItem", planItem);
@@ -198,6 +199,8 @@ public class ArticleController {
 
 		 
 		String[] files = article.getFiles();
+		
+		if(files == null) {return "success";}
 		
 		for (String fullName : files) {
 			Map<String, Object> map = new HashMap<String, Object>();
