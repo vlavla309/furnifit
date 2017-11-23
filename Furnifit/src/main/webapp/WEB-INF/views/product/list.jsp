@@ -181,6 +181,8 @@ var find = false;
 				
 				to_ajax();
 			}else{
+				$('#min').val("0")
+				$('#max').val("0")
 				$('.pricebtna').text('적용하기')
 				$(".price").removeAttr('disabled');
 			}
@@ -203,6 +205,9 @@ var find = false;
 				
 				to_ajax();
 			}else{
+				$('input[name=maxWidth]').val("0")
+				$('input[name=maxLength]').val("0")
+				$('input[name=maxHeight]').val("0")
 				$('.sizebtn').text('적용하기')
 				$(".size").removeAttr('disabled');
 				to_ajax();
@@ -212,14 +217,22 @@ var find = false;
 		/* search버튼을 누르면, 검색! ajax는 추후에  */
 		$(document).on("click", ".btn-sm",function(event) {
 			$('input[name=keyword]').val($('#keyword').val())
+			$('#keyword').val("")
 			to_ajax();
 		});
 		
+		/* 정렬 */
 		$('.target').change(function() {
 			$('input[name=sort]').val($(this).val())
 			to_ajax();
 		});
 		
+		/* 더보기 버튼을 누르면 page size가 늘어남*/
+		$(document).on("click", "#add",function(event) {
+			event.preventDefault();
+			$('input[name=pageSize]').val(Number($('input[name=pageSize]').val())+ 6)
+			to_ajax();
+		});
 		
 		//핸들바 템플릿 가져오기
 		var source = $("#entry-template").html(); 
@@ -237,6 +250,7 @@ var find = false;
 				data : formData,
 				success : function(data) {
 					console.log(data)
+					$('input[name=keyword]').val("")
 					var html = template(data);
 					$('.information-grids').empty();
 					$('.information-grids').append(html);
@@ -301,7 +315,7 @@ var find = false;
 							<li>
 								<div class="col-md-2">
 									<select class="form-control input-sm target">
-										<option value="total">전체</option>
+										<option value="total">정렬</option>
 										<option value="height">높은가격순</option>
 										<option value="low">낮은가격순</option>
 										<option value="new">신상품순</option>
@@ -320,6 +334,7 @@ var find = false;
 					<th scope="row">카테고리</th>
 					<td>
 						<ul id = "category">
+							<li><a class="categorya">전체</a></li>
 							<c:forEach items="${categorylist}" var="category">
 								<li><a class="categorya">${category.name}</a></li>
 							</c:forEach>
@@ -379,14 +394,15 @@ var find = false;
 			</tbody>
 		</table>
 		<form name ="filter" id = "filter">
-			<input type="hidden" name = "sort" value="">
-			<input type="hidden" name = "keyword" value="">
+			<input type="hidden" value="" name = "sort" >
+			<input type="hidden" value="" name = "keyword" >
 			<input type="hidden" name = "category" value="" id="cate">
 			<input type="hidden" name = "minPrice" value="0" id="min">
 			<input type="hidden" name = "maxPrice" value="0" id="max">
 			<input type="hidden" name="maxWidth" value="0">
 			<input type="hidden" name="maxLength" value="0">
 			<input type="hidden" name="maxHeight" value="0">
+			<input type="hidden" name = "pageSize" value = "6">
 		</form>
 		<div class="information-grids agile-info" id="wrapper">
 			<c:forEach items="${list}" var="product">
@@ -458,6 +474,14 @@ var find = false;
 		</div>
 	</div>
 	<!-- //container -->
+	<div class = "row">
+		<div class="col-md-12">
+			<div class="text-center">
+				<a class="btn btn-default btn-lg" id = "add"><i class="fa fa-angle-down  fa-2x" aria-hidden="true"></i> 더보기</a>
+			</div>
+		</div>
+	</div>
+	
 </div>
 <!-- //blog -->
 <%@ include file="../include/footer.jsp"%>

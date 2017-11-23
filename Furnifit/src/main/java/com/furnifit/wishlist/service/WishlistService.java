@@ -34,5 +34,7 @@ public interface WishlistService {
 	 * @param email
 	 * @return
 	 */
-	public List<Wishlist> userwishlist(String email);
+	public List<Wishlist> userwishlist(Map<String, String> map);
+	
+	public int listcount(String email);
 }

@@ -21,11 +21,22 @@
 		wishlist
 	</select>
 
-	<select id="userwishlist" resultType="Wishlist" parameterType="string">
+	<select id="userwishlist" resultType="Wishlist" parameterType="map">
 		SELECT email, product_id as "productId"
-		FROM wishlist
-		WHERE EMAIL = #{email}
-	</select>
+		FROM (SELECT CEIL(rownum / #{pageSize}) request_page, email, product_id
+			  FROM (SELECT email, product_id
+				    FROM wishlist
+				    WHERE EMAIL = #{email}))
+			  WHERE request_page = #{page}
+	</select> 
+
+	<!-- 검색 데이터 개수 -->
+  	<select id="userwishlistCount" parameterType="String" resultType="int">
+  		SELECT count(product_id)
+  		FROM wishlist
+		where email = #{email}
+  	</select>
+
 
 	<delete id="delete" parameterType="map">
 		DELETE FROM WISHLIST
