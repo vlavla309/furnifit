@@ -24,6 +24,8 @@ public class Product {
 	private String regdate;
 	private String[] files;
 	private List<ProductImg> imgs;
+	private String link; 
+	
 	/**
 	 * 생성자 
 	 */
@@ -61,6 +63,28 @@ public class Product {
 		this.regdate = regdate;
 		this.files = files;
 	}
+
+	
+	
+	public Product(int productId, String category, String name, String brand, int price, String color, int width,
+			int length, int height, String description, String regdate, String[] files, List<ProductImg> imgs,
+			String link) {
+		this.productId = productId;
+		this.category = category;
+		this.name = name;
+		this.brand = brand;
+		this.price = price;
+		this.color = color;
+		this.width = width;
+		this.length = length;
+		this.height = height;
+		this.description = description;
+		this.regdate = regdate;
+		this.files = files;
+		this.imgs = imgs;
+		this.link = link;
+	}
+
 
 	/**
 	 * setter getter
@@ -177,12 +201,21 @@ public class Product {
 	}
 
 
+	public String getLink() {
+		return link;
+	}
+
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", category=" + category + ", name=" + name + ", brand=" + brand
 				+ ", price=" + price + ", color=" + color + ", width=" + width + ", length=" + length + ", height="
 				+ height + ", description=" + description + ", regdate=" + regdate + ", files=" + Arrays.toString(files)
-				+ "]";
+				+ ", imgs=" + imgs + ", link=" + link + "]";
 	}
 	
 }

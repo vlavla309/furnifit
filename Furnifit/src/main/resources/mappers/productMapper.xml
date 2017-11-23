@@ -17,7 +17,8 @@
 		width,
 		length,
 		height,
-		color)
+		color,
+		link)
 		VALUES (#{productId},
 		#{name},
 		#{brand},
@@ -27,7 +28,8 @@
 		#{width},
 		#{length},
 		#{height},
-		#{color})
+		#{color},
+		#{link})
 	</insert>
 
 	<insert id="addAttach" parameterType="map">
@@ -55,6 +57,7 @@
 		length,
 		height,
 		description,
+		link,
 		regdate
 		FROM products
 	</select>
@@ -70,6 +73,7 @@
 		length,
 		height,
 		description,
+		link,
 		regdate
 		FROM (SELECT CEIL(rownum / 6) request_page,
 		product_id,
@@ -82,6 +86,7 @@
 		length,
 		height,
 		description,
+		link,
 		regdate
 		FROM (SELECT product_id,
 		category,
@@ -93,6 +98,7 @@
 		length,
 		height,
 		description,
+		link,
 		regdate
 		FROM products))
 		WHERE request_page = 1
@@ -109,6 +115,7 @@
 		length,
 		height,
 		description,
+		link,
 		regdate
 		FROM (SELECT CEIL(rownum / #{pageSize}) request_page,
 		product_id,
@@ -121,6 +128,7 @@
 		length,
 		height,
 		description,
+		link,
 		regdate
 		FROM (SELECT product_id,
 		category,
@@ -132,6 +140,7 @@
 		length,
 		height,
 		description,
+		link,
 		regdate
 		FROM products
 		<where>
@@ -207,6 +216,7 @@
 		length,
 		height,
 		description,
+		link,
 		REGDATE
 		FROM products
 		where product_id =
