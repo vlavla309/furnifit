@@ -402,7 +402,7 @@ var find = false;
 			<input type="hidden" name="maxWidth" value="0">
 			<input type="hidden" name="maxLength" value="0">
 			<input type="hidden" name="maxHeight" value="0">
-			<input type="text" name = "pageSize" value = "6">
+			<input type="hidden" name = "pageSize" value = "6">
 		</form>
 		<div class="information-grids agile-info" id="wrapper">
 			<c:forEach items="${list}" var="product">

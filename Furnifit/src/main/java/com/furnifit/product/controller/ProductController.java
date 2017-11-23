@@ -81,12 +81,10 @@ public class ProductController {
 	
 	@RequestMapping(value="", method= RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> list(Model model, ProductParams params, @RequestParam int pageSize) {
+	public Map<String, Object> list(Model model, ProductParams params) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		logger.info(params);
-		logger.info("pageSize : "+pageSize);
-		
 		List<Product> list = productsrv.searchlist(params);
 		List<Wishlist> wishlist = wishsrv.read();
 		map.put("list", list);
