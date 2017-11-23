@@ -47,4 +47,11 @@ public interface OrdersService {
 	 */
 	public List<Orders> price(int orderId) throws Exception;
 	
+	/**
+	 * 적용한 쿠폰 시리얼 번호 변경
+	 * @param orders
+	 * @return 
+	 */
+	public void serialUpdate(Orders orders) throws Exception;
+	
 }

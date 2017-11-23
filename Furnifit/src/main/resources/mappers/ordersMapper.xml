@@ -13,11 +13,14 @@
 				    (order_id,
 					 email,
 					 price,
-					 regdate)
+					 regdate,
+					 use_coupones)
 		VALUES 		(#{orderId},
 					 #{email},
 					 #{price},
-					 sysdate)
+					 SYSDATE
+					 <if test="useCoupones ==  0 ">, 0</if>
+					 <if test="useCoupones != 0 ">, #{useCoupones}</if>)
 	</insert>
 	
 	<!-- 주문목록 리스트 -->
@@ -25,7 +28,8 @@
 		SELECT order_id AS "orderId",
 			   email,
 			   price,
-			   regdate
+			   regdate,
+			   use_coupones AS "useCoupones"
 		FROM   orders
 		WHERE  email = #{email}
 	</select>
@@ -36,16 +40,19 @@
 		SELECT order_id AS "orderId",
 			   email,
 			   price,
-			   regdate
+			   regdate,
+			   use_coupones AS "useCoupones"
 		FROM   (SELECT CEIL(rownum / #{pageSize}) request_page,
 							order_id,
 			   				email,
 			   				price,
-							regdate
+							regdate,
+							use_coupones
 							FROM   (SELECT 	order_id,
 						   				   	email,
 						   				   	price,
-										   	regdate
+										   	regdate,
+										   	use_coupones
 								    FROM    	orders
 								    ORDER BY  	order_id DESC))
 		WHERE   request_page = #{page}
@@ -63,10 +70,19 @@
 		SELECT order_id AS "orderId",
 			   email,
 			   price,
-			   regdate
+			   regdate,
+			   use_coupones AS "useCoupones"
 		FROM   orders
 		WHERE  order_id = #{value}
 	</select>
+	
+   <!-- 적용한 쿠폰 시리얼 번호 변경
+   <update id="serialUpdate" parameterType="Orders">
+       	UPDATE orders
+     	<set>
+			use_coupones = #{useCoupones}
+		</set>
+   </update> -->
 	
 </mapper>
 

@@ -10,6 +10,7 @@ public class Orders{
 	private String email;
 	private int price;
 	private String regdate;
+	private int useCoupones;
 	
 	public Orders() {}
 	
@@ -18,12 +19,13 @@ public class Orders{
 		this.price = price;
 	}
 	
-	public Orders(int orderId, String email, int price, String regdate) {
+	public Orders(int orderId, String email, int price, String regdate, int useCoupones) {
 		super();
 		this.orderId = orderId;
 		this.email = email;
 		this.price = price;
 		this.regdate = regdate;
+		this.useCoupones = useCoupones;
 	}
 
 	public int getOrderId() {
@@ -58,8 +60,17 @@ public class Orders{
 		this.regdate = regdate;
 	}
 
+	public int getUseCoupones() {
+		return useCoupones;
+	}
+
+	public void setUseCoupones(int useCoupones) {
+		this.useCoupones = useCoupones;
+	}
+
 	@Override
 	public String toString() {
-		return "Order [orderId=" + orderId + ", email=" + email + ", price=" + price + ", regdate=" + regdate + "]";
+		return "Orders [orderId=" + orderId + ", email=" + email + ", price=" + price + ", regdate=" + regdate
+				+ ", useCoupones=" + useCoupones + "]";
 	}
 }
