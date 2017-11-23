@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import com.furnifit.article.dao.ArticleDao;
+import com.furnifit.article.domain.Article;
 import com.furnifit.like.dao.LikeDao;
 import com.furnifit.like.domain.Like;
 
@@ -17,10 +19,16 @@ public class LikeServiceImpl implements LikeService {
 	
 	@Inject
 	private LikeDao dao;
+	
+	@Inject
+	private ArticleDao artDao;
 
 	@Override
 	public void create(Like like) {
 		dao.create(like);
+		Article article = artDao.read(like.getArticleId());
+		article.setLikecnt(article.getLikecnt()+1);
+		artDao.artUpdate(article);
 
 	}
 

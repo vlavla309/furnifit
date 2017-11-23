@@ -15,8 +15,7 @@ public interface LikeDao {
 	
 	/**
 	 * 게시글안에 해당 회원 좋아요 읽어오기
-	 * @param articleId
-	 * @param email
+	 * @param map
 	 * @return
 	 */
 	public Like read(Map<String, Object> map);

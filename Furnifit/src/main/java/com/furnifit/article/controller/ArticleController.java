@@ -1,7 +1,10 @@
 package com.furnifit.article.controller;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -21,11 +24,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.furnifit.article.dao.ArticleDao;
 import com.furnifit.article.domain.Article;
 import com.furnifit.article.service.ArticleService;
 import com.furnifit.common.web.ArticleParams;
 import com.furnifit.common.web.PageBuilder;
 import com.furnifit.furniture.domain.Furniture;
+import com.furnifit.like.domain.Like;
+import com.furnifit.like.service.LikeService;
 import com.furnifit.member.domain.Member;
 import com.furnifit.planitem.domain.PlanItem;
 import com.furnifit.product.domain.Product;
@@ -47,6 +53,12 @@ public class ArticleController {
 	
 	@Inject
 	ArticleService service;
+	
+	@Inject
+	LikeService likeService;
+	
+	@Inject
+	ArticleDao dao;
 	
 	
 	@RequestMapping(value = "/register/{planitemId}", method = RequestMethod.GET)
@@ -127,6 +139,14 @@ public class ArticleController {
 		 article.setViewcnt(article.getViewcnt()+1);
 		 service.artUpdate(article);
 		 
+		 HttpSession session = request.getSession();
+		 Member member = (Member)session.getAttribute("login");
+		 
+		 Map<String, Object> map = new HashMap<String, Object>();
+		 map.put("articleId", article.getArticleId());
+		 map.put("email", member.getEmail());
+		 Like likes = likeService.read(map);
+		 
 		 
 		 PlanItem planItem = service.readPlanItem(article.getPlanitemId());
 		 
@@ -140,6 +160,7 @@ public class ArticleController {
 		 model.addAttribute("product",prdList); 
 		 model.addAttribute("planItem", planItem);
 		 model.addAttribute("article", article);
+		 model.addAttribute("likes", likes);
 		 
 		 
 		 return "article/detail";
@@ -169,9 +190,27 @@ public class ArticleController {
 	@RequestMapping(value = "/{articleId}", method = {RequestMethod.PATCH, RequestMethod.PUT, RequestMethod.POST})
 	@ResponseBody
 	public String update(Article article,  String content) throws Exception {
-
-			service.artUpdate(article);
 			
+		int articleId = article.getArticleId();
+		dao.deleteAttach(articleId);
+		
+	    dao.artUpdate(article);
+
+		 
+		String[] files = article.getFiles();
+		
+		for (String fullName : files) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			File f = new File(fullName);
+			String fileName = f.getName();
+			String filePath = f.getParent();
+			logger.info("----filename : " + fileName + " --> filePath : " + filePath+" ----");
+			map.put("name", fileName.replace("s_", ""));
+			map.put("path", filePath);
+			map.put("articleId", article.getArticleId());
+			
+			dao.replaceAttach(map);
+		}
 			
 		
 		 return "success";

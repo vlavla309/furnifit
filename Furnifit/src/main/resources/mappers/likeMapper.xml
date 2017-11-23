@@ -19,7 +19,7 @@
 	
 	<!--  상세읽기 -->
 	<select id="read" parameterType="map" resultType="Like">
-		 SELECT article_id AS "articleId" ,
+	 SELECT article_id AS "articleId" ,
 	 		email,
 	 		To_char(regdate, 'YYYY-MM-DD') regdate	
 	 FROM   likes
@@ -27,7 +27,7 @@
 	 AND    email = #{email}
 		
 	</select>
-	
+		
 	<!-- 게시글에대한 좋아요 개수 -->
 	 <select id="likeCount" parameterType="int" resultType="int">
   		SELECT count(*)

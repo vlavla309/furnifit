@@ -254,13 +254,9 @@ height: auto;
                 <!-- 배치도 이미지 -->
                 <br>
 
-                
-                  <div class="row" style="margin-left: 26%">
-                <div style="border: 1px ; float: left; width: 400px;  height: 260px; border-color: #B40404; padding: 10px; margin: 0 auto;">
-                  <img src="" width="105%"  alt="" />
-                </div>
-         
-               </div> 
+                <div class="planimgDiv" >
+        <img src="${rSrcPath }/${planItem.image}" style="width:100%;"  alt="" />
+                    </div>
   
   <!-- 자세히보기-가구목록  -->
 <br>
@@ -365,7 +361,7 @@ height: auto;
             <div style="margin-left: 40%" class="buttonList">
           
                 <button type="submit" class="button3" id="modifyBtn">저장하기</button>
-                <button type="reset" class="button3" id="cancelBtn">취소</button>
+                <a href="${contextPath }/article/${article.articleId}"><button type="button" class="button3" id="cancelBtn" >취소</button></a>
           </div>
        
             </div>
