@@ -80,12 +80,18 @@ public class ArticleDaoTest {
 	@Test
 	public void artUpdate() throws Exception {
 		
-		Article article = dao.read(24);
+		Article article = dao.read(51);
+		article.setContent("수정수정");
+		article.setTitle("수정제목");
+		article.setViewcnt(3);
+		dao.artUpdate(article);
+		
+		
 		
 		
 
 		
-		logger.info(article.getViewcnt());
+		logger.info(dao.read(51));
 			
 		}
 	

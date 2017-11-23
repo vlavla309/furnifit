@@ -100,6 +100,15 @@ public class MybatisArticleDao implements ArticleDao {
 	public int listSearchCount(ArticleParams params) {
 		return sqlSession.selectOne(namespace + ".listSearchCount", params);
 	}
+
+
+	@Override
+	public void likeUpdate(int articleId) {
+		sqlSession.update(namespace + ".likeUpdate", articleId);
+		
+	}
+	
+	
 	
 	
 

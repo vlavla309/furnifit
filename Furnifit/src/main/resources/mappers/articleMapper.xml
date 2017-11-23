@@ -112,7 +112,8 @@
      	<set>
 			<if test="title != null">title = #{title},</if>
 			<if test="content != null">content = #{content},</if>
-			<if test="viewcnt != null">viewcnt = #{viewcnt}</if>
+			<if test="viewcnt != null">viewcnt = #{viewcnt},</if>
+			<if test="likecnt != null">likecnt = #{likecnt}</if>
 		</set>
 		WHERE article_id = #{articleId}
    </update>
@@ -150,7 +151,7 @@
 			  						 a.planitem_id,
 			  		   				 likecnt,
 			 		 			     viewcnt,
-					   				 To_char(regdate, 'YYYY-MM-DD') regdate,
+					   				 regdate,
 			   		   				 title,
 			   		   				 content,
 			   		   				 p.image 
@@ -200,6 +201,15 @@
 	
   		
   	</select>
+  	
+  		  <!-- likecnt 변경하기위한 수정 -->
+   <update id="likeUpdate" parameterType="int">
+       	UPDATE likes
+     	<set>
+			<if test="likecnt != null">likecnt = #{likecnt}</if>
+		</set>
+		WHERE article_id = #{articleId}
+   </update>
 	
 	
 

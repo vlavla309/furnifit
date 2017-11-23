@@ -43,6 +43,21 @@
 		#{order_no},
 		sysdate)
 	</insert>
+	
+	<select id="productAll" resultType="Product">
+		SELECT product_id AS "productId",
+		category,
+		NAME,
+		brand,
+		price,
+		color,
+		width,
+		length,
+		height,
+		description,
+		regdate
+		FROM products
+	</select>
 
 	<select id="listAll" resultType="Product">
 		SELECT product_id AS "productId",

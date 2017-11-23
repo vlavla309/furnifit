@@ -10,14 +10,34 @@
 .align2 {
   text-align: center;
 }
+
+.contentDiv{
+margin:auto; 
+width: 630px;
+border-color: white;
+border-radius: 10px;
+}
+
 .likeArt{
 border-style:hidden; 
 margin-left:42%; 
 border-radius:5px; 
 font-weight:bold; 
-background-color: #F79F81;
+background-color: #FA8258;
 color: white;  
-width: 15%; 
+width: 18%; 
+height:36px; 
+font-size: 13pt;
+}
+
+.likeArt2{
+border-style:hidden; 
+margin-left:42%; 
+border-radius:5px; 
+font-weight:bold; 
+background-color: #610B0B;
+color: white;  
+width: 17%; 
 height:36px; 
 font-size: 13pt;
 }
@@ -66,8 +86,8 @@ resize: none;
 border-color: #F6E3CE;
 background-color: transparent;
 width: 100%;
-font-size: 12pt;
-color: #610B0B;
+font-size: 11pt;
+color: #DF3A01;
 }
 
 .button2 {
@@ -166,6 +186,44 @@ display: block;
 width : 100%;
 height: auto;
 }
+.artContainer{
+width: 900px; 
+border: 3px solid; 
+border-color: #F6E3CE; 
+padding: 40px;
+}
+
+.artPlanitemName{
+width:23%;  
+height: 12%; 
+background-color: transparent; 
+font-weight:bold; 
+border: none; 
+font-size:11pt; 
+color: #F7BE81;
+}
+.artPlanitemEmail{
+width:23%;  
+height: 12%; 
+background-color: transparent; 
+font-weight:bold; 
+border: none; 
+font-size:11pt; 
+color: #F7BE81;
+}
+
+.planimgDiv img{
+width: 100%;
+}
+
+.furnitureList{
+background-color: white;
+}
+.artBoxFooter{
+float: right;
+}
+
+
 
 
 </style>
@@ -191,12 +249,12 @@ height: auto;
  
  </form>  
    <!-- blog -->
-      <div class="blog"  style="background-color: white" >
+      <div class="blog"   >
          <!-- container -->
-         <div class="container" style="width: 900px; border: 3px solid; border-color: #F6E3CE; padding: 40px"  >
+         <div class="container artContainer" >
          
                   
-        <div class="box-footer" style="float: right">
+        <div class="box-footer artBoxFooter" >
         <c:if test="${article.email == login.email}">
                   <a href="${contextPath }/article/update/${article.articleId}" type="button"><button type="submit" id="topbtn" class="modifyBtn" >MODIFY</button></a>
          <button type="submit"  id="topbtn" class="deleteBtn">DELETE</button>
@@ -207,7 +265,7 @@ height: auto;
   
   </div>
   <br>
-            <div class="blog-heading w3layouts" style="margin-top: 30px" >
+            <div class="blog-heading w3layouts"  >
             
             
             <!-- 여기서 내용을 채운다 -->
@@ -220,7 +278,7 @@ height: auto;
                <table id="shareForm">
                <tr >
                <div class="alert alert-warning" role="alert">
-            <strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" readonly="readonly"  value="&nbsp;${planItem.name}" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
+            <strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" readonly="readonly"  value="&nbsp;${planItem.name}" class="artPlanitemName">
                   </div>
                </tr>
                
@@ -232,7 +290,7 @@ height: auto;
                </tr>
                <tr>
                <div class="alert alert-warning" role="alert">
-        <strong id="shareInfo">작성자 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input readonly="readonly"  value="${login.email}"  type="text" style="width:23%;  height: 12%; background-color: transparent; font-weight:bold; border: none; font-size:11pt; color: #F7BE81;">
+        <strong id="shareInfo">작성자 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input readonly="readonly"  value="${login.email}"  type="text" class="artPlanitemEmail" >
             </div>
                </tr>
                <tr>
@@ -251,18 +309,19 @@ height: auto;
                      
         <br>
         <br>
+        
                    <div class="planimgDiv" >
-        <img src="${rSrcPath }/${planItem.image}" style="width:100%;"  alt="" />
+        <img src="${rSrcPath }/${planItem.image}"  alt="" />
                     </div>
                  
          
   
   <!-- 자세히보기-가구목록  -->
 <br>
-<button class="accordion" class="col-md-2" style="margin-left: 60%; margin-top: 10px">&nbsp;자세히보기 ▼</button>
+<button class="accordion" class="col-md-2 artDetailView" >&nbsp;자세히보기 ▼</button>
 
 
-<div class="bs-docs-example wow fadeInUp animated panel" data-wow-delay=".5s" style="background-color: white">
+<div class="bs-docs-example wow fadeInUp animated panel furnitureList" data-wow-delay=".5s" >
             <table class="table table-hover">
               <thead>
                 <tr >
@@ -288,21 +347,19 @@ height: auto;
             
              
           </div>
-          <br>
-          <br>
-          <br>
-          <br>
-
- 
-
-      <!-- 파일첨부할곳 -->
+           <br>
+           <br>
+           <br>
+           
+      <!-- 게시판 이미지 업로드 -->
           <div class="box box-primary"  >
         <c:forEach items="${article.images}" var="articleImg">
         <br>
         <br>
-                   <div class="articleImg">
+        
+                  <div class="articleImg row">
          <img  src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"   >
-                    </div>
+                    </div> 
                   </c:forEach>
                  </div>
           <br>
@@ -312,16 +369,21 @@ height: auto;
 
           
           <!-- 글쓸곳 -->
-           <div class="alert alert-warning row" role="alert" style="margin:auto; width: 500px">       
-                <textarea name="content" rows="8" cols="55" readonly="readonly"
+           <div class="alert alert-warning row contentDiv" role="alert" >       
+                <textarea name="content" rows="10" cols="55" readonly="readonly"
             class="artContent" 
             >${article.content }</textarea>
                 
           </div>  
           <br>
           <br>
+          <br>
+          <br>
+          <br>
+          <br>
           
-          <button class="likeArt">좋아요♥&nbsp;<font size="2px">[${article.likecnt }]</font></button>
+          <button type="button" class="likeArt" id="like" name="like">추천하기♥&nbsp;&nbsp;<font size="3%">[${article.likecnt }]</font></button>
+           <button type="button" disabled="disabled" class="likeArt2" id="alreadyLike" name="like">&nbsp;추천됨&nbsp;ν<font size="3%" id="likeCount">&nbsp;&nbsp;&nbsp;[${article.likecnt }]</font></button>
    
          <br>
          <br>
@@ -392,6 +454,46 @@ $(document).ready(function(){
     formObj.submit();
   });
   
+
+  if(!"${likes.email}"){
+	 $("#alreadyLike").hide();
+  }else{
+	 $("#like").hide();
+    
+  }
+  
+  $("#like").on("click", function(){
+  		
+	  to_ajax();
+  });
+  
+  function to_ajax(){
+	  var articleId = "${article.articleId}";
+	  var email = "${login.email}";
+	  var likecnt = "${article.likecnt}"
+	
+	  $.ajax({
+        type:'post',
+        url:'${contextPath}/like',
+        headers: { 
+            "Content-Type": "application/json",
+            "X-HTTP-Method-Override": "POST" },
+        dataType:'text',
+        data: JSON.stringify({articleId:articleId, email:email, likecnt:likecnt}),
+        success:function(result){
+          console.log("result: " + result);
+          if(result == 'success'){
+             alert("추천완료!");
+             $("#like").hide();
+             $("#alreadyLike").show();
+             $("#likeCount").text("${article.likecnt +1}");
+    	
+          }
+        }
+     });
+  }
+  
+ 
 });
 </script>
 
@@ -418,6 +520,8 @@ $(".deleteBtn").on("click",function(){
        }
     });
 });
+
+
 </script> 
 
 <script>

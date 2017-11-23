@@ -17,6 +17,8 @@ import com.furnifit.article.domain.ArticleImg;
 import com.furnifit.common.web.ArticleParams;
 import com.furnifit.furniture.dao.FurnitureDao;
 import com.furnifit.furniture.domain.Furniture;
+import com.furnifit.like.dao.LikeDao;
+import com.furnifit.like.domain.Like;
 import com.furnifit.planitem.dao.PlanItemDao;
 import com.furnifit.planitem.domain.PlanItem;
 import com.furnifit.product.dao.ProductDao;
@@ -38,6 +40,7 @@ public class ArticleServiceImpl implements ArticleService {
 	
 	@Inject
 	private PlanItemDao planitemDao;
+	
 	
 	
 	@Override
@@ -72,12 +75,9 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public Article read(int articleId) throws Exception {
 		Article article = articleDao.read(articleId);
-		
 		article.setImages(articleDao.getAttach(articleId));
 		
-		for (ArticleImg img : article.getImages()) {
-			logger.info(img);
-		}
+		
 		
 		return article;
 	}
@@ -102,32 +102,10 @@ public class ArticleServiceImpl implements ArticleService {
 		return productDao.read(productId);
 	}
 
-	@Transactional
+	
 	@Override
-	public void artUpdate(Article article) {
-		articleDao.artUpdate(article);
-		
-		int articleId = article.getArticleId();
-		articleDao.deleteAttach(articleId);
-		 
-		String[] files = article.getFiles();
-		
-		if(files == null) {return;}
-		
-		for (String fullName : files) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			File f = new File(fullName);
-			String fileName = f.getName();
-			String filePath = f.getParent();
-			logger.info("----filename : " + fileName + " --> filePath : " + filePath+" ----");
-			map.put("name", fileName.replace("s_", ""));
-			map.put("path", filePath);
-			map.put("articleId", article.getArticleId());
-			
-			articleDao.replaceAttach(map);
-		}
-		
-		
+	public void artUpdate(Article article) {	
+	    articleDao.artUpdate(article);	
 	}
 	
 	@Override
@@ -148,6 +126,13 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleDao.listSearchCount(params);
 		
 	}
+
+	@Override
+	public void likeUpdate(int articleId) {
+		articleDao.likeUpdate(articleId);
+		
+	}
+	
 	
 	
 

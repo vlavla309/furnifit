@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.furnifit.brand.dao.BrandDao;
 import com.furnifit.brand.doamin.Brand;
+import com.furnifit.common.web.PageBuilder;
+import com.furnifit.common.web.Params;
 import com.furnifit.member.domain.Member;
 import com.furnifit.product.domain.Product;
 import com.furnifit.product.service.ProductService;
@@ -75,14 +77,28 @@ public class WishlistController {
 	}
 
 	@RequestMapping(value="", method=RequestMethod.GET)
-	public String mypagewishlist(Model model, HttpSession session) {
+	public String mypagewishlist(Model model, HttpSession session, Params param) {
 		
+		param.setPageSize(6);
+		param.setPagiSize(5);
+		
+		Map<String, String> map = new HashMap<>();
 		Member member = (Member) session.getAttribute("login");
-		List<Wishlist> wishlist = wishlistservice.userwishlist(member.getEmail());
-		List<Product> product = productsrv.list();
+		
+		map.put("pageSize", param.getPageSize()+"");
+		map.put("page", param.getPage()+"");
+		map.put("email", member.getEmail());
+		
+		List<Wishlist> wishlist = wishlistservice.userwishlist(map);
+		List<Product> product = productsrv.productList();
 		List<Brand> brandlist = branddao.list();
 		
-		
+		PageBuilder pb = new PageBuilder();
+		pb.setParams(param);
+		pb.setTotalRowCount(wishlistservice.listcount(member.getEmail()));
+		pb.build();
+		logger.info(pb.getCurrentStartPage() + " : " + pb.getCurrentEndPage());
+		model.addAttribute("pb", pb);
 		model.addAttribute("wishlist",wishlist);
 		model.addAttribute("list", product);
 		model.addAttribute("brandlist", brandlist);

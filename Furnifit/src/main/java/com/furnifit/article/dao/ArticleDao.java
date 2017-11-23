@@ -104,6 +104,14 @@ public interface ArticleDao {
 	 */
 	public int listSearchCount(ArticleParams params);
 	
+	/**
+	 * 좋아요 추가될때마다 likecnt 1씩 올리기위한 수정
+	 * @param articleId
+	 * @return
+	 */
+	public void likeUpdate(int articleId);
+	
+	
 	
 
 }
