@@ -16,6 +16,10 @@ border-style: hidden;
 border-radius: 10px;
 }
 
+.artLikecnt{
+width: 34px; 
+}
+
 .button2 {
 width: 90px;
 height: 28px;
@@ -42,15 +46,16 @@ min-width: 20px;
 
 .label1{
 background-color: #F79F81;
-width: 30px;
+width: 30%;
 
 }
 
 .label2{
 border: hidden;
 background-color: white;
-color: black;
+color: #610B0B;
 font-size: 10pt;
+font-weight: bold;
 }
 
 .selectBox{
@@ -144,9 +149,9 @@ $(document).ready(function(){
             </p>
             <h3>
               <span class="label label1" >&nbsp;<i
-                class="fa fa-heart " aria-hidden="true"></i>&nbsp;&nbsp;${article.likecnt }
-              </span>&nbsp; <span class="label label2"><i
-                class="fa fa-eye " aria-hidden="true"></i>&nbsp;&nbsp;${article.viewcnt }</span>
+                class="fa fa-heart artLikecnt" ></i>${article.likecnt }
+              </span>&nbsp; <span class="label label2" "><i
+                class="fa fa-user " ></i>&nbsp;&nbsp;${article.viewcnt }</span>
             </h3>
            
           </div>

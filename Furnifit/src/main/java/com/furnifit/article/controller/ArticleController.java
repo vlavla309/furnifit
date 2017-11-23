@@ -64,7 +64,6 @@ public class ArticleController {
 			prdList.add(pro);
 		}
 		model.addAttribute("product",prdList);	
-		logger.info(prdList);
 		
 		HttpSession session =  request.getSession();
 		Member member = (Member)session.getAttribute("login");
@@ -77,7 +76,6 @@ public class ArticleController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String registPOST(Article article) throws Exception {
 		
-		logger.info(article);
 		service.create(article);
 		return "redirect:/article";
 	}
@@ -126,8 +124,9 @@ public class ArticleController {
 	@RequestMapping(value = "/{articleId}", method = RequestMethod.GET)
 	public String read(@PathVariable int articleId,Furniture furniture,Product product,HttpServletRequest request, Model model) throws Exception {
 		 Article article = service.read(articleId);
-		// article.setViewcnt(article.getViewcnt() +1);
-		 //service.artUpdate(article);
+		 article.setViewcnt(article.getViewcnt()+1);
+		 service.artUpdate(article);
+		 
 		 
 		 PlanItem planItem = service.readPlanItem(article.getPlanitemId());
 		 
@@ -170,8 +169,7 @@ public class ArticleController {
 	@RequestMapping(value = "/{articleId}", method = {RequestMethod.PATCH, RequestMethod.PUT, RequestMethod.POST})
 	@ResponseBody
 	public String update(Article article,  String content) throws Exception {
-			logger.info("되.." + content);
-			logger.info(article);
+
 			service.artUpdate(article);
 			
 			

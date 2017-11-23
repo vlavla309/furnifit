@@ -65,7 +65,7 @@ public class ArticleDaoTest {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void listsearchCount() throws Exception {
 		int page = 1;
 		ArticleParams params = new ArticleParams();
@@ -74,11 +74,22 @@ public class ArticleDaoTest {
 		params.setAcreage("xs");
 		
 		logger.info(dao.listSearchCount(params));
-		
-		
-		
 			
 		}
+	
+	@Test
+	public void artUpdate() throws Exception {
+		
+		Article article = dao.read(24);
+		
+		
+
+		
+		logger.info(article.getViewcnt());
+			
+		}
+	
+	
 	}
 	
 	

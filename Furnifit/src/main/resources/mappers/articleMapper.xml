@@ -39,6 +39,7 @@
 	 		email,
 	 		planitem_id AS "planitemId",
 	 		likecnt,
+	 		viewcnt,
 	 		To_char(regdate, 'YYYY-MM-DD') regdate,
 	 		title,
 	 		content	

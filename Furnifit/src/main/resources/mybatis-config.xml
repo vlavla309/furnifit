@@ -24,5 +24,6 @@
 		<typeAlias type="com.furnifit.common.web.ProductParams" alias="ProductParams"/>
 		<typeAlias type="com.furnifit.common.web.Params" alias="Params"/>
 		<typeAlias type="com.furnifit.common.web.PageBuilder" alias="PageBuilder"/>
+		<typeAlias type="com.furnifit.like.domain.Like" alias="Like"/>
 	</typeAliases>
 </configuration>
