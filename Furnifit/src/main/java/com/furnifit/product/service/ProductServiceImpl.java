@@ -94,5 +94,15 @@ public class ProductServiceImpl implements ProductService {
 		return products;
 	}
 
+
+	@Override
+	public List<Product> productList() {
+		List<Product> products=productdao.productList();
+		for (Product product : products) {
+			product.setImgs(imgDao.productImg(product.getProductId()));
+		}
+		return products;
+	}
+
 	
 }

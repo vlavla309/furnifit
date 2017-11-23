@@ -118,7 +118,7 @@ var doneLoop = false;
 var find = false;
 
 	$(function() {
-			
+		
 		/* color 버튼을 누르면 조건검색 리스트에 추가됨. ajax는 추후에!, 클래스 속성을 btnd로 변경한 후에 icon delete를 추가로 해준다. */
 		$(document).on("click", ".colorBtn", function(event) {
 			event.preventDefault();

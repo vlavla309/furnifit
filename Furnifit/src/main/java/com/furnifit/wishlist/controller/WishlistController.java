@@ -90,7 +90,7 @@ public class WishlistController {
 		map.put("email", member.getEmail());
 		
 		List<Wishlist> wishlist = wishlistservice.userwishlist(map);
-		List<Product> product = productsrv.list();
+		List<Product> product = productsrv.productList();
 		List<Brand> brandlist = branddao.list();
 		
 		PageBuilder pb = new PageBuilder();
