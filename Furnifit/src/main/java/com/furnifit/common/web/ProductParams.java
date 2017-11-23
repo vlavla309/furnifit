@@ -20,7 +20,7 @@ public class ProductParams extends Params {
 	
 	
 	public ProductParams() {
-		super(1, 10, 10);
+		super(1, 6, 10);
 	}
 
 	public ProductParams(int page, int pageSize, int pageNum) {
@@ -28,8 +28,9 @@ public class ProductParams extends Params {
 	}
 	
 
-	public ProductParams(String sort, String keyword, String category, String[] brands, int minPrice, int maxPrice,
+	public ProductParams(int page, int pageSize, int pageNum, String sort, String keyword, String category, String[] brands, int minPrice, int maxPrice,
 			int maxWidth, int maxHeight, int maxLength, String[] colors) {
+		super(page, pageSize, pageNum);
 		this.sort = sort;
 		this.keyword = keyword;
 		this.category = category;

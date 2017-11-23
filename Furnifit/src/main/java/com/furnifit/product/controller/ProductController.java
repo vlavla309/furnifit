@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.furnifit.brand.dao.BrandDao;
@@ -80,10 +81,11 @@ public class ProductController {
 	
 	@RequestMapping(value="", method= RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> list(Model model, ProductParams params) {
+	public Map<String, Object> list(Model model, ProductParams params, @RequestParam int pageSize) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		logger.info(params);
+		logger.info("pageSize : "+pageSize);
 		
 		List<Product> list = productsrv.searchlist(params);
 		List<Wishlist> wishlist = wishsrv.read();

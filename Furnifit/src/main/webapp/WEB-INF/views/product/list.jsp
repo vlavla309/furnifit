@@ -181,6 +181,8 @@ var find = false;
 				
 				to_ajax();
 			}else{
+				$('#min').val("0")
+				$('#max').val("0")
 				$('.pricebtna').text('적용하기')
 				$(".price").removeAttr('disabled');
 			}
@@ -203,6 +205,9 @@ var find = false;
 				
 				to_ajax();
 			}else{
+				$('input[name=maxWidth]').val("0")
+				$('input[name=maxLength]').val("0")
+				$('input[name=maxHeight]').val("0")
 				$('.sizebtn').text('적용하기')
 				$(".size").removeAttr('disabled');
 				to_ajax();
@@ -216,11 +221,18 @@ var find = false;
 			to_ajax();
 		});
 		
+		/* 정렬 */
 		$('.target').change(function() {
 			$('input[name=sort]').val($(this).val())
 			to_ajax();
 		});
 		
+		/* 더보기 버튼을 누르면 page size가 늘어남*/
+		$(document).on("click", "#add",function(event) {
+			event.preventDefault();
+			$('input[name=pageSize]').val(Number($('input[name=pageSize]').val())+ 6)
+			to_ajax();
+		});
 		
 		//핸들바 템플릿 가져오기
 		var source = $("#entry-template").html(); 
@@ -390,6 +402,7 @@ var find = false;
 			<input type="hidden" name="maxWidth" value="0">
 			<input type="hidden" name="maxLength" value="0">
 			<input type="hidden" name="maxHeight" value="0">
+			<input type="text" name = "pageSize" value = "6">
 		</form>
 		<div class="information-grids agile-info" id="wrapper">
 			<c:forEach items="${list}" var="product">
@@ -461,6 +474,14 @@ var find = false;
 		</div>
 	</div>
 	<!-- //container -->
+	<div class = "row">
+		<div class="col-md-12">
+			<div class="text-center">
+				<a class="btn btn-default btn-lg" id = "add"><i class="fa fa-angle-down  fa-2x" aria-hidden="true"></i> 더보기</a>
+			</div>
+		</div>
+	</div>
+	
 </div>
 <!-- //blog -->
 <%@ include file="../include/footer.jsp"%>
