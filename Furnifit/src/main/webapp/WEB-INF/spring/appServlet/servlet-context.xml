@@ -52,9 +52,7 @@
 		</interceptor>
 		
 		<interceptor>
-			<mapping path="/"/>
-			<mapping path="/home/home"/>
-			
+			<mapping path="/wishlist"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>

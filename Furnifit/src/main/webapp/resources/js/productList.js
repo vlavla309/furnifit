@@ -224,18 +224,22 @@ var find = false;
 			event.preventDefault();
 			var wishbtn = $(this);
 			var productId = $(this).attr("href");
-			$.ajax({
-				url : contextPath+'/wishlist/' + productId,
-				type : 'post',
-				success : function(data) {
-					alert("추가성공")
-					wishbtn.attr('class', 'wishdeletebtn')
-					wishbtn.children().children().attr('class', 'fa fa-heart')
-				},
-				error : function(data){
-					console.log(data)
-				}
-			});
+			if(loginEmail == "" || loginEmail ==null){
+				alert("로그인을 해주세요")
+			}else{
+				$.ajax({
+					url : contextPath+'/wishlist/' + productId,
+					type : 'post',
+					success : function(data) {
+						alert("추가성공")
+						wishbtn.attr('class', 'wishdeletebtn')
+						wishbtn.children().children().attr('class', 'fa fa-heart')
+					},
+					error : function(data){
+						console.log(data)
+					}
+				});
+			}
 		});
 
 		/* 위시리스트를 버튼을 다시 누르면, 삭제가되고, 클래스 속성을 변경한다. 하트 아이콘을 비워져있는 아이콘으로 변경한다.*/
