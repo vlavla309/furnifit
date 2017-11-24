@@ -107,6 +107,12 @@ public class MybatisArticleDao implements ArticleDao {
 		sqlSession.update(namespace + ".likeUpdate", articleId);
 		
 	}
+
+
+	@Override
+	public List<Article> likecntcoupone() {
+		return sqlSession.selectList(namespace+".likecntcoupone");
+	}
 	
 	
 	

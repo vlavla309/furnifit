@@ -140,6 +140,11 @@ public class ArticleServiceImpl implements ArticleService {
 		articleDao.likeUpdate(articleId);
 		
 	}
+
+	@Override
+	public List<Article> likecntcoupone() {
+		return articleDao.likecntcoupone();
+	}
 	
 	
 	

@@ -97,4 +97,10 @@ public interface ArticleService {
 	 * @return
 	 */
 	public void likeUpdate(int articleId);
+	
+	/**
+	 * 추천수가 높은 게시글 작성자 3명에게 쿠폰지급
+	 * @return
+	 */
+	public List<Article> likecntcoupone();
 }
