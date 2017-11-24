@@ -2,7 +2,7 @@ package com.furnifit.member.dao;
 
 import java.util.Date;
 
-import com.furnifit.member.domain.Coupon;
+import com.furnifit.coupon.domain.Coupon;
 import com.furnifit.member.domain.LoginDTO;
 import com.furnifit.member.domain.Member;
 

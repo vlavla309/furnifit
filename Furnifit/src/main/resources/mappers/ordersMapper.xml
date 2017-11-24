@@ -76,13 +76,5 @@
 		WHERE  order_id = #{value}
 	</select>
 	
-   <!-- 적용한 쿠폰 시리얼 번호 변경
-   <update id="serialUpdate" parameterType="Orders">
-       	UPDATE orders
-     	<set>
-			use_coupones = #{useCoupones}
-		</set>
-   </update> -->
-	
 </mapper>
 

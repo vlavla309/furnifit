@@ -1,4 +1,4 @@
-package com.furnifit.member.service;
+package com.furnifit.coupon.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.furnifit.member.dao.CouponDao;
-import com.furnifit.member.domain.Coupon;
+import com.furnifit.coupon.dao.CouponDao;
+import com.furnifit.coupon.domain.Coupon;
 
 @Service
 public class CouponServiceImpl implements CouponService {
@@ -28,6 +28,11 @@ public class CouponServiceImpl implements CouponService {
 	@Override
 	public void couponUpdate(Coupon coupon) throws Exception {
 		daodao.couponUpdate(coupon);
+	}
+
+	@Override
+	public Coupon serialRead(int orderId) throws Exception {
+		return daodao.serialRead(orderId);
 	}
 	
 }

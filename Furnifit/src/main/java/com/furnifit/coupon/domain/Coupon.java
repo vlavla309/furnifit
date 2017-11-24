@@ -1,4 +1,4 @@
-package com.furnifit.member.domain;
+package com.furnifit.coupon.domain;
 
 public class Coupon {
 	private int serial;
