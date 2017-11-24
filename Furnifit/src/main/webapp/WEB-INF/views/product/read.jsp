@@ -24,24 +24,8 @@
 	src="${rSrcPath}magnific-popup/js/magnific-popup.js"></script>
 <script src="${rSrcPath}js/foundation.min.js"></script>
 <script src="${rSrcPath}js/setup.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script>
-	$(document).ready(function() {
-		$('[data-toggle="tooltip"]').tooltip();
-	});
-</script>
-<style>
-.coupon {
-	border: 2px dotted #F6CECE;
-	border-radius: 10px;
-}
-
-th{
-	color: #9E1616;
-}
-
-</style>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="${rSrcPath}js/productRead.js"></script>
 <!-- blog -->
 <div class="blog w3layouts">
 	<!-- container -->
