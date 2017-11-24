@@ -183,6 +183,10 @@ var find = false;
 		$(document).on("click", "#add",function(event) {
 			event.preventDefault();
 			$('input[name=pageSize]').val(Number($('input[name=pageSize]').val())+ 6)
+			var total = $('input[name = totalsize').val()
+			if(Number(total)<=Number($('input[name=pageSize]').val())){
+				$('#add').remove()
+			}
 			to_ajax();
 		});
 		

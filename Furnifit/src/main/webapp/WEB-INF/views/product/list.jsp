@@ -62,6 +62,7 @@
 			 {{/list}}
 </script>
 <script src="${rSrcPath}js/productList.js"></script>
+
 <!-- blog -->
 <div class="blog">
 	<!-- container -->
@@ -162,6 +163,7 @@
 			<input type="hidden" name="maxLength" value="0">
 			<input type="hidden" name="maxHeight" value="0">
 			<input type="hidden" name = "pageSize" value = "6">
+			<input type = "hidden" name = "totalsize" value="${totalsize}">
 		</form>
 		<div class="information-grids agile-info" id="wrapper">
 			<c:forEach items="${list}" var="product">
