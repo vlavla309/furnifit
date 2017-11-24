@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
                         
-<mapper namespace="com.furnifit.member.dao.CouponDao">
+<mapper namespace="com.furnifit.coupon.dao.CouponDao">
 	
     <select id="read" parameterType="String" resultType="Coupon">
-    	SELECT e.serial, c.discount_rate*100 AS discountRate, TO_CHAR(e.expiration_date, 'YYYY-MM-DD') AS expirationDate , e.status
+    	SELECT e.serial, e.coupone_id, c.discount_rate*100 AS discountRate, TO_CHAR(e.expiration_date, 'YYYY-MM-DD') AS expirationDate , e.status
     	FROM coupones c JOIN offer_coupones e
     	ON c.coupone_id = e.coupone_id
     	WHERE e.email = #{email}
@@ -31,5 +31,20 @@
 		</set>  
 		WHERE serial = #{serial}
    </update>
+   
+   <!-- 쿠폰 id가져오기 -->
+   <select id="idRead" resultType="Coupon">	
+    	select c.coupone_id
+	  from orders o, offer_coupones c
+	  where o.use_coupones = c.serial 
+   </select>
+   
+   	<!-- orderId로 상세읽기 -->
+	<select id="serialRead" parameterType="int" resultType="Coupon">		
+		select c.serial, c.status, s.discount_rate*100 AS discountRate
+		from  orders o, offer_coupones c, coupones s
+		where o.use_coupones = c.serial and c.coupone_id = s.coupone_id
+		and o.order_id = #{value}
+	</select>
 	
 </mapper>

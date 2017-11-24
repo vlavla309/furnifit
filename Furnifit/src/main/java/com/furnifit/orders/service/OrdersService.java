@@ -53,5 +53,4 @@ public interface OrdersService {
 	 * @return 
 	 */
 	public void serialUpdate(Orders orders) throws Exception;
-	
 }

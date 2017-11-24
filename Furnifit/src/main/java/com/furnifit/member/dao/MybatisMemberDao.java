@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.furnifit.member.domain.Coupon;
+import com.furnifit.coupon.domain.Coupon;
 import com.furnifit.member.domain.LoginDTO;
 import com.furnifit.member.domain.Member;
 

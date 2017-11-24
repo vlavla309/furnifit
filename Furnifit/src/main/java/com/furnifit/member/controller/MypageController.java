@@ -12,9 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.furnifit.member.domain.Coupon;
+import com.furnifit.coupon.domain.Coupon;
+import com.furnifit.coupon.service.CouponService;
 import com.furnifit.member.domain.Member;
-import com.furnifit.member.service.CouponService;
 import com.furnifit.member.service.MemberService;
 
 

@@ -1,4 +1,4 @@
-package com.furnifit.member.dao;
+package com.furnifit.coupon.dao;
 
 import java.util.List;
 
@@ -7,12 +7,12 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.furnifit.member.domain.Coupon;
+import com.furnifit.coupon.domain.Coupon;
 
 @Repository
 public class MybatisCouponDao implements CouponDao {
 	
-	private static final String NAMESPACE = "com.furnifit.member.dao.CouponDao";
+	private static final String NAMESPACE = "com.furnifit.coupon.dao.CouponDao";
 
 	@Inject
 	private SqlSession sqlSession;
@@ -31,5 +31,10 @@ public class MybatisCouponDao implements CouponDao {
 	@Override
 	public void couponUpdate(Coupon coupon) throws Exception {
 		sqlSession.update(NAMESPACE + ".couponUpdate", coupon);
+	}
+
+	@Override
+	public Coupon serialRead(int orderId) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".serialRead", orderId);
 	}
 }

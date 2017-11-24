@@ -74,7 +74,7 @@
                 <div class="table-responsive">
                   <table class="table">
                     <tbody>
-                      <tr><td><strong style="font-size: 18px">[가구 10% 할인쿠폰]이 적용되었습니다.</strong></td></tr>
+                      <tr><td><strong style="font-size: 18px">serialNo : ${coupon.serial}<br> [${coupon.discountRate}% 할인쿠폰]이 적용되었습니다.</strong></td></tr>
                     </tbody>
                 </table>
               </div>

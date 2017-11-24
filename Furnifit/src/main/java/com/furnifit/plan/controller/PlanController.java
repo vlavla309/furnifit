@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.furnifit.common.web.PageBuilder;
 import com.furnifit.common.web.Params;
-import com.furnifit.member.domain.Coupon;
+import com.furnifit.coupon.domain.Coupon;
+import com.furnifit.coupon.service.CouponService;
 import com.furnifit.member.domain.Member;
-import com.furnifit.member.service.CouponService;
 import com.furnifit.plan.domain.Plan;
 import com.furnifit.plan.service.PlanService;
 import com.furnifit.planitem.domain.PlanItem;

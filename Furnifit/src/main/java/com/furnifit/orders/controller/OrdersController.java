@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.furnifit.common.web.PageBuilder;
 import com.furnifit.common.web.Params;
-import com.furnifit.member.domain.Coupon;
+import com.furnifit.coupon.domain.Coupon;
+import com.furnifit.coupon.service.CouponService;
 import com.furnifit.member.domain.Member;
-import com.furnifit.member.service.CouponService;
 import com.furnifit.orderitems.domain.Orderitems;
 import com.furnifit.orderitems.service.OrderitemsService;
 import com.furnifit.orders.domain.Orders;
@@ -101,23 +102,34 @@ public class OrdersController {
 	
 	/** 주문항목 상세보기  */
 	@RequestMapping(value ="/{orderId}", method=RequestMethod.GET)
-	public String read(@PathVariable("orderId") int orderId, Model model, HttpServletRequest request, Params params) throws Exception {
+	public String read(@PathVariable("orderId") int orderId, Model model, HttpServletRequest request, Orders order, Params params) throws Exception {
 		
 		HttpSession session = request.getSession();   
 		Member member = (Member) session.getAttribute("login");
 		
 		List<Orderitems> itemList = itemService.read(orderId);
+		for (Orderitems orderitems : itemList) {
+			logger.info("orderitems : "+orderitems);
+		}
+		
 		List<Product> proList = proService.list();
 		List<Orders> orderList = ordersService.listByParams(params);
+		for (Orders orders : orderList) {
+			logger.info("orders---"+orders);	
+		}
+		
 		List<Orders> priceList = ordersService.price(orderId);
 		List<ProductImg> imgList = imgDao.list();
+		
+		// 적용된 쿠폰번호
+		Coupon coupon = couponService.serialRead(orderId);
 		
 		model.addAttribute("prolist", proList);
 		model.addAttribute("itemlist", itemList);
 		model.addAttribute("orderlist", orderList);
-		model.addAttribute("orderlist", orderList);
 		model.addAttribute("pricelist", priceList);
 		model.addAttribute("imglist", imgList);
+		model.addAttribute("coupon", coupon);
 		
 		return "order/order-info";
 	}

@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.furnifit.coupon.domain.Coupon;
+import com.furnifit.coupon.service.CouponService;
 import com.furnifit.furniture.dao.FurnitureDao;
 import com.furnifit.furniture.domain.Furniture;
-import com.furnifit.member.domain.Coupon;
 import com.furnifit.member.domain.Member;
-import com.furnifit.member.service.CouponService;
 import com.furnifit.orderitems.domain.Orderitems;
 import com.furnifit.orderitems.service.OrderitemsService;
 import com.furnifit.orders.domain.Orders;
