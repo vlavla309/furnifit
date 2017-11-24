@@ -70,7 +70,7 @@ public class ProductController {
 		List<Color> colorlist = colordao.list();
 		List<Brand> brandlist = branddao.list();
 		List<Category> categorylist = categorys.list();
-		
+		model.addAttribute("title", "productList - furnifit");
 		model.addAttribute("list",list);
 		model.addAttribute("wishlist",wishlist);
 		model.addAttribute("colorlist", colorlist);
@@ -83,6 +83,7 @@ public class ProductController {
 	@ResponseBody
 	public Map<String, Object> list(Model model, ProductParams params) {
 		
+		model.addAttribute("title", "productList - furnifit");
 		Map<String, Object> map = new HashMap<String, Object>();
 		logger.info(params);
 		List<Product> list = productsrv.searchlist(params);
@@ -97,7 +98,9 @@ public class ProductController {
 	
 	@RequestMapping(value="/{productid}", method= RequestMethod.GET)
 	public String read(Model model, @PathVariable("productid") int productid) {
-		model.addAttribute("product", productsrv.read(productid));
+		Product product = productsrv.read(productid);
+		model.addAttribute("product", product);
+		model.addAttribute("title", product.getName()+" - furnifit");
 		return "product/read";
 	}
 	
