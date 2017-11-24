@@ -36,8 +36,12 @@ import com.furnifit.member.domain.Member;
 import com.furnifit.planitem.domain.PlanItem;
 import com.furnifit.product.domain.Product;
 
-
-
+/**
+ *
+ *
+ * @author 박보라
+ *
+ */
 @RequestMapping("/article")
 @Controller
 public class ArticleController {
@@ -98,17 +102,22 @@ public class ArticleController {
 		params.setPageSize(PAGE_SIZE);
 		params.setPagiSize(PAGI_SIZE);
 		
+		
 		List<Article> articles = service.listByParams(params);
 		
 		model.addAttribute("list", articles);
 		
 		
-		
 		PageBuilder pb = new PageBuilder();
 		pb.setParams(params);
+		
 		pb.setTotalRowCount(service.listSearchCount(params));
+		
 		pb.build();
 		model.addAttribute("pb", pb);
+		
+		model.addAttribute("title", "Furnifit - Board" );
+		
 		 
 		 return "article/list";
 	}
@@ -161,6 +170,7 @@ public class ArticleController {
 		 model.addAttribute("planItem", planItem);
 		 model.addAttribute("article", article);
 		 model.addAttribute("likes", likes);
+		 model.addAttribute("title", article.getTitle() );
 		 
 		 
 		 return "article/detail";

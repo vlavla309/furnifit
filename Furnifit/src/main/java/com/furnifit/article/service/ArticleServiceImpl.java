@@ -23,6 +23,7 @@ import com.furnifit.planitem.dao.PlanItemDao;
 import com.furnifit.planitem.domain.PlanItem;
 import com.furnifit.product.dao.ProductDao;
 import com.furnifit.product.domain.Product;
+import com.furnifit.productimg.dao.ProductImageDao;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -40,6 +41,9 @@ public class ArticleServiceImpl implements ArticleService {
 	
 	@Inject
 	private PlanItemDao planitemDao;
+	
+	@Inject
+	private ProductImageDao imgDao;
 	
 	
 	
@@ -99,7 +103,11 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public Product readProduct(int productId) {
-		return productDao.read(productId);
+		Product product = productDao.read(productId);
+		product.setImgs(imgDao.productImg(productId));
+		
+		return product;
+		
 	}
 
 	

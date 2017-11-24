@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../include/header.jsp" %>
+<style></style>
 <style>
 .align {
   text-align: center;
@@ -11,11 +12,35 @@
   text-align: center;
 }
 
+
+.align3 {
+  text-align: center;
+
+}
+
 .contentDiv{
 margin:auto; 
 width: 630px;
 border-color: white;
 border-radius: 10px;
+}
+.artPrdImg{
+	width: 80px;
+	min-height: 30px;
+	display: block;
+	height: 70px;
+    margin: auto;
+}
+.artPrdImg img{
+width: 100%;
+height: 100%;
+}
+.artLink{
+width: 100px;
+color: black;
+background-color: transparent;
+box-shadow: none;
+border: 0px solid;
 }
 
 .likeArt{
@@ -23,7 +48,7 @@ border-style:hidden;
 margin-left:42%; 
 border-radius:5px; 
 font-weight:bold; 
-background-color: #FA8258;
+background-color: #B40404;
 color: white;  
 width: 18%; 
 height:36px; 
@@ -47,7 +72,7 @@ button.accordion {
     color: white;
     cursor: pointer;
     padding: 5px;
-    width: 15%;
+    width: 12%;
     border: none;
     text-align: left;
     outline: none;
@@ -56,10 +81,18 @@ button.accordion {
     border-radius: 8px;
 }
 
+.fFont{
+font-size: 13pt;
+}
+.table1{
+border-color: black;
+}
+
 button.accordion.active, button.accordion:hover {
     background-color: #F6E3CE; 
     border: 2;
 }
+
 
 div.panel {
     padding: 0 18px;
@@ -316,29 +349,89 @@ float: right;
                  
          
   
-  <!-- 자세히보기-가구목록  -->
+  <!-- 자세히보기-가구  -->
 <br>
-<button class="accordion" class="col-md-2 artDetailView" >&nbsp;자세히보기 ▼</button>
-
-
-<div class="bs-docs-example wow fadeInUp animated panel furnitureList" data-wow-delay=".5s" >
-            <table class="table table-hover">
+  <div class="grid_3 grid_5 wow fadeInUp animated" data-wow-delay=".5s">
+            <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+              <ul id="myTab" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">가구목록</a></li>
+                <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">후 기</a></li>                
+              </ul>
+              
+              <!-- 가구목록 상세 -->
+              
+              <div id="myTabContent" class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
+                 <table class="table table-hover table1" >
               <thead>
                 <tr >
-                  <th class="align2">상품번호</th>
-                  <th class="align2">상품명</th>
-                  <th class="align2">상품가격</th>
-                  <th class="align2">사이트바로가기</th>
+                  <th class="align3"><font class="fFont">상품번호</font></th>
+                  <th class="align3"><font class="fFont">상품명</font></th>
+                  <th class="align3"><font class="fFont">상품가격</font></th>
+                  <th class="align3"><font class="fFont">링크</font></th>
                 </tr>
               </thead>
                <c:forEach var="product" items="${product}" >
               <tbody style="text-align: cennter">
                 
                 <tr>
-                  <td class="align2">${product.productId }</td>
+                  <td class="align2">
+                  <c:forEach items="${product.imgs}" var="img">
+                  <div class="artPrdImg">
+          <img src="${rSrcPath}/productimg/${img.path}/${img.name}"/>
+                  </div>                
+                </c:forEach></td>
                   <td class="align2">${product.name }</td>
                   <td class="align2">${product.price }</td>
-                  <td class="align2">${product.brand }</td>
+                  <td class="align2"><a href="${product.link }"><button type="button" class="artLink" >바로가기</button></a></td>
+                </tr>
+               
+              </tbody>
+               </c:forEach>
+            </table>
+                </div>
+                <!-- 후기 상세 -->
+                
+                <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
+                <div class="box box-primary"  >
+        <c:forEach items="${article.images}" var="articleImg">
+        
+                  <div class="articleImg row">
+        <a class="img2" href="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"><img  src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"   ></a>
+                    </div> 
+                    </c:forEach>
+                 </div>
+                </div>
+                               
+                </div>
+              </div>
+            </div>
+          </div>
+
+<button class="accordion" class="col-md-2 artDetailView" >&nbsp;&nbsp;&nbsp;가구목록 ▼ </button>         
+<div class="bs-docs-example wow fadeInUp animated panel furnitureList" data-wow-delay=".5s" >
+            <table class="table table-hover table1" >
+              <thead>
+                <tr >
+                  <th class="align3"><font class="fFont">상품번호</font></th>
+                  <th class="align3"><font class="fFont">상품명</font></th>
+                  <th class="align3"><font class="fFont">상품가격</font></th>
+                  <th class="align3"><font class="fFont">링크</font></th>
+                </tr>
+              </thead>
+               <c:forEach var="product" items="${product}" >
+              <tbody style="text-align: cennter">
+                
+                <tr>
+                  <td class="align2">
+                  <c:forEach items="${product.imgs}" var="img">
+                  <div class="artPrdImg">
+					<img src="${rSrcPath}/productimg/${img.path}/${img.name}"/>
+                  </div>								
+								</c:forEach></td>
+                  <td class="align2">${product.name }</td>
+                  <td class="align2">${product.price }</td>
+                  <td class="align2"><a href="${product.link }"><button type="button" class="artLink" >바로가기</button></a></td>
                 </tr>
                
               </tbody>
@@ -347,25 +440,20 @@ float: right;
             
              
           </div>
-           <br>
-           <br>
-           <br>
+         
+  
            
       <!-- 게시판 이미지 업로드 -->
           <div class="box box-primary"  >
         <c:forEach items="${article.images}" var="articleImg">
-        <br>
-        <br>
         
                   <div class="articleImg row">
-         <img  src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"   >
+        <a class="img2" href="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"><img  src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"   ></a>
                     </div> 
-                  </c:forEach>
+                    </c:forEach>
                  </div>
-          <br>
-          <br>
-          <br>
-          <br>
+                 <div></div>
+         
 
           
           <!-- 글쓸곳 -->
@@ -443,6 +531,8 @@ float: right;
 </script>  
    
 <script>
+var abc = 0;
+
 $(document).ready(function(){
   
   var formObj = $("form[role='form']");
@@ -494,6 +584,22 @@ $(document).ready(function(){
   }
   
  
+  
+  $('.img2').bind('click', function(event){  //one은 한번만 실행된다.(확대 한번.)
+      var $target = $(this); // $(event.target);
+      
+      $target.width($target.width()*2);  // 나누기는 축소
+      $target.height($target.height()*2);
+      
+       abc++;
+       
+      if(abc>2){
+          $('.img2').unbind(); 
+      }
+      
+  });
+  
+ 
 });
 </script>
 
@@ -540,6 +646,22 @@ for (i = 0; i < acc.length; i++) {
     }
 }
 </script>  
+<script>
+var acc2 = document.getElementsByClassName("accordion2");
+var i;
+
+for (i = 0; i < acc2.length; i++) {
+    acc2[i].onclick = function(){
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+            panel.style.display = "none";
+        } else {
+            panel.style.display = "block";
+        }
+    }
+}
+</script> 
 
        
          

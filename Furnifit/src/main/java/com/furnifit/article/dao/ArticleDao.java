@@ -11,15 +11,10 @@ import com.furnifit.furniture.domain.Furniture;
 import com.furnifit.planitem.domain.PlanItem;
 import com.furnifit.product.domain.Product;
 
+
 /**
  *
- *
- * @author 박보라
- *
- */
-/**
- *
- *
+ * 공유게시판 dao
  * @author 박보라
  *
  */

@@ -165,6 +165,7 @@
          							   <when test="acreage == 'mm'"> and acreage BETWEEN 5 and 7 </when>
          							   <when test="acreage == 'll'"> and acreage BETWEEN 8 and 9 </when>
          							   <when test="acreage =='xl'">  and acreage >= 10 </when>
+         							   <otherwise> and acreage >= 1</otherwise>
          							   </choose> 
          							   </where>        							   								 
 									 ORDER BY 									 
@@ -181,8 +182,7 @@
   	<select id="listSearchCount" parameterType="ArticleParams" resultType="int">
   		SELECT count(article_id)
   		FROM articles a, planitems p
-  		<where>
-		and  a.planitem_id = p.planitem_id
+  		<where>	and  a.planitem_id = p.planitem_id
 		and article_id > 0
 		<choose>
         <when test="acreage == 'xs'"> and acreage BETWEEN 1 and 2 </when>

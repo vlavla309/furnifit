@@ -36,6 +36,14 @@ button.accordion {
     border-radius: 8px;
 }
 
+.artLink{
+width: 100px;
+color: black;
+background-color: transparent;
+box-shadow: none;
+border: 0px solid;
+}
+
 button.accordion.active, button.accordion:hover {
     background-color: #F6E3CE; 
     border: 2;
@@ -214,7 +222,7 @@ box-shadow: none;
                   <th class="align2">상품번호</th>
                   <th class="align2">상품명</th>
                   <th class="align2">상품가격</th>
-                  <th class="align2">사이트바로가기</th>
+                  <th class="align2">링크</th>
                 </tr>
               </thead>
                <c:forEach var="product" items="${product}" >
@@ -224,7 +232,7 @@ box-shadow: none;
                   <td class="align2">${product.productId }</td>
                   <td class="align2">${product.name }</td>
                   <td class="align2">${product.price }</td>
-                  <td class="align2">${product.brand }</td>
+                  <td class="align2"><a href="${product.link }"><button type="button" class="artLink" >바로가기</button></a></td>
                 </tr>
                
               </tbody>
