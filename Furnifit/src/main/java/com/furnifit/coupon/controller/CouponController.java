@@ -32,7 +32,7 @@ public class CouponController {
 	
 	private Logger logger = Logger.getLogger(CouponController.class);
 	//59 59 23 L * ? 매월 마지막 아무요일에 23시 59분 59초
-	@Scheduled(cron = "59 59 23 L * ?")
+	@Scheduled(cron = "00 00 00 1 * ?")
 	public void doA() {
 		List<Article> artlist = articlesrv.likecntcoupone();
 		int couponeId = 5;
