@@ -4,14 +4,77 @@
   border: 1px dashed;
   border-color: #F5D0A9;
 }
+.nav-tabs > li > a{ 
+margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    background-color: #B40404;
+    color: white;
+    font-weight: bold;
+}
 .align2 {
   text-align: center;
 }
-
-.furnitureTbody{
-text-align: cennter;
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+color: white;
+font-weight: bold;
+cursor: default;
+background-color: #F5D0A9;
+border: 0px solid;
+border-bottom-color: transparent;
 }
 
+.nav-tabs > li > a:hover{
+border-color: #FBF8EF;
+background-color: #F7F2E0;
+}
+
+
+.align3 {
+  text-align: center;
+
+}
+
+.contentDiv{
+margin:auto; 
+width: 630px;
+border-color: white;
+border-radius: 10px;
+}
+.artPrdImg{
+	width: 80px;
+	min-height: 30px;
+	display: block;
+	height: 70px;
+    margin: auto;
+}
+
+.artReview{
+border: 2px dashed #F5D0A9;
+width: 650px;
+margin: auto;
+}
+
+.artContent{
+width: 100%;
+margin-left: 120px;
+}
+
+.artContent textarea{
+text-align:center; 
+border: 0px solid;
+resize: none; 
+background-color: white;
+font-size: 11pt;
+color: black;
+margin: auto;
+}
+
+.artPrdImg img{
+width: 100%;
+height: 100%;
+}
 .artLink{
 width: 100px;
 color: black;
@@ -20,34 +83,40 @@ box-shadow: none;
 border: 0px solid;
 }
 
-.fileDrop {
-  width: 80%;
-  height: 100px;
-  border: 1px dotted gray;
-  background-color: lightslategrey;
-  margin: auto;
-}
-
-#acreage{
-width:4%;  
-height: 14%; 
-background-color: transparent; 
+.likeArt{
+border-style:hidden; 
+margin-left:42%; 
+border-radius:5px; 
 font-weight:bold; 
-border: none; 
-font-size:11pt; 
-color: #F7BE81;
-text-align: center;
+background-color: #DF0101;
+color: white;  
+width: 15%; 
+height:36px; 
+font-size: 13pt;
 }
 
+.furnitureTbody{
+text-align: cennter;
+}
 
-
+.likeArt2{
+border-style:hidden; 
+margin-left:42%; 
+border-radius:5px; 
+font-weight:bold; 
+background-color: #F79F81;
+color: white;  
+width: 17%; 
+height:36px; 
+font-size: 13pt;
+}
 
 button.accordion {
     background-color: #8A0808;
     color: white;
     cursor: pointer;
     padding: 5px;
-    width: 15%;
+    width: 12%;
     border: none;
     text-align: left;
     outline: none;
@@ -56,10 +125,18 @@ button.accordion {
     border-radius: 8px;
 }
 
+.fFont{
+font-size: 13pt;
+}
+.table1{
+border-color: black;
+}
+
 button.accordion.active, button.accordion:hover {
     background-color: #F6E3CE; 
     border: 2;
 }
+
 
 div.panel {
     padding: 0 18px;
@@ -77,21 +154,8 @@ div.panel {
   border-style: hidden;
   border-radius: 10px;
 }
-
-.artTitle{
-text-align:center; 
-font-weight:bold; 
-width: 55%; 
-height: 40px; 
-border: 1px solid #F5D0A9;
-}
-
-.artContent{
-text-align:center; 
-font-weight: bold;
-resize: none; 
-border: 1px solid;
-border-color: #F5D0A9;
+.nav-tabs{
+border-bottom: 0px solid;
 }
 
 .button2 {
@@ -107,17 +171,9 @@ border-color: #F5D0A9;
 padding: 3px;
 }
 
-.modifyContent{
-text-align: center;
-}
-
 #shareInfo{
 color: #DF0101;
 font-size: 9pt;
-}
-
-.furnitureList{
-background-color: white;
 }
 
 #m{
@@ -130,6 +186,18 @@ font-size:11pt;
 color: #F7BE81;
 text-align: center;
 }
+
+#acreage{
+width:4%;  
+height: 14%; 
+background-color: transparent; 
+font-weight:bold; 
+border: none; 
+font-size:11pt; 
+color: #F7BE81;
+text-align: center;
+}
+
 
 ul.dropdown-menu {
     top: 1.5cm;
@@ -164,11 +232,7 @@ font-size: 12pt;
 box-shadow: none;
 }
 
-.planimgDiv img{
-width: 100%;
-}
-
-.topbtn{
+#topbtn{
 border-style:hidden; 
 border-radius:10px; 
 background-color: #B40404;
@@ -177,26 +241,25 @@ width: 60px;
 height: 29px; 
 font-size: 9pt
 }
+
+
 .articleImg{
-width: 150px;
+width: 400px;
 margin: auto;
 display: block;
 }
+
 
 .articleImg img{
 width : 100%;
 height: auto;
 }
-
-.button3{
-  width: 80px;
-  height: 28px;
-  background-color: #61210B;
-  color: white;
-  border: 2;
-  border-style: hidden;
-  border-radius: 10px;
-  }
+.artContainer{
+width: 900px; 
+border: 3px solid; 
+border-color: #F6E3CE; 
+padding: 40px;
+}
 
 .artPlanitemName{
 width:23%;  
@@ -207,7 +270,6 @@ border: none;
 font-size:11pt; 
 color: #F7BE81;
 }
-
 .artPlanitemEmail{
 width:23%;  
 height: 12%; 
@@ -218,18 +280,22 @@ font-size:11pt;
 color: #F7BE81;
 }
 
-.artContainer{
-width: 900px; 
-border: 3px solid; 
-border-color: #F6E3CE; 
-padding: 40px;
+.planimgDiv img{
+width: 100%;
 }
 
-.popup{
+.furnitureList{
+background-color: white;
+}
+.artBoxFooter{
+float: right;
+}
+
+.popup {
 position: absolute;
 }
 
-.back{ 
+.back { 
 background-color: gray; 
 opacity:0.5; 
 width: 100%; 
@@ -244,10 +310,11 @@ opacity:1;
 boarder:1px; 
 margin: auto; 
 }
-
+     
 .show{
 position:relative;
 max-width: 1200px; 
 max-height: 800px; 
 overflow: auto;       
-     } 
+}
+
