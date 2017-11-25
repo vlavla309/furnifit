@@ -106,6 +106,13 @@ public interface ArticleDao {
 	 */
 	public void likeUpdate(int articleId);
 	
+	/**
+	 * 
+	 * 추천수가 높은 사용자 3명에게 쿠폰을 지급
+	 * @return
+	 */
+	public List<Article> likecntcoupone();
+	
 	
 	
 
