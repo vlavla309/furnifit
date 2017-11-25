@@ -42,50 +42,48 @@ public class OrderitemsController {
 	@Inject
 	private OrderitemsService itemsService;
 	@Inject
+	private OrdersService ordersService;
+	@Inject
+	private FurnitureDao furniDao;
+	@Inject
 	private ProductService proService;
 	@Inject
 	private ProductImageDao imgDao;
 	@Inject
 	private CouponService couponService;
-	@Inject
-	private FurnitureDao furniDao;
-	@Inject
-	private OrdersService ordersrv;
-	
 
-	/** 주문항목 생성 */
+
+	/** 주문, 주문항목 생성 */
 	@RequestMapping(value = "/{planitemId}", method = RequestMethod.GET)
 	public String registGET(@PathVariable("planitemId") int planitemId, Model model,  HttpServletRequest request) throws Exception {
-		
 		HttpSession session = request.getSession();   
 		Member member = (Member) session.getAttribute("login");
 		
-		List<Furniture> list = furniDao.list(planitemId);
-		List<Product> product1 = proService.list();
+		List<Furniture> furniList = furniDao.list(planitemId);
+		List<Product> proList = proService.list();
 		List<ProductImg> imgList = imgDao.list();
 		List<Coupon> couponList =  couponService.readAvailable(member.getEmail());
 		
-		model.addAttribute("prolist", product1);	
-		model.addAttribute("itemlist", list);
-		model.addAttribute("imglist", imgList);
-		model.addAttribute("couponlist", couponList);
+		model.addAttribute("proList", proList);	
+		model.addAttribute("furniList", furniList);
+		model.addAttribute("imgList", imgList);
+		model.addAttribute("couponList", couponList);
 		return "order/order-write";
 	}
 	
 	@RequestMapping(value = "/{planitemId}", method = RequestMethod.POST)
 	public String registPOST(@PathVariable("planitemId") int planitemId, Orderitems orderitems, Orders order, Coupon coupon) throws Exception {
 		logger.info("planitemId : "+planitemId);
-		ordersrv.create(order);
 		logger.info("order.getOrderId() : "+order.getOrderId());
 		logger.info(orderitems);
+		
+		ordersService.create(order);
 		
 		for (int i = 0; i < orderitems.getProductIds().length; i++) {
 			Orderitems item = new Orderitems(orderitems.getProductIds()[i], order.getOrderId(), orderitems.getAmounts()[i]);
 			logger.info(item);
 			itemsService.create(item);
 		}
-		
-		logger.info("coupon.getSerial() : "+coupon.getSerial());
 		couponService.couponUpdate(coupon);
 		
 		return "redirect:/order/order-list";

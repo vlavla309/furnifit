@@ -53,11 +53,12 @@ $(function() {
       success : function(request) {
         console.log(request);
         alert("위시리스트에 추가 되었습니다.");
-        wishbtn.attr("disabled","disabled");
+        $(event.target).attr("disabled", true);	//위시리스트 추가 시 비활성화
       },
       error : function(request) {
         console.log(request);
         alert("이미 위시리스트에 있습니다.");
+        $(event.target).attr("disabled", true);
       }
     })
   })
