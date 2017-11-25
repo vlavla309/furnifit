@@ -32,12 +32,6 @@
 		WHERE serial = #{serial}
    </update>
    
-   <!-- 쿠폰 id가져오기 -->
-   <select id="idRead" resultType="Coupon">	
-    	select c.coupone_id
-	  from orders o, offer_coupones c
-	  where o.use_coupones = c.serial 
-   </select>
    
    	<!-- orderId로 상세읽기 -->
 	<select id="serialRead" parameterType="int" resultType="Coupon">		
