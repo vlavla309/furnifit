@@ -8,8 +8,30 @@
   border: 1px dashed;
   border-color: #F5D0A9;
 }
+.nav-tabs > li > a{
+margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    background-color: #B40404;
+    color: white;
+    font-weight: bold;
+}
 .align2 {
   text-align: center;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+color: white;
+font-weight: bold;
+cursor: default;
+background-color: #F5D0A9;
+border: 0px solid;
+border-bottom-color: transparent;
+}
+
+.nav-tabs > li > a:hover{
+border-color: #FBF8EF;
+background-color: #F7F2E0;
 }
 
 
@@ -17,6 +39,8 @@
   text-align: center;
 
 }
+
+
 
 .contentDiv{
 margin:auto; 
@@ -48,9 +72,9 @@ border-style:hidden;
 margin-left:42%; 
 border-radius:5px; 
 font-weight:bold; 
-background-color: #B40404;
+background-color: #DF013A;
 color: white;  
-width: 18%; 
+width: 15%; 
 height:36px; 
 font-size: 13pt;
 }
@@ -60,7 +84,7 @@ border-style:hidden;
 margin-left:42%; 
 border-radius:5px; 
 font-weight:bold; 
-background-color: #610B0B;
+background-color: #F79F81;
 color: white;  
 width: 17%; 
 height:36px; 
@@ -110,17 +134,17 @@ div.panel {
   border-style: hidden;
   border-radius: 10px;
 }
+.nav-tabs{
+border-bottom: 0px solid;
+}
 
 .artContent{
 text-align:center; 
 border: 0px solid;
-font-weight: bold;
 resize: none; 
-border-color: #F6E3CE;
-background-color: transparent;
-width: 100%;
+background-color: white;
 font-size: 11pt;
-color: #DF3A01;
+color: black;
 }
 
 .button2 {
@@ -209,7 +233,7 @@ font-size: 9pt
 
 
 .articleImg{
-width: 450px;
+width: 400px;
 margin: auto;
 display: block;
 }
@@ -354,8 +378,8 @@ float: right;
   <div class="grid_3 grid_5 wow fadeInUp animated" data-wow-delay=".5s">
             <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
               <ul id="myTab" class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">가구목록</a></li>
-                <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">후 기</a></li>                
+                <li role="presentation" class="active"><a class="" href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">가구목록</a></li>
+                <li role="presentation"><a class="" href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">후 기</a></li>                
               </ul>
               
               <!-- 가구목록 상세 -->
@@ -365,7 +389,7 @@ float: right;
                  <table class="table table-hover table1" >
               <thead>
                 <tr >
-                  <th class="align3"><font class="fFont">상품번호</font></th>
+                  <th class="align3"><font class="fFont">상품</font></th>
                   <th class="align3"><font class="fFont">상품명</font></th>
                   <th class="align3"><font class="fFont">상품가격</font></th>
                   <th class="align3"><font class="fFont">링크</font></th>
@@ -391,86 +415,37 @@ float: right;
             </table>
                 </div>
                 <!-- 후기 상세 -->
+               
+                <div role="tabpanel" style="border: 1px solid" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
                 
-                <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
                 <div class="box box-primary"  >
+                <br>
         <c:forEach items="${article.images}" var="articleImg">
         
                   <div class="articleImg row">
         <a class="img2" href="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"><img  src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"   ></a>
-                    </div> 
+                    </div>      
                     </c:forEach>
                  </div>
+                 <br>
+                 <br>
+                   <div class="row" style="margin-left: 240px" role="alert" >       
+                <textarea name="content" rows="10" cols="45" readonly="readonly"
+            class="artContent" 
+            >${article.content }</textarea>
+                
+          </div> 
+        
                 </div>
+               
                                
                 </div>
               </div>
             </div>
           </div>
 
-<button class="accordion" class="col-md-2 artDetailView" >&nbsp;&nbsp;&nbsp;가구목록 ▼ </button>         
-<div class="bs-docs-example wow fadeInUp animated panel furnitureList" data-wow-delay=".5s" >
-            <table class="table table-hover table1" >
-              <thead>
-                <tr >
-                  <th class="align3"><font class="fFont">상품번호</font></th>
-                  <th class="align3"><font class="fFont">상품명</font></th>
-                  <th class="align3"><font class="fFont">상품가격</font></th>
-                  <th class="align3"><font class="fFont">링크</font></th>
-                </tr>
-              </thead>
-               <c:forEach var="product" items="${product}" >
-              <tbody style="text-align: cennter">
-                
-                <tr>
-                  <td class="align2">
-                  <c:forEach items="${product.imgs}" var="img">
-                  <div class="artPrdImg">
-					<img src="${rSrcPath}/productimg/${img.path}/${img.name}"/>
-                  </div>								
-								</c:forEach></td>
-                  <td class="align2">${product.name }</td>
-                  <td class="align2">${product.price }</td>
-                  <td class="align2"><a href="${product.link }"><button type="button" class="artLink" >바로가기</button></a></td>
-                </tr>
-               
-              </tbody>
-               </c:forEach>
-            </table>
-            
-             
-          </div>
-         
-  
-           
-      <!-- 게시판 이미지 업로드 -->
-          <div class="box box-primary"  >
-        <c:forEach items="${article.images}" var="articleImg">
-        
-                  <div class="articleImg row">
-        <a class="img2" href="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"><img  src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"   ></a>
-                    </div> 
-                    </c:forEach>
-                 </div>
-                 <div></div>
-         
-
           
-          <!-- 글쓸곳 -->
-           <div class="alert alert-warning row contentDiv" role="alert" >       
-                <textarea name="content" rows="10" cols="55" readonly="readonly"
-            class="artContent" 
-            >${article.content }</textarea>
-                
-          </div>  
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          
-          <button type="button" class="likeArt" id="like" name="like">추천하기♥&nbsp;&nbsp;<font size="3%">[${article.likecnt }]</font></button>
+          <button type="button" class="likeArt" id="like" name="like">좋아요♥&nbsp;<font size="3%">[${article.likecnt }]</font></button>
            <button type="button" disabled="disabled" class="likeArt2" id="alreadyLike" name="like">&nbsp;추천됨&nbsp;ν<font size="3%" id="likeCount">&nbsp;&nbsp;&nbsp;[${article.likecnt }]</font></button>
    
          <br>
