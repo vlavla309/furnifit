@@ -2,26 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ include file="../include/header.jsp"%>
 <link rel="stylesheet" href="${rSrcPath}css/productList.css" />
-<script>
-	$(function() {
-		$(document).on("click", ".wishdeletebtn", function(event) {
-			event.preventDefault();
-			var wishdeletebtn = $(this);
-			var productId = $(this).attr("href");
-			$.ajax({
-				url : '${contextPath}/wishlist/' + productId,
-				type : 'DELETE',
-				success : function(data) {
-					alert("삭제성공")
-					wishdeletebtn.parent().parent().parent().parent().remove()
-				},
-				error : function(data) {
-					console.log(data)
-				}
-			});
-		});
-	});
-</script>
+<script src="${rSrcPath}js/wishlist.js"></script>
 <!-- blog -->
 <div class="blog">
 	<!-- container -->
