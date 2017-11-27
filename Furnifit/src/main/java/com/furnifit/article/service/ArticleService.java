@@ -103,4 +103,14 @@ public interface ArticleService {
 	 * @return
 	 */
 	public List<Article> likecntcoupone();
+
+	/**
+	 * 상품상세보기에서 보여줄 공유배치도
+	 * @param productId
+	 * @return
+	 */
+	public List<Article> productRead(int productId);
+
 }
+
+

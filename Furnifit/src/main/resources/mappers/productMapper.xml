@@ -188,18 +188,16 @@
 				and #{maxLength} >= length
 			</if>
 			<!-- 정렬 -->
-			<if test="sort != null or !sort.equals('')">
-				order by regdate ))
-			</if>
 			<if test="sort.equalsIgnoreCase('low')">
-				order by price ))
+				order by price 
 			</if>
 			<if test="sort.equalsIgnoreCase('height')">
-				order by price desc))
+				order by price desc
 			</if>
 			<if test="sort.equalsIgnoreCase('new')">
-				order by regdate desc))
+				order by regdate desc
 			</if>
+			))
 		</where>
 		WHERE request_page = #{page}
 	</select>
@@ -219,8 +217,12 @@
 		link,
 		REGDATE
 		FROM products
-		where product_id =
-		#{value}
+		where product_id =	#{value}
 	</select>
-
+	
+	<!-- 상품 상세보기에서 상품과 같은 카테고리에 있는 상품 목록을 보여주는 부분 -->
+	<select id = "productReadList" resultType="Product" parameterType="String">
+		select product_id AS "productId", category, brand from Products where category = #{category}
+	</select>
+	
 </mapper>

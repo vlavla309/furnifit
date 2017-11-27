@@ -48,5 +48,12 @@ public interface ProductService {
 	 */
 	public List<Product> productList();
 	
+	/**
+	 * 상품 상세보기 뷰에 해당 상품 카테고리에 해당하는 상품 목록!
+	 * @param category
+	 * @return
+	 */
+	public List<Product> productReadList(String category);
+	
 	
 }

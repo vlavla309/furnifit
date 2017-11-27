@@ -12,25 +12,41 @@
 <script type="text/javascript" src="${rSrcPath}js/xzoom.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${rSrcPath}css/xzoom.css"
 	media="all" />
-<!-- hammer plugin here -->
-<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-<link type="text/css" rel="stylesheet" media="all"
-	href="${rSrcPath}fancybox/source/jquery.fancybox.css" />
-<link type="text/css" rel="stylesheet" media="all"
-	href="${rSrcPath}magnific-popup/css/magnific-popup.css" />
-<script type="text/javascript"
-	src="${rSrcPath}fancybox/source/jquery.fancybox.js"></script>
-<script type="text/javascript"
-	src="${rSrcPath}magnific-popup/js/magnific-popup.js"></script>
-<script src="${rSrcPath}js/foundation.min.js"></script>
 <script src="${rSrcPath}js/setup.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<!-- 이미지 슬라이드 -->
+
+<link rel="stylesheet" type="text/css"
+	href="${rSrcPath}css/elastislide.css" />
+<link rel="stylesheet" type="text/css" href="${rSrcPath}css/custom.css" />
+<script src="${rSrcPath}js/modernizr.custom.17475.js"></script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="${rSrcPath}/js/bootstrap.js"></script>
+<script type="text/javascript" src="${rSrcPath}js/jquerypp.custom.js"></script>
+<script type="text/javascript" src="${rSrcPath}js/jquery.elastislide.js"></script>
+		
 <script src="${rSrcPath}js/productRead.js"></script>
+
+<style>
+.elastislide-wrapper nav span {
+	position: absolute;
+	background: #ddd url(${rSrcPath}/images/nav.png) no-repeat 4px 3px;
+	width: 23px;
+	height: 23px;
+	border-radius: 50%;
+	text-indent: -9000px;
+	cursor: pointer;
+	opacity: 0.8;
+}
+</style>
+
 <!-- blog -->
 <div class="blog w3layouts">
 	<!-- container -->
 	<div class="container">
-		<div class="col-md-8 blog-top-left-grid">
+		<div class="col-md-9 blog-top-left-grid">
 			<div class="left-blog left-single">
 				<div class="blog-left">
 					<div class="single-left-left">
@@ -47,20 +63,23 @@
 							<div class="xzoom-container">
 								<c:forEach items="${product.imgs}" var="img">
 									<c:if test="${img.orderNo==0}">
-										<img class="xzoom" id="xzoom-default" 
+										<img class="xzoom" id="xzoom-default"
 											src="${rSrcPath}/productimg/${img.path}/${img.name}"
-											xoriginal="${rSrcPath}/productimg/${img.path}/${img.name}" title = "${img.orderNo }"/>
-									</c:if>	
+											xoriginal="${rSrcPath}/productimg/${img.path}/${img.name}"
+											title="${img.orderNo }" />
+									</c:if>
 								</c:forEach>
 								<div class="xzoom-thumbs">
 									<c:forEach items="${product.imgs}" var="img">
 										<a href="${rSrcPath}/productimg/${img.path}/${img.name}">
-											<img class="xzoom-gallery" width="80" src="${rSrcPath}/productimg/${img.path}/${img.name}" xpreview="${rSrcPath}/productimg/${img.path}/${img.name}"
-													title="The description goes here">
-										</a> 
+											<img class="xzoom-gallery" width="80"
+											src="${rSrcPath}/productimg/${img.path}/${img.name}"
+											xpreview="${rSrcPath}/productimg/${img.path}/${img.name}"
+											title="The description goes here">
+										</a>
 									</c:forEach>
 								</div>
-								
+
 							</div>
 						</div>
 					</div>
@@ -81,8 +100,8 @@
 													<th>색깔</th>
 													<td>${product.color}</td>
 													<th>규격 <a href="#" data-toggle="tooltip"
-														title="규격은  W(너비) D(넓이) H(높이)로 구성되며, 원형일 경우 R(지름) H(높이)의 형태로 규격이 표시됩니다."><i class="fa fa-question-circle"
-															aria-hidden="true"></i></a>
+														title="규격은  W(너비) D(넓이) H(높이)로 구성되며, 원형일 경우 R(지름) H(높이)의 형태로 규격이 표시됩니다."><i
+															class="fa fa-question-circle" aria-hidden="true"></i></a>
 													</th>
 													<td>${product.width}*${product.length}*
 														${product.height}</td>
@@ -106,33 +125,39 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-4 blog-top-right-grid">
+		<div class="col-md-3 blog-top-right-grid" style="">
 			<div class="Categories" data-wow-delay=".5s">
 				<h3>Categories</h3>
-				<ul>
-					<li><a href="#">Phasellus sem leo, interdum quis risus</a></li>
-					<li><a href="#">Nullam egestas nisi id malesuada aliquet </a></li>
-					<li><a href="#"> Donec condimentum purus urna venenatis</a></li>
-					<li><a href="#">Ut congue, nisl id tincidunt lobor mollis</a></li>
-					<li><a href="#">Cum sociis natoque penatibus et magnis</a></li>
-					<li><a href="#">Suspendisse nec magna id ex pretium</a></li>
-				</ul>
+				<div class="column">
+					<!-- Elastislide Carousel -->
+					<ul id="carousel1" class="elastislide-list">
+						<c:forEach items="${categorylist}" var="category">
+							<c:forEach items="${category.imgs}" var="img">
+								<li><a href="${contextPath}/product/${img.productId}"><img
+										src="${rSrcPath}/productimg/${img.path}/${img.name}"
+										alt="image04" style="width: 50%; height: 50%" /></a></li>
+							</c:forEach>
+						</c:forEach>
+					</ul>
+					<!-- End Elastislide Carousel -->
+				</div>
 			</div>
+			
 			<div class="Categories" data-wow-delay=".5s">
-				<h3>Archive</h3>
-				<ul class="marked-list offs1">
-					<li><a href="#">May 2016 (7)</a></li>
-					<li><a href="#">April 2016 (11)</a></li>
-					<li><a href="#">March 2016 (12)</a></li>
-					<li><a href="#">February 2016 (14)</a></li>
-					<li><a href="#">January 2016 (10)</a></li>
-					<li><a href="#">December 2016 (12)</a></li>
-					<li><a href="#">November 2016 (8)</a></li>
-					<li><a href="#">October 2016 (7)</a></li>
-					<li><a href="#">September 2016 (8)</a></li>
-					<li><a href="#">August 2016 (6)</a></li>
-				</ul>
+				<h3>이 가구를 사용한 배치도</h3>
+				<div class="column">
+					<!-- Elastislide Carousel -->
+					<ul id="carousel" class="elastislide-list">
+						<c:forEach items="${artlist}" var="article">
+							<li><a href="${contextPath}/article/${article.articleId}"><img
+									src="${rSrcPath }${article.planitemImg }" alt="image04"
+									style="width: 100%" /></a></li>
+						</c:forEach>
+					</ul>
+					<!-- End Elastislide Carousel -->
+				</div>
 			</div>
+			
 		</div>
 		<div class="clearfix"></div>
 	</div>

@@ -51,5 +51,11 @@ public interface ProductDao {
 	public List<Product> productList();
 	
 	
+	/**
+	 * @param category
+	 * @return
+	 */
+	public List<Product> productReadList(String category);
+	
 	
 }

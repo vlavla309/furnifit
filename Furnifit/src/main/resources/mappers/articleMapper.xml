@@ -35,7 +35,8 @@
 
 	<!-- 게시판 상세읽기 -->
 	<select id="read" parameterType="int" resultType="Article">
-		SELECT article_id AS "articleId" ,
+		SELECT
+		article_id AS "articleId" ,
 		email,
 		planitem_id AS "planitemId",
 		likecnt,
@@ -43,7 +44,8 @@
 		To_char(regdate, 'YYYY-MM-DD') regdate,
 		title,
 		content
-		FROM articles
+		FROM
+		articles
 		WHERE article_id = #{value}
 
 	</select>
@@ -63,11 +65,13 @@
 
 	<!-- 게시물에대한 첨부파일 리스트 가져오기 -->
 	<select id="getAttach" parameterType="int" resultType="ArticleImg">
-		SELECT name,
+		SELECT
+		name,
 		path,
 		article_id AS "articleId"
 		FROM article_img
-		WHERE article_id = #{articleId}
+		WHERE article_id =
+		#{articleId}
 		ORDER BY regdate DESC
 	</select>
 
@@ -83,7 +87,8 @@
 		(name,
 		article_id,
 		path)
-		VALUES (#{name},
+		VALUES
+		(#{name},
 		#{articleId},
 		#{path})
 	</insert>
@@ -92,7 +97,8 @@
 	<!-- 게시판 전체리스트 -->
 	<!-- 전체 리스트 -->
 	<select id="listAll" resultType="Article">
-		SELECT article_id AS "articleId",
+		SELECT article_id AS
+		"articleId",
 		email,
 		planitem_id AS "planitemId",
 		likecnt,
@@ -122,7 +128,8 @@
 	<!-- 게시글 삭제 -->
 	<delete id="artDelete" parameterType="int">
 		DELETE FROM articles
-		WHERE article_id = #{article_id}
+		WHERE
+		article_id = #{article_id}
 	</delete>
 
 	<!-- 한페이지당 출력할 게시글들 가져오기 -->
@@ -137,7 +144,8 @@
 		title,
 		content,
 		image AS "planitemImg"
-		FROM (SELECT CEIL(rownum / #{pageSize}) request_page,
+		FROM
+		(SELECT CEIL(rownum / #{pageSize}) request_page,
 		article_id,
 		email,
 		planitem_id ,
@@ -147,7 +155,8 @@
 		title,
 		content,
 		image
-		FROM (SELECT article_id,
+		FROM (SELECT
+		article_id,
 		email,
 		a.planitem_id,
 		likecnt,
@@ -228,10 +237,18 @@
 		likecnt,
 		viewcnt
 		FROM articles
-		ORDER BY likecnt DESC,
+		ORDER BY likecnt
+		DESC,
 		viewcnt DESC))
 		WHERE request_page = 1
 	</select>
 
+
+	<select id="productRead" parameterType="int" resultType="Article">
+		select PI.IMAGE as "planitemImg", ART.ARTICLE_ID as "articleId"
+		from products p, furnitures f, planitems pi, articles art
+		where p.product_id = f.product_id and F.PLANITEM_ID = PI.PLANITEM_ID and
+		ART.PLANITEM_ID = PI.PLANITEM_ID and f.product_id =#{value}
+	</select>
 
 </mapper>

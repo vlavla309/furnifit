@@ -145,6 +145,11 @@ public class ArticleServiceImpl implements ArticleService {
 	public List<Article> likecntcoupone() {
 		return articleDao.likecntcoupone();
 	}
+
+	@Override
+	public List<Article> productRead(int productId) {
+		return articleDao.productRead(productId);
+	}
 	
 	
 	

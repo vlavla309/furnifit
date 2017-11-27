@@ -104,5 +104,15 @@ public class ProductServiceImpl implements ProductService {
 		return products;
 	}
 
+
+	@Override
+	public List<Product> productReadList(String category) {
+		List<Product> products=productdao.productReadList(category);
+		for (Product product : products) {
+			product.setImgs(imgDao.productImg(product.getProductId()));
+		}
+		return products;
+	}
+
 	
 }
