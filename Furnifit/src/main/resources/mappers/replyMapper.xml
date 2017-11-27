@@ -4,55 +4,66 @@
 
 <mapper namespace="com.furnifit.reply.dao.ReplyDao">
 
-	<select id="list" resultType="Reply">
-		SELECT * FROM replies
-		WHERE reply_id AS replyId= #{reply_id} AS replyId
-		ORDER BY article_id AS articleId DESC
-	</select>
-	
-	<insert id="create">
-		INSERT INTO replies (reply_id AS replyId, content)
-		VALUES(#{reply_id} AS replyId, #{content})
-	</insert>
-	
-	<update id="update">
-		UPDATE replies 
-		SET content=#{content}
-		WHERE article_id AS articleId=#{article_id} AS articleId
-	</update>
-	
-	<delete id="delete">
-		DELETE FROM replies
-		WHERE article_id AS articleId=#{article_id} AS articleId
-	</delete>
-	
-	<!-- 
-	<select id="listPage" resultType="Replies">
-		SELECT * FROM replies
-		WHERE reply_id = #{reply_id}
-		ORDER BY article_id DESC
-		LIMIT #{cri.pageStart}, #{cri.perPageNum}
-	</select>
-	 -->
-	 <select id="listPage" resultType="Reply">
-  	 	<![CDATA[
- 			SELECT reply_id, article_id, email, content regdate
- 			FROM ( SELECT 
-     			   rownum rn, reply_id, article_id, email, content regdate
-     			   FROM replies
-   				   WHERE reply_id = #{reply_id} and article_id > 0 and rownum <= #{cri.page} * #{cri.perPageNum} )
-			WHERE rn > ( #{cri.page} -1) * #{cri.perPageNum}
-  		]]> 
- 	 </select>
- 	 <!-- SELECT /*+INDEX_DESC(tbl_reply pk_reply))*/ -->
- 	 
-	<select id="count" resultType="int">
-		SELECT count(reply_id) FROM replies
-		WHERE reply_id = #{reply_id}
-	</select>
+<!-- 
+	댓글 목록 불러오기 
+	resultType에 패키지까지 포함된 클래스명을 작성해야 하는데
+	mybatis-config.xml에 <typeAliases> 태그를 이용해서 별명을 설정했음
+-->	 
+<select id="list" resultType="Reply">  <!-- ResultSet에 저장된 검색 결과를 Reply 객체에 매핑 -->
+<![CDATA[
+select *
+from (select reply_id, article_id, email, content, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS') as regdate 
+  from replies
+  where article_id = #{articleId} 
+  order by reply_id desc)
+where rownum <= 20
+]]>
+</select>
 
+<!-- 댓글 등록 -->
+<insert id="create">
+	insert into replies (reply_id, article_id , email, content )
+	values (replies_seq.NEXTVAL, #{articleId}, #{email}, #{content} )
+</insert>
 
+<!-- 댓글 수정 -->
+<update id="update">
+	update replies set content = #{content},
+	regdate = sysdate
+	where reply_id = #{reply_id}
+</update>
 
+<!-- 댓글 삭제 -->
+<delete id="delete">
+	delete from replies 
+	where reply_id =#{reply_id}
+</delete>
+ 
+<select id="count" resultType="int">
+	select count(article_id) from replies
+ 	where article_id = #{articleId}
+</select>
 
+<!-- 무한 스크롤 -->
+<select id="infiniteScrollDown" resultType="Reply">  <!-- ResultSet에 저장된 검색 결과를 Reply 객체에 매핑 -->
+<![CDATA[
+	select reply_id, article_id, email, content, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS') as regdate 
+	from replies
+	where article_id = #{articleId} and reply_id <= #{reply_id}
+	and reply_id > #{reply_id}-10
+	order by reply_id desc
+]]>
+</select>
 
+<!-- 	 
+<select id="list" resultType="Reply">
+<![CDATA[
+  select reply_id, article_id, email, content, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS') as regdate 
+  from replies
+  where article_id = #{articleId} and rownum <= 40
+  order by reply_id desc
+]]>
+</select>
+ -->
+ 
 </mapper>
