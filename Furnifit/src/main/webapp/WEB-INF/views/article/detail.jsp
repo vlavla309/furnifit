@@ -151,8 +151,7 @@
 
       <div class="box box-success">
         <div class="box-header">
-          <h3><span><strong>댓글&nbsp쓰기</strong></span></h3>
-          <br>
+          <h3 class="replyWriter"><span><strong>댓글&nbsp쓰기</strong></span></h3>
         </div>
         <div class="box-body">
           <label for="exampleInputEmail1"></label>
@@ -171,7 +170,7 @@
         </div>
       </div>
       <br>
-      <hr class="dunggul" style="border: solid 4px #1523C3;">
+      <hr class="dunggul" style="border: solid 4px #f70940;">
 
 <!-- 입력한 댓글들은 이곳에 출력된다. -->
 <div id="replies">
@@ -183,8 +182,8 @@
 </div>
 </div>
 
-                </div>
- </div>
+</div>
+</div>
 </div>
 </div>  
 
