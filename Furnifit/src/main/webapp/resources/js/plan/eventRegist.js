@@ -29,4 +29,9 @@ $( document ).ready(function(){
 			selectedElem=null;
 		}
 	});
+	
+	
+	$("#searchToggleBtn").on("click", function(){
+		$("#searchWrap").toggle();
+	});
 });
