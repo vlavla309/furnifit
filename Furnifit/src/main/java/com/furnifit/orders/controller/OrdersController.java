@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,34 +60,28 @@ public class OrdersController {
 		logger.info(orders);
 		ordersService.create(orders);
 		itemService.create(orderitem);
-//		logger.info(orders.getUseCoupones());
-//		couponService.couponUpdate(orders.getUseCoupones());
 		
 		return "redirect:/order/order-list";
 	}
 	
-	
 	/** 주문목록 리스트  */
 	@RequestMapping(value = "", method=RequestMethod.GET)
 	public String listAll(Model model, HttpServletRequest request, Params params) throws Exception {
-		
 		HttpSession session = request.getSession();   
 		Member member = (Member) session.getAttribute("login");
 		
-		// 페이징 리스트
+		// 페이징
 		params.setPageSize(PAGE_SIZE);
 		params.setPagiSize(PAGI_SIZE);
 		int totalRowCount = ordersService.pageCount();
-		
 		List<Orders> orderList = ordersService.listByParams(params);
-		
 		PageBuilder pageBuilder = new PageBuilder(params, totalRowCount);
 		pageBuilder.build();
 		
 		List<Product> proList = proService.list();
 		List<ProductImg> imgList = imgDao.list();
 //		List<Coupon> couponList =  couponService.read(member.getEmail());
-		List<Coupon> couponList =  couponService.readAvailable(member.getEmail());
+		List<Coupon> couponList =  couponService.readAvailable(member.getEmail());	//사용 가능한 쿠폰 확인
 		
 		model.addAttribute("orderlist", orderList);
 		model.addAttribute("pageBuilder", pageBuilder);
@@ -108,21 +101,11 @@ public class OrdersController {
 		Member member = (Member) session.getAttribute("login");
 		
 		List<Orderitems> itemList = itemService.read(orderId);
-		for (Orderitems orderitems : itemList) {
-			logger.info("orderitems : "+orderitems);
-		}
-		
 		List<Product> proList = proService.list();
 		List<Orders> orderList = ordersService.listByParams(params);
-		for (Orders orders : orderList) {
-			logger.info("orders---"+orders);	
-		}
-		
 		List<Orders> priceList = ordersService.price(orderId);
 		List<ProductImg> imgList = imgDao.list();
-		
-		// 적용된 쿠폰번호
-		Coupon coupon = couponService.serialRead(orderId);
+		Coupon coupon = couponService.serialRead(orderId);	//주문 시 사용된 쿠폰 확인
 		
 		model.addAttribute("prolist", proList);
 		model.addAttribute("itemlist", itemList);

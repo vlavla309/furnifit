@@ -2,154 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="../include/header.jsp"%>
 
-<style>
-input[type="radio"]:not(old){ margin-left: 20px; }
-select{width: 200px; height: 30px}
-.coupon{
-  background-color: #FBF8EF;
-  border: 2px dotted #F6CECE;
-  border-radius: 10px;
-  padding-top: 15px;
-  height: 105px;
-}
-.price{
-  text-align:center;
-  background-color: #FBF8EF;
-  border-radius: 10px;
-  height: 180px;
-}
-
-.count{
-  width: 20%; 
-  text-align: right; 
-  border-radius: 5px; 
-  border:1px dotted black;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: black;
-  border-color: black;
-}
-.btn-primary2 {
-  color: #fff;
-  background-color: #B40404;
-  border-color: #B40404;
-}
-.btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active,
-  .btn-primary.active, .open>.dropdown-toggle.btn-primary {
-  color: #fff;
-  background-color: #B40404;
-}
-</style>
-
-<script>
-$(function() {
-	totalSum();
-	
-	// 페이지 로드 시 초기 합계 (.count : 수량 / #total : 총 합계 / input[name=price] : orders의 총 합계(hidden))
-	function totalSum(){
-    	var sum = 0;
-        var price = $(".count").parent().next().next();
-        for (var i = 0; i < price.length; i++) {
-          sum = sum +  parseInt($(price[i]).text());
-        }  
-        $("#total").text(sum + "원");
-        $("input[name=price]").val(sum);
-	}
-	
-    // 수량 변경에 따른 합계 & 총 합계 (수량 * 판매가)
-    $(".count").bind('keyup mouseup', function (event) {
-      $(event.target).parent().next().next().text( parseInt($(event.target).val())*parseInt($(event.target).parent().next().text())+"원")
-      totalSum(); 
-    });
-  
-    
-    // Select 쿠폰선택 (select[name=discount] : 쿠폰 select)
- 	$("#coupon").text("적용된 쿠폰이 없습니다.");
-    
-    $("select[name=discount]").bind('change', function (event) {
- 	    var rate = $(this).val();  	//할인율(discountRate)
-
- 	    var sel = document.getElementById("sel");
- 	  	var selVal = sel.options[sel.selectedIndex].text;  //선택한 option의 text 
- 	    var serialNum = 0;	//시리얼 번호
- 	    
- 		if(selVal != "---쿠폰 선택---"){
- 			serialNum = selVal.split(")")[0];		//시리얼번호 split
-     	 $("#coupon").html("serialNo : "+serialNum+'<br><br>'+rate.split(".")[0]+"% 쿠폰이 적용되었습니다.");
-     	 $(".count").attr("disabled", true);
-     	  var sum = 0;
-          var price = $(".count").parent().next().next();
-          for (var i = 0; i < price.length; i++) {
-          	sum = Math.floor(sum +  parseInt($(price[i]).text()) * ((100 - rate) * 0.01));	//쿠폰 할인율 적용한 총 합계
-          }  
-          $("#total").text(sum + "원");
-          
-          $("input[name=price]").val(sum);
-          $("input[name=useCoupones]").val(serialNum);	//orders의 사용된 쿠폰시리얼번호
-          $("input[name=serial]").val(serialNum);		//offer_coupones의 시리얼번호
- 	   }else{
-   		 $("#coupon").text("적용된 쿠폰이 없습니다.");
-   		 totalSum();
-   		 $(".count").attr("disabled", false);
-   		 $("input[name=price]").val(sum);
-   		 $("input[name=useCoupones]").val(serialNum);
-   		 $("input[name=serial]").val(serialNum);
-   	   }
-   }); 
-    
-
-    // 가구 삭제
-	var furniCnt = ${furniList.size()};
-    $(document).on("click", ".deleteOrder", function(event){   
-    	event.preventDefault(); 
-    	var furniProId =  $(this).parent().parent().attr("value");	//furniture 가구 고유번호
-    	var productId = $(this).attr("value");	//product 가구 고유번호
-    	
-    	if(furniProId == productId && furniCnt != 1){
-    		$("#delete").remove();
-    		furniCnt = furniCnt-1;
-    		if(furniCnt != 0){
-    			$("#kind").html('<strong>'+furniCnt+"종류의 가구를 주문합니다."+'<strong>');
-    		}else{
-    			$("#kind").html('<strong>'+"주문할 가구가 없습니다."+'<strong>');
-    		}
-    	}else{
-    		alert("1개 이상의 가구가 있어야 합니다.")
-    	}
-    	totalSum();
-    });
-    
-    // 위시리스트
-    var wishbtn = $("a[name=addWishlist]");
-    
-    wishbtn.click(function(event) {
-      event.preventDefault(); 
-      var furniProId =  $(this).parent().parent().attr("value");	//furniture 가구 고유번호
-   	  var productId = $(this).attr('value');
-      
-   	  $.ajax({
-        url :'${contextPath}/wishlist/'+productId,
-        type : 'POST',
-        success : function(request) {
-          console.log(request);
-          alert("위시리스트에 추가 되었습니다.");
-          if(furniProId == productId){
-          	$(event.target).attr("disabled", true);	//위시리스트 추가 시 비활성화
-          }
-        },
-        error : function(request) {
-          console.log(request);
-          alert("이미 위시리스트에 있습니다.");
-          $(event.target).attr("disabled", true);
-        }
-      })
-    })
-    
-});
-</script>
-
+<link rel="stylesheet" href="${rSrcPath}css/order-write.css" />
+<script src="${rSrcPath}js/order-write.js"></script>
 
 
 <form role="form" method="post">
@@ -175,7 +29,7 @@ $(function() {
               </thead>
               <tbody>
                 <c:forEach items="${furniList}" var="furni">
-                 <tr value="${furni.productId}" id="delete">
+                 <tr value="${furni.productId}">
                     <td colspan="2">
                         <c:forEach items="${imgList}" var="img">
                           <c:if test="${furni.productId == img.productId && img.orderNo==0}">
@@ -246,7 +100,7 @@ $(function() {
                 <div class="table-responsive">
                 <input type="hidden" name="email" value="${login.email}">
                   <table class="table" style="margin-top: 10px">
-                      <tr><td value="${furniList.size()}" id="kind"><strong>${furniList.size()}종류의 가구를 주문합니다.</strong></td></tr>
+                      <tr><td class="${furniList.size()}" id="kind"><strong>${furniList.size()}종류의 가구를 주문합니다.</strong></td></tr>
                       <tr><td style="color: red"><h3>총 합계</h3></td></tr>
                       <tr><td><h3><span id="total">원</span><input type="hidden" name="price"></h3></td></tr>
                   </table>
