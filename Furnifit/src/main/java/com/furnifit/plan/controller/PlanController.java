@@ -1,4 +1,4 @@
-package com.furnifit.plan.controller;
+ 	package com.furnifit.plan.controller;
 
 import java.util.List;
 
@@ -17,6 +17,7 @@ import com.furnifit.common.web.Params;
 import com.furnifit.coupon.domain.Coupon;
 import com.furnifit.coupon.service.CouponService;
 import com.furnifit.member.domain.Member;
+import com.furnifit.orders.domain.Orders;
 import com.furnifit.plan.domain.Plan;
 import com.furnifit.plan.service.PlanService;
 import com.furnifit.planitem.domain.PlanItem;
@@ -45,7 +46,7 @@ public class PlanController {
 	
 	/** 배치도목록 리스트 */
 	@RequestMapping(value = "/mypage/planlist", method=RequestMethod.GET)
-	public String listAll(Model model, HttpServletRequest request, Params params) throws Exception {
+	public String listAll(Model model, HttpServletRequest request, Params params, Orders order) throws Exception {
 		params.setPageSize(PAGE_SIZE);
 		params.setPagiSize(PAGI_SIZE);
 		
@@ -70,8 +71,9 @@ public class PlanController {
 		}
 		
 		List<Coupon> couponList =  couponService.read(member.getEmail());
+		Coupon coupon = couponService.serialRead(order.getOrderId());
 		
-		
+		logger.info("coupon getId---"+coupon);
 		model.addAttribute("itemlist", itemList);
 		model.addAttribute("couponlist", couponList);
 		
@@ -85,12 +87,6 @@ public class PlanController {
 //		itemService.delete(planId, planitemId);
 //		return "redirect:/plan/plan-manage";	
 //	}
-	
-	
-	
-	
-	
-	
 	
 	
 	/**

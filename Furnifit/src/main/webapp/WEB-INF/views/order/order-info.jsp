@@ -74,7 +74,16 @@
                 <div class="table-responsive">
                   <table class="table">
                     <tbody>
-                      <tr><td><strong style="font-size: 18px">serialNo : ${coupon.serial}<br> [${coupon.discountRate}% 할인쿠폰]이 적용되었습니다.</strong></td></tr>
+                      <tr>
+                      <c:choose>
+                        <c:when test="${coupon.discountRate == null}">
+                        <td><strong style="font-size: 18px">적용된 쿠폰이 없습니다.</strong></td>
+                      </c:when>
+                      <c:otherwise>
+                        <td><strong style="font-size: 18px">serialNo : ${coupon.serial}<br> [${coupon.discountRate}% 할인쿠폰]이 적용되었습니다.</strong></td>
+                      </c:otherwise>
+                      </c:choose>
+                      </tr>
                     </tbody>
                 </table>
               </div>

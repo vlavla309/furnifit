@@ -1,2 +1,211 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-do not touch me!!!!!!!!!!!!!!
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Plan Writer - FurniFit</title>
+
+
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="${rSrcPath}/css/planwriter.css">
+<link rel="stylesheet" type="text/css" href="${rSrcPath}/css/jquery-ui.css">
+  
+<!-- Javascript -->
+<script type="text/javascript" src="${rSrcPath}/js/jquery-1.12.4.js"></script>
+<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script type="text/javascript" src="${rSrcPath}/js/plan/snap.svg-min.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/snap.svg.zpd.js"></script>
+
+<script type="text/javascript" src="${rSrcPath}/js/plan/planwriter.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/function.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/eventRegist.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/eventHandler.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/Editor.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/Coordinate.js"></script>
+<script type="text/javascript" src="${rSrcPath}/s/plan/calc.js"></script>
+
+
+<script type="text/javascript">
+	var contextPath = "${contextPath}";
+	var planImgPath = contextPath + "/resources/images/plan";
+</script>
+
+
+</head>
+<body>
+<div id="wrap">
+	<!-- header 시작 -->
+	<div id="header">
+		<nav id="headerNav">
+			<div id="headerLogo">
+			<a href="#">FurniFit</a>
+			</div>
+			<div id="headerMenuWrap">
+				<ul id="headerMenuLeft">
+					<li><a id=saveBtn href="#">저장</a></li>
+					<li><a href="#">menu2</a></li>
+					<li><a id=crtBtn href="#">침대하나</a></li>
+				</ul>
+				
+				<ul id="headerMenuRight">
+					<li class="exit"><a href="#">EXIT</a></li>
+				</ul>
+			</div>
+			
+		</nav>
+		
+		<!-- left sidebar 시작 -->
+		<div class="sidebar">
+			<div id="leftSidebarWrap">
+				<div id="sidemenu">
+					<div id="planitemTabs">
+				       <ul id="planitems">
+				       <!-- 샘플 ㅎㅎ -->
+						<!-- <li><div class='planitem'><a href='1'>내방</a></div></li> -->
+					  </ul>
+					 <!-- <button id="newPlanBtn">Add Plan</button> -->
+					 <a href="#" id="newPlanBtn"><img src="${rSrcPath }/images/plan/plus.png" width=50px;></a>
+					</div>
+					<div id="leftToggle">
+						<button id="leftToggleBtn"><</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- left sidebar 끝	 -->
+		
+		<!-- right sidebar 시작 -->
+		<div class="sidebar">
+			<div id="rightSidebarWrap">
+				<div id="sidemenu">
+					<div id="rightToggle">
+						<button id="rightToggleBtn">></button>
+					</div>
+					<div id="rightTabs">
+						<ul>
+							<li><a href="#tabs-1">가구목록</a></li>
+							<li><a href="#tabs-2">찜목록</a></li>
+							<li><a href="#tabs-3">배치목록</a></li>
+ 						</ul>
+ 						
+ 						<!-- 상품 목록 -->
+						<div id="tabs-1" class="tabContent">
+							<div class="productWrap">
+							<!-- 상품 목록 -->
+								<div class="product">
+									<div class="imgWrap">
+									<a href="1"><img src="images/bed.png"/></a>
+									</div>
+									<div class="infoWrap">
+										<span>상품명</span>
+										<span>브랜드</span>
+										<span>200x200x200</span>
+										<span>100000원</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- 위시리스트 목록 -->
+						<div id="tabs-2" class="tabContent">
+							<div class="productWrap">
+							<!-- 상품 목록 -->
+								<div class="product">
+									<div class="imgWrap">
+									<a href="1"><img src="images/small_bed.png"/></a>
+									</div>
+									<div class="infoWrap">
+										<span>상품명</span>
+										<span>브랜드</span>
+										<span>200x200x200</span>
+										<span>100000원</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- 배치 목록 -->
+						<div id="tabs-3" class="tabContent">
+							<div class="productWrap">
+							<!-- 상품 목록 -->
+								<div class="product">
+									<div class="imgWrap">
+									<a href="1"><img src="images/bed.png"/></a>
+									</div>
+									<div class="infoWrap">
+										<span>상품명</span>
+										<span>브랜드</span>
+										<span>200x200x200</span>
+										<span>100000원</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- right sidebar 끝-->	
+	</div>
+	<!-- header 끝 -->
+	
+	<!-- content 시작 -->
+	<div id="content">
+		<div id="editorWrap">
+		
+			<!-- 샘플 ㅎㅎ -->
+			<!-- <div id="editorContainer-1" class="editorContainer active">
+			<svg width="100%" height="100%">
+				<g class="editor">
+				</g>
+			</svg>
+			</div> -->
+		</div>
+	</div>
+	<!-- content 끝 -->
+
+
+	<!-- footer 시작 -->
+	<div id="footer">
+			<div id="furnitureInfoWrap">
+				<div class="imgWrap">
+					<img src="images/bed.png" />
+				</div>
+				<div class="infoWrap">
+					<span>카테고리</span>
+					<span>상품명</span> 
+					<span>브랜드</span> 
+					<span>200x200x200</span>
+				</div>
+				<div class="controlWrap">
+					<ul>
+						<li><a href="#" id="clockwiseRotateBtn">시계방향 회전</a></li>
+						<li><a href="#" id="counterclockwiseRotateBtn">시계반대방향 회전</a></li>
+						<li><a href="#" id="deleteBtn">삭제</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	<!-- footer 끝 -->
+	
+	
+	<!-- 새 배치도 추가 폼 -->
+	<div id="newPlanForm" title="새 배치도 추가">
+  		<form>
+    		<fieldset class="ui-helper-reset">
+      			<label for="tab_title">배치도이름</label><br>
+      			<input type="text" name="planName" id="planName" placeholder='배치도 이름을 입력해주세요' class="ui-widget-content ui-corner-all" required>
+      			<br><br>
+      			<label for="tab_title">방의 크기</label><br>
+      			<input type="number" name="planWidth" id="planWidth" placeholder='방의 가로길이를 입력해주세요' class="ui-widget-content ui-corner-all" required>
+      			<input type="number" name="planHeight" id="planHeight" placeholder='방의 세로길이를 입력해주세요' class="ui-widget-content ui-corner-all" required>
+      			<input type="number" name="planLength" id="planLength" placeholder='방의 높이를 입력해주세요' class="ui-widget-content ui-corner-all" required>
+    		</fieldset>
+  		</form>
+	</div>
+	<!-- 새 배치도 추가 폼 -->
+</div>	
+</body>
+</html>

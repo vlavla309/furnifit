@@ -11,7 +11,7 @@ public class Orderitems{
 	private int productId;
 	private int orderId;
 	private int amount;
-	private int amounts [];
+	private int amounts [];		// 주문서 작성시 사용(배열)
 	private int productIds [];
 	
 	public Orderitems() {}
