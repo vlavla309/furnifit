@@ -93,13 +93,16 @@ public class ProductController {
 		model.addAttribute("title", "Furnifit - Product");
 		Map<String, Object> map = new HashMap<String, Object>();
 		logger.info(params);
+		
 		List<Product> list = productsrv.searchlist(params);
-		for (Product product : list) {
-			logger.info(product);
-		}
-		List<Wishlist> wishlist = wishsrv.read();
+		List<Color> colorlist = colordao.list();
+		List<Brand> brandlist = branddao.list();
+		List<Category> categorylist = categorys.list();
+		
+		map.put("brandlist", brandlist);
+		map.put("colorlist", colorlist);
+		map.put("categorylist", categorylist);
 		map.put("list", list);
-		map.put("wishlist",wishlist);
 		
 		
 		return map;

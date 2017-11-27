@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<!-- header -->
 <%@ include file="include/header.jsp"%>
 
-<link rel="stylesheet" href="${rSrcPath}css/plan-manage.css" />
 
 
 <div class="blog">
@@ -30,4 +30,5 @@
   </div>
 </div>
 
+<!-- footer -->
 <%@ include file="include/footer.jsp"%>
