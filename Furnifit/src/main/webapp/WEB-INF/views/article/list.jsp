@@ -146,7 +146,7 @@
               <span class="label label1 ">&nbsp; <i
                 class="fa fa-heart artLikecnt"></i>${article.likecnt }
               </span>&nbsp; <span class="label label2"> <i
-                class="fa fa-hand-o-up artViewcnt"></i>&nbsp;&nbsp;${article.viewcnt }
+                class="fa fa-share"></i>&nbsp;&nbsp;${article.viewcnt }
               </span>
             </h3>
           </div>
