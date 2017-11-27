@@ -12,6 +12,9 @@
 	href="${rSrcPath}/css/planwriter.css">
 <link rel="stylesheet" type="text/css"
 	href="${rSrcPath}/css/jquery-ui.css">
+<link
+	href="${pageContext.servletContext.contextPath }/resources/css/font-awesome.css"
+	rel="stylesheet">
 
 <!-- Javascript -->
 <script type="text/javascript" src="${rSrcPath}/js/jquery-1.12.4.js"></script>
@@ -28,15 +31,67 @@
 <script type="text/javascript" src="${rSrcPath}/js/plan/Coordinate.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/calc.js"></script>
 
-
 <script type="text/javascript">
 	var contextPath = "${contextPath}";
 	var planImgPath = contextPath + "/resources/images/plan";
 	var rSrcPath = "${rSrcPath}";
 	var proImgPath = "${rSrcPath}/productimg";
-	
 </script>
 
+<style>
+.information-grid-info {
+	height: 250px;
+}
+
+.colorBtn {
+	border: 1px solid #dadada;
+	height: 30px;
+	width: 30px;
+}
+
+.colordelete {
+	border: 1px solid #dadada;
+	height: 30px;
+	width: 30px;
+}
+
+.pdbotton {
+	padding-bottom: 15px;
+}
+
+.categorydelete, .branddelete, .branda, .categorya {
+	padding: 0.5em;
+	border-radius: 0.5em;
+}
+
+.paramActive {
+	background: #ac3939;
+	color: white !important;
+}
+
+.colorUncheck {
+	display: none;
+}
+
+#myBtn {
+	display: none;
+	position: fixed;
+	bottom: 20px;
+	right: 30px;
+	z-index: 99;
+	border: none;
+	outline: none;
+	background-color: red;
+	color: white;
+	cursor: pointer;
+	padding: 15px;
+	border-radius: 10px;
+}
+
+#myBtn:hover {
+	background-color: #555;
+}
+</style>
 
 </head>
 <body>
@@ -98,59 +153,74 @@
 							<!-- 상품 목록 -->
 							<div id="tabs-1" class="tabContent">
 								<div id="searchTab">
-								<button type="button" id="searchToggleBtn">검색하기</button>
-								<div id="searchWrap">
-									<div id="searchKeyword">
-									<input type="text"/>
-									<button>검색</button>
-									</div>
-									<div id="searchAccodian">
-										<h3>카테고리</h3>
-										<div>
-											<p>섹션 1111</p>
+									<button type="button" id="searchToggleBtn">검색하기</button>
+									<div id="searchWrap">
+										<div id="searchKeyword">
+											<input type="text" />
+											<button>검색</button>
 										</div>
-										<h3>브랜드</h3>
-										<div>
-											<p>섹션 22222</p>
+										<div id="searchAccodian">
+											<h3>카테고리</h3>
+											<div id="category"></div>
+											<h3>브랜드</h3>
+											<div>
+												<ul id="brand"></ul>
+											</div>
+											<h3>색상</h3>
+											<div>
+												<ul id="colorul"></ul>
+											</div>
+											<h3>가격</h3>
+											<div id="price">
+												<ul>
+													<li><input type="number" id="minprice" class="price"
+														value="0" placeholder="min price"></li>
+													<li>~</li>
+													<li><input type="number" id="maxprice" class="price"
+														value="10000" placeholder="max price"></li>
+													<li><button type="submit" class="btn btn-sm pricebtna">적용하기</button></li>
+												</ul>
+											</div>
+											<h3>사이즈</h3>
+											<div id="size">
+												<ul>
+													<li><input type="number" placeholder="가로" id="w"
+														class="size" style="width: 50px;"></li>
+													<li>*</li>
+													<li><input type="number" placeholder="세로" id="l"
+														class="size" style="width: 50px;"></li>
+													<li>*</li>
+													<li><input type="number" placeholder="높이" id="d"
+														class="size" style="width: 50px;"></li>
+													<li><button type="submit" class="btn btn-sm sizebtn">적용하기</button></li>
+												</ul>
+											</div>
 										</div>
-										<h3>색상</h3>
-										<div>
-											<p>섹션 3333</p>
-										</div>
-										<h3>가격</h3>
-										<div>
-											<p>섹션 44444</p>
-										</div>
-										<h3>사이즈</h3>
-										<div>
-											<p>섹션 44444</p>
-										</div>
-									</div>
 
-									<form name="filter" id="filter">
-										<input type="hidden" value="" name="sort"> <input
-											type="hidden" value="" name="keyword"> <input
-											type="hidden" name="category" value="" id="cate"> <input
-											type="hidden" name="minPrice" value="0" id="min"> <input
-											type="hidden" name="maxPrice" value="0" id="max"> <input
-											type="hidden" name="maxWidth" value="0"> <input
-											type="hidden" name="maxLength" value="0"> <input
-											type="hidden" name="maxHeight" value="0"> <input
-											type="hidden" name="pageSize" value="6"> <input
-											type="hidden" name="totalsize" value="${totalsize}">
-									</form>
-								</div>
+										<form name="filter" id="filter">
+											<input type="hidden" value="" name="sort"> <input
+												type="hidden" value="" name="keyword"> <input
+												type="hidden" name="category" value="" id="cate"> <input
+												type="hidden" name="minPrice" value="0" id="min"> <input
+												type="hidden" name="maxPrice" value="0" id="max"> <input
+												type="hidden" name="maxWidth" value="0"> <input
+												type="hidden" name="maxLength" value="0"> <input
+												type="hidden" name="maxHeight" value="0"> <input
+												type="hidden" name="pageSize" value="6"> <input
+												type="hidden" name="totalsize" value="${totalsize}">
+										</form>
+									</div>
 								</div>
 								<div class="productWrap">
 									<!-- 상품 목록 -->
 									<!-- 상품 항목  시작-->
 									<!-- 상품 항목  끝-->
-									
+
 								</div>
-								
+
 							</div>
-							
-							
+
+
 
 							<!-- 위시리스트 목록 -->
 							<div id="tabs-2" class="tabContent">
@@ -249,6 +319,6 @@
 		</div>
 		<!-- 새 배치도 추가 폼 -->
 	</div>
-	
+
 </body>
 </html>
