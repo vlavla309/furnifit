@@ -342,7 +342,7 @@ overflow: auto;
   letter-spacing: -4px;
 }
 
-li {
+.replyLi {
   list-style:none;
 }
 #newEmail {
@@ -360,6 +360,8 @@ li {
 #exampleComment {
   box-shadow: 1px 1px 1px #EFEFF3;
 }
+
+
 
 
 

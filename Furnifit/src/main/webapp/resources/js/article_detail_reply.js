@@ -1,9 +1,10 @@
 
 /* 댓글들이 처음 출력되는 코드 */
+/*var articleId = $('input[name=articleId]').val();*/
 var articleId = $("#newArticleId").val();
-var email = $("#newEmail").val();
 console.log(articleId);
-console.log(email);
+var email =loginEmail;
+
 /* var reply_id = $("#newReply_id"); */
 
 (getList = function getAllList() {
@@ -19,7 +20,7 @@ $.getJSON("/one/reply/all/" + articleId, function(data) {
           +"<span class='time'>"
           +"<span class='fa fa-clock-o' style='margin-left:84%'>" + " " + "<span style='font-size:12px';>" + this.regdate + "</span>" + "</span>"
           +"</span>"
-          +"<div class='timeline-header' style='font-size: 14px;'>" + this.email + "</div>"
+          +"<div class='timeline-header' style='font-size: 14px;'>" + email + "</div>"
             + "<br>" + "<div class='timeline-body'><strong>" + this.content + "</strong>" + "</div>" + "<br><br>"
             + "<div class='timeline-footer'>" + "<a class='btn btn-danger btn-xs' data-toggle='modal' data-target='#modifyModal'>Modify</a>"
             + "</div>"

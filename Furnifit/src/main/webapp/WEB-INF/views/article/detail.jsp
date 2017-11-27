@@ -3,8 +3,7 @@
 <%@ include file="../include/header.jsp" %>
 <link rel="stylesheet" href="${rSrcPath}css/article_detail.css" />
 <script src="${rSrcPath}js/article_detail.js"></script>
-<script src="${rSrcPath}js/article_detail_reply.js"></script>
-<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<%-- <script src="${rSrcPath}js/article_detail_reply.js"></script> --%>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
 
@@ -177,6 +176,7 @@
 <!-- 입력한 댓글들은 이곳에 출력된다. -->
 <div id="replies">
 </div>
+<script src="${rSrcPath}js/article_detail_reply.js"></script>
 </div>
 </div>
 </div>
