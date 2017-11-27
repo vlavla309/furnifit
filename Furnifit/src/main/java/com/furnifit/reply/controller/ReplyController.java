@@ -105,7 +105,7 @@ public class ReplyController {
 	public List<Reply> infiniteScrollDownPOST(Reply reply) throws Exception {
 		
 		logger.info("infiniteScrollDownPOST");
-		int bnoToStart = reply.getReply_id() - 1;
+		int bnoToStart = reply.getReply_id() - 1;  // 출력된 댓글의 마지막 번호에서 1개를 뺀 값
 		reply.setReply_id(bnoToStart);
 		return service.infiniteScrollDown(reply);
 	}

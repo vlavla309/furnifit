@@ -18,8 +18,8 @@ import com.furnifit.reply.domain.Reply;
 /* Dao를 스프링에 인식, 데이터베이스 연동을 위해서 @Repository 사용
  * @Controller, @Repository, @Service 모두 스프링에 인식(등록)하기 위해서 사용한다.
  * 위와 같은 어노테이션이 설정된 클래스는 자동으로 객체가 생성된다.
- * 어노테이션을 사용하라면 스프링 설정 파일(root-context.xml)에서 [Namespaces] 탭 클릭 -> context 항목을 체크하면 된다.
- * 그리고 <bean> 태그를 이용해서 등록해야 자동으로 생성되는데 <context:component-scan /> 태그를 이용하면
+ * 어노테이션을 사용하려면 스프링 설정 파일(root-context.xml)에서 [Namespaces] 탭 클릭 -> context 항목을 체크하면 된다.
+ * 참고로 <bean> 태그를 이용해서 등록해야 자동으로 생성되는데 <context:component-scan /> 태그를 이용하면
  * 등록하지 않아도 된다.
 */
 @Repository
