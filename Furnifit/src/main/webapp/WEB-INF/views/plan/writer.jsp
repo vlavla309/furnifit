@@ -97,6 +97,7 @@
 							</ul>
 							<!-- 상품 목록 -->
 							<div id="tabs-1" class="tabContent">
+							<div id="searchTab">
 							<form name="filter" id="filter">
 								<input type="hidden" value="" name="sort"> <input
 									type="hidden" value="" name="keyword"> <input
@@ -109,6 +110,7 @@
 									type="hidden" name="pageSize" value="6"> <input
 									type="hidden" name="totalsize" value="${totalsize}">
 							</form>
+							</div>
 								<div class="productWrap">
 									<!-- 상품 목록 -->
 									<!-- 상품 항목  시작-->
@@ -121,7 +123,7 @@
 
 							<!-- 위시리스트 목록 -->
 							<div id="tabs-2" class="tabContent">
-								<div class="productWrap">
+								<div class="wishlistWrap">
 									<!-- 상품 목록 -->
 									<div class="product">
 										<div class="imgWrap">
@@ -136,7 +138,7 @@
 
 							<!-- 배치 목록 -->
 							<div id="tabs-3" class="tabContent">
-								<div class="productWrap">
+								<div class="furnitureWrap">
 									<!-- 상품 목록 -->
 									<div class="product">
 										<div class="imgWrap">

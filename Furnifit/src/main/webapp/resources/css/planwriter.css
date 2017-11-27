@@ -132,11 +132,14 @@ a{
 
 #rightTabs{
 	float:right;
+	width:35em;
 }
 
 .tabContent{
-	heigth:100%;
-	min-height: 30em;
+	padding:0px!important;
+	width:100%;
+	height:30em;
+	min-height: 10em;
 	overflow: auto;
 }
 
