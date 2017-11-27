@@ -134,8 +134,8 @@
 						<c:forEach items="${categorylist}" var="category">
 							<c:forEach items="${category.imgs}" var="img">
 								<li><a href="${contextPath}/product/${img.productId}"><img
-										src="${rSrcPath}/productimg/${img.path}/${img.name}"
-										alt="image04" style="width: 50%; height: 50%" /></a></li>
+										src="${rSrcPath}/productimg/${img.path}/s_${img.name}"
+										alt="image04" /></a></li>
 							</c:forEach>
 						</c:forEach>
 					</ul>

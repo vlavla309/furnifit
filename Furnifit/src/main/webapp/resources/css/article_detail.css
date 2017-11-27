@@ -344,12 +344,12 @@ overflow: auto;
   text-transform: uppercase;
   letter-spacing: -2px;
 }
-.replyWriter .spanReplyWriter {
+.replyWriter > span {
   display: block;
   margin: 11px 0 17px 0;
   font-size: 31px;
   line-height: 80px;
-  color: #0c0e96;
+  color: #ef0804;
   text-shadow: 0 6.36px 8.896px #c4b59d,0 -2px 1px #fff;
   letter-spacing: -4px;
 }
@@ -372,11 +372,4 @@ overflow: auto;
 #exampleComment {
   box-shadow: 1px 1px 1px #EFEFF3;
 }
-
-
-
-
-
-
-
 

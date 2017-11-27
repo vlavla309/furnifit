@@ -117,7 +117,7 @@
                   <div class="juicy">
                   <a href="${contextPath}/mypage/coupon" class="juicy"><img src="${rSrcPath}/images/coupon.png" class="img2"/></a>
                   <a href="${contextPath}/wishlist" class="juicy"><img src="${rSrcPath}/images/wishlist.png" class="img2"/></a>
-                  <a href="${pageContext.servletContext.contextPath}" data-toggle="modal" data-target="#myModal" class="juicy" id="modalmodal"><img src="${rSrcPath}/images/withdraw.png" class="img2"/></a>
+                  <a href="${contextPath}/mypage/withdraw" data-toggle="modal" data-target="#myModal" class="juicy" id="modalmodal"><img src="${rSrcPath}/images/withdraw.png" class="img2"/></a>
                   </div>
                   <!-- Modal -->
                   <div class="modal fade" id="myModal" role="dialog">
@@ -126,7 +126,7 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                          <h4 class="modal-title">탈퇴 모달이다 제발 되라</h4>
+                          <h4 class="modal-title">탈퇴하시면 1년간 가입이 안됩니다. 탈퇴 하시겠습니까?</h4>
                         </div>
                         <div class="modal-body">
                           <form id="withdraw-modal" action="" method="post">

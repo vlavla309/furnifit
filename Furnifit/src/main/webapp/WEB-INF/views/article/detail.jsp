@@ -153,8 +153,7 @@
 
       <div class="box box-success">
         <div class="box-header">
-          <h3><span><strong>댓글&nbsp쓰기</strong></span></h3>
-          <br>
+          <h3 class="replyWriter"><span><strong>댓글&nbsp쓰기</strong></span></h3>
         </div>
         <div class="box-body">
           <label for="exampleInputEmail1"></label>
@@ -169,29 +168,28 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-          <button type="button" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
+          <button type="button" class="btn btn-default id="replyAddBtn">ADD REPLY</button>
         </div>
       </div>
       <br>
-      <hr class="dunggul" style="border: solid 4px #1523C3;">
+      <hr class="dunggul" style="border: solid 2px #f70940;">
 
 <!-- 입력한 댓글들은 이곳에 출력된다. -->
 <div id="replies">
 </div>
-<script src="${rSrcPath}js/article_detail_reply.js"></script>
-</div>
-</div>
-</div>
-</div>
-</div>
 
-                </div>
- </div>
+<script src="${rSrcPath}js/article_detail_reply.js"></script>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>  
 
-
-          
-   <!-- //blog -->
+<!-- //blog -->
 <%@ include file="../include/footer.jsp" %>
 </body>
