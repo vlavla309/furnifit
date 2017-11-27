@@ -19,28 +19,21 @@ function scale() {
 
 }
 
+var once=1;
 function toAjax() {
 
 	var formData = $("#filter").serialize();
-	console.log(formData);
 	$.ajax({
 		url : contextPath + '/product/',
 		type : 'post',
 		data : formData,
 		success : function(data) {
-			console.log(data)
-<<<<<<< HEAD
-			/* console.log(data.list[0].imgs[0].name) */
-			/* console.log(data.list[0].productId) */
-			console.log(data)
-			productList(data)
-			filter(data)
-=======
-			/*console.log(data.list[0].imgs[0].name)*/
-			/*console.log(data.list[0].productId)*/
+			if(once==1){
+				filter(data)
+				once=0;
+			}
 			productList(data);
 			makeFurnitureList(data);
->>>>>>> 3012dd9a4527f62b6ca8ac8b37da9ecfeb8386a7
 		},
 		error : function(data) {
 			console.log(data)
@@ -67,7 +60,6 @@ function productList(data) {
 				+ "</span> <span>" + item.price + "원 </span>"
 		str += "</div>"
 	});
-<<<<<<< HEAD
 
 	$('.productWrap').html(str)
 
@@ -102,8 +94,6 @@ function filter(data) {
 	$('#colorul').html(str)
 	
 
-=======
-	$('.productWrap').html(str)
 }
 
 
@@ -128,7 +118,6 @@ function makeFurnitureList(data){
 		console.log(item.toString());
 	});
 		
->>>>>>> 3012dd9a4527f62b6ca8ac8b37da9ecfeb8386a7
 }
 
 $(function() {
@@ -138,7 +127,7 @@ $(function() {
 		event.preventDefault();
 		$(this).children().first().toggleClass("colorUncheck");
 		$(this).attr('class','btn btn-default colordelete')
-		$('#filter').append("<input type =\"hidden\" name =\"colors\" value=\""+$(this).attr('id')+"\"/>")
+		$('#filter').append("<input type =\"text\" name =\"colors\" value=\""+$(this).attr('id')+"\"/>")
 		
 		toAjax();
 		
@@ -157,16 +146,18 @@ $(function() {
 	/* brand 버튼을 누르면 조건검색 리스트에 추가됨. ajax는 추후에! */
 	$(document).on(	"click", ".branda",function(event) {
 		event.preventDefault();
-		$(this).attr('class','branddelete')
+		
+		$(this).attr('class','branddelete');
 		$(this).toggleClass("paramActive");
-		$('#filter').append("<input type =\"hidden\" name =\"brands\" value=\""+$(this).text()+"\"/>")
+		$('#filter').append("<input type =\"text\" name =\"brands\" value=\""+$(this).text()+"\"/>")
 		toAjax();
 	});
 
 	/* 브랜드 버튼 체크를 해제하고, 아래에 form에서  input 제거!, ajax는 추후 */
 	$(document).on(	"click", ".branddelete",function(event) {
+		alert($(this).text());
 		event.preventDefault();
-		$(this).attr('class','branda')
+		$(this).attr('class','branda');
 		$('#filter :input[value="'+$(this).text()+'"]').remove();
 		toAjax();
 	});
@@ -231,23 +222,6 @@ $(function() {
 	$(document).on("click", ".btn-sm",function(event) {
 		$('input[name=keyword]').val($('#keyword').val())
 		$('#keyword').val("")
-		toAjax();
-	});
-	
-	/* 정렬 */
-	$('.target').change(function() {
-		$('input[name=sort]').val($(this).val())
-		toAjax();
-	});
-	
-	/* 더보기 버튼을 누르면 page size가 늘어남*/
-	$(document).on("click", "#add",function(event) {
-		event.preventDefault();
-		$('input[name=pageSize]').val(Number($('input[name=pageSize]').val())+ 6)
-		var total = $('input[name = totalsize').val()
-		if(Number(total)<=Number($('input[name=pageSize]').val())){
-			$('#add').remove()
-		}
 		toAjax();
 	});
 	

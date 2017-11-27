@@ -79,7 +79,7 @@ public class ProductController {
 		model.addAttribute("title", "Furnifit - productList");
 		model.addAttribute("list",list);
 		model.addAttribute("wishlist",wishlist);
-		model.addAttribute("totalsize", wishlist.size());
+		model.addAttribute("totalsize", list.size());
 		model.addAttribute("colorlist", colorlist);
 		model.addAttribute("brandlist", brandlist);
 		model.addAttribute("categorylist", categorylist);
