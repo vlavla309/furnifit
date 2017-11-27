@@ -28,6 +28,7 @@ $( document ).ready(function(){
 			selectedElem.remove();
 			selectedElem=null;
 		}
+		unSelectAll();
 	});
 	
 	
