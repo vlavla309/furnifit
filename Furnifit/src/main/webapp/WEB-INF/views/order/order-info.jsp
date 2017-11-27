@@ -1,22 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="../include/header.jsp"%>
 
-<style>
-.coupon {
-  background-color: #FBF8EF;
-  border: 2px dotted #F6CECE;
-  border-radius: 10px;
-  padding-top: 15px
-}
-</style>
+<link rel="stylesheet" href="${rSrcPath}css/order-info.css" />
 
-<!-- blog -->
+
 <div class="blog">
-  <!-- container -->
   <div class="container">
+  
+    <!-- 주문서 조회 div-->
     <div class="col-md-12">
       <div class="box">
           <h1>주문서 조회</h1><br>
+          
+          <!-- 테이블(가구img, 가구명, 수량, 판매가, 합계) -->
           <div class="table-responsive">
             <table class="table">
               <thead>
@@ -34,26 +30,24 @@
                     <td colspan="2">
                      <c:forEach items="${imglist}" var="img">
                           <c:if test="${item.productId == img.productId && img.orderNo==0}">
-                            <img src="${rSrcPath}/productimg/${img.path}/${img.name}"
-                              alt="" class="img-responsive" style="height: 100px; width: auto"/>    
+                            <img src="${rSrcPath}/productimg/${img.path}/${img.name}" class="img-responsive" style="height: 100px; width: auto"/>    
                           </c:if>
                          </c:forEach>
                     </td>
                     <c:set var="doneLoop" value="false"/>
                      <c:forEach items="${prolist}" var="product">
                      <c:if test="${not doneLoop}">
-                     <c:if test="${item.productId == product.productId}">
-                        <td colspan="7">${product.name}</td>
-                        <td>${item.amount}</td>
-                        <td>${product.price}원</td>
-                        <td>${item.amount * product.price}원</td>
-                       <c:set var="doneLoop" value="true"/>
-                      </c:if>
+                       <c:if test="${item.productId == product.productId}">
+                          <td colspan="7">${product.name}</td>
+                          <td>${item.amount}</td>
+                          <td>${product.price}원</td>
+                          <td>${item.amount * product.price}원</td>
+                         <c:set var="doneLoop" value="true"/>
+                        </c:if>
                       </c:if>
                    </c:forEach>
                   </tr>
-                  </c:forEach>
-              
+                </c:forEach>
               </tbody>
               <tfoot>
               <c:forEach items="${pricelist}" var="price">
@@ -65,11 +59,17 @@
               </tfoot>
             </table>
           </div>
+          <!-- 테이블(가구img, 가구명, 수량, 판매가, 합계) -->
+          
       </div>
+      
+      <!-- 쿠폰적용 div -->
       <div class="box">
         <h3 style="color: #8A0808;">쿠폰적용</h3><br>
           <div class="col-sm-12">
             <div class="form-group">
+            
+              <!-- 적용된 쿠폰 띄우기 -->
               <div class="box coupon">
                 <div class="table-responsive">
                   <table class="table">
@@ -88,18 +88,20 @@
                 </table>
               </div>
             </div>
+            <!-- /적용된 쿠폰 띄우기 -->
+            
           </div>
         </div>
       </div>
+      <!-- /쿠폰적용 div -->
+      
       <div class="box-footer text-center">
           <a href="${contextPath}/mypage/order" class="btn btn-default">목록으로</a>
       </div>
-      <!-- /.box -->
-      <!-- /.col-md-9 -->
     </div>
-    <!-- /.container -->
+    <!-- /주문서 조회 div-->
+    
   </div>
-  <!-- //container -->
 </div>
-<!-- //blog -->\
+
 <%@ include file="../include/footer.jsp"%>

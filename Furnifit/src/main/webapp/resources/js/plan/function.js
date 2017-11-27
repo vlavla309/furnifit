@@ -32,7 +32,8 @@ function toAjax(){
 			console.log(data)
 			/*console.log(data.list[0].imgs[0].name)*/
 			/*console.log(data.list[0].productId)*/
-			productList(data)
+			productList(data);
+			makeFurnitureList(data);
 		},
 		error: function(data) {
 			console.log(data)
@@ -54,8 +55,30 @@ function productList(data){
 		str+="<span>"+item.name+"</span> <span>"+item.brand+"</span> <span>"+item.width * item.length * item.height +"</span> <span>"+item.price+"원 </span>"
 		str+="</div>"
 	});
-	
 	$('.productWrap').html(str)
+}
+
+
+function makeFurnitureList(data){
+	$.each(data.list, function(i, item) {
+		var furniture=new Furniture(item.productId,
+									item.category,
+									item.name,
+									item.brand,
+									item.price,
+									item.color,
+									item.width,
+									item.length,
+									item.height,
+									proImgPath+"/"+item.imgs[0].path+"/"+item.imgs[0].name);
+
+		furnitures.set(Number(item.productId), furniture);
+	});
+	
+	/*테스트*/
+	furnitures.forEach(function(item, key, mapObj){
+		console.log(item.toString());
+	});
 		
 }
 

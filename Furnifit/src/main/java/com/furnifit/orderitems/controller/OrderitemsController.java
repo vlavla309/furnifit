@@ -62,8 +62,9 @@ public class OrderitemsController {
 		List<Furniture> furniList = furniDao.list(planitemId);
 		List<Product> proList = proService.list();
 		List<ProductImg> imgList = imgDao.list();
-		List<Coupon> couponList =  couponService.readAvailable(member.getEmail());
+		List<Coupon> couponList =  couponService.readAvailable(member.getEmail());	//사용 가능한 쿠폰 확인
 		
+		model.addAttribute("title", "Furnifit - order/"+planitemId);
 		model.addAttribute("proList", proList);	
 		model.addAttribute("furniList", furniList);
 		model.addAttribute("imgList", imgList);
@@ -74,13 +75,15 @@ public class OrderitemsController {
 	@RequestMapping(value = "/{planitemId}", method = RequestMethod.POST)
 	public String registPOST(@PathVariable("planitemId") int planitemId, Orderitems orderitems, Orders order, Coupon coupon) throws Exception {
 		logger.info("planitemId : "+planitemId);
-		logger.info("오더오더오더----"+order);
 		logger.info("order.getOrderId() : "+order.getOrderId());
 		logger.info(orderitems);
 		
 		ordersService.create(order);
 		
 		for (int i = 0; i < orderitems.getProductIds().length; i++) {
+			logger.info("orderitems.getProductIds()[i]---"+orderitems.getProductIds()[i]);
+			logger.info("order.getOrderId()---"+ order.getOrderId());
+			logger.info("orderitems.getAmounts()[i])---"+ orderitems.getAmounts()[i]);
 			Orderitems item = new Orderitems(orderitems.getProductIds()[i], order.getOrderId(), orderitems.getAmounts()[i]);
 			logger.info(item);
 			itemsService.create(item);
