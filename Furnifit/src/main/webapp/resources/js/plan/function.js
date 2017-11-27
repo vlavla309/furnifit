@@ -29,18 +29,15 @@ function toAjax() {
 		data : formData,
 		success : function(data) {
 			console.log(data)
-<<<<<<< HEAD
 			/* console.log(data.list[0].imgs[0].name) */
 			/* console.log(data.list[0].productId) */
 			console.log(data)
 			productList(data)
 			filter(data)
-=======
 			/*console.log(data.list[0].imgs[0].name)*/
 			/*console.log(data.list[0].productId)*/
 			productList(data);
 			makeFurnitureList(data);
->>>>>>> 3012dd9a4527f62b6ca8ac8b37da9ecfeb8386a7
 		},
 		error : function(data) {
 			console.log(data)
@@ -54,7 +51,6 @@ function productList(data) {
 	
 	var str = "";
 	$.each(data.list, function(i, item) {
-<<<<<<< HEAD
 		str+="<div class=\"product\">"
 		str+="	<div class=\"imgWrap\">"
 		str+="<a class='addFurnitureBtn' href=\""+item.productId+"\"><img src=\""+proImgPath+""+item.imgs[0].path+"/"+item.imgs[0].name+"\" /></a>"
@@ -63,7 +59,6 @@ function productList(data) {
 		str+="</div>"
 		str+="<span>"+item.name+"</span> <span>"+item.brand+"</span> <span>"+item.width * item.length * item.height +"</span> <span>"+item.price+"원 </span>"
 		str+="</div>"
-=======
 		str += "<div class=\"product\">"
 		str += "	<div class=\"imgWrap\">"
 		str += "<a href=\"" + item.productId + "\"><img src=\"" + proImgPath
@@ -76,9 +71,7 @@ function productList(data) {
 				+ "</span> <span>" + item.width * item.length * item.height
 				+ "</span> <span>" + item.price + "원 </span>"
 		str += "</div>"
->>>>>>> 3f47efb65ea2dc293827ddea4186933a7d6e27fb
 	});
-<<<<<<< HEAD
 
 	$('.productWrap').html(str)
 
@@ -109,11 +102,9 @@ function filter(data) {
 		console.log(item.name)
 		str += "<li><a class=\"btn btn-default colorBtn\" id =\""+item.name+"\" style=\"background:"+item.rgb+"\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:white\" aria-hidden=\"true\"></i></a></li>"
 	});
-	str += "</ul>"
-	$('#colorul').html(str)
+	str += "</ul>";
+	$('#colorul').html(str);
 	
-
-=======
 	$('.productWrap').html(str)
 }
 
@@ -133,16 +124,10 @@ function makeFurnitureList(data){
 
 		furnitures.set(Number(item.productId), furniture);
 	});
-<<<<<<< HEAD
-=======
-	
 	/*테스트*/
 	furnitures.forEach(function(item, key, mapObj){
 		console.log(item.toString());
 	});
-		
->>>>>>> 3012dd9a4527f62b6ca8ac8b37da9ecfeb8386a7
->>>>>>> 3f47efb65ea2dc293827ddea4186933a7d6e27fb
 }
 
 $(function() {
