@@ -161,7 +161,7 @@ Editor.prototype.furniture2= function(x,y,type, productId){
 
 /* 배치도에 새 가구 생성 */
 Editor.prototype.furniture= function(x,y,target){
-	console.log(target.toString());
+	//console.log(target.toString());
 	var furniture;
 	var width = target.width * this.scale;
 	var height = target.height * this.scale;

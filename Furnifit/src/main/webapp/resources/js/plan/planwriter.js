@@ -139,7 +139,7 @@ function selectPlan(id){
 function setFurnitureInfo(){
 	var productId=Number(selectedElem.data("productId"));
 	var furniture=furnitures.get(productId);
-	console.log(furniture.toString());
+	//console.log(furniture.toString());
 	$("#furnitureInfoWrap .imgWrap img").attr("src", furniture.imgPath);
 	$("#furnitureInfoWrap .infoWrap .category").text(furniture.category);
 	$("#furnitureInfoWrap .infoWrap .name").text(furniture.name);

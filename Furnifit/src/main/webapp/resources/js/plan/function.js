@@ -33,7 +33,7 @@ function toAjax() {
 				once=0;
 			}
 
-			console.log(data)
+			//console.log(data)
 			/* console.log(data.list[0].imgs[0].name) */
 			/* console.log(data.list[0].productId) */
 			filter(data)
@@ -92,7 +92,7 @@ function filter(data) {
 	str += "<ul>"
 	// color
 	$.each(data.colorlist, function(i, item) {
-		console.log(item.name)
+		//console.log(item.name)
 		str += "<li><a class=\"btn btn-default colorBtn\" id =\""+item.name+"\" style=\"background:"+item.rgb+"\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:white\" aria-hidden=\"true\"></i></a></li>"
 	});
 	str += "</ul>";
@@ -119,7 +119,7 @@ function makeFurnitureList(data){
 	});
 	/*테스트*/
 	furnitures.forEach(function(item, key, mapObj){
-		console.log(item.toString());
+		//console.log(item.toString());
 	});
 }
 
