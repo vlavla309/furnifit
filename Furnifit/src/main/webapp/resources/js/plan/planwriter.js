@@ -78,6 +78,11 @@ $( function() {
 	});
 	/*----------------------상품 카테고리 탭 끝!!!----------------------*/
 	
+	/*상품 검색 ui 아코디언*/
+	$( "#searchAccodian" ).accordion({
+		heightStyle: "content",
+		collapsible: true
+	});
 } );
 
 function changeDirection(target) {
