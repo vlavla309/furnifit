@@ -103,7 +103,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<li><a class="hvr-bounce-to-bottom" href="${contextPath}/article">배치도공유게시판</a></li> 
 									</ul>
 								</li>	
-								<li><a href="contact.html">brand</a></li>
+								<li><a href="${contextPath}/brand">brand</a></li>
 							</ul>	
 							<div class="clearfix"> </div>
 						</div>	
