@@ -26,7 +26,7 @@
 <script type="text/javascript" src="${rSrcPath}/js/plan/eventHandler.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/Editor.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/Coordinate.js"></script>
-<script type="text/javascript" src="${rSrcPath}/s/plan/calc.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/calc.js"></script>
 
 
 <script type="text/javascript">
@@ -97,26 +97,57 @@
 							</ul>
 							<!-- 상품 목록 -->
 							<div id="tabs-1" class="tabContent">
-							<div id="searchTab">
-							<form name="filter" id="filter">
-								<input type="hidden" value="" name="sort"> <input
-									type="hidden" value="" name="keyword"> <input
-									type="hidden" name="category" value="" id="cate"> <input
-									type="hidden" name="minPrice" value="0" id="min"> <input
-									type="hidden" name="maxPrice" value="0" id="max"> <input
-									type="hidden" name="maxWidth" value="0"> <input
-									type="hidden" name="maxLength" value="0"> <input
-									type="hidden" name="maxHeight" value="0"> <input
-									type="hidden" name="pageSize" value="6"> <input
-									type="hidden" name="totalsize" value="${totalsize}">
-							</form>
-							</div>
+								<div id="searchTab">
+								<button type="button" id="searchToggleBtn">검색하기</button>
+								<div id="searchWrap">
+									<div id="searchKeyword">
+									<input type="text"/>
+									<button>검색</button>
+									</div>
+									<div id="searchAccodian">
+										<h3>카테고리</h3>
+										<div>
+											<p>섹션 1111</p>
+										</div>
+										<h3>브랜드</h3>
+										<div>
+											<p>섹션 22222</p>
+										</div>
+										<h3>색상</h3>
+										<div>
+											<p>섹션 3333</p>
+										</div>
+										<h3>가격</h3>
+										<div>
+											<p>섹션 44444</p>
+										</div>
+										<h3>사이즈</h3>
+										<div>
+											<p>섹션 44444</p>
+										</div>
+									</div>
+
+									<form name="filter" id="filter">
+										<input type="hidden" value="" name="sort"> <input
+											type="hidden" value="" name="keyword"> <input
+											type="hidden" name="category" value="" id="cate"> <input
+											type="hidden" name="minPrice" value="0" id="min"> <input
+											type="hidden" name="maxPrice" value="0" id="max"> <input
+											type="hidden" name="maxWidth" value="0"> <input
+											type="hidden" name="maxLength" value="0"> <input
+											type="hidden" name="maxHeight" value="0"> <input
+											type="hidden" name="pageSize" value="6"> <input
+											type="hidden" name="totalsize" value="${totalsize}">
+									</form>
+								</div>
+								</div>
 								<div class="productWrap">
 									<!-- 상품 목록 -->
 									<!-- 상품 항목  시작-->
 									<!-- 상품 항목  끝-->
 									
 								</div>
+								
 							</div>
 							
 							
@@ -218,5 +249,6 @@
 		</div>
 		<!-- 새 배치도 추가 폼 -->
 	</div>
+	
 </body>
 </html>
