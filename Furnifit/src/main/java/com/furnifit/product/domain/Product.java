@@ -17,9 +17,9 @@ public class Product {
 	private String brand;  //일룸, 까사미아, 이케아
 	private int price; 
 	private String color;  //black, white, braun , walnut, green
-	private int width;
-	private int length;
-	private int height;
+	private int width; //가로
+	private int height; //세로
+	private int length; //높이
 	private String description;
 	private String regdate;
 	private String[] files;
