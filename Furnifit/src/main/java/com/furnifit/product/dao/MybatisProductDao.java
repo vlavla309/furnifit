@@ -53,4 +53,9 @@ public class MybatisProductDao implements ProductDao {
 		return sqlsession.selectList(namespace+".productAll");
 	}
 
+	@Override
+	public List<Product> productReadList(String category) {
+		return sqlsession.selectList(namespace+".productReadList", category);
+	}
+
 }

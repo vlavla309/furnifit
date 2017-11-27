@@ -113,6 +113,12 @@ public class MybatisArticleDao implements ArticleDao {
 	public List<Article> likecntcoupone() {
 		return sqlSession.selectList(namespace+".likecntcoupone");
 	}
+
+
+	@Override
+	public List<Article> productRead(int productId) {
+		return sqlSession.selectList(namespace+".productRead", productId);
+	}
 	
 	
 	

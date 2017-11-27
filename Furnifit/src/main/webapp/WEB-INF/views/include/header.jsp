@@ -73,20 +73,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </c:otherwise>
                           </c:choose>
                           </ul>
-            
-            
-<%-- 							<ul>
-								<li><a href="login.html">Login</a></li>
-								<li><a href="${contextPath}/member/register">Sign up</a></li>
-                                
-							</ul> --%>
-						</div>
-						<div class="social-icons">
-							<ul>
-								<li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a class="twitter facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a class="twitter google" href="#"><i class="fa fa-google-plus"></i></a></li>
-							</ul>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
@@ -113,7 +99,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li><a href="${contextPath}/product">Product</a></li>
 								<li><a href="#" class="dropdown-toggle hvr-bounce-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">가구배치도<span class="caret"></span></a>
 									<ul class="dropdown-menu">
-										<li><a class="hvr-bounce-to-bottom" href="gallery1.html">배치도작성</a></li>
+										<li><a class="hvr-bounce-to-bottom" href="${contextPath}/plan/writer">배치도작성</a></li>
 										<li><a class="hvr-bounce-to-bottom" href="${contextPath}/article">배치도공유게시판</a></li> 
 									</ul>
 								</li>	

@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.furnifit.article.dao.ArticleDao;
+import com.furnifit.article.domain.Article;
+import com.furnifit.article.service.ArticleService;
 import com.furnifit.brand.dao.BrandDao;
 import com.furnifit.brand.doamin.Brand;
 import com.furnifit.category.dao.CategoryDao;
@@ -63,6 +66,9 @@ public class ProductController {
 	@Inject
 	private CategoryDao categorys;
 	
+	@Inject
+	private ArticleService artsrv;
+	
 	@RequestMapping(value="", method= RequestMethod.GET)
 	public String list(Model model) {
 		List<Product> list = productsrv.list();
@@ -100,8 +106,24 @@ public class ProductController {
 	@RequestMapping(value="/{productid}", method= RequestMethod.GET)
 	public String read(Model model, @PathVariable("productid") int productid) {
 		Product product = productsrv.read(productid);
+		logger.info("Product : "+product);
+		
+		List<Product> categorylist = productsrv.productReadList(product.getCategory());
+		for (Product product2 : categorylist) {
+			logger.info(product2);
+		}
+		
+		List<Article> artlist = artsrv.productRead(productid);
+		
+		for (Article article : artlist) {
+			logger.info(article);
+		}
+		
 		model.addAttribute("product", product);
 		model.addAttribute("title", "Furnifit - "+product.getName());
+		model.addAttribute("categorylist", categorylist);
+		model.addAttribute("artlist", artlist);
+		
 		return "product/read";
 	}
 	
