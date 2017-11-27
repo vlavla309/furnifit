@@ -1,3 +1,4 @@
+
 .pagination>li>a, .pagination>li>span {
 	color: #353535;
 	background-color: #FBF8EF;
@@ -9,7 +10,7 @@
 	z-index: 2;
 	color: white;
 	cursor: default;
-	background-color: #8A0808;
+	background-color: #8A0808; 
 	border-color: #8A0808;
 }
 
@@ -84,7 +85,7 @@
 .artBoardTitle {
 	font-size: 23pt;
 	color: #8A4B08;
-}
+} 
 
 .artListTitle {
 	font-size: 12pt;

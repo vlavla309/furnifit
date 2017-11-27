@@ -41,6 +41,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	var contextPath = "${contextPath}"
 	var loginEmail = "${login.email}"
+	var rSrcPath = "${rSrcPath}"
 </script>	
 <!--animate-->
 <%-- <link href="${pageContext.servletContext.contextPath }/resources/css/animate.css" rel="stylesheet" type="text/css" media="all"> --%>
