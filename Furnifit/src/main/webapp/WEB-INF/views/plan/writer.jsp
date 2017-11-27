@@ -21,6 +21,7 @@
 <script type="text/javascript" src="${rSrcPath}/js/plan/snap.svg.zpd.js"></script>
 
 <script type="text/javascript" src="${rSrcPath}/js/plan/planwriter.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/Furniture.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/function.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/eventRegist.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/eventHandler.js"></script>
