@@ -94,6 +94,9 @@ public class ProductController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		logger.info(params);
 		List<Product> list = productsrv.searchlist(params);
+		for (Product product : list) {
+			logger.info(product);
+		}
 		List<Wishlist> wishlist = wishsrv.read();
 		map.put("list", list);
 		map.put("wishlist",wishlist);
