@@ -166,11 +166,11 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-          <button type="button" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
+          <button type="button" class="btn btn-default id="replyAddBtn">ADD REPLY</button>
         </div>
       </div>
       <br>
-      <hr class="dunggul" style="border: solid 4px #f70940;">
+      <hr class="dunggul" style="border: solid 2px #f70940;">
 
 <!-- 입력한 댓글들은 이곳에 출력된다. -->
 <div id="replies">
