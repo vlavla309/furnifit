@@ -5,21 +5,18 @@
 <mapper namespace="com.furnifit.offercoupone.dao.OfferCouponeDao">
 
 	<insert id="createCoupone" parameterType="map">
-
 		INSERT INTO
 		OFFER_COUPONES (SERIAL, COUPONE_ID,EMAIL, STATUS, OFFER_DATE,
 		EXPIRATION_DATE)
 		VALUES (offer_coupones_seq.nextval, #{couponeid},
 		#{email}, '사용가능', sysdate,
 		add_months(sysdate, 1))
-
 	</insert>
 
 	<update id="updateCoupone">
-		update OFFER_COUPONES
-		set status='기간만료'
-		where EXPIRATION_DATE > sysdate-1 and STATUS='사용가능'
+		UPDATE OFFER_COUPONES
+		<set>STATUS = '기간만료'</set>
+		WHERE SYSDATE-1 > EXPIRATION_DATE AND STATUS='사용가능'
 	</update>
-
-
+	
 </mapper>
