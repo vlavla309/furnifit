@@ -34,4 +34,13 @@ $( document ).ready(function(){
 	$("#searchToggleBtn").on("click", function(){
 		$("#searchWrap").toggle();
 	});
+	
+	
+	$(document).on("click", ".addFurnitureBtn",function(e){
+		e.preventDefault();
+		var pid=Number($(this).attr("href"));
+		console.log("pid "+pid);
+		var fur=furnitures.get(pid);
+		console.log(fur.toString());
+	});
 });

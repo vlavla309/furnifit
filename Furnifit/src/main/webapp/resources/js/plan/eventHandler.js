@@ -6,12 +6,12 @@ function select(target){
 	if(selectedElem.hasClass("furniture")){
 		selectedViewbox=target.parent().parent(); // 선택된 가구의 뷰박스 획득
 		target.attr({strokeWidth: 4}); 
-		$("#footer").show();
+		$("#furnitureInfoWrap").show().css("display", "flex");
 	}
 }
 
 function unSelectAll(){
-	$("#footer").hide();
+	$("#furnitureInfoWrap").hide();
 	selectedElem=null;
 	curEditor.furnitures.attr({
 		strokeWidth: 0 // CamelCase...

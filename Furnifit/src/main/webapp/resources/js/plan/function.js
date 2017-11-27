@@ -48,7 +48,7 @@ function productList(data){
 	$.each(data.list, function(i, item) {
 		str+="<div class=\"product\">"
 		str+="	<div class=\"imgWrap\">"
-		str+="<a href=\""+item.productId+"\"><img src=\""+proImgPath+""+item.imgs[0].path+"/"+item.imgs[0].name+"\" /></a>"
+		str+="<a class='addFurnitureBtn' href=\""+item.productId+"\"><img src=\""+proImgPath+""+item.imgs[0].path+"/"+item.imgs[0].name+"\" /></a>"
 		str+="</div>"
 		str+="<div class=\"infoWrap\">" 
 		str+="</div>"

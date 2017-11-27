@@ -208,7 +208,7 @@ a{
 #furnitureInfoWrap{
 	border : 1px solid black;
 	margin : 0.5em;
-	display:flex;
+	display:none;
 }
 
 #furnitureInfoWrap *{
