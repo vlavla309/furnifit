@@ -1,4 +1,4 @@
- 	package com.furnifit.plan.controller;
+package com.furnifit.plan.controller;
 
 import java.util.List;
 
@@ -47,33 +47,27 @@ public class PlanController {
 	/** 배치도목록 리스트 */
 	@RequestMapping(value = "/mypage/planlist", method=RequestMethod.GET)
 	public String listAll(Model model, HttpServletRequest request, Params params, Orders order) throws Exception {
-		params.setPageSize(PAGE_SIZE);
-		params.setPagiSize(PAGI_SIZE);
-		
 		HttpSession session = request.getSession();   
 		Member member = (Member) session.getAttribute("login");
 		
+		// 페이징
 		int totalRowCount = planService.pageCount();
+		params.setPageSize(PAGE_SIZE);
+		params.setPagiSize(PAGI_SIZE);
 		
 		List<Plan> planlist = planService.listByParams(params);
-		for (Plan plan : planlist) {
-			logger.info(plan);
-		}
-		model.addAttribute("planlist", planlist);
 		
 		PageBuilder pageBuilder = new PageBuilder(params, totalRowCount);
 		pageBuilder.build();
-		model.addAttribute("pageBuilder", pageBuilder);
 		
 		List<PlanItem> itemList = itemService.listAll();
-		for (PlanItem planItem : itemList) {
-			logger.info(planItem);
-		}
-		
 		List<Coupon> couponList =  couponService.read(member.getEmail());
-		Coupon coupon = couponService.serialRead(order.getOrderId());
+		//Coupon coupon = couponService.serialRead(order.getOrderId());
 		
-		logger.info("coupon getId---"+coupon);
+		//logger.info("coupon getId---"+coupon);
+		model.addAttribute("title", "Furnifit - planList");
+		model.addAttribute("planlist", planlist);
+		model.addAttribute("pageBuilder", pageBuilder);
 		model.addAttribute("itemlist", itemList);
 		model.addAttribute("couponlist", couponList);
 		

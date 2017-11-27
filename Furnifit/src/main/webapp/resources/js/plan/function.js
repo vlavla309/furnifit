@@ -29,11 +29,18 @@ function toAjax() {
 		data : formData,
 		success : function(data) {
 			console.log(data)
+<<<<<<< HEAD
 			/* console.log(data.list[0].imgs[0].name) */
 			/* console.log(data.list[0].productId) */
 			console.log(data)
 			productList(data)
 			filter(data)
+=======
+			/*console.log(data.list[0].imgs[0].name)*/
+			/*console.log(data.list[0].productId)*/
+			productList(data);
+			makeFurnitureList(data);
+>>>>>>> 3012dd9a4527f62b6ca8ac8b37da9ecfeb8386a7
 		},
 		error : function(data) {
 			console.log(data)
@@ -60,6 +67,7 @@ function productList(data) {
 				+ "</span> <span>" + item.price + "원 </span>"
 		str += "</div>"
 	});
+<<<<<<< HEAD
 
 	$('.productWrap').html(str)
 
@@ -94,6 +102,33 @@ function filter(data) {
 	$('#colorul').html(str)
 	
 
+=======
+	$('.productWrap').html(str)
+}
+
+
+function makeFurnitureList(data){
+	$.each(data.list, function(i, item) {
+		var furniture=new Furniture(item.productId,
+									item.category,
+									item.name,
+									item.brand,
+									item.price,
+									item.color,
+									item.width,
+									item.length,
+									item.height,
+									proImgPath+"/"+item.imgs[0].path+"/"+item.imgs[0].name);
+
+		furnitures.set(Number(item.productId), furniture);
+	});
+	
+	/*테스트*/
+	furnitures.forEach(function(item, key, mapObj){
+		console.log(item.toString());
+	});
+		
+>>>>>>> 3012dd9a4527f62b6ca8ac8b37da9ecfeb8386a7
 }
 
 $(function() {

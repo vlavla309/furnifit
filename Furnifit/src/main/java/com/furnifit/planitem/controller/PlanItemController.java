@@ -58,20 +58,12 @@ public class PlanItemController {
 		
 		// 가구정보
 		List<Product> proList = proService.list();
-		for (Product product : proList) {
-			logger.info(product);
-		}
 		List<Furniture> furniList = furniDao.list(planItemId);
-		for (Furniture furni : furniList) {
-			logger.info(furni);
-		}
 		
 		// 쇼핑몰 링크
 		List<Brand> brandList = brandDao.list();
-		for (Brand brand : brandList) {
-			logger.info(brand);
-		}
 		
+		model.addAttribute("title", "Furnifit - itemList/"+planItemId);
 		model.addAttribute("planitemlist", planitemList);
 		model.addAttribute("prolist", proList);
 		model.addAttribute("furnilist", furniList);

@@ -98,14 +98,14 @@ public class MemberController {
 		if(check == 1) {
 			session.setAttribute("member", member);
 		}
-		return "redirect: /PlanWriter";
+		return "redirect: /one";
 	}
 	
 	// 회원 탈퇴
 	@RequestMapping(value = "/withdraw", method=RequestMethod.GET)
 	public String delete() {
 		log.debug("mypage 회원 탈퇴");
-		return "member/mypage";
+		return "mypage/mypage";
 	}
 	
 	// 회원 탈퇴 처리

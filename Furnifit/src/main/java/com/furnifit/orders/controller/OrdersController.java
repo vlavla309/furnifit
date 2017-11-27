@@ -80,9 +80,9 @@ public class OrdersController {
 		
 		List<Product> proList = proService.list();
 		List<ProductImg> imgList = imgDao.list();
-//		List<Coupon> couponList =  couponService.read(member.getEmail());
 		List<Coupon> couponList =  couponService.readAvailable(member.getEmail());	//사용 가능한 쿠폰 확인
 		
+		model.addAttribute("title", "Furnifit - orderList");
 		model.addAttribute("orderlist", orderList);
 		model.addAttribute("pageBuilder", pageBuilder);
 		model.addAttribute("prolist", proList);
@@ -107,6 +107,7 @@ public class OrdersController {
 		List<ProductImg> imgList = imgDao.list();
 		Coupon coupon = couponService.serialRead(orderId);	//주문 시 사용된 쿠폰 확인
 		
+		model.addAttribute("title", "Furnifit - orderId/"+order.getOrderId());
 		model.addAttribute("prolist", proList);
 		model.addAttribute("itemlist", itemList);
 		model.addAttribute("orderlist", orderList);

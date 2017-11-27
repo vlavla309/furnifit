@@ -12,6 +12,8 @@
     <div class="col-md-12">
       <h1>배치도 상세보기</h1><br><br>
       <div class="box box-info">
+      
+        <!-- 방 크기 정보 -->
         <div class="table-responsive">
           <table class="table">
               <tr>
@@ -26,11 +28,13 @@
               </tr>
           </table>
         </div>
+        <!-- /방 크기 정보 -->
+        
       </div>
     </div>
     <!-- /배치도 상세보기 div-->
 
-    <!-- 목록 리스트 div-->
+    <!-- 배치도 목록 리스트 div-->
     <div class="col-md-12" style="margin-top: 30px">
       <div class="box">
         <div class="table-responsive">
@@ -40,6 +44,8 @@
         </div>
         <div class="table-responsive">
          <h3 style="color: #8A0808;">가구목록</h3>
+         
+         <!-- 테이블(상품번호, 상품명, 쇼핑몰로 가기, 위시리스트) -->
           <table class="table">
             <tr>
               <th colspan="2">상품번호</th>
@@ -62,15 +68,21 @@
               </tr>
             </c:forEach>
           </table>
+          <!-- /테이블(상품번호, 상품명, 쇼핑몰로 가기, 위시리스트) -->
+          
         </div>
       </div><br>
+      
+      <!-- 공유, 주문서 작성, 삭제 버튼 -->
       <div class="text-center">
         <a href="${contextPath}/article/register/${planitemlist.planitemId}" class="btn btn-primary">공유</a>&nbsp;
         <a href="${contextPath}/order/${planitemlist.planitemId}" class="btn btn-primary">주문서 작성</a>
         <button type="button" class="btn btn-primary" style="margin-left: 10px" id=delbtn value="${planitemlist.planitemId}">삭제</button>
       </div>
+      <!-- /공유, 주문서 작성, 삭제 버튼 -->
+      
     </div>
-    <!-- /목록 리스트 div-->
+    <!-- /배치도 목록 리스트 div-->
   </div>
 </div>
 
