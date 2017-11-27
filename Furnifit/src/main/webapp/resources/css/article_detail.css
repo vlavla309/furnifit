@@ -337,7 +337,7 @@ overflow: auto;
   margin: 11px 0 17px 0;
   font-size: 31px;
   line-height: 80px;
-  color: #ef500b;
+  color: #ef0804;
   text-shadow: 0 6.36px 8.896px #c4b59d,0 -2px 1px #fff;
   letter-spacing: -4px;
 }
@@ -363,12 +363,7 @@ overflow: auto;
 
 .btn-primary {
   color: #fff;
-  background-color: #337ab7;
+  background-color: #0757f7;
   border-color: #2e6da4;
 }
-
-
-
-
-
 

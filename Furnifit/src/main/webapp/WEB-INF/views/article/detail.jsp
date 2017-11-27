@@ -175,20 +175,19 @@
 <!-- 입력한 댓글들은 이곳에 출력된다. -->
 <div id="replies">
 </div>
-<script src="${rSrcPath}js/article_detail_reply.js"></script>
-</div>
-</div>
-</div>
-</div>
-</div>
 
+<script src="${rSrcPath}js/article_detail_reply.js"></script>
+
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 </div>  
 
-
-          
-   <!-- //blog -->
+<!-- //blog -->
 <%@ include file="../include/footer.jsp" %>
 </body>
