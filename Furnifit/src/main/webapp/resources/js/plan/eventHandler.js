@@ -5,13 +5,14 @@ function select(target){
 	
 	if(selectedElem.hasClass("furniture")){
 		selectedViewbox=target.parent().parent(); // 선택된 가구의 뷰박스 획득
+		setFurnitureInfo();
 		target.attr({strokeWidth: 4}); 
-		$("#footer").show();
+		$("#furnitureInfoWrap").show().css("display", "flex");
 	}
 }
 
 function unSelectAll(){
-	$("#footer").hide();
+	$("#furnitureInfoWrap").hide();
 	selectedElem=null;
 	curEditor.furnitures.attr({
 		strokeWidth: 0 // CamelCase...
@@ -32,7 +33,8 @@ function hOut(){
 function dragStart(x,y,e) {
 	curEditor.canvas.paper.zpd('toggle');
 	selectedViewbox=this.parent().parent(); //선택된 가구의 에디터 정보 가져오기
-	origTransform = this.transform().local;  //기존 트랜스폼 명령
+	origTransform = this.transform().local;//기존 트랜스폼 명령
+	savedTransform = this.transform().local;//기존 트랜스폼 명령
 	target=this;
 	ox=0;
 	oy=0;
@@ -88,15 +90,13 @@ function dragDrop(x,y) {
 		dir = isCollisionOfWall(target.getBBox());
 	}
 
-
-
 	/*collision check*/
 	var collisionFurnitures=isCollisionOfFurnitures(target);
 
 	if(collisionFurnitures){
 		console.log("겹침");
 		this.attr({
-			transform: origTransform
+			transform: savedTransform
 		});
 	}
 
@@ -132,8 +132,8 @@ function hasCollision(target, set){
 		}
 	});
 
-	pathTarget.remove();
-	pathSet.remove();
+	//pathTarget.remove();
+	//pathSet.remove();
 
 	return result;
 }
@@ -150,7 +150,7 @@ function isCollisionOfFurnitures(target){
 			pathSet.push(pathElem);
 
 			var interSection=Snap.path.intersection(pathElem, pathTarget);
-
+			console.log(interSection);
 			if(interSection.length > 0){
 				result = true;
 				return;
@@ -169,8 +169,6 @@ function isCollisionOfWall(target){
 	var east;
 	var south;
 	var west;
-
-
 
 	var bbox=curEditor.wallNorth.getBBox();
 	north =Snap.path.isBBoxIntersect(bbox, target);
@@ -232,9 +230,8 @@ function rect2Path(target){
 	pathStr+=" L"+posA.x+" "+posA.y;
 
 	var path=curEditor.canvas.path(pathStr).attr({
-		fill : "none",
-		stroke:"#888"
-			//fill : "#000"
+		//stroke:"#888",
+		fill : "none"
 	});
 
 	return path;
@@ -261,9 +258,8 @@ function g2Path(target){
 	pathStr+=" L"+posA.x+" "+posA.y;
 
 	var path=curEditor.canvas.path(pathStr).attr({
-		fill : "none",
-		stroke:"#888"
-			//fill : "#000"
+		//stroke:"#888",
+		fill : "none"
 	});
 
 	return path;

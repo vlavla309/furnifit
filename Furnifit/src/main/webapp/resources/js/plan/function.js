@@ -32,6 +32,16 @@ function toAjax() {
 				filter(data)
 				once=0;
 			}
+=======
+			console.log(data)
+			/* console.log(data.list[0].imgs[0].name) */
+			/* console.log(data.list[0].productId) */
+			console.log(data)
+			productList(data)
+			filter(data)
+			/*console.log(data.list[0].imgs[0].name)*/
+			/*console.log(data.list[0].productId)*/
+>>>>>>> 13d3708bf6a1608b2584c2d3ae601b9b2738e3b3
 			productList(data);
 			makeFurnitureList(data);
 		},
@@ -47,18 +57,17 @@ function productList(data) {
 	
 	var str = "";
 	$.each(data.list, function(i, item) {
-		str += "<div class=\"product\">"
-		str += "	<div class=\"imgWrap\">"
-		str += "<a href=\"" + item.productId + "\"><img src=\"" + proImgPath
-				+ "" + item.imgs[0].path + "/" + item.imgs[0].name
-				+ "\" /></a>"
+		str+="<div class=\"product\">"
+		str+="	<div class=\"imgWrap\">"
+		str+="		<a class='addFurnitureBtn' href=\""+item.productId+"\"><img src=\""+proImgPath+""+item.imgs[0].path+"/"+item.imgs[0].name+"\" /></a>"
+		str+="	</div>"
+		str+="	<div class=\"infoWrap\">" 
+		str += "	<span>" + item.name + "</span>;"
+		str += "	<span>" + item.brand + "</span>";
+		str += "	<span>" + item.width * item.length * item.height+ "</span>";
+		str += "	<span>" + item.price + "원 </span>";
 		str += "</div>"
-		str += "<div class=\"infoWrap\">"
-		str += "</div>"
-		str += "<span>" + item.name + "</span> <span>" + item.brand
-				+ "</span> <span>" + item.width * item.length * item.height
-				+ "</span> <span>" + item.price + "원 </span>"
-		str += "</div>"
+		str+="</div>"
 	});
 
 	$('.productWrap').html(str)
@@ -90,10 +99,14 @@ function filter(data) {
 		console.log(item.name)
 		str += "<li><a class=\"btn btn-default colorBtn\" id =\""+item.name+"\" style=\"background:"+item.rgb+"\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:white\" aria-hidden=\"true\"></i></a></li>"
 	});
-	str += "</ul>"
-	$('#colorul').html(str)
+	str += "</ul>";
+	$('#colorul').html(str);
 	
+<<<<<<< HEAD
 
+=======
+	$('.productWrap').html(str)
+>>>>>>> 13d3708bf6a1608b2584c2d3ae601b9b2738e3b3
 }
 
 
@@ -112,12 +125,14 @@ function makeFurnitureList(data){
 
 		furnitures.set(Number(item.productId), furniture);
 	});
-	
 	/*테스트*/
 	furnitures.forEach(function(item, key, mapObj){
 		console.log(item.toString());
 	});
+<<<<<<< HEAD
 		
+=======
+>>>>>>> 13d3708bf6a1608b2584c2d3ae601b9b2738e3b3
 }
 
 $(function() {
@@ -225,6 +240,27 @@ $(function() {
 		toAjax();
 	});
 	
+<<<<<<< HEAD
 	toAjax()
 
+=======
+	/* 정렬 */
+	$('.target').change(function() {
+		$('input[name=sort]').val($(this).val())
+		toAjax();
+	});
+	
+	/* 더보기 버튼을 누르면 page size가 늘어남*/
+	$(document).on("click", "#add",function(event) {
+		event.preventDefault();
+		$('input[name=pageSize]').val(Number($('input[name=pageSize]').val())+ 6)
+		var total = $('input[name = totalsize').val()
+		if(Number(total)<=Number($('input[name=pageSize]').val())){
+			$('#add').remove()
+		}
+		toAjax();
+	});
+	
+	toAjax();
+>>>>>>> 13d3708bf6a1608b2584c2d3ae601b9b2738e3b3
 })

@@ -130,29 +130,90 @@ Editor.prototype.room = function(width,height,length){
 }
 
 /* 배치도에 새 가구 생성 */
-Editor.prototype.furniture= function(x,y,type, productId){
-		var furniture;
-		var rect=this.canvas.rect(x, y, 100*this.scale, 213*this.scale).attr("fill", "none");
-		var image=this.canvas.image(planImgPath+"/bed.png", x, y ,100*this.scale, 213*this.scale);
-		
-		furniture=this.canvas.g(rect,image).attr({
-			stroke: "#6799FF",
-			strokeWidth: 0,
-			class: "furniture"}
-		).data("productId", productId).transform("");
+Editor.prototype.furniture2= function(x,y,type, productId){
+	var furniture;
+	var rect=this.canvas.rect(x, y, 100*this.scale, 213*this.scale).attr("fill", "none");
+	var image=this.canvas.image(planImgPath+"/bed.png", x, y ,100*this.scale, 213*this.scale);
+	
+	furniture=this.canvas.g(rect,image).attr({
+		stroke: "#6799FF",
+		strokeWidth: 0,
+		class: "furniture"}
+	).data("productId", productId).transform("");
 
-		//클릭 이벤트 등록
-		furniture.mousedown(function(){
-			unSelectAll();
-		});
-		
-		furniture.mouseup(function(){
-			select(this);
-		});
+	//클릭 이벤트 등록
+	furniture.mousedown(function(){
+		unSelectAll();
+	});
+	
+	furniture.mouseup(function(){
+		select(this);
+	});
 
-		//드래그 이벤트 등록
-		furniture.drag(dragMove, dragStart,dragDrop);
-		furniture.hover(hIn, hOut);
-		this.furnitures.push(furniture);
-		return furniture;
+	//드래그 이벤트 등록
+	furniture.drag(dragMove, dragStart,dragDrop);
+	furniture.hover(hIn, hOut);
+	this.furnitures.push(furniture);
+	return furniture;
 }
+
+
+
+/* 배치도에 새 가구 생성 */
+Editor.prototype.furniture= function(x,y,target){
+	console.log(target.toString());
+	var furniture;
+	var width = target.width * this.scale;
+	var height = target.height * this.scale;
+	var length = target.length * this.scale;
+	var imgPath=planImgPath+"/";
+	
+	switch(target.category){
+	case "침대":
+		if(target.width>130)imgPath+="bed_big.png";
+		else imgPath+="bed_small.png";
+		break;
+	case "선반":
+		imgPath+="shelf.png";
+		break;
+	case "쇼파":
+		if(target.width>80)imgPath+="sofa_big.png";
+		else imgPath+="sofa_small.png";
+		break;
+	case "옷장":
+		imgPath+="closet.png";
+		break;
+	case "책상":
+		imgPath+="desk.png";
+		break;
+	case "식탁":
+		imgPath+="kitchentable.png";
+		break;
+	}
+	
+	var rect=this.canvas.rect(x, y, width, length).attr("fill", "none");
+	var image=this.canvas.image(imgPath, x, y , width, length);
+	
+	furniture=this.canvas.g(rect,image).attr({
+		stroke: "#6799FF",
+		strokeWidth: 0,
+		class: "furniture"}
+	).data("productId", target.productId).transform("");
+
+	//클릭 이벤트 등록
+	furniture.mousedown(function(){
+		unSelectAll();
+	});
+	
+	furniture.mouseup(function(){
+		select(this);
+	});
+
+	//드래그 이벤트 등록
+	furniture.drag(dragMove, dragStart,dragDrop);
+	furniture.hover(hIn, hOut);
+	this.furnitures.push(furniture);
+	return furniture;
+}
+
+

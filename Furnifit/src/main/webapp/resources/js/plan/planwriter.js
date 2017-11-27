@@ -135,3 +135,15 @@ function delPlanItem(id){
 function selectPlan(id){
 	$(".planitem a[href="+id+"]").trigger("click");
 }
+
+function setFurnitureInfo(){
+	var productId=Number(selectedElem.data("productId"));
+	var furniture=furnitures.get(productId);
+	console.log(furniture.toString());
+	$("#furnitureInfoWrap .imgWrap img").attr("src", furniture.imgPath);
+	$("#furnitureInfoWrap .infoWrap .category").text(furniture.category);
+	$("#furnitureInfoWrap .infoWrap .name").text(furniture.name);
+	$("#furnitureInfoWrap .infoWrap .brand").text(furniture.brand);
+	$("#furnitureInfoWrap .infoWrap .size").text(furniture.width+"x"+furniture.height+"x"+furniture.length);
+	
+}

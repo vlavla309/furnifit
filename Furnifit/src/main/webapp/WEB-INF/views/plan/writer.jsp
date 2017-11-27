@@ -289,16 +289,19 @@ li {
 		<div id="footer">
 			<div id="furnitureInfoWrap">
 				<div class="imgWrap">
-					<img src="images/bed.png" />
+					<img src="" />
 				</div>
 				<div class="infoWrap">
-					<span>카테고리</span> <span>상품명</span> <span>브랜드</span> <span>200x200x200</span>
+					<span class="category">카테고리</span> 
+					<span class="name">상품명</span> 
+					<span class="brand">브랜드</span> 
+					<span class="size">200x200x200</span>
 				</div>
 				<div class="controlWrap">
 					<ul>
-						<li><a href="#" id="clockwiseRotateBtn">시계방향 회전</a></li>
-						<li><a href="#" id="counterclockwiseRotateBtn">시계반대방향 회전</a></li>
-						<li><a href="#" id="deleteBtn">삭제</a></li>
+						<li><a href="#" id="clockwiseRotateBtn"><img src="${contextPath }/resources/images/plan/rotate.png" alt="시계방향 회전"></a></li>
+						<li><a href="#" id="counterclockwiseRotateBtn"><img src="${contextPath }/resources/images/plan/counterRotate.png" alt="시계반대방향 회전"></a></li>
+						<li><a href="#" id="deleteBtn"><img src="${contextPath }/resources/images/plan/trash.png" alt="삭제"></a></li>
 					</ul>
 				</div>
 			</div>
