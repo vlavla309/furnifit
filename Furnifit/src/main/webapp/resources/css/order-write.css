@@ -1,0 +1,48 @@
+input[type="radio"]:not(old) {
+	margin-left: 20px;
+}
+
+select {
+	width: 200px;
+	height: 30px
+}
+
+.coupon {
+	background-color: #FBF8EF;
+	border: 2px dotted #F6CECE;
+	border-radius: 10px;
+	padding-top: 15px;
+	height: 105px;
+}
+
+.price {
+	text-align: center;
+	background-color: #FBF8EF;
+	border-radius: 10px;
+	height: 180px;
+}
+
+.count {
+	width: 20%;
+	text-align: right;
+	border-radius: 5px;
+	border: 1px dotted black;
+}
+
+.btn-primary {
+	color: #fff;
+	background-color: black;
+	border-color: black;
+}
+
+.btn-primary2 {
+	color: #fff;
+	background-color: #B40404;
+	border-color: #B40404;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active,
+	.btn-primary.active, .open>.dropdown-toggle.btn-primary {
+	color: #fff;
+	background-color: #B40404;
+}

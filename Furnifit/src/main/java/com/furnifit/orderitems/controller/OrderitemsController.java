@@ -74,6 +74,7 @@ public class OrderitemsController {
 	@RequestMapping(value = "/{planitemId}", method = RequestMethod.POST)
 	public String registPOST(@PathVariable("planitemId") int planitemId, Orderitems orderitems, Orders order, Coupon coupon) throws Exception {
 		logger.info("planitemId : "+planitemId);
+		logger.info("오더오더오더----"+order);
 		logger.info("order.getOrderId() : "+order.getOrderId());
 		logger.info(orderitems);
 		
