@@ -11,6 +11,8 @@
   <!-- 배치도 관리 div-->
     <div class="col-md-3">
       <h1>배치도 관리</h1><br><br>
+      
+      <!-- 회원 정보 -->
       <div class="box box-info">
         <h4 class="text-center" style="padding-top: 10px;"><strong>내 정보</strong></h4>
         <div class="table-responsive">
@@ -25,10 +27,12 @@
           </table>
         </div>
       </div>
+      <!-- /회원 정보 -->
+      
     </div><br><br><br><br>
     <!-- /배치도 관리 div-->
 
-    <!-- 목록 리스트 div-->
+    <!-- 배치도 목록 리스트 div-->
     <div class="col-md-9">
       <div class="box">
         <form method="post" action="order-address.leaf">
@@ -50,7 +54,6 @@
           </div>
         </form>
       </div>
-
       <div class="box">
         <div class="box-footer">
 
@@ -70,13 +73,13 @@
                 <li><a href="${pageBuilder.getQueryString(pageBuilder.currentEndPage +1)}">&raquo;</a></li>
               </c:if>
             </ul>
-         </div>
+          </div>
           <!-- /페이징 --> 
 
         </div>
       </div>
     </div>
-    <!-- /목록 리스트 div-->
+    <!-- /배치도 목록 리스트 div-->
   </div>
 </div>
 
