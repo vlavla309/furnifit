@@ -40,6 +40,6 @@ $( document ).ready(function(){
 		e.preventDefault();
 		var pid=Number($(this).attr("href"));
 		var fur=furnitures.get(pid);
-		curEditor.furniture2(curEditor.offsetX, curEditor.offsetY, fur);
+		curEditor.furniture(curEditor.offsetX, curEditor.offsetY, fur);
 	});
 });

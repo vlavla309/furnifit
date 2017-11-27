@@ -130,7 +130,7 @@ Editor.prototype.room = function(width,height,length){
 }
 
 /* 배치도에 새 가구 생성 */
-Editor.prototype.furniture= function(x,y,type, productId){
+Editor.prototype.furniture2= function(x,y,type, productId){
 	var furniture;
 	var rect=this.canvas.rect(x, y, 100*this.scale, 213*this.scale).attr("fill", "none");
 	var image=this.canvas.image(planImgPath+"/bed.png", x, y ,100*this.scale, 213*this.scale);
@@ -160,7 +160,7 @@ Editor.prototype.furniture= function(x,y,type, productId){
 
 
 /* 배치도에 새 가구 생성 */
-Editor.prototype.furniture2= function(x,y,target){
+Editor.prototype.furniture= function(x,y,target){
 	console.log(target.toString());
 	var furniture;
 	var width = target.width * this.scale;

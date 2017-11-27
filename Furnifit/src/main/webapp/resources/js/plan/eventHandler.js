@@ -5,6 +5,7 @@ function select(target){
 	
 	if(selectedElem.hasClass("furniture")){
 		selectedViewbox=target.parent().parent(); // 선택된 가구의 뷰박스 획득
+		setFurnitureInfo();
 		target.attr({strokeWidth: 4}); 
 		$("#furnitureInfoWrap").show().css("display", "flex");
 	}

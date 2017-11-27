@@ -135,3 +135,10 @@ function delPlanItem(id){
 function selectPlan(id){
 	$(".planitem a[href="+id+"]").trigger("click");
 }
+
+function setFurnitureInfo(){
+	console.log(selectedElem.data("productId"));
+	var productId=Number(selectedElem.data("productId"));
+	var furniture=furnitures.get(productId)
+	$(".furnitureInfoWrap .imgWrap img").attr("src", furniture.imgPath);
+}

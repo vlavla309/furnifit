@@ -53,24 +53,15 @@ function productList(data) {
 	$.each(data.list, function(i, item) {
 		str+="<div class=\"product\">"
 		str+="	<div class=\"imgWrap\">"
-		str+="<a class='addFurnitureBtn' href=\""+item.productId+"\"><img src=\""+proImgPath+""+item.imgs[0].path+"/"+item.imgs[0].name+"\" /></a>"
-		str+="</div>"
-		str+="<div class=\"infoWrap\">" 
-		str+="</div>"
-		str+="<span>"+item.name+"</span> <span>"+item.brand+"</span> <span>"+item.width * item.length * item.height +"</span> <span>"+item.price+"원 </span>"
-		str+="</div>"
-		str += "<div class=\"product\">"
-		str += "	<div class=\"imgWrap\">"
-		str += "<a href=\"" + item.productId + "\"><img src=\"" + proImgPath
-				+ "" + item.imgs[0].path + "/" + item.imgs[0].name
-				+ "\" /></a>"
+		str+="		<a class='addFurnitureBtn' href=\""+item.productId+"\"><img src=\""+proImgPath+""+item.imgs[0].path+"/"+item.imgs[0].name+"\" /></a>"
+		str+="	</div>"
+		str+="	<div class=\"infoWrap\">" 
+		str += "	<span>" + item.name + "</span>;"
+		str += "	<span>" + item.brand + "</span>";
+		str += "	<span>" + item.width * item.length * item.height+ "</span>";
+		str += "	<span>" + item.price + "원 </span>";
 		str += "</div>"
-		str += "<div class=\"infoWrap\">"
-		str += "</div>"
-		str += "<span>" + item.name + "</span> <span>" + item.brand
-				+ "</span> <span>" + item.width * item.length * item.height
-				+ "</span> <span>" + item.price + "원 </span>"
-		str += "</div>"
+		str+="</div>"
 	});
 
 	$('.productWrap').html(str)
@@ -250,6 +241,5 @@ $(function() {
 		toAjax();
 	});
 	
-	toAjax()
-
+	toAjax();
 })
