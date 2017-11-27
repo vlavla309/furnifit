@@ -2,7 +2,100 @@
   pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../include/header.jsp"%>
-<link rel="stylesheet" href="${rSrcPath}css/article_list.css" />
+<style>
+.pagination>li>a, .pagination>li>span {
+  color: #353535;
+  background-color: #FBF8EF;
+}
+
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover,
+  .pagination>.active>span:hover, .pagination>.active>a:focus,
+  .pagination>.active>span:focus {
+  z-index: 2;
+  color: white;
+  cursor: default;
+  background-color: #8A0808; 
+  border-color: #8A0808;
+}
+
+.button {
+  width: 50px;
+  height: 28px;
+  background-color: #61210B;
+  color: white;
+  border: 2;
+  border-style: hidden;
+  border-radius: 10px;
+}
+
+.artLikecnt {
+  width: 34px;
+}
+
+.button2 {
+  width: 90px;
+  height: 28px;
+  background-color: #61210B;
+  color: white;
+  border: 2;
+  border-style: hidden;
+  border-radius: 10px;
+}
+
+.articleDiv {
+  box-shadow: none !important;
+}
+
+.articleDiv2 {
+  padding: 1em;
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+}
+
+.label {
+  padding: 2px 3px;
+  min-width: 20px;
+}
+
+.label1 {
+  background-color: #8A0808;
+  width: 27%;
+}
+
+.label2 {
+  border: hidden;
+  background-color: white;
+  color: #610B0B;
+  font-weight: bold;
+  width: 10%
+}
+
+.selectBox {
+  height: 27px;
+  border-radius: 10px"
+}
+
+.planDiv {
+  width: 100%;
+  min-height: 80px;
+  display: block;
+  height: 200px;
+}
+
+.planDiv img {
+  width: 100%;
+  height: 100%;
+}
+
+.artBoardTitle {
+  font-size: 23pt;
+  color: #8A4B08;
+} 
+
+.artListTitle {
+  font-size: 12pt;
+  color: #3B0B0B;
+}
+</style>
 <script src="${rSrcPath}js/article_list.js"></script>
 <!-- blog -->
 <div class="blog">
@@ -70,8 +163,8 @@
         </c:if>
         <c:forEach begin="${pb.currentStartPage }"
           end="${pb.currentEndPage }" var="pageList">
-          <li>
-            <c:out value="${pb.params.page == pageList?'class =active':''}"/>>
+          <li
+            <c:out value="${pb.params.page == pageList ? 'class =active':''}"/>>
             <a href="${pb.getQueryString(pageList)}">${pageList}</a>
           </li>
         </c:forEach>

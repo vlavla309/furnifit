@@ -48,7 +48,7 @@
               <table class="table table-hover">
                 <thead>
                  <tr >
-                  <th class="align2">상품번호</th>
+                  <th class="align2">상품</th>
                   <th class="align2">상품명</th>
                   <th class="align2">상품가격</th>
                   <th class="align2">링크</th>
@@ -57,7 +57,13 @@
                <c:forEach var="product" items="${product}" >
               <tbody style="text-align: cennter">              
                 <tr>
-                  <td class="align2">${product.productId }</td>
+                  <td class="align2"> 
+                    <c:forEach items="${product.imgs}" var="img">
+                      <div class="artPrdImg">
+                         <img src="${rSrcPath}/productimg/${img.path}/${img.name}"/>
+                      </div>                
+                     </c:forEach>
+                  </td>
                   <td class="align2">${product.name }</td>
                   <td class="align2">${product.price }</td>
                   <td class="align2"><a href="${product.link }"><button type="button" class="artLink2" >바로가기</button></a></td>
@@ -76,10 +82,10 @@
             <p>
             <div class="form-group">
                 <label for="exampleInputEmail1">File DROP Here</label>
-                <div class="fileDrop"></div>
-                </div>
+                  <div class="fileDrop"></div>
+                  </div>
                <!-- /.box-body -->
-               <div class="box-footer">
+                  <div class="box-footer">
                   <div>
                      <hr>
                   </div>

@@ -3,6 +3,12 @@
 <%@ include file="../include/header.jsp" %>
 <link rel="stylesheet" href="${rSrcPath}css/article_detail.css" />
 <script src="${rSrcPath}js/article_detail.js"></script>
+<script src="${rSrcPath}js/article_detail_reply.js"></script>
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+
+
 <body>
 <!-- hidden -->
 <input type="hidden" name="likeEmail" value="${likes.email }">
@@ -98,7 +104,7 @@
                 <br>
                    <c:forEach items="${article.images}" var="articleImg">       
                   <div class="articleImg row">
-                     <img id="reviewImg"  src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"   >
+                     <a data-fancybox="gallery" href="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"><img src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}" style="width: 50px"></a>
                   </div>      
                     </c:forEach>
                  </div>
@@ -116,39 +122,74 @@
           <button type="button" disabled="disabled" class="likeArt2" id="alreadyLike" name="like">&nbsp;좋아요&nbsp;ν&nbsp;<font size="3%" id="likeCount">&nbsp;&nbsp;&nbsp;[${article.likecnt }]</font></button>            
           <br>
           <br>
+          <br>  
+          
+          <!-- 댓글 아래에 modify 버튼이 있는데 그 버튼의 모달 -->
+<div id="modifyModal" class="modal modal-primary fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body" data-rno>
+        <p><input type="text" id="content" class="form-control"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
+        <button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<!-- 댓글 입력 폼 -->
+<br><br>
+ <div class="row">
+    <div class="col-md-12">
+
+      <div class="box box-success">
+        <div class="box-header">
+          <h3><span><strong>댓글&nbsp쓰기</strong></span></h3>
           <br>
-          <!-- 댓글 -->         
-              <table style="width: 30px; margin: 0 auto;  text-align: center " >
-                  <tr>
-                    <td><input type="hidden" name=""  />
-                    <textarea name="contents" rows="2" cols="100"
-                     style="resize: none; border-style: solid; font-size: 11pt" 
-                       >댓글을 작성해주세요.</textarea></td> n&nbsp;&nbsp;&nbsp;&nbsp;
-                     <td><input class="replybtn" type="submit" value="등록"
-                      style="width: 50px; height: 33px; font-size: 11pt"></td>
-                  </tr>
-            </table>
-            <br/>
-            <br/>           
-            <br/>
-   <table width="780" border="0" cellpadding="0" cellspacing="0" align="center">
-     <tr><td width="600" colspan="2" height="3" bgcolor="#B40404"></td></tr> 
-     <tr height="25">
-      <td width="50%" align="left" style="color:#B40404;  font-weight: bold">&nbsp;&nbsp;보라보라얍</td>
-      <td width="50%" align="right" style="color:#B40404;  font-weight: bold" >2017.11.13&nbsp;<input id="deletebtn" type="button" value="삭제"
-       ></td>
-     </tr>
-     <tr><td width="600" colspan="2" height="1" bgcolor="#B40404"></td></tr>
-     <tr height="60">
-      <td align="left" style="padding: 5px 5px 5px 5px; color:#585858;  font-weight: bold" valign="top">
-                 하이루 방가루
-      </td>
-     </tr>
-     <tr><td width="600" colspan="2" height="3" bgcolor="#B40404"></td></tr>
-   </table>    
+        </div>
+        <div class="box-body">
+          <label for="exampleInputEmail1"></label>
+          <input class="form-control" type="hidden" id="newReply" value="${Reply.email}">
+          <label for="exampleInputEmail1" id="exampleEmail">Email</label> 
+          <input class="form-control" type="text" placeholder="로그인이 필요합니다" readonly id="newEmail" value="${login.email}">
+          <br>
+          <label for="exampleInputEmail1" id="exampleComment">Comment</label> 
+          <input class="form-control" type="text" placeholder="회원만 등록하실 수 있습니다." id="newContent">
+          <label for="exampleInputEmail1"></label>
+          <input type='hidden' name='articleId' id='newArticleId' value="${article.articleId}">
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+          <button type="button" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
+        </div>
+      </div>
+      <br>
+      <hr class="dunggul" style="border: solid 4px #1523C3;">
+
+<!-- 입력한 댓글들은 이곳에 출력된다. -->
+<div id="replies">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+                </div>
  </div>
 </div>
-</div>            
+</div>  
+
+
+          
    <!-- //blog -->
 <%@ include file="../include/footer.jsp" %>
 </body>
