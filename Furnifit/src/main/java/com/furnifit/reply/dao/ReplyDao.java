@@ -2,7 +2,6 @@ package com.furnifit.reply.dao;
 
 import java.util.List;
 
-import com.furnifit.reply.domain.Criteria;
 import com.furnifit.reply.domain.Reply;
 
 /**

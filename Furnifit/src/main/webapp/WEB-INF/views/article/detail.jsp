@@ -461,7 +461,7 @@ $(window).scroll(function() {
     	var articleId = ${article.articleId};
 
         $.ajax({
-            url: "/one/reply/infiniteScrollDown",
+            url: "/PlanWriter/reply/infiniteScrollDown",
             data: {
                 reply_id : reply_id,
                 articleId : articleId
@@ -503,7 +503,7 @@ $("#replyAddBtn").on("click", function() {
 
   $.ajax({
     type : 'post',
-    url : '/one/reply',
+    url : '/PlanWriter/reply',
     headers : {
       "Content-Type" : "application/json",
       "X-HTTP-Method-Override" : "POST"},
@@ -548,7 +548,7 @@ $("#replyDelBtn").on("click", function() {
   } else {
     $.ajax({
       type : 'delete',
-      url : '/one/reply/' + reply_id,
+      url : '/PlanWriter/reply/' + reply_id,
       headers : {
         "Content-Type" : "application/json",
         "X-HTTP-Method-Override" : "DELETE"
@@ -580,7 +580,7 @@ $("#replyModBtn").on("click",function(){
 	} else {
       $.ajax({
         type:'put',
-        url:'/one/reply/'+ reply_id,
+        url:'/PlanWriter/reply/'+ reply_id,
         headers: { 
               "Content-Type": "application/json",
               "X-HTTP-Method-Override": "PUT" },
