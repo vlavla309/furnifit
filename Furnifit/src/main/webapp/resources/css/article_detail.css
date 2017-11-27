@@ -318,3 +318,51 @@ max-height: 800px;
 overflow: auto;       
 }
 
+.dunggul { 
+  border-top-left-radius: 0.7em; 
+  border-top-right-radius: 0.7em; 
+  border-bottom-right-radius: 0.7em; 
+  border-bottom-left-radius: 0.7em; 
+}
+
+.replyWriter {
+  /* margin: 20px; */
+  font-family: 'Paytone One', sans-serif;
+  color: #202020;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+}
+.replyWriter .spanReplyWriter {
+  display: block;
+  margin: 11px 0 17px 0;
+  font-size: 31px;
+  line-height: 80px;
+  color: #0c0e96;
+  text-shadow: 0 6.36px 8.896px #c4b59d,0 -2px 1px #fff;
+  letter-spacing: -4px;
+}
+
+li {
+  list-style:none;
+}
+#newEmail {
+  box-shadow: 1px 1px 1px #EFEFF3;
+}
+#newContent {
+  box-shadow: 1px 1px 1px #EFEFF3;
+}
+#replyAddBtn {
+  box-shadow: 1px 1px 1px #EFEFF3;
+}
+#exampleEmail {
+  box-shadow: 1px 1px 1px #EFEFF3;
+}
+#exampleComment {
+  box-shadow: 1px 1px 1px #EFEFF3;
+}
+
+
+
+
+
+
