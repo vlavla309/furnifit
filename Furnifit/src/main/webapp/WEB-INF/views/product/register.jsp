@@ -68,7 +68,7 @@
 							<label for="color">color</label> <select name="color">
 								<option value="black">black</option>
 								<option value="white">white</option>
-								<option value="braun">braun</option>
+								<option value="brown">brown</option>
 								<option value="walnut">walnut</option>
 								<option value="green">green</option>
 							</select>

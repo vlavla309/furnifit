@@ -46,17 +46,22 @@ a{
 
 #headerMenuLeft{
 	float:left;
+	margin-bottom:0px!important;
 }
+
 
 #headerMenuRight{
 	float:right;
+	margin:0px!important;
 }
+
 
 #headerMenuLeft li, #headerMenuRight li{
 	padding :0.5rem;
 	list-style: none;
 	display: inline-block;
 	border-left: 1px solid #e7e7e7;
+	margin:0;
 }
 
 #headerMenuRight .exit{
@@ -71,7 +76,6 @@ a{
 
 #sidemenu{
 	display:inline-flex;
-	max-width: 25rem;
 	height:100%;
 }
 
@@ -132,7 +136,7 @@ a{
 
 #rightTabs{
 	float:right;
-	width:35em;
+	width:25em;
 }
 
 .tabContent{

@@ -32,16 +32,12 @@ function toAjax() {
 				filter(data)
 				once=0;
 			}
-=======
+
 			console.log(data)
 			/* console.log(data.list[0].imgs[0].name) */
 			/* console.log(data.list[0].productId) */
-			console.log(data)
-			productList(data)
 			filter(data)
-			/*console.log(data.list[0].imgs[0].name)*/
-			/*console.log(data.list[0].productId)*/
->>>>>>> 13d3708bf6a1608b2584c2d3ae601b9b2738e3b3
+			
 			productList(data);
 			makeFurnitureList(data);
 		},
@@ -102,11 +98,7 @@ function filter(data) {
 	str += "</ul>";
 	$('#colorul').html(str);
 	
-<<<<<<< HEAD
-
-=======
 	$('.productWrap').html(str)
->>>>>>> 13d3708bf6a1608b2584c2d3ae601b9b2738e3b3
 }
 
 
@@ -129,10 +121,6 @@ function makeFurnitureList(data){
 	furnitures.forEach(function(item, key, mapObj){
 		console.log(item.toString());
 	});
-<<<<<<< HEAD
-		
-=======
->>>>>>> 13d3708bf6a1608b2584c2d3ae601b9b2738e3b3
 }
 
 $(function() {
@@ -240,10 +228,6 @@ $(function() {
 		toAjax();
 	});
 	
-<<<<<<< HEAD
-	toAjax()
-
-=======
 	/* 정렬 */
 	$('.target').change(function() {
 		$('input[name=sort]').val($(this).val())
@@ -262,5 +246,4 @@ $(function() {
 	});
 	
 	toAjax();
->>>>>>> 13d3708bf6a1608b2584c2d3ae601b9b2738e3b3
 })
