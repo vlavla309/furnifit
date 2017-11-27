@@ -3,6 +3,7 @@ package com.furnifit.member.controller;
 import java.util.Date;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.util.WebUtils;
 
 import com.furnifit.member.domain.LoginDTO;
 import com.furnifit.member.domain.Member;
@@ -58,10 +60,12 @@ public class MemberController {
 	// 로그아웃 처리
 	@RequestMapping(value = "logout", method=RequestMethod.GET)
 	public String logOut(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
-		
-
+		Member user = (Member)session.getAttribute("login");
+		if(user != null) {
+			session.removeAttribute("login");
+			session.invalidate();
+		}		
 		return "redirect:/";
-
 	}
 	
 	// 회원가입

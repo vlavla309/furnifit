@@ -1,144 +1,237 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-                        
+
 <mapper namespace="com.furnifit.article.dao.ArticleDao">
 
-	
+
 	<insert id="create" parameterType="Article">
-	
-	
-	 INSERT INTO articles
-	 			 (article_id ,
-	 			  email,
-	 			  planitem_id, 
-	 			  title,
-	 			  content	 
-	 			 )
-	 VALUES      (
-	 			  articles_seq.nextval,
-	 			  #{email},
-	 			  #{planitemId},
-	 			  #{title},
-	 			  #{content})
-	 			  
+
+		<selectKey keyProperty="articleId" resultType="int" order="BEFORE">
+			select articles_seq.nextval
+			FROM DUAL
+		</selectKey>
+
+
+		INSERT INTO articles
+		(article_id ,
+		email,
+		planitem_id,
+		likecnt,
+		viewcnt,
+		title,
+		content
+		)
+		VALUES (
+		#{articleId},
+		#{email},
+		#{planitemId},
+		#{likecnt},
+		#{viewcnt},
+		#{title},
+		#{content})
+
 	</insert>
-	
+
 	<!-- 게시판 상세읽기 -->
 	<select id="read" parameterType="int" resultType="Article">
-		 SELECT article_id AS "articleId" ,
-	 		email,
-	 		planitem_id AS "planitemId",
-	 		likecnt,
-	 		To_char(regdate, 'YYYY-MM-DD') regdate,
-	 		title,
-	 		content	
-	 FROM   articles
-	 WHERE  article_id = #{value}
-		
+		SELECT article_id AS "articleId" ,
+		email,
+		planitem_id AS "planitemId",
+		likecnt,
+		viewcnt,
+		To_char(regdate, 'YYYY-MM-DD') regdate,
+		title,
+		content
+		FROM articles
+		WHERE article_id = #{value}
+
 	</select>
-	
+
 	<!-- 게시판 이미지 업로드 -->
-	<insert id="addAttach" parameterType="map" >
-	INSERT INTO article_img
-				(name,
-				 article_id,
-				 path,
-				 regdate)
-	VALUES      (#{name},
-				 #{articleId},
-				 #{path},
-				 sysdate)
+	<insert id="addAttach" parameterType="map">
+		INSERT INTO article_img
+		(name,
+		article_id,
+		path,
+		regdate)
+		VALUES (#{name},
+		#{articleId},
+		#{path},
+		sysdate)
 	</insert>
-	
-		<!-- 게시물에대한 첨부파일 리스트 가져오기 -->
+
+	<!-- 게시물에대한 첨부파일 리스트 가져오기 -->
 	<select id="getAttach" parameterType="int" resultType="ArticleImg">
-	SELECT name,
-		   path,
-		   article_id AS "articleId"
-	FROM  article_img
-	WHERE article_id = #{articleId}
-	ORDER BY regdate DESC
+		SELECT name,
+		path,
+		article_id AS "articleId"
+		FROM article_img
+		WHERE article_id = #{articleId}
+		ORDER BY regdate DESC
 	</select>
-	
+
+	<!-- 게시글 첨부이미지파일 삭제(수정시) -->
+	<delete id="deleteAttach" parameterType="int">
+		DELETE FROM article_img
+		WHERE article_id = #{articleId}
+	</delete>
+
+	<!--게시글 첨부이미지 파일 수정 업로드 -->
+	<insert id="replaceAttach">
+		INSERT into article_img
+		(name,
+		article_id,
+		path)
+		VALUES (#{name},
+		#{articleId},
+		#{path})
+	</insert>
+
+
 	<!-- 게시판 전체리스트 -->
-	   <!-- 전체 리스트 -->
-   <select id="listAll" resultType="Article">
-	 SELECT article_id AS "articleId",
-	 		email,
-	 		planitem_id AS "planitemId",
-	 		likecnt,
-	 		viewcnt,
-	 		To_char(regdate, 'YYYY-MM-DD') regdate,
-	 		title,
-	 		content
-	 FROM   articles
-	 ORDER BY article_id DESC
- 
-   </select>
-   
-   
-	<!-- 상세게시글에 해당하는 배치도항목 정보 가져오기 -->
-   <select id="readPlanItem" parameterType="int" resultType="PlanItem">
-   SELECT planitem_id AS "planitemId",
-   		  plan_id AS "planId",
-   		  width,
-   		  height,
-   		  length,
-   		  acreage,
-   		  image,
-   		  name
-    FROM  planitems
-    WHERE planitem_id = #{value}
-   </select>
-   
-   <!-- 배치도항목에 해당하는 가구번호목록(리스트) 가져오기 -->
-    <select id="readFurniture" parameterType="int" resultType="Furniture">
-   SELECT planitem_id AS "planitemId",
-   		  product_id AS "productId"
-    FROM  furnitures
-    WHERE planitem_id = #{value}
-   </select>
-   
-   
-   <!-- 가구번호에 대한 가구(상품)정보 가져오기 -->
-   <select id="readProduct" parameterType="int" resultType="Product">
-   SELECT product_id AS "productId",
-   		  category,
-   		  name,
-   		  brand,
-   		  price,
-   		  color,
-   		  width,
-   		  length,
-   		  height,
-   		  description,
-   		  To_char(regdate, 'YYYY-MM-DD') regdate	  
-    FROM  products
-    WHERE product_id = #{value}
-   </select>
-   
-   
-   <!-- 게시글 수정 -->
-   <update id="artUpdate" parameterType="Article">
-       	UPDATE articles
-     	<set>
+	<!-- 전체 리스트 -->
+	<select id="listAll" resultType="Article">
+		SELECT article_id AS "articleId",
+		email,
+		planitem_id AS "planitemId",
+		likecnt,
+		viewcnt,
+		To_char(regdate, 'YYYY-MM-DD') regdate,
+		title,
+		content
+		FROM articles
+		ORDER BY article_id DESC
+
+	</select>
+
+
+	<!-- 게시글 수정 -->
+	<update id="artUpdate" parameterType="Article">
+		UPDATE articles
+		<set>
 			<if test="title != null">title = #{title},</if>
 			<if test="content != null">content = #{content},</if>
-			<if test="viewcnt != null">viewcnt = #{viewcnt}</if>
+			<if test="viewcnt != null">viewcnt = #{viewcnt},</if>
+			<if test="likecnt != null">likecnt = #{likecnt}</if>
 		</set>
-		WHERE article_id = #{article_id}
-   </update>
-   
-   
-   <!-- 게시글 삭제 -->
-   <delete id="artDelete" parameterType="int">
-    DELETE FROM articles
-    WHERE article_id = #{article_id}
-   </delete>
+		WHERE article_id = #{articleId}
+	</update>
 
-	
-	
-	
-	
+
+	<!-- 게시글 삭제 -->
+	<delete id="artDelete" parameterType="int">
+		DELETE FROM articles
+		WHERE article_id = #{article_id}
+	</delete>
+
+	<!-- 한페이지당 출력할 게시글들 가져오기 -->
+	<select id="listByParams" parameterType="ArticleParams"
+		resultType="Article">
+		SELECT article_id AS "articleId",
+		email,
+		planitem_id AS "planitemId",
+		likecnt,
+		viewcnt,
+		regdate,
+		title,
+		content,
+		image AS "planitemImg"
+		FROM (SELECT CEIL(rownum / #{pageSize}) request_page,
+		article_id,
+		email,
+		planitem_id ,
+		likecnt,
+		viewcnt,
+		regdate,
+		title,
+		content,
+		image
+		FROM (SELECT article_id,
+		email,
+		a.planitem_id,
+		likecnt,
+		viewcnt,
+		regdate,
+		title,
+		content,
+		p.image
+		FROM articles a,
+		planitems p
+		<where>
+			and a.planitem_id = p.planitem_id
+			<choose>
+				<when test="acreage == 'xs'"> and acreage BETWEEN 1 and 2 </when>
+				<when test="acreage == 'ss'"> and acreage BETWEEN 3 and 4 </when>
+				<when test="acreage == 'mm'"> and acreage BETWEEN 5 and 7 </when>
+				<when test="acreage == 'll'"> and acreage BETWEEN 8 and 9 </when>
+				<when test="acreage =='xl'"> and acreage >= 10 </when>
+				<otherwise> and acreage >= 1</otherwise>
+			</choose>
+		</where>
+		ORDER BY
+		<choose>
+			<when test="sort == 'like'"> likecnt DESC </when>
+			<when test="sort == 'view'"> viewcnt DESC </when>
+			<otherwise> regdate DESC</otherwise>
+		</choose>
+		))
+		WHERE request_page = #{page}
+	</select>
+
+
+	<!-- 검색 데이터 개수 -->
+	<select id="listSearchCount" parameterType="ArticleParams"
+		resultType="int">
+		SELECT count(article_id)
+		FROM articles a, planitems p
+		<where>
+			and a.planitem_id = p.planitem_id
+			and article_id > 0
+			<choose>
+				<when test="acreage == 'xs'"> and acreage BETWEEN 1 and 2 </when>
+				<when test="acreage == 'ss'"> and acreage BETWEEN 3 and 4 </when>
+				<when test="acreage == 'mm'"> and acreage BETWEEN 5 and 7 </when>
+				<when test="acreage == 'll'"> and acreage BETWEEN 8 and 9 </when>
+				<when test="acreage =='xl'"> and acreage >= 10 </when>
+			</choose>
+		</where>
+		ORDER BY
+		<choose>
+			<when test="sort == 'like'"> likecnt DESC </when>
+			<when test="sort == 'view'"> viewcnt DESC </when>
+			<otherwise> regdate DESC</otherwise>
+		</choose>
+
+
+	</select>
+
+	<!-- likecnt 변경하기위한 수정 -->
+	<update id="likeUpdate" parameterType="int">
+		UPDATE likes
+		<set>
+			<if test="likecnt != null">likecnt = #{likecnt}</if>
+		</set>
+		WHERE article_id = #{articleId}
+	</update>
+
+	<!-- 추천수가 높은 게시글 작성자 3명에게 쿠폰 지급! 동일한 추천수일경우 조회수가 높은 사용자에게 줌 -->
+	<select id="likecntcoupone" resultType="Article">
+		SELECT email,
+		likecnt,
+		viewcnt
+		FROM (SELECT Ceil(rownum / 3) request_page,
+		email,
+		likecnt,
+		viewcnt
+		FROM (SELECT email,
+		likecnt,
+		viewcnt
+		FROM articles
+		ORDER BY likecnt DESC,
+		viewcnt DESC))
+		WHERE request_page = 1
+	</select>
+
+
 </mapper>

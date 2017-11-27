@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<mapper namespace="com.furnifit.like.dao.LikeDao">
+
+	
+	<insert id="create" parameterType="Like">
+	
+	 INSERT INTO likes
+	 			 (article_id,
+	 			  email	 
+	 			 )
+	 VALUES      (
+	 			  #{articleId},
+	 			  #{email})
+	 			  
+	</insert> 
+	
+	<!--  상세읽기 -->
+	<select id="read" parameterType="map" resultType="Like">
+	 SELECT article_id AS "articleId" ,
+	 		email,
+	 		To_char(regdate, 'YYYY-MM-DD') regdate	
+	 FROM   likes
+	 WHERE  article_id = #{articleId}
+	 AND    email = #{email}
+		
+	</select>
+		
+	<!-- 게시글에대한 좋아요 개수 -->
+	 <select id="likeCount" parameterType="int" resultType="int">
+  		SELECT count(*)
+  		FROM likes
+  		WHERE article_id = #{articleId}
+  	</select>
+	
+
+	
+	
+
+	
+</mapper>

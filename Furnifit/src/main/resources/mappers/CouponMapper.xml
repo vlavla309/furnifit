@@ -2,20 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
                         
-<mapper namespace="com.furnifit.member.dao.CouponDao">
+<mapper namespace="com.furnifit.coupon.dao.CouponDao">
 	
     <select id="read" parameterType="String" resultType="Coupon">
-    	SELECT e.serial, c.discount_rate*100 AS discountRate, TO_CHAR(e.expiration_date, 'YYYY-MM-DD') AS expirationDate , e.status
+    	SELECT e.serial, e.coupone_id, c.discount_rate*100 AS discountRate, TO_CHAR(e.expiration_date, 'YYYY-MM-DD') AS expirationDate , e.status
     	FROM coupones c JOIN offer_coupones e
     	ON c.coupone_id = e.coupone_id
     	WHERE e.email = #{email}
     </select>
     
-    <select id="readAvailable" parameterType="String" resultType="coupon">
+    <!-- 사용 가능한 쿠폰 확인  -->
+    <select id="readAvailable" parameterType="String" resultType="Coupon">
     	SELECT e.serial, c.discount_rate*100 AS discountRate, TO_CHAR(e.expiration_date, 'YYYY-MM-DD') AS expirationDate , e.status
-    	FROM coupones c JOIN offer_coupones e
-    	ON c.coupone_id = e.coupone_id
-    	WHERE e.email = #{email} AND e.status = "사용가능"
+    	FROM   coupones c JOIN offer_coupones e
+    	ON     c.coupone_id = e.coupone_id
+    	WHERE  e.status = '사용가능'
+    	AND    e.email = #{email}
+    	AND    e.expiration_date > SYSDATE-1
+    	ORDER BY c.discount_rate ASC
     </select>
+	
+   <!-- 사용된 쿠폰 used_date, status 변경 -->
+   <update id="couponUpdate" parameterType="int">
+       	UPDATE offer_coupones
+     	<set>
+			<if test="usedDate == null">used_date = SYSDATE,</if>
+			status = '사용완료'
+		</set>  
+		WHERE serial = #{serial}
+   </update>
+   
+   
+   	<!-- orderId로 상세읽기 -->
+	<select id="serialRead" parameterType="int" resultType="Coupon">		
+		select c.serial, c.status, s.discount_rate*100 AS discountRate
+		from  orders o, offer_coupones c, coupones s
+		where o.use_coupones = c.serial and c.coupone_id = s.coupone_id
+		and o.order_id = #{value}
+	</select>
 	
 </mapper>

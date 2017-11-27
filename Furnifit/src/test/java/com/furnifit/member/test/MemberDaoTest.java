@@ -9,9 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.furnifit.member.dao.CouponDao;
 import com.furnifit.member.dao.MemberDao;
-import com.furnifit.member.domain.Coupon;
 import com.furnifit.member.domain.Member;
 
 @RunWith(SpringJUnit4ClassRunner.class)

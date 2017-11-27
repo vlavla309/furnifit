@@ -20,33 +20,33 @@ public class OrderitemsServiceImpl implements OrderitemsService {
 	@Inject
 	private OrderitemsDao dao;
 
-	// 주문할 가구 등록
+	/**
+	 * 주문항목 생성
+	 * @param items
+	 * @return
+	 */
 	@Override
-	public void create(Orderitems items) throws Exception {
+	public void create(Orderitems items) {
 		dao.create(items);
 	}
 	
-	// 가구 정보 상세보기
+	/**
+	 * 주문항목 리스트 조회
+	 * @param 
+	 * @return List<Orderitems>
+	 */
 	@Override
-	public Orderitems read(int productId) throws Exception {
-		return dao.read(productId);
+	public List<Orderitems> listAll() throws Exception {
+		return dao.listAll();
 	}
 	
-	// 회원별 주문할 리스트
+	/**
+	 * 주문항목 상세보기
+	 * @param orderId
+	 * @return List<Orderitems>
+	 */
 	@Override
-	public List<Orderitems> listAll(String email) throws Exception {
-		return dao.listAll(email);
-	}
-	
-	// 주문할 가구 삭제
-	@Override
-	public void delete(int orderId, int productId) throws Exception {
-		dao.delete(orderId, productId);
-	}
-	
-	// 가구의 수량 변경
-	@Override
-	public void update(Orderitems items) throws Exception {
-		dao.update(items);
-	}
+	public List<Orderitems> read(int orderId) throws Exception {
+		return dao.read(orderId);
+	} 
 }

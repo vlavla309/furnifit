@@ -1,5 +1,9 @@
 package com.furnifit.plan.domain;
 
+/**
+ * @author 손정화
+ *
+ */
 public class Plan{
 	private int planId;
 	private String email;
@@ -9,7 +13,6 @@ public class Plan{
 	public Plan() {}
 
 	public Plan(int planId, String email, String name, String regdate) {
-		super();
 		this.planId = planId;
 		this.email = email;
 		this.name = name;

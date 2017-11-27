@@ -1,0 +1,199 @@
+
+.align {
+  text-align: center;
+  border: 1px dashed;
+  border-color: #F5D0A9;
+}
+.align2{
+text-align: center;
+}
+
+#acreage{
+width:4%;  
+height: 14%; 
+background-color: transparent; 
+font-weight:bold; 
+border: none; 
+font-size:11pt; 
+color: #F7BE81;
+text-align: center;
+}
+
+button.accordion {
+    background-color: #8A0808;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    width: 15%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 13px;
+    transition: 0.4s;
+    border-radius: 8px;
+}
+
+.artLink2{
+width: 100px;
+color: black;
+background-color: transparent;
+box-shadow: none;
+border: 0px solid;
+}
+
+button.accordion.active, button.accordion:hover {
+    background-color: #F6E3CE; 
+    border: 2;
+}
+
+div.panel {
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+    
+}
+
+.planimgDiv img{
+width: 100%;
+}
+
+.button {
+  width: 100px;
+  height: 38px;
+  background-color: #8A0808;
+  color: white;
+  border: 2;
+  border-style: hidden;
+  border-radius: 10px;
+}
+
+.artRegisterBtn{
+margin-left: 40%;
+}
+
+.fileDrop {
+  width: 80%;
+  height: 100px;
+  border: 1px dotted gray;
+  background-color: lightslategrey;
+  margin: auto;
+}
+
+.button2 {
+  width: 50px;
+  height: 25px;
+  background-color: #8A0808;
+  color: white;
+  border: 2;
+  border-style: hidden;
+  border-radius: 10px;
+}
+#shareForm tr td{
+padding: 3px;
+}
+#shareInfo{
+color: #DF0101;
+font-size: 9pt;
+}
+
+.artTitle2{ 
+font-weight:bold; 
+width: 40%; 
+height: 40px; 
+border: 1px solid #F5D0A9;
+}
+
+#m{
+width:10%;  
+height: 14%; 
+background-color: transparent; 
+font-weight:bold; 
+border: none; 
+font-size:11pt; 
+color: #F7BE81;
+text-align: center;
+}
+
+ul.dropdown-menu {
+    top: 1.5cm;
+}
+#shareReply{
+color: 
+}
+
+.artContent{
+font-weight: bold;
+resize: none; 
+border: 1px solid;
+border-color: #F5D0A9;
+}
+
+.replybtn {
+  width: 60px;
+  height: 23px;
+  background-color: #61210B;
+  color: white;
+  border: 2;
+  border-style: hidden;
+  margin-left: 10%
+}
+
+#replyth{
+color: #DF0101;
+font-size: 12pt;
+}
+
+#deletebtn{
+background-color :white;
+color: #B40404;
+border-style: hidden;
+font-weight: bold;
+width: 45px; 
+height: 25px; 
+font-size: 12pt;
+box-shadow: none;
+}
+.button3{
+  width: 80px;
+  height: 28px;
+  background-color: #61210B;
+  color: white;
+  border: 2;
+  border-style: hidden;
+
+}
+
+.artContainer2{
+width: 900px; 
+border: 3px solid; 
+border-color: #F6E3CE; 
+padding: 40px;
+}
+
+.artHead{
+margin-top: 30px;
+}
+
+.artPlanitemName2{
+width:23%;  
+height: 12%; 
+background-color: transparent; 
+font-weight:bold; 
+border: none; 
+font-size:11pt; 
+color: #F7BE81;
+}
+
+.furnitureList{
+background-color: white;
+}
+
+.artPlanitemEmail2{
+width:23%;  
+height: 12%; 
+background-color: transparent; 
+font-weight:bold; 
+border: none; 
+font-size:11pt; 
+color: #F7BE81;
+}

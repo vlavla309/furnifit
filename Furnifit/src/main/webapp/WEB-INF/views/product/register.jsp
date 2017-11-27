@@ -58,6 +58,11 @@
 							<label for="price">price</label> <input type="text" name="price"
 								class="form-control" placeholder="Enter price...">
 						</div>
+						
+						<div class="form-group">
+							<label for="price">상품 링크</label> <input type="text" name="link"
+								class="form-control" placeholder="Enter link...">
+						</div>
 
 						<div class="form-group">
 							<label for="color">color</label> <select name="color">
@@ -192,7 +197,7 @@
 							str += "<input type='hidden' name='files[" + index
 									+ "]' value='" + $(this).attr("href")
 									+ "'> ";
-						});
+				});
 
 				that.append(str);
 

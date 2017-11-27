@@ -43,4 +43,9 @@ private static final String namespace = "com.furnifit.wishlist.dao.WishlistDao";
 		return sqlsession.selectList(namespace+".userwishlist",map);
 	}
 
+	@Override
+	public int listcount(String email) {
+		return sqlsession.selectOne(namespace+".userwishlistCount", email);
+	}
+
 }

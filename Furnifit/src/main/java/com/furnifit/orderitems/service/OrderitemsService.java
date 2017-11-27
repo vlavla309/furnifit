@@ -11,18 +11,25 @@ import com.furnifit.orderitems.domain.Orderitems;
  */
 public interface OrderitemsService {
 	
-	// 주문할 가구 등록
-	public void create(Orderitems items) throws Exception;
+	/**
+	 * 주문항목 생성
+	 * @param items
+	 * @return
+	 */
+	public void create(Orderitems items);
 	
-	// 가구 정보 상세보기
-	public Orderitems read(int productId) throws Exception;
+	/**
+	 * 주문항목 리스트 조회
+	 * @param 
+	 * @return List<Orderitems>
+	 */
+	public List<Orderitems> listAll() throws Exception;
 	
-	// 회원별 주문할 리스트
-	public List<Orderitems> listAll(String email) throws Exception;
+	/**
+	 * 주문항목 상세보기
+	 * @param orderId
+	 * @return List<Orderitems>
+	 */
+	public List<Orderitems> read(int orderId) throws Exception;
 	
-	// 주문할 가구 삭제
-	public void delete(int orderId, int productId) throws Exception;
-	
-	// 가구의 수량 변경
-	public void update(Orderitems items) throws Exception;
 }

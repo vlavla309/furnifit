@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.furnifit.article.domain.Article;
-import com.furnifit.article.domain.Furniture;
+import com.furnifit.common.web.ArticleParams;
+import com.furnifit.furniture.domain.Furniture;
 import com.furnifit.planitem.domain.PlanItem;
 import com.furnifit.product.domain.Product;
 
 public interface ArticleService {
-
+	
 	
 	/**
 	 * 게시글 등록
@@ -44,7 +45,7 @@ public interface ArticleService {
 	 * @param planitemId
 	 * @return
 	 */
-	public PlanItem readPlanItem(int planitemId);
+	public PlanItem readPlanItem(int planitemId) throws Exception;
 	
 	
 	/**
@@ -74,4 +75,32 @@ public interface ArticleService {
 	 */
 	public void artDelete(int articleId);
 	
+	
+	/**
+	 * 한페이지당 출력할 게시글들 가져오기
+	 * @param page
+	 * @return
+	 */
+	public List<Article> listByParams(ArticleParams params);
+	
+	
+	/**
+	 * 검색시 해당 게시글수 가져오기
+	 * @param params
+	 * @return
+	 */
+	public int listSearchCount(ArticleParams params);
+	
+	/**
+	 * 좋아요 추가될때마다 likecnt 1씩 올리기위한 수정
+	 * @param articleId
+	 * @return
+	 */
+	public void likeUpdate(int articleId);
+	
+	/**
+	 * 추천수가 높은 게시글 작성자 3명에게 쿠폰지급
+	 * @return
+	 */
+	public List<Article> likecntcoupone();
 }

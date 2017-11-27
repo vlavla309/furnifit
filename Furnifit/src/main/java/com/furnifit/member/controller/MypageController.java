@@ -12,9 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.furnifit.member.domain.Coupon;
+import com.furnifit.coupon.domain.Coupon;
+import com.furnifit.coupon.service.CouponService;
 import com.furnifit.member.domain.Member;
-import com.furnifit.member.service.CouponService;
 import com.furnifit.member.service.MemberService;
 
 
@@ -31,7 +31,7 @@ public class MypageController {
 	private CouponService couponService;
 
 	// 마이페이지
-	@RequestMapping(value = "/mypage", method=RequestMethod.GET)
+	@RequestMapping(value = "", method=RequestMethod.GET)
 	public String mypage() {
 		log.debug("마이페이지");
 		return "mypage/mypage";

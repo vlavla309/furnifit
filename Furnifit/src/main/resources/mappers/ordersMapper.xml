@@ -4,24 +4,77 @@
                         
 <mapper namespace="com.furnifit.orders.dao.OrdersDao">
 	
-	<!-- 회원별 주문할 리스트 -->
+	<!-- 주문 생성 -->
+	<insert id="create" parameterType="Orders">
+		<selectKey keyProperty="orderId" resultType="int" order="BEFORE">
+			SELECT orders_seq.nextval FROM DUAL
+		</selectKey>
+		INSERT INTO orders
+				    (order_id,
+					 email,
+					 price,
+					 regdate,
+					 use_coupones)
+		VALUES 		(#{orderId},
+					 #{email},
+					 #{price},
+					 SYSDATE
+					 <if test="useCoupones ==  0 ">, 0</if>
+					 <if test="useCoupones != 0 ">, #{useCoupones}</if>)
+	</insert>
+	
+	<!-- 주문목록 리스트 -->
 	<select id="listAll" parameterType="String" resultType="Orders">
 		SELECT order_id AS "orderId",
 			   email,
 			   price,
-			   regdate
+			   regdate,
+			   use_coupones AS "useCoupones"
 		FROM   orders
 		WHERE  email = #{email}
 	</select>
 	
-	<!-- 주문내역 상세보기 -->
-	<select id="read" parameterType="int" resultType="Orders">
+	
+	<!-- 주문목록 리스트(+페이징) -->
+	<select id="listByParams" parameterType="Params" resultType="Orders">
 		SELECT order_id AS "orderId",
 			   email,
 			   price,
-			   regdate
+			   regdate,
+			   use_coupones AS "useCoupones"
+		FROM   (SELECT CEIL(rownum / #{pageSize}) request_page,
+							order_id,
+			   				email,
+			   				price,
+							regdate,
+							use_coupones
+							FROM   (SELECT 	order_id,
+						   				   	email,
+						   				   	price,
+										   	regdate,
+										   	use_coupones
+								    FROM    	orders
+								    ORDER BY  	order_id DESC))
+		WHERE   request_page = #{page}
+	</select>
+	
+	<!-- 출력페이지 계산을 위한 행의 수 반환  -->
+	<select id="pageCount" resultType="int">
+		SELECT count(order_id) AS "count"
 		FROM   orders
-		WHERE  orderId = #{orderId}
+	</select>
+	
+	
+	<!-- 총합계 금액 반환 -->
+	<select id="price" parameterType="int" resultType="Orders">
+		SELECT order_id AS "orderId",
+			   email,
+			   price,
+			   regdate,
+			   use_coupones AS "useCoupones"
+		FROM   orders
+		WHERE  order_id = #{value}
 	</select>
 	
 </mapper>
+

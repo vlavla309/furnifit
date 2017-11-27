@@ -7,19 +7,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.furnifit.member.domain.Coupon;
+import com.furnifit.coupon.domain.Coupon;
+import com.furnifit.coupon.service.CouponService;
+import com.furnifit.furniture.dao.FurnitureDao;
+import com.furnifit.furniture.domain.Furniture;
 import com.furnifit.member.domain.Member;
-import com.furnifit.member.service.CouponService;
 import com.furnifit.orderitems.domain.Orderitems;
 import com.furnifit.orderitems.service.OrderitemsService;
+import com.furnifit.orders.domain.Orders;
+import com.furnifit.orders.service.OrdersService;
 import com.furnifit.product.domain.Product;
 import com.furnifit.product.service.ProductService;
 import com.furnifit.productimg.dao.ProductImageDao;
@@ -40,83 +42,51 @@ public class OrderitemsController {
 	@Inject
 	private OrderitemsService itemsService;
 	@Inject
+	private OrdersService ordersService;
+	@Inject
+	private FurnitureDao furniDao;
+	@Inject
 	private ProductService proService;
 	@Inject
-	//private Product product;
 	private ProductImageDao imgDao;
 	@Inject
 	private CouponService couponService;
-	
-	/** 주문할 가구 리스트  */
-	@RequestMapping(value = "", method=RequestMethod.GET)
-	public String listAll(Model model, HttpServletRequest request) throws Exception {
-		
+
+
+	/** 주문, 주문항목 생성 */
+	@RequestMapping(value = "/{planitemId}", method = RequestMethod.GET)
+	public String registGET(@PathVariable("planitemId") int planitemId, Model model,  HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();   
 		Member member = (Member) session.getAttribute("login");
 		
-		List<Orderitems> list = itemsService.listAll(member.getEmail());
-		for (Orderitems orderitems : list) {
-			logger.info(orderitems);
-		}
-		
+		List<Furniture> furniList = furniDao.list(planitemId);
 		List<Product> proList = proService.list();
-		for (Product product : proList) {
-			logger.info(product);
-		}
-		
 		List<ProductImg> imgList = imgDao.list();
-		for (ProductImg productImg : imgList) {
-			logger.info(productImg);
-		}
+		List<Coupon> couponList =  couponService.readAvailable(member.getEmail());
 		
-		List<Coupon> couponList =  couponService.read(member.getEmail());
-		
-		model.addAttribute("list", list);
-		model.addAttribute("prolist", proList);
-		model.addAttribute("imglist", imgList);
-		model.addAttribute("couponlist", couponList);
+		model.addAttribute("proList", proList);	
+		model.addAttribute("furniList", furniList);
+		model.addAttribute("imgList", imgList);
+		model.addAttribute("couponList", couponList);
 		return "order/order-write";
 	}
-
 	
-	
-	/** 주문할 가구 삭제 */
-	@RequestMapping(value = "/{orderId}/{productId}", method = RequestMethod.DELETE)
-	public ResponseEntity<String> remove(@PathVariable("orderId") int orderId, @PathVariable("productId") int productId)throws Exception{
-		ResponseEntity<String> entity = null;
-		try {
-			itemsService.delete(orderId, productId);
-			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-		} catch (Exception e) {
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	@RequestMapping(value = "/{planitemId}", method = RequestMethod.POST)
+	public String registPOST(@PathVariable("planitemId") int planitemId, Orderitems orderitems, Orders order, Coupon coupon) throws Exception {
+		logger.info("planitemId : "+planitemId);
+		logger.info("order.getOrderId() : "+order.getOrderId());
+		logger.info(orderitems);
+		
+		ordersService.create(order);
+		
+		for (int i = 0; i < orderitems.getProductIds().length; i++) {
+			Orderitems item = new Orderitems(orderitems.getProductIds()[i], order.getOrderId(), orderitems.getAmounts()[i]);
+			logger.info(item);
+			itemsService.create(item);
 		}
-		return entity;
+		couponService.couponUpdate(coupon);
+		
+		return "redirect:/order/order-list";
 	}
 	
-	
-	
-	
-	
-	
-	/** 가구 정보 상세보기 */
-	/*	@RequestMapping(value = "", method = RequestMethod.GET)
-		public void read(@RequestParam("productId") int productId, Model model)throws Exception{
-			model.addAttribute(itemsService.read(productId));
-		}*/
-	
-//	@RequestMapping(value = "", method=RequestMethod.GET)
-//	public void createGET(Orderitems items, Model model) throws Exception {
-//		logger.info("----------create get");
-//	}
-//	
-//	@RequestMapping(value = "", method=RequestMethod.POST)
-//	public String createPOST(Orderitems items, Model model) throws Exception {
-//		logger.info("----------create post");
-//		
-//		itemsService.create(items);
-//		model.addAttribute("create", "success");
-//		
-//		return "redirect:/order/order-list";
-//	}
-	
-}
+}	

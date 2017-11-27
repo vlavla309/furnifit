@@ -3,176 +3,66 @@
 <%@ include file="../include/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<link rel="stylesheet" href="${rSrcPath}css/productList.css" />
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script src="" id="entry-template" type="text/x-handlebars-template">
+			{{#list}}
+				<div class="col-md-4 information-grid pdbotton" data-wow-delay=".5s">
+					<div class="information-info">
+						{{#each imgs}}
+							<div class="information-grid-img">
+								{{#ifimg ../this.productId this.productId this.orderNo}}
+										<a href="${contextPath}/product/{{../this.productId}}"><img
+										src="${rSrcPath}/productimg/{{this.path}}/{{this.name}}" alt=""
+										class="img-responsive" style="height: 300px; width: auto" /></a>
+								{{/ifimg}}
+							</div>
+						{{/each}}
 
-<style>
- 
-.information-grid-info {
-	height: 250px;
-}
-
-.colorBtn {
-	border: 1px solid #dadada;
-	height: 30px;
-	width: 30px;
-}
-
-
-.colordelete {
-	border: 1px solid #dadada;
-	height: 30px;
-	width: 30px;
-}
-
-li {
-	list-style: none;
-	display: inline;
-	margin-right: 2em;
-}
-
-table, th, td {
-	border: 1px solid #FBF8EF;
-}
-
-table {
-	width: 80%;
-	padding: 0px;
-}
-
-th {
-	background: #FBF8EF;
-	text-align: center;
-	width: 15%;
-}
-
-#search {
-	float: right;
-	margin-top: 9px;
-	width: 250px;
-}
-
-.search {
-	padding: 5px 0;
-	width: 230px;
-	height: 30px;
-	position: relative;
-	left: 10px;
-	float: left;
-	line-height: 22px;
-}
-
-.pdbotton {
-	padding-bottom: 15px;
-}
-
-.branddelete, .branda, .categorya{
-padding:0.5em;
-border-radius: 0.5em;
-}
-
-.paramActive{
-background:	#ac3939;
-color:white!important;
-}
-
-.colorUncheck{
-display:none;
-}
-</style>
-
-<script>
-	$(function() {
-
-		/* color 버튼을 color 테이블에서 불러들임 */
-		<c:forEach items="${colorlist}" var="color">
-			str = "<li><a class=\"btn btn-default colorBtn\" id =\"${color.name}\" style=\"background:${color.rgb}\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:white\" aria-hidden=\"true\"></i></a></li>"
-			if("${color.name}"=="white"){
-				str = "<li><a class=\"btn btn-default colorBtn\" id =\"${color.name}\" style=\"background:${color.rgb}\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:black\" aria-hidden=\"true\"></i></a></li>"
-			}
-			$('#colorul').append(str);
-		</c:forEach>
-
-		/* 브랜드 테이블에있는 데이터 불러들임 */
-		<c:forEach items="${brandlist}" var="brand">
-			$('#brand').append("<li><a class=\"branda\">${brand.name}</a></li>");
-		</c:forEach>
-
-		/* 카테고리 테이블 데이터 불러들임 */
-		<c:forEach items="${categorylist}" var="category">
-			$('#category').append("<li><a class=\"categorya\">${category.name}</a></li>");
-		</c:forEach>
-		
-		/* color 버튼을 누르면 조건검색 리스트에 추가됨. ajax는 추후에!, 클래스 속성을 btnd로 변경한 후에 icon delete를 추가로 해준다. */
-		$(document).on("click", ".colorBtn", function(event) {
-			event.preventDefault();
-			$(this).children().first().toggleClass("colorUncheck");
-			$(this).attr('class','btn btn-default colordelete')
-			$('#filter').append("<input type =\"text\" name =\"color\" value=\""+$(this).attr('id')+"\"/>")
-			
-		});
-		
-		/* 색상버튼 체크를 해제하고, 아래에 form에서  input 제거!, ajax는 추후 */
-		$(document).on("click", ".colordelete", function(event) {
-			event.preventDefault();
-			$(this).attr('class','btn btn-default colorBtn')
-			$(this).children().first().toggleClass("colorUncheck");
-			alert($(this).attr('id'))
-			$('#filter :input[value="'+$(this).attr('id')+'"]').remove();
-		});
-
-		/* brand 버튼을 누르면 조건검색 리스트에 추가됨. ajax는 추후에! */
-		$(document).on(	"click", ".branda",function(event) {
-			event.preventDefault();
-			$(this).attr('class','branddelete')
-			$(this).toggleClass("paramActive");
-		});
-		
-		$(document).on(	"click", ".branddelete",function(event) {
-			event.preventDefault();
-			$(this).attr('class','branda')
-		});
-		
-		/* category 버튼을 누르면 조건검색 리스트에 추가됨. ajax는 추후에! */
-		$(document).on(	"click", ".categorya",function(event) {
-			event.preventDefault();
-			$(".categorya").removeClass("paramActive");
-			$(this).toggleClass("paramActive");
-		});
-		
-		
-		/* 위시리스트를 누르면, 저장이되고 버튼의 클래스 속성을 변경한다. 또한 비어있는 하트를 채워진 하트로 바꿈. */
-		$(document).on("click", ".wishbtn", function(event) {
-			event.preventDefault();
-			var wishbtn = $(this);
-			var productId = $(this).attr("href");
-			$.ajax({
-				url : '${contextPath}/wishlist/' + productId,
-				type : 'post',
-				success : function(data) {
-					alert("추가성공")
-					wishbtn.attr('class', 'wishdeletebtn')
-					wishbtn.children().children().attr('class', 'fa fa-heart')
-				}
-			});
-		});
-
-		/* 위시리스트를 버튼을 다시 누르면, 삭제가되고, 클래스 속성을 변경한다. 하트 아이콘을 비워져있는 아이콘으로 변경한다.*/
-		$(document).on(	"click", ".wishdeletebtn",	function(event) {
-			event.preventDefault();
-			var wishdeletebtn = $(this);
-			var productId = $(this).attr("href");
-			$.ajax({
-				url : '${contextPath}/wishlist/' + productId,
-				type : 'DELETE',
-				success : function(data) {
-					alert("삭제성공")
-					wishdeletebtn.attr('class', 'wishbtn')
-					wishdeletebtn.children().children().attr('class','fa fa-heart-o')
-				}
-			});
-		});
-
-	});
+						<div class="information-grid-info">
+							<span class="badge badge-danger">Sale 40%</span>
+							<h4>
+								<a href="${contextPath}/product/{{productId}}">{{name}}</a>
+							</h4>
+							<hr>
+							<p>
+								<strong>&#8361; {{price}} </strong> <br>
+								{{width}} * {{length}} * {{height}} <small>(가로
+									* 세로 * 높이 mm)</small>
+							</p>  
+							<h3>
+							{{#iflogin "${login.email}"}}
+    							<a href="{{productId}}" class="wishbtn"> 
+									<span class="label label-danger"> 
+										<i class="fa fa-heart-o" aria-hidden="true"></i>
+									</span>
+								</a>
+							{{else}}
+								{{init}}
+								{{#each ../../wishlist}}
+									{{#ifDoneLoop}}
+										{{#ifwishlist ../../productId productId email}}
+											<a href="{{../productId}}" class="wishdeletebtn"> 
+												<span class="label label-danger"> <i class="fa fa-heart" aria-hidden="true"></i></span>
+											</a>
+										{{/ifwishlist}}
+									{{/ifDoneLoop}}
+								{{/each}}
+								{{#ifFind}}
+									<a href="{{../productId}}" class="wishbtn"> 
+										<span class="label label-danger"> <i class="fa fa-heart-o" aria-hidden="true"></i></span>
+									</a>
+								{{/ifFind}}
+							{{/iflogin}}
+							</h3>
+						</div>
+						</a>
+					</div>
+				</div>
+			 {{/list}}
 </script>
+<script src="${rSrcPath}js/productList.js"></script>
+
 <!-- blog -->
 <div class="blog">
 	<!-- container -->
@@ -183,9 +73,17 @@ display:none;
 					<td colspan="2">
 						<ul>
 							<li>
+								<div class="col-md-2">
+									<select class="form-control input-sm target">
+										<option value="total">정렬</option>
+										<option value="height">높은가격순</option>
+										<option value="low">낮은가격순</option>
+										<option value="new">신상품순</option>
+									</select>
+								</div>
 								<div class="col-md-3">
-									<input type="text" class="form-control input-sm" maxlength="64"
-										placeholder="카테고리 내 검색" />
+									<input type="text" class="form-control input-sm  maxlength="64"
+										placeholder="카테고리 내 검색" id="keyword"/>
 								</div>
 								<button type="submit" class="btn btn-sm">Search</button>
 							</li>
@@ -196,6 +94,10 @@ display:none;
 					<th scope="row">카테고리</th>
 					<td>
 						<ul id = "category">
+							<li><a class="categorya">전체</a></li>
+							<c:forEach items="${categorylist}" var="category">
+								<li><a class="categorya">${category.name}</a></li>
+							</c:forEach>
 						</ul>
 					</td>
 				</tr>
@@ -203,6 +105,9 @@ display:none;
 					<th scope="row">브랜드</th>
 					<td>
 						<ul id="brand">
+							<c:forEach items="${brandlist}" var="brand">
+								<li><a class="branda">${brand.name}</a></li>
+							</c:forEach>
 						</ul>
 					</td>
 				</tr>
@@ -210,9 +115,10 @@ display:none;
 					<th scope="row">가격</th>
 					<td colspan="2">
 						<ul>
-							<li>~6만원</li>
-							<li>6만원~24만원</li>
-							<li>24~</li>
+							<li><input type="number" id="minprice" class="price" value="0" placeholder="min price"></li>
+							<li>~</li> 
+							<li><input type="number"  id="maxprice" class="price" value="10000" placeholder="max price"></li>
+							<li><button type="submit" class="btn btn-sm pricebtna">적용하기</button></li>
 						</ul>
 					</td>
 				</tr>
@@ -220,13 +126,14 @@ display:none;
 					<th scope="row">사이즈</th>
 					<td colspan="2">
 						<ul>
-							<li><input type="text" placeholder="가로" style="width: 50px;">
+							<li><input type="number" placeholder="가로" id = "w" class="size" style="width: 50px;">
 							</li>
 							<li>*</li>
-							<li><input type="text" placeholder="세로" style="width: 50px;">
+							<li><input type="number" placeholder="세로" id="l" class="size" style="width: 50px;">
 							</li>
 							<li>*</li>
-							<li><input type="text" placeholder="높이" style="width: 50px;"></li>
+							<li><input type="number" placeholder="높이" id = "d" class="size" style="width: 50px;"></li>
+							<li><button type="submit" class="btn btn-sm sizebtn">적용하기</button></li>
 						</ul>
 					</td>
 				</tr>
@@ -234,13 +141,29 @@ display:none;
 					<th scope="row">색상</th>
 					<td colspan="2">
 						<ul id="colorul">
+							<c:forEach items="${colorlist}" var="color">
+								<li><a class="btn btn-default colorBtn" id ="${color.name}" style="background:${color.rgb}" aria-hidden="true" aria-label="Settings"><i class="fa fa-check  fa-lg colorUncheck"  style="color:white" aria-hidden="true"></i></a></li>
+								<c:if test="${color.name == white}">
+									<li><a class="btn btn-default colorBtn" id ="${color.name}" style="background:${color.rgb}" aria-hidden="true" aria-label="Settings"><i class="fa fa-check  fa-lg colorUncheck"  style="color:black" aria-hidden="true"></i></a></li>
+								</c:if>
+							</c:forEach>
+							
 						</ul>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 		<form name ="filter" id = "filter">
-		
+			<input type="hidden" value="" name = "sort" >
+			<input type="hidden" value="" name = "keyword" >
+			<input type="hidden" name = "category" value="" id="cate">
+			<input type="hidden" name = "minPrice" value="0" id="min">
+			<input type="hidden" name = "maxPrice" value="0" id="max">
+			<input type="hidden" name="maxWidth" value="0">
+			<input type="hidden" name="maxLength" value="0">
+			<input type="hidden" name="maxHeight" value="0">
+			<input type="hidden" name = "pageSize" value = "6">
+			<input type = "hidden" name = "totalsize" value="${totalsize}">
 		</form>
 		<div class="information-grids agile-info" id="wrapper">
 			<c:forEach items="${list}" var="product">
@@ -312,6 +235,15 @@ display:none;
 		</div>
 	</div>
 	<!-- //container -->
+	<div class = "row">
+		<div class="col-md-12">
+			<div class="text-center">
+				<a class="btn btn-default btn-lg" id = "add"><i class="fa fa-angle-down  fa-2x" aria-hidden="true"></i> 더보기</a>
+			</div>
+		</div>
+	</div>
+	<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 </div>
 <!-- //blog -->
+
 <%@ include file="../include/footer.jsp"%>

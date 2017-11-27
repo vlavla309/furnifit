@@ -17,7 +17,8 @@
 		width,
 		length,
 		height,
-		color)
+		color,
+		link)
 		VALUES (#{productId},
 		#{name},
 		#{brand},
@@ -27,7 +28,8 @@
 		#{width},
 		#{length},
 		#{height},
-		#{color})
+		#{color},
+		#{link})
 	</insert>
 
 	<insert id="addAttach" parameterType="map">
@@ -43,23 +45,9 @@
 		#{order_no},
 		sysdate)
 	</insert>
-
-	<select id="list" resultType="Product">
-		SELECT product_id  AS "productId", 
-		category,
-		NAME,
-		brand,
-		price,
-		color,
-		width,
-		length,
-		height,
-		description
-		FROM products
-	</select>
 	
-	<select id="read" resultType="Product" parameterType="int">
-		SELECT product_id  AS "productId",
+	<select id="productAll" resultType="Product">
+		SELECT product_id AS "productId",
 		category,
 		NAME,
 		brand,
@@ -69,9 +57,170 @@
 		length,
 		height,
 		description,
+		link,
+		regdate
+		FROM products
+	</select>
+
+	<select id="listAll" resultType="Product">
+		SELECT product_id AS "productId",
+		category,
+		NAME,
+		brand,
+		price,
+		color,
+		width,
+		length,
+		height,
+		description,
+		link,
+		regdate
+		FROM (SELECT CEIL(rownum / 6) request_page,
+		product_id,
+		category,
+		NAME,
+		brand,
+		price,
+		color,
+		width,
+		length,
+		height,
+		description,
+		link,
+		regdate
+		FROM (SELECT product_id,
+		category,
+		NAME,
+		brand,
+		price,
+		color,
+		width,
+		length,
+		height,
+		description,
+		link,
+		regdate
+		FROM products))
+		WHERE request_page = 1
+	</select>
+
+	<select id="list" resultType="Product" parameterType="ProductParams">
+		SELECT product_id AS "productId",
+		category,
+		NAME,
+		brand,
+		price,
+		color,
+		width,
+		length,
+		height,
+		description,
+		link,
+		regdate
+		FROM (SELECT CEIL(rownum / #{pageSize}) request_page,
+		product_id,
+		category,
+		NAME,
+		brand,
+		price,
+		color,
+		width,
+		length,
+		height,
+		description,
+		link,
+		regdate
+		FROM (SELECT product_id,
+		category,
+		NAME,
+		brand,
+		price,
+		color,
+		width,
+		length,
+		height,
+		description,
+		link,
+		regdate
+		FROM products
+		<where>
+			<choose>
+				<when test="category == '전체' or category.equals('')">
+					product_id > 0
+				</when>
+				<otherwise>
+					category = #{category}					
+				</otherwise>
+			</choose>
+
+			<!-- brand -->
+			<if test="brands != null">
+				AND brand in
+				<foreach item="item" index="index" collection="brands" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<!-- color -->
+			<if test="colors != null">
+				AND color in
+				<foreach item="item" index="index" collection="colors" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+
+			<!-- 키워드 검색 -->
+			<if test="keyword != null and !keyword.equals('')">and upper(name) LIKE upper('%'||#{keyword}||'%') </if>
+
+			<!-- 가격 -->
+			<if test="maxPrice != 0 "> and #{maxPrice} > price </if>
+			<if test="minPrice != 0 "> and price > #{minPrice} </if>
+
+			<!-- 가구사이즈 -->
+			<if test="maxWidth != 0 ">
+				and #{maxWidth} >= WIDTH
+			</if>
+			<if test="maxHeight != 0">
+				and #{maxHeight} >= HEIGHT
+			</if>
+			<if test="maxLength != 0 ">
+				and #{maxLength} >= length
+			</if>
+			<!-- 정렬 -->
+			<if test="sort != null or !sort.equals('')">
+				order by regdate ))
+			</if>
+			<if test="sort.equalsIgnoreCase('low')">
+				order by price ))
+			</if>
+			<if test="sort.equalsIgnoreCase('height')">
+				order by price desc))
+			</if>
+			<if test="sort.equalsIgnoreCase('new')">
+				order by regdate desc))
+			</if>
+		</where>
+		WHERE request_page = #{page}
+	</select>
+
+	<select id="read" resultType="Product" parameterType="int">
+		SELECT
+		product_id AS "productId",
+		category,
+		NAME,
+		brand,
+		price,
+		color,
+		width,
+		length,
+		height,
+		description,
+		link,
 		REGDATE
 		FROM products
-		where product_id = #{value}
+		where product_id =
+		#{value}
 	</select>
 
 </mapper>

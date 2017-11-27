@@ -29,28 +29,39 @@
                 </tr>
               </thead>
               <tbody>
-                <c:forEach items="${list}" var="item">
-                  <tr>
+              <c:forEach items="${itemlist}" var="item">
+                 <tr>
                     <td colspan="2">
-                        <c:forEach items="${imglist}" var="img">
-              <c:if test="${product.productId == img.productId}">
-                <img src="${pageContext.servletContext.contextPath}/resources/productimg/${img.path}/${img.name}"
-                  alt="" class="img-responsive" style="height: 300px; width: auto"/>
-              </c:if>
-                 </c:forEach>
+                     <c:forEach items="${imglist}" var="img">
+                          <c:if test="${item.productId == img.productId && img.orderNo==0}">
+                            <img src="${rSrcPath}/productimg/${img.path}/${img.name}"
+                              alt="" class="img-responsive" style="height: 100px; width: auto"/>    
+                          </c:if>
+                         </c:forEach>
                     </td>
-                    <td colspan="7">가구가구</td>
-                    <td>333</td>
-                    <td>11111</td>
-                    <td><span name="totalPrice">10000원</span></td>
+                    <c:set var="doneLoop" value="false"/>
+                     <c:forEach items="${prolist}" var="product">
+                     <c:if test="${not doneLoop}">
+                     <c:if test="${item.productId == product.productId}">
+                        <td colspan="7">${product.name}</td>
+                        <td>${item.amount}</td>
+                        <td>${product.price}원</td>
+                        <td>${item.amount * product.price}원</td>
+                       <c:set var="doneLoop" value="true"/>
+                      </c:if>
+                      </c:if>
+                   </c:forEach>
                   </tr>
-                </c:forEach>
+                  </c:forEach>
+              
               </tbody>
               <tfoot>
+              <c:forEach items="${pricelist}" var="price">
                 <tr>
                   <th colspan="10" class="text-center" style="color: red;"><h3>총 합계</h3></th>
-                  <th colspan="2" class="text-left"><span id="total"><h3>20000원</h3></span></th>
+                  <th colspan="2" class="text-left"><span id="total"><h3>${price.price}원</h3></span></th>
                 </tr>
+                </c:forEach>
               </tfoot>
             </table>
           </div>
@@ -63,7 +74,16 @@
                 <div class="table-responsive">
                   <table class="table">
                     <tbody>
-                      <tr><td><strong style="font-size: 18px">[가구 10% 할인쿠폰]이 적용되었습니다.</strong></td></tr>
+                      <tr>
+                      <c:choose>
+                        <c:when test="${coupon.discountRate == null}">
+                        <td><strong style="font-size: 18px">적용된 쿠폰이 없습니다.</strong></td>
+                      </c:when>
+                      <c:otherwise>
+                        <td><strong style="font-size: 18px">serialNo : ${coupon.serial}<br> [${coupon.discountRate}% 할인쿠폰]이 적용되었습니다.</strong></td>
+                      </c:otherwise>
+                      </c:choose>
+                      </tr>
                     </tbody>
                 </table>
               </div>
@@ -72,7 +92,7 @@
         </div>
       </div>
       <div class="box-footer text-center">
-          <button type="submit" class="btn btn-primary" style="height: 40px">목록으로</button>
+          <a href="${contextPath}/mypage/order" class="btn btn-default">목록으로</a>
       </div>
       <!-- /.box -->
       <!-- /.col-md-9 -->

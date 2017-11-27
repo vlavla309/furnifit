@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.furnifit.common.web.ProductParams;
 import com.furnifit.product.domain.Product;
 
 /**
@@ -39,7 +40,17 @@ public class MybatisProductDao implements ProductDao {
 
 	@Override
 	public List<Product> list() {
-		return sqlsession.selectList(namespace+".list");
+		return sqlsession.selectList(namespace+".listAll");
+	}
+
+	@Override
+	public List<Product> searchlist(ProductParams params) {
+		return sqlsession.selectList(namespace+".list", params);
+	}
+
+	@Override
+	public List<Product> productList() {
+		return sqlsession.selectList(namespace+".productAll");
 	}
 
 }

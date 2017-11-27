@@ -6,19 +6,15 @@ import java.util.Map;
 
 import com.furnifit.article.domain.Article;
 import com.furnifit.article.domain.ArticleImg;
-import com.furnifit.article.domain.Furniture;
+import com.furnifit.common.web.ArticleParams;
+import com.furnifit.furniture.domain.Furniture;
 import com.furnifit.planitem.domain.PlanItem;
 import com.furnifit.product.domain.Product;
 
+
 /**
  *
- *
- * @author 박보라
- *
- */
-/**
- *
- *
+ * 공유게시판 dao
  * @author 박보라
  *
  */
@@ -42,10 +38,23 @@ public interface ArticleDao {
 	
 	
 	/**
-	 * 게시판 이미지 업로드
+	 * 게시글 이미지 업로드
 	 * @param map
 	 */
 	public void addAttach(Map<String, Object> map); 
+	
+	
+	/**
+	 * 게시글 첨부이미지 삭제(수정시)
+	 * @param articleId
+	 */
+	public void deleteAttach(int articleId);
+	
+	/**
+	 * 게시글 첨부이미지 파일 수정 업로드
+	 * @param map
+	 */
+	public void replaceAttach(Map<String, Object> map);
 	
 	
 	/**
@@ -53,29 +62,6 @@ public interface ArticleDao {
 	 * @return List<Article>
 	 */
 	public List<Article> listAll();
-	
-	
-	/**
-	 * 상세게시글에 해당하는 배치도항목 정보 가져오기
-	 * @param planitemId
-	 * @return
-	 */
-	public PlanItem readPlanItem(int planitemId);
-	
-	
-	/**
-	 * 배치도항목에 해당하는 가구번호목록(리스트) 가져오기 
-	 * @param planitemId
-	 * @return
-	 */
-	public List<Furniture> readFurniture(int planitemId);
-	
-	/**
-	 * 가구번호에 대한 가구(상품)정보 가져오기
-	 * @param productId
-	 * @return
-	 */
-	public Product readProduct(int productId);
 	
 	
 	/**
@@ -98,6 +84,35 @@ public interface ArticleDao {
 	 * @return
 	 */
 	public List<ArticleImg> getAttach(int articleId);
+	
+	/**
+	 * 한페이지당 출력할 게시글들 가져오기
+	 * @param page
+	 * @return
+	 */
+	public List<Article> listByParams(ArticleParams params);
+	
+	/**
+	 * 검색시 해당 게시글수 가져오기
+	 * @param params
+	 * @return
+	 */
+	public int listSearchCount(ArticleParams params);
+	
+	/**
+	 * 좋아요 추가될때마다 likecnt 1씩 올리기위한 수정
+	 * @param articleId
+	 * @return
+	 */
+	public void likeUpdate(int articleId);
+	
+	/**
+	 * 
+	 * 추천수가 높은 사용자 3명에게 쿠폰을 지급
+	 * @return
+	 */
+	public List<Article> likecntcoupone();
+	
 	
 	
 

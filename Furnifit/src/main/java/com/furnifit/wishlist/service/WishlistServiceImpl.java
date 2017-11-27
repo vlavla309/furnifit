@@ -44,4 +44,9 @@ public class WishlistServiceImpl implements WishlistService {
 		return wishdao.userwishlist(map);
 	}
 
+	@Override
+	public int listcount(String email) {
+		return wishdao.listcount(email);
+	}
+
 }

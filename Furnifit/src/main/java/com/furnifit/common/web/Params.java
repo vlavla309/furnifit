@@ -9,7 +9,7 @@ package com.furnifit.common.web;
 public class Params {
 	private int page;         /** 사용자 요청 페이지 */
 	private int pageSize;     /** 페이지에 출력할 행의 수 */
-	private int pagiSize;      /** 페이지에 출력할 페이지 수 */
+	private int pagiSize;      /** 페이지에 출력할 페이지 수 (페이지 몇개보여줄껀지의 개수)*/
 	
 	public Params() {
 		this(1,10, 10);
