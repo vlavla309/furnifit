@@ -11,6 +11,8 @@
   <!-- 주문서 목록 div-->
     <div class="col-md-12">
      <h1>주문서 목록</h1><br><br>
+     
+      <!-- 회원 정보 -->
       <div class="box box-info">
         <div class="col-md-6 text-center" >
         <div class="table-responsive" >
@@ -34,10 +36,12 @@
           </div>
         </div>
       </div>
+      <!-- /회원 정보 -->
+      
     </div><br><br><br><br>
     <!-- /주문서 목록 div-->
     
-    <!-- 목록 리스트 div-->
+    <!-- 주문 목록 리스트 div-->
     <div class="col-md-12">
       <div class="box">
           <div class="text-center" id="box">
@@ -52,7 +56,6 @@
             </c:forEach>
           </div>
       </div>
-
       <div class="box">
         <div class="box-footer">
           
@@ -77,8 +80,8 @@
           
         </div>
       </div>
-    </div>
-    <!-- /목록 리스트 div-->
+     </div>
+    <!-- /주문 목록 리스트 div-->
   </div>
 </div>
 
