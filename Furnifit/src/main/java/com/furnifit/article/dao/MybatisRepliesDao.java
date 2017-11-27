@@ -53,6 +53,6 @@ public class MybatisRepliesDao implements RepliesDao {
 	@Override
 	public int count(Integer article_id) throws Exception {
 		return session.selectOne(namespace + ".count", article_id);
-	}
+	} 
 	
 }

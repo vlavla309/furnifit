@@ -9,7 +9,7 @@ margin-right: 2px;
     line-height: 1.42857143;
     border: 1px solid transparent;
     border-radius: 4px 4px 0 0;
-    background-color: #B40404;
+    background-color: #F5D0A9;
     color: white;
     font-weight: bold;
 }
@@ -20,7 +20,7 @@ margin-right: 2px;
 color: white;
 font-weight: bold;
 cursor: default;
-background-color: #F5D0A9;
+background-color: #B40404;
 border: 0px solid;
 border-bottom-color: transparent;
 }
@@ -51,14 +51,16 @@ border-radius: 10px;
 }
 
 .artReview{
-border: 2px dashed #F5D0A9;
-width: 650px;
+border: 0px dashed #B40404;
+width: 800px;
 margin: auto;
+
 }
+
 
 .artContent{
 width: 100%;
-margin-left: 120px;
+margin-left: 40px;
 }
 
 .artContent textarea{
@@ -104,10 +106,10 @@ border-style:hidden;
 margin-left:42%; 
 border-radius:5px; 
 font-weight:bold; 
-background-color: #F79F81;
+background-color: #610B0B;
 color: white;  
 width: 17%; 
-height:36px; 
+height:40px; 
 font-size: 13pt;
 }
 
@@ -243,16 +245,26 @@ font-size: 9pt
 }
 
 
+
 .articleImg{
-width: 400px;
-margin: auto;
-display: block;
+margin: 10px;
+overflow: hidden;
+text-align: center;
+display: inline-block;
+width: 200px;
+height: 150px;
+}
+
+.artReview2{
+width:fit-content;
+margin:auto;
 }
 
 
 .articleImg img{
-width : 100%;
-height: auto;
+height: 100%;
+width: auto;
+padding: 10px;
 }
 .artContainer{
 width: 900px; 

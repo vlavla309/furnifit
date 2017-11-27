@@ -96,23 +96,25 @@
             </table>
                 </div>
                 <!-- 후기 상세 -->
-               <br>
-               <br>
+     
+               
                 <div role="tabpanel"  class="tab-pane fade artReview" id="profile" aria-labelledby="profile-tab">               
-                <div class="box box-primary"  >
-                <br>
-                   <c:forEach items="${article.images}" var="articleImg">       
-                  <div class="articleImg row">
-                     <a data-fancybox="gallery" href="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"><img src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}" style="width: 50px"></a>
-                  </div>      
+                  <div class="box box-primary artReview2"  >
+                   <br>
+                    <c:forEach items="${article.images}" var="articleImg">       
+                      <div class="articleImg row">
+                        <a data-fancybox="gallery" href="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"><img src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}" ></a>
+                      </div>      
                     </c:forEach>
                  </div>
-                 <br>
-                 <br>
-                   <div class="row artContent"  role="alert" >       
-                <textarea name="content" rows="10" cols="45" readonly="readonly">${article.content }</textarea>               
-                   </div>        
-                </div>                                           
+                   <br>
+                   <br>
+                    <div class="row artContent"  role="alert" >       
+                      <textarea name="content" rows="15" cols="90" readonly="readonly">${article.content }</textarea>               
+                    </div>        
+                </div> 
+                
+                                                          
                </div>
               </div>
             </div>

@@ -17,5 +17,5 @@ public interface RepliesDao {
 	
 	public List<Replies> listPage(Integer article_id, Criteria cri) throws Exception;
 
-    public int count(Integer article_id) throws Exception;
+    public int count(int article_id) throws Exception;
 }
