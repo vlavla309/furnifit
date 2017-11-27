@@ -74,12 +74,6 @@ function makeFurnitureList(data){
 
 		furnitures.set(Number(item.productId), furniture);
 	});
-	
-	/*테스트*/
-	furnitures.forEach(function(item, key, mapObj){
-		console.log(item.toString());
-	});
-		
 }
 
 $(function() {
