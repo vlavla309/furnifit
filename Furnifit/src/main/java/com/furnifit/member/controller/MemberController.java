@@ -93,30 +93,12 @@ public class MemberController {
 	// 회원정보 수정 처리
 	@RequestMapping(value = "/edit", method=RequestMethod.POST)
 	public String editSignup(Member member, HttpSession session) throws Exception {
-		/*System.out.println(member);
-		String email = member.getEmail();
-		log.debug("회원정보 수정 처리");
-		Member loginMember = (Member) session.getAttribute("member");*/
-		/*String email = loginMember.getEmail();*/
-		// System.out.println(loginMember);
-		/*
-		if(member.getPhone() == null) {
-			member.setPhone(loginMember.getPhone());
-		}
-		if(member.getPasswd() == null) {
-			member.setPasswd(loginMember.getPasswd());
-		}
-		if(member.getName() == null) {
-			member.setName(loginMember.getName());
-		}
-		*/
-		//member.setEmail(email);
 		
 		int check = memberService.update(member);
 		if(check == 1) {
 			session.setAttribute("member", member);
 		}
-		return "redirect: /one";
+		return "redirect: /PlanWriter";
 	}
 	
 	// 회원 탈퇴
@@ -130,10 +112,7 @@ public class MemberController {
 	@RequestMapping(value = "/withdraw", method=RequestMethod.POST)
 	public String delete(String email, String passwd, Model model) throws Exception {
 		log.debug("회원 탈퇴 처리");
-		/*
-		Member loginMember = (Member) session.getAttribute("member");
-		String password = loginMember.getPasswd();
-		*/
+		
 		boolean result = memberService.checkPw(email, passwd);
 		
 		if(result) {
