@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../include/header.jsp" %>
 <link rel="stylesheet" href="${rSrcPath}css/article_modify.css" />
-<script src="${rSrcPath}js/article_modify.js"></script>
 <body>
 <!-- hidden -->
 <input type="hidden" name="articleId" value="${article.articleId}"> 
@@ -115,7 +114,7 @@
               <p>
               <br>
               <br>
-                <textarea name="content" rows="8" cols="55"  class="artContent">${article.content }</textarea>            
+                <textarea maxlength="1000" name="content" rows="8" cols="55"  class="artContent">${article.content }</textarea>            
               </div>  
           <br>
           <br>
@@ -128,10 +127,78 @@
        </div>
      </div>
     </form>            
-<script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/js/artupload.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].onclick = function(){
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+            panel.style.display = "none";
+        } else {
+            panel.style.display = "block";
+        }
+    } 
+}
+</script> 
+     
+<script>
+$(function(){
+
+$("#modifyBtn").on("click",function(){
+	 event.preventDefault();
+   
+	 var that = $("#registerForm");
+	 
+    var str = "";
+    $(".uploadedList .delbtn").each(
+        function(index) {
+          str += "<input type='hidden' name='files[" + index
+              + "]' value='" + $(this).attr("href")
+              + "'> ";
+    });
+    
+	 that.append(str);
+	 
+	 to_ajax();
+	 });
+	 
+	
+    function to_ajax(){
+    var formData = $("#registerForm").serialize();
+    console.log(formData);
+    
+    $.ajax({ 
+      type:'post',
+      url:'${contextPath}/article/${article.articleId}',
+      data: formData,  
+      success:function(result){
+        console.log("result: " + result);
+        if(result == 'success'){
+          alert("수정 되었습니다.");
+          location.href='${contextPath}/article/${article.articleId}';
+      		  }
+  		  }
+      });
+	}
+
+
+});
+
+
+   
+   
+</script>
+
+                
+               <script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/js/artupload.js"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
 <script id="template" type="text/x-handlebars-template">
-<li>  
+<li>
   <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
   <div class="mailbox-attachment-info">
   <a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
@@ -139,38 +206,58 @@
      class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw  fa-times "></i></a>
   </span>
   </div>
-</li>                 
+</li>                
 </script>
-<script >
-var template = Handlebars.compile($("#template").html());
-$(".fileDrop").on("dragenter dragover", function(event) {
-  event.preventDefault();
-});
-$(".fileDrop").on("drop", function(event) {
-  event.preventDefault();
 
-  var files = event.originalEvent.dataTransfer.files;
-  var file = files[0];
-  var formData = new FormData();
-  formData.append("file", file);
 
-  $.ajax({
-    url : contextPath+'/uploadajaxart',
-    data : formData,
-    dataType : 'text',
-    processData : false,
-    contentType : false,
-    type : 'POST',
-    success : function(data) {
-      var fileInfo = getFileInfo(data);
+<script>
+  var template = Handlebars.compile($("#template").html());
 
-      var html = template(fileInfo);
-
-      $(".uploadedList").append(html);
-    }
+  $(".fileDrop").on("dragenter dragover", function(event) {
+    event.preventDefault();
   });
+
+  $(".fileDrop").on("drop", function(event) {
+    event.preventDefault();
+
+    var files = event.originalEvent.dataTransfer.files;
+
+    var file = files[0];
+
+    var formData = new FormData();
+
+    formData.append("file", file);
+
+    $.ajax({
+      url : '${pageContext.servletContext.contextPath }/uploadajaxart',
+      data : formData,
+      dataType : 'text',
+      processData : false,
+      contentType : false,
+      type : 'POST',
+      success : function(data) {
+        var fileInfo = getFileInfo(data);
+
+        var html = template(fileInfo);
+
+        $(".uploadedList").append(html);
+      }
+    });
+  });
+
+
+
+</script>
+<script>
+$(".uploadedList").on("click", ".delbtn", function(event){
+     event.preventDefault(); 
+     $(this).parent().parent().parent().remove();
 });
-</script>   
+</script>
+  
+
+       
+         
 <!-- //blog -->
 <%@ include file="../include/footer.jsp" %>
 

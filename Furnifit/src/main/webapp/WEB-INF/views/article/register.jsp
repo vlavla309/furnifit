@@ -76,10 +76,10 @@
             <p>
             <div class="form-group">
                 <label for="exampleInputEmail1">File DROP Here</label>
-                <div class="fileDrop"></div>
-                </div>
+                  <div class="fileDrop"></div>
+                  </div>
                <!-- /.box-body -->
-               <div class="box-footer">
+                  <div class="box-footer">
                   <div>
                      <hr>
                   </div>

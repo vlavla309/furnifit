@@ -3,6 +3,11 @@
 <%@ include file="../include/header.jsp" %>
 <link rel="stylesheet" href="${rSrcPath}css/article_detail.css" />
 <script src="${rSrcPath}js/article_detail.js"></script>
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+
+
 <body>
 <!-- hidden -->
 <input type="hidden" name="likeEmail" value="${likes.email }">
@@ -98,7 +103,7 @@
                 <br>
                    <c:forEach items="${article.images}" var="articleImg">       
                   <div class="articleImg row">
-                     <img id="reviewImg"  src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"   >
+                     <a data-fancybox="gallery" href="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}"><img src="${rSrcPath}/articleimg/${articleImg.path}/${articleImg.name}" style="width: 50px"></a>
                   </div>      
                     </c:forEach>
                  </div>
