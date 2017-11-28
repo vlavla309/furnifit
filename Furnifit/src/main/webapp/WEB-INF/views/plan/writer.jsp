@@ -120,7 +120,6 @@ li {
 						<li><a href="#">menu2</a></li>
 						<li><a id=crtBtn href="#">침대하나</a></li>
 					</ul>
-
 					<ul id="headerMenuRight">
 						<li class="exit"><a href="#">EXIT</a></li>
 					</ul>
@@ -306,6 +305,9 @@ li {
 				</div>
 			</div>
 			<!-- right sidebar 끝-->
+			
+			<div id="msgBar" class="alert"></div>
+			
 		</div>
 		<!-- header 끝 -->
 

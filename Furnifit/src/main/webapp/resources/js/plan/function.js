@@ -300,4 +300,36 @@ $(function() {
 			});
 
 	toAjax();
-})
+});
+
+var timerId;
+function showMsgBar(type, msg){
+	var msgBar=$("#msgBar");
+	msgBar.removeClass("alert-success");
+	msgBar.removeClass("alert-danger");
+	msgBar.hide();
+	clearTimeout(timerId);
+	
+	var alertType="alert-danger";
+	var strongStr;
+	switch(type){
+	case "success":
+		alertType="alert-success";
+		strongStr="Success! ";
+		break;
+	case "fail":
+		alertType="alert-danger";
+		strongStr="Fail! ";
+		break;
+	}
+	var msgStr="<strong>"+strongStr+"</strong>"+msg;
+	msgBar.addClass(alertType);
+	msgBar.html(msgStr);
+	msgBar.show();
+
+	timerId=setTimeout(function(){
+		console.log("종료");
+		msgBar.hide("fade");
+	}, 3000);
+
+}
