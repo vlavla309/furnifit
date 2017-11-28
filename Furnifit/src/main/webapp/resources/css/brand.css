@@ -1,8 +1,11 @@
 
 body {
 	margin: 0;
-	padding: 0;
 }
+/*
+	사진을 배경으로 만들고 크기와 위치 조절을 위한 코드
+	폰트의 설정과 크기 설정
+*/
 .scene {
 	height: 150vh;
 	overflow: hidden;
@@ -61,7 +64,7 @@ body {
   margin-top:1rem;
 }
 
-
+/* 첫번째 사진과 마지막 사진에 있는 버튼 디자인 설정 */
 .btn{
     text-decoration: none;
     font-size:1rem;
