@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/brand")
 public class BrandController {
+	/* 로그 확인 */
 	private static final Logger logger = Logger.getLogger(BrandController.class);
 	
 	// brand 페이지

@@ -23,7 +23,7 @@
                  <table id="shareForm">
                    <tr >
                      <div class="alert alert-warning" role="alert">
-                     <strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;<input type="text" readonly="readonly"  value="&nbsp;${planItem.name}" class="artPlanitemName">
+                     <strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;&nbsp;<input type="text" readonly="readonly"  value="&nbsp;${planItem.name}" class="artPlanitemName">
                      </div>
                    </tr>              
                    <tr>
@@ -34,7 +34,7 @@
                    </tr>
                    <tr>
                      <div class="alert alert-warning" role="alert">
-                      <strong id="shareInfo">작성자 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input readonly="readonly"  value="${article.email }"  type="text"  class="artPlanitemEmail" >
+                      <strong id="shareInfo">작성자 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input readonly="readonly"  value="${article.email }"  type="text"  class="artPlanitemEmail" >
                      </div>
                    </tr>     
                 </table>

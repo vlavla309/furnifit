@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" href="${rSrcPath}css/article_register.css" />
 <%@ include file="../include/header.jsp" %>
+<link rel="stylesheet" href="${rSrcPath}css/article_register.css" />
 <body>
 <!-- hidden -->
 <input type="hidden" value="${pageContext.servletContext.contextPath }" name="path" id ="path"> 
@@ -11,106 +11,106 @@
          <!-- container --> 
          <div class="container artContainer2">
             <form id='registerForm' role="form" method="post" action="${contextPath}/article">
-            <input type="hidden" name="planitemId" value="${planItem.planitemId}">
-              <div class="blog-heading w3layouts artHead" >              
-              </div>
-              <div class="gallery-grids" >
-                <table id="shareForm">
-                  <tr>
-                    <div class="alert alert-warning" role="alert">
-                      <strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;<input type="text" readonly="readonly"  value="${planItem.name}" class="artPlanitemName2">
-                    </div>
-                  </tr>               
-                  <tr>
-                    <div class="alert alert-warning" role="alert">
-                     <strong id="shareInfo">평 수 :</strong>&nbsp;&nbsp;<input id="m" readonly="readonly"  value="${planItem.length}" type="text">x <input id="m" readonly="readonly" value="${planItem.width}" type="text" >x <input  id="m" readonly="readonly"  value="${planItem.height}" type="text">
-                      &nbsp;&nbsp;&nbsp; <strong id="shareInfo">(&nbsp;평 수 :&nbsp;</strong><input readonly="readonly" value="${planItem.acreage}"  id="acreage" type="text"> <strong id="shareInfo">평&nbsp;)</strong>
-                    </div>
-                  </tr>
-                  <tr>
-                   <div class="alert alert-warning" role="alert">
-                    <strong id="shareInfo">작성자 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" readonly="readonly" name="email"  value="${login.email}"  class="artPlanitemName2">
-                   </div>
-                  </tr>
-                </table>
-                  <br>
-                  <br>
-            <!-- 배치도 이미지 -->               
-                <div class="planimgDiv" >
-                  <img src="${rSrcPath }/${planItem.image}"  alt="" />
-                </div>        
-              </div>  
-            <!-- 자세히보기-가구목록  -->
-                <br>
-                  <button type="button" class="accordion" class="col-md-2">&nbsp;자세히보기 ▼</button>
-                    <div class="bs-docs-example wow fadeInUp animated panel furnitureList" data-wow-delay=".5s" >
-                      <table class="table table-hover">
-                        <thead>
-                          <tr>
-                          <th class="align2">상품</th>
-                          <th class="align2">상품명</th>
-                          <th class="align2">상품가격</th>
-                          <th class="align2">링크</th>
-                          </tr>
-                        </thead>
-                       <c:forEach var="product" items="${product}" >
-                        <tbody style="text-align: cennter">              
-                          <tr>
-                            <td class="align2"> 
-                              <c:forEach items="${product.imgs}" var="img">
-                                <div class="artPrdImg">
-                                  <img src="${rSrcPath}/productimg/${img.path}/${img.name}"/>
-                                </div>                
-                               </c:forEach>
-                            </td>
-                            <td class="align2">${product.name }</td>
-                            <td class="align2">${product.price }</td>
-                            <td class="align2"><a href="${product.link }"><button type="button" class="artLink2" >바로가기</button></a></td>
-                          </tr>              
-                        </tbody>
-                      </c:forEach>
-                    </table>
-                  </div>
-                   <br>
-                   <br>
-                   <br>
-                   <br>            
-                   <br>
-                   <br>
-          <!-- 파일첨부할곳 -->
-                   <p>
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">File DROP Here</label>
-                        <div class="fileDrop">
-                        </div>
-                    </div>
-                    <div class="box-footer">
-                      <div>
-                       <hr>
+              <input type="hidden" name="planitemId" value="${planItem.planitemId}">
+                <div class="blog-heading w3layouts artHead" >              
+                </div>
+                  <div class="gallery-grids" >
+                    <table id="shareForm">
+                     <tr>
+                      <div class="alert alert-warning" role="alert">
+                        <strong id="shareInfo">배치도명 :</strong>&nbsp;&nbsp;&nbsp;<input type="text" readonly="readonly"  value="${planItem.name}" class="artPlanitemName2">
                       </div>
-                        <ul class="mailbox-attachments clearfix uploadedList">
-                        </ul>
-          	       <br>
-                   <br>
-                   <br>
-                   <br>      
-              <!-- 글쓸곳 -->
-                    <div class="row" style="text-align: center;">
-                      <input type="text" name="title" class="artTitle2" required="required" placeholder="&nbsp;&nbsp;&nbsp;제목을 입력해주세요.">
-                        <p>
-                        <br>
-                          <textarea name="content" rows="8" cols="55" class="artContent"  required="required" placeholder="&nbsp;&nbsp;&nbsp;글을 작성해주세요."></textarea>                
-                    </div>  
-                   <br>
-                   <br>
-                    <div class="artRegisterBtn" >         
-                      <button type="submit" class="button3">저장하기</button>
-                        <a href="${contextPath }/mypage/itemlist/${planItem.planitemId}"><button type="button" class="button3" onclick="article/list.jsp">취소</button></a>
+                     </tr>               
+                     <tr>
+                      <div class="alert alert-warning" role="alert">
+                       <strong id="shareInfo">평 수 :</strong>&nbsp;&nbsp;<input id="m" readonly="readonly"  value="${planItem.length}" type="text">x <input id="m" readonly="readonly" value="${planItem.width}" type="text" >x <input  id="m" readonly="readonly"  value="${planItem.height}" type="text">
+                        &nbsp;&nbsp;&nbsp; <strong id="shareInfo">(&nbsp;평 수 :&nbsp;</strong><input readonly="readonly" value="${planItem.acreage}"  id="acreage" type="text"> <strong id="shareInfo">평&nbsp;)</strong>
+                      </div>
+                     </tr>
+                     <tr>
+                       <div class="alert alert-warning" role="alert">
+                        <strong id="shareInfo">작성자 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" readonly="readonly" name="email"  value="${login.email}"  class="artPlanitemName2">
+                          </div>
+                     </tr>
+                    </table>
+                    <br>
+                    <br>
+            <!-- 배치도 이미지 -->               
+                    <div class="planimgDiv" >
+                      <img src="${rSrcPath }/${planItem.image}"  alt="" />
                     </div>        
-                  </div> 
-              </form>
+                  </div>  
+            <!-- 자세히보기-가구목록  -->
+                    <br>
+                      <button type="button" class="accordion" class="col-md-2">&nbsp;자세히보기 ▼</button>
+                        <div class="bs-docs-example wow fadeInUp animated panel furnitureList" data-wow-delay=".5s" >
+                          <table class="table table-hover">
+                           <thead>
+                            <tr>
+                              <th class="align2">상품</th>
+                              <th class="align2">상품명</th>
+                              <th class="align2">상품가격</th>
+                              <th class="align2">링크</th>
+                            </tr>
+                           </thead>
+                          <c:forEach var="product" items="${product}" >
+                           <tbody style="text-align: cennter">              
+                             <tr>
+                               <td class="align2"> 
+                                 <c:forEach items="${product.imgs}" var="img">
+                                   <div class="artPrdImg">
+                                     <img src="${rSrcPath}/productimg/${img.path}/${img.name}"/>
+                                   </div>                
+                                 </c:forEach>
+                               </td>
+                               <td class="align2">${product.name }</td>
+                               <td class="align2">${product.price }</td>
+                               <td class="align2"><a href="${product.link }"><button type="button" class="artLink2" >바로가기</button></a></td>
+                             </tr>              
+                            </tbody>
+                           </c:forEach>
+                          </table>
+                       </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>            
+                        <br>
+                        <br>
+                <!-- 파일첨부할곳 -->
+                        <p>
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">File DROP Here</label>
+                              <div class="fileDrop">
+                              </div>
+                          </div>
+                        <div class="box-footer">
+                          <div>
+                            <hr>
+                          </div>
+                            <ul class="mailbox-attachments clearfix uploadedList">
+                            </ul>
+                        <br>
+                        <br>
+                        <br>
+                        <br>      
+                  <!-- 글쓸곳 -->
+                        <div class="row" style="text-align: center;">
+                          <input type="text" name="title" class="artTitle2" required="required" placeholder="&nbsp;&nbsp;&nbsp;제목을 입력해주세요.">
+                            <p>
+                            <br>
+                            <textarea name="content" rows="8" cols="55" class="artContent"  required="required" placeholder="&nbsp;&nbsp;&nbsp;글을 작성해주세요."></textarea>                
+                        </div>  
+                        <br>
+                        <br>
+                          <div class="artRegisterBtn" >         
+                            <button type="submit" class="button3">저장하기</button>
+                              <a href="${contextPath }/mypage/itemlist/${planItem.planitemId}"><button type="button" class="button3" onclick="article/list.jsp">취소</button></a>
+                          </div>        
+                    </div> 
+               </form>
             </div>
-          </div>              
+         </div>              
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/js/artupload.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script id="template" type="text/x-handlebars-template">

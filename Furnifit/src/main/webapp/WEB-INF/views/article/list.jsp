@@ -15,7 +15,7 @@
         <form name="listForm" id="listForm" method="get" action="${contextPath }/article">
          <div class="form-inline col-md-5 col-md-offset-8">
           <span><select name="acreage" id="acreage" class="selectBox">
-                  <option value="">평      수</option>
+                  <option value="">평  수</option>
                   <option value="xs">1 ~ 2평 (㎡)</option>
                   <option value="ss">3 ~ 4평 (㎡)</option>
                   <option value="mm">5 ~ 7평 (㎡)</option>

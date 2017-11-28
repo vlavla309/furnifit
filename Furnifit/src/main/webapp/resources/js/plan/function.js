@@ -20,6 +20,7 @@ function scale() {
 }
 
 var once=1;
+
 function toAjax() {
 
 	var formData = $("#filter").serialize();
@@ -32,12 +33,6 @@ function toAjax() {
 				filter(data)
 				once=0;
 			}
-
-			//console.log(data)
-			/* console.log(data.list[0].imgs[0].name) */
-			/* console.log(data.list[0].productId) */
-			filter(data)
-			
 			productList(data);
 			makeFurnitureList(data);
 		},
@@ -92,12 +87,17 @@ function filter(data) {
 	str += "<ul>"
 	// color
 	$.each(data.colorlist, function(i, item) {
-		//console.log(item.name)
-		str += "<li><a class=\"btn btn-default colorBtn\" id =\""+item.name+"\" style=\"background:"+item.rgb+"\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:white\" aria-hidden=\"true\"></i></a></li>"
+		console.log(item.name)
+		if (item.name == "white"){
+			str+="<li><a class=\"btn btn-default colorBtn\" id =\""+item.name+"\" style=\"background:"+item.rgb+"\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:black\" aria-hidden=\"true\"></i></a></li>"
+		}else{
+			str += "<li><a class=\"btn btn-default colorBtn\" id =\""+item.name+"\" style=\"background:"+item.rgb+"\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:white\" aria-hidden=\"true\"></i></a></li>"
+		}
 	});
 	str += "</ul>";
 	$('#colorul').html(str);
 	
+
 	$('.productWrap').html(str)
 }
 
@@ -130,7 +130,7 @@ $(function() {
 		event.preventDefault();
 		$(this).children().first().toggleClass("colorUncheck");
 		$(this).attr('class','btn btn-default colordelete')
-		$('#filter').append("<input type =\"text\" name =\"colors\" value=\""+$(this).attr('id')+"\"/>")
+		$('#filter').append("<input type =\"hidden\" name =\"colors\" value=\""+$(this).attr('id')+"\"/>")
 		
 		toAjax();
 		
@@ -152,13 +152,12 @@ $(function() {
 		
 		$(this).attr('class','branddelete');
 		$(this).toggleClass("paramActive");
-		$('#filter').append("<input type =\"text\" name =\"brands\" value=\""+$(this).text()+"\"/>")
+		$('#filter').append("<input type =\"hidden\" name =\"brands\" value=\""+$(this).text()+"\"/>")
 		toAjax();
 	});
 
 	/* 브랜드 버튼 체크를 해제하고, 아래에 form에서  input 제거!, ajax는 추후 */
 	$(document).on(	"click", ".branddelete",function(event) {
-		alert($(this).text());
 		event.preventDefault();
 		$(this).attr('class','branda');
 		$('#filter :input[value="'+$(this).text()+'"]').remove();
