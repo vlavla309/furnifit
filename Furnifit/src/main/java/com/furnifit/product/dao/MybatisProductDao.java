@@ -48,14 +48,14 @@ public class MybatisProductDao implements ProductDao {
 		return sqlsession.selectList(namespace+".list", params);
 	}
 
-	@Override
-	public List<Product> productList() {
-		return sqlsession.selectList(namespace+".productAll");
-	}
 
 	@Override
 	public List<Product> productReadList(String category) {
 		return sqlsession.selectList(namespace+".productReadList", category);
+	}
+	
+	public List<Product> productwish(Map<String, String> map){
+		return sqlsession.selectList(namespace+".productwish", map);
 	}
 
 }

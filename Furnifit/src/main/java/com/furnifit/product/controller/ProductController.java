@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ import com.furnifit.category.doamin.Category;
 import com.furnifit.color.dao.ColorDao;
 import com.furnifit.color.domain.Color;
 import com.furnifit.common.web.ProductParams;
+import com.furnifit.member.domain.Member;
 import com.furnifit.product.domain.Product;
 import com.furnifit.product.service.ProductService;
 import com.furnifit.productimg.dao.ProductImageDao;
@@ -88,7 +90,7 @@ public class ProductController {
 	
 	@RequestMapping(value="", method= RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> list(Model model, ProductParams params) {
+	public Map<String, Object> list(Model model, ProductParams params, HttpSession session) {
 		
 		model.addAttribute("title", "Furnifit - Product");
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -98,7 +100,12 @@ public class ProductController {
 		List<Color> colorlist = colordao.list();
 		List<Brand> brandlist = branddao.list();
 		List<Category> categorylist = categorys.list();
-		
+		List<Product> wishlist=null;
+		Member member = (Member) session.getAttribute("login");
+		if(member !=null) {
+			wishlist = productsrv.productwish(member.getEmail(), 1, wishsrv.listcount(member.getEmail()));
+		}
+		map.put("wishlist", wishlist);
 		map.put("brandlist", brandlist);
 		map.put("colorlist", colorlist);
 		map.put("categorylist", categorylist);
@@ -112,18 +119,8 @@ public class ProductController {
 	@RequestMapping(value="/{productid}", method= RequestMethod.GET)
 	public String read(Model model, @PathVariable("productid") int productid) {
 		Product product = productsrv.read(productid);
-		logger.info("Product : "+product);
-		
 		List<Product> categorylist = productsrv.productReadList(product.getCategory());
-		for (Product product2 : categorylist) {
-			logger.info(product2);
-		}
-		
 		List<Article> artlist = artsrv.productRead(productid);
-		
-		for (Article article : artlist) {
-			logger.info(article);
-		}
 		
 		model.addAttribute("product", product);
 		model.addAttribute("title", "Furnifit - "+product.getName());

@@ -142,9 +142,11 @@
 					<td colspan="2">
 						<ul id="colorul">
 							<c:forEach items="${colorlist}" var="color">
-								<li><a class="btn btn-default colorBtn" id ="${color.name}" style="background:${color.rgb}" aria-hidden="true" aria-label="Settings"><i class="fa fa-check  fa-lg colorUncheck"  style="color:white" aria-hidden="true"></i></a></li>
-								<c:if test="${color.name == white}">
+								<c:if test="${color.name == 'white'}">
 									<li><a class="btn btn-default colorBtn" id ="${color.name}" style="background:${color.rgb}" aria-hidden="true" aria-label="Settings"><i class="fa fa-check  fa-lg colorUncheck"  style="color:black" aria-hidden="true"></i></a></li>
+								</c:if>
+								<c:if test="${color.name != 'white'}">
+									<li><a class="btn btn-default colorBtn" id ="${color.name}" style="background:${color.rgb}" aria-hidden="true" aria-label="Settings"><i class="fa fa-check  fa-lg colorUncheck"  style="color:white" aria-hidden="true"></i></a></li>
 								</c:if>
 							</c:forEach>
 							
@@ -179,7 +181,6 @@
 								</c:if>
 							</div>
 						</c:forEach>
-
 						<div class="information-grid-info">
 							<span class="badge badge-danger">Sale 40%</span>
 							<h4>
@@ -245,5 +246,4 @@
 	<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 </div>
 <!-- //blog -->
-
 <%@ include file="../include/footer.jsp"%>

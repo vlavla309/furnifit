@@ -39,10 +39,6 @@ public class WishlistServiceImpl implements WishlistService {
 		wishdao.delete(map);
 	}
 
-	@Override
-	public List<Wishlist> userwishlist(Map<String, String> map) {
-		return wishdao.userwishlist(map);
-	}
 
 	@Override
 	public int listcount(String email) {
