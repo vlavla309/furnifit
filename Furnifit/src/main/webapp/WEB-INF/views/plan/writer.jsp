@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -120,7 +122,8 @@ li {
 						<li><a id=crtBtn href="#">침대하나</a></li>
 					</ul>
 					<ul id="headerMenuRight">
-						<li class="exit"><a href="#"><strong>EXIT </strong><i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
+						<li class="exit"><a href="#"><strong>EXIT </strong><i
+								class="fa fa-sign-in" aria-hidden="true"></i></a></li>
 					</ul>
 				</div>
 
@@ -140,7 +143,9 @@ li {
 								src="${rSrcPath }/images/plan/plus.png" width=50px;></a>
 						</div>
 						<div id="leftToggle">
-							<button id="leftToggleBtn"  class="sideToggleBtn"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>
+							<button id="leftToggleBtn" class="sideToggleBtn">
+								<i class="fa fa-angle-double-left" aria-hidden="true"></i>
+							</button>
 						</div>
 					</div>
 				</div>
@@ -152,30 +157,33 @@ li {
 				<div id="rightSidebarWrap">
 					<div class="sidemenu">
 						<div id="rightToggle">
-							<button id="rightToggleBtn" class="sideToggleBtn"><i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+							<button id="rightToggleBtn" class="sideToggleBtn">
+								<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+							</button>
 						</div>
 						<div id="rightTabs">
 							<ul>
 								<li><a href="#tabs-1">가구목록</a></li>
-								<li><a href="#tabs-2">찜목록</a></li>
+								<c:if test="${login !=null}">
+									<li><a href="#tabs-2" id="wishtab">찜목록</a></li>
+								</c:if>
 								<li><a href="#tabs-3">배치목록</a></li>
 							</ul>
 							<!-- 상품 목록 -->
 							<div id="tabs-1" class="tabContent">
 								<div id="searchTab">
 									<button type="button" id="searchToggleBtn">
-									Search
-									<i class="fa fa-search" aria-hidden="true"></i>
+										Search <i class="fa fa-search" aria-hidden="true"></i>
 									</button>
 									<div id="searchWrap">
 										<div id="searchKeyword">
 											<div class="col-lg-12 in-gp-tb">
 												<div class="input-group">
 													<input type="text" class="form-control" id="keyword"
-														placeholder="Search for..."> 
-														<span class="input-group-btn">
-															<button class="btn btn-default" type="button">Search</button>
-														</span>
+														placeholder="Search for..."> <span
+														class="input-group-btn">
+														<button class="btn btn-default" type="button">Search</button>
+													</span>
 												</div>
 												<!-- /input-group -->
 											</div>
@@ -253,9 +261,7 @@ li {
 
 							<!-- 위시리스트 목록 -->
 							<div id="tabs-2" class="tabContent">
-								<div class="wishlistWrap">
-									
-								</div>
+								<div class="wishlistWrap"></div>
 
 							</div>
 
@@ -279,9 +285,9 @@ li {
 				</div>
 			</div>
 			<!-- right sidebar 끝-->
-			
+
 			<div id="msgBar" class="alert"></div>
-			
+
 		</div>
 		<!-- header 끝 -->
 
@@ -308,17 +314,20 @@ li {
 					<a href="#" target="_blank"><img src="" /></a>
 				</div>
 				<div class="infoWrap">
-					<span class="category">카테고리</span> 
- 					<span class="name">상품명</span> 
- 					<span class="brand">브랜드</span> 
- 					<span class="size">200x200x200</span>
+					<span class="category">카테고리</span> <span class="name">상품명</span> <span
+						class="brand">브랜드</span> <span class="size">200x200x200</span>
 				</div>
 				<div class="controlWrap">
 					<ul>
-						<li><a href="#" id="clockwiseRotateBtn"><img src="${contextPath }/resources/images/plan/rotate.png" alt="시계방향 회전"></a></li>
- 						<li><a href="#" id="counterclockwiseRotateBtn"><img src="${contextPath }/resources/images/plan/counterRotate.png" alt="시계반대방향 회전"></a></li>
- 						<li><a href="#" id="deleteBtn"><img src="${contextPath }/resources/images/plan/trash.png" alt="삭제"></a></li>
-  					
+						<li><a href="#" id="clockwiseRotateBtn"><img
+								src="${contextPath }/resources/images/plan/rotate.png"
+								alt="시계방향 회전"></a></li>
+						<li><a href="#" id="counterclockwiseRotateBtn"><img
+								src="${contextPath }/resources/images/plan/counterRotate.png"
+								alt="시계반대방향 회전"></a></li>
+						<li><a href="#" id="deleteBtn"><img
+								src="${contextPath }/resources/images/plan/trash.png" alt="삭제"></a></li>
+
 					</ul>
 				</div>
 			</div>
