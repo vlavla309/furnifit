@@ -3,7 +3,7 @@
 <%@ include file="../include/header.jsp" %>
 <link rel="stylesheet" href="${rSrcPath}css/article_detail.css" />
 <script src="${rSrcPath}js/article_detail.js"></script>
-<%-- <script src="${rSrcPath}js/article_detail_reply.js"></script> --%>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
 
