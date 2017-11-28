@@ -140,7 +140,8 @@ function setFurnitureInfo(){
 	var productId=Number(selectedElem.data("productId"));
 	var furniture=furnitures.get(productId);
 	//console.log(furniture.toString());
-	$("#furnitureInfoWrap .imgWrap img").attr("src", furniture.imgPath);
+	$("#furnitureInfoWrap .imgWrap a").attr("href", contextPath+"/product/"+furniture.productId);
+	$("#furnitureInfoWrap .imgWrap a img").attr("src", furniture.imgPath);
 	$("#furnitureInfoWrap .infoWrap .category").text(furniture.category);
 	$("#furnitureInfoWrap .infoWrap .name").text(furniture.name);
 	$("#furnitureInfoWrap .infoWrap .brand").text(furniture.brand);
