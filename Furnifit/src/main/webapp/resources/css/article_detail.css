@@ -330,6 +330,7 @@ max-height: 800px;
 overflow: auto;       
 }
 
+/* 댓글 폼과 댓글 출력 사이에 경계선이 있는데 그 선 양쪽 모서리를 둥글게 만드는 태그 */
 .dunggul { 
   border-top-left-radius: 0.7em; 
   border-top-right-radius: 0.7em; 
@@ -337,6 +338,7 @@ overflow: auto;
   border-bottom-left-radius: 0.7em; 
 }
 
+/* 댓글 쓰기 글자에 디자인 효과 */
 .replyWriter {
   /* margin: 20px; */
   font-family: 'Paytone One', sans-serif;
@@ -354,9 +356,12 @@ overflow: auto;
   letter-spacing: -4px;
 }
 
+/* li를 쓰면 생기는 이미지를 없애는 코드 */
 .replyLi {
   list-style:none;
 }
+
+/* 댓글 폼에 있는 글씨들과 폼에 그림자 효과를 주는 코드 */
 #newEmail {
   box-shadow: 1px 1px 1px #EFEFF3;
 }
@@ -372,4 +377,3 @@ overflow: auto;
 #exampleComment {
   box-shadow: 1px 1px 1px #EFEFF3;
 }
-

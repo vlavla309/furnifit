@@ -28,10 +28,19 @@ $( document ).ready(function(){
 			selectedElem.remove();
 			selectedElem=null;
 		}
+		unSelectAll();
 	});
 	
 	
 	$("#searchToggleBtn").on("click", function(){
 		$("#searchWrap").toggle();
+	});
+	
+	
+	$(document).on("click", ".addFurnitureBtn",function(e){
+		e.preventDefault();
+		var pid=Number($(this).attr("href"));
+		var fur=furnitures.get(pid);
+		curEditor.furniture(curEditor.offsetX, curEditor.offsetY, fur);
 	});
 });

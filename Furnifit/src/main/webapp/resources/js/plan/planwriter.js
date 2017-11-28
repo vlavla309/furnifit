@@ -7,11 +7,12 @@ var selectedElem; //현재 선택된 엘레먼트
 var planCount=1; //작성중인 배치도 ID 시퀀스
 var editors; //작성중인 배치도 편집기 목록
 var curEditor; //현재 작성중인 배치도 편집기
+var furnitures;
 
 $( function() {
 	//초기화!!!
 	editors= new Map();
-	
+	furnitures = new Map();
 	
 	// 새 배치도 작성폼 다이얼로그 
 	var newPlanDlg = $( "#newPlanForm" ).dialog({
@@ -133,4 +134,16 @@ function delPlanItem(id){
 
 function selectPlan(id){
 	$(".planitem a[href="+id+"]").trigger("click");
+}
+
+function setFurnitureInfo(){
+	var productId=Number(selectedElem.data("productId"));
+	var furniture=furnitures.get(productId);
+	//console.log(furniture.toString());
+	$("#furnitureInfoWrap .imgWrap img").attr("src", furniture.imgPath);
+	$("#furnitureInfoWrap .infoWrap .category").text(furniture.category);
+	$("#furnitureInfoWrap .infoWrap .name").text(furniture.name);
+	$("#furnitureInfoWrap .infoWrap .brand").text(furniture.brand);
+	$("#furnitureInfoWrap .infoWrap .size").text(furniture.width+"x"+furniture.height+"x"+furniture.length);
+	
 }

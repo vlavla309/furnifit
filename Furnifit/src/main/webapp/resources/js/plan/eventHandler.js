@@ -5,13 +5,14 @@ function select(target){
 	
 	if(selectedElem.hasClass("furniture")){
 		selectedViewbox=target.parent().parent(); // 선택된 가구의 뷰박스 획득
+		setFurnitureInfo();
 		target.attr({strokeWidth: 4}); 
-		$("#footer").show();
+		$("#furnitureInfoWrap").show().css("display", "flex");
 	}
 }
 
 function unSelectAll(){
-	$("#footer").hide();
+	$("#furnitureInfoWrap").hide();
 	selectedElem=null;
 	curEditor.furnitures.attr({
 		strokeWidth: 0 // CamelCase...
@@ -32,7 +33,8 @@ function hOut(){
 function dragStart(x,y,e) {
 	curEditor.canvas.paper.zpd('toggle');
 	selectedViewbox=this.parent().parent(); //선택된 가구의 에디터 정보 가져오기
-	origTransform = this.transform().local;  //기존 트랜스폼 명령
+	origTransform = this.transform().local;//기존 트랜스폼 명령
+	savedTransform = this.transform().local;//기존 트랜스폼 명령
 	target=this;
 	ox=0;
 	oy=0;
@@ -88,15 +90,13 @@ function dragDrop(x,y) {
 		dir = isCollisionOfWall(target.getBBox());
 	}
 
-
-
 	/*collision check*/
 	var collisionFurnitures=isCollisionOfFurnitures(target);
 
 	if(collisionFurnitures){
 		console.log("겹침");
 		this.attr({
-			transform: origTransform
+			transform: savedTransform
 		});
 	}
 
@@ -132,36 +132,60 @@ function hasCollision(target, set){
 		}
 	});
 
-	pathTarget.remove();
-	pathSet.remove();
+	//pathTarget.remove();
+	//pathSet.remove();
 
 	return result;
 }
 /* Check. Is Collision of Furnitures */
 function isCollisionOfFurnitures(target){
 	//console.log(target);
-	var result=false;
+	var resultEdge=false;
+	var resultPoint=false;
 	var pathTarget=getPath(target);
 
+	var vertexTarget=getVertex(target[0]);
 	var pathSet=Snap.set();
+
+	//배치도 가구들마다 충돌 체크
 	curEditor.furnitures.forEach(function(elem, i) {
+		console.log("fur"+i)
 		if(target!=elem){
 			pathElem=getPath(elem);
 			pathSet.push(pathElem);
 
+			console.log(pathElem);
+			//드래그 대상의 꼭지점이 다른 가구의 영역에 포함 되는지 확인
+			vertexTarget.forEach(function(pos, j) {
+				if(resultPoint)return false;
+				resultPoint=Snap.path.isPointInside(pathElem, pos.x, pos.y);
+			});
+			if(resultPoint)return;
+			
+			//다른가구의 꼭지점이 드래그 대상 영역에 포함되는지 확인
+			var vertextElem=getVertex(elem[0]);
+			vertextElem.forEach(function(pos, j) {
+				if(resultPoint)return false;
+				resultPoint=Snap.path.isPointInside(pathTarget, pos.x, pos.y);
+			});
+			if(resultPoint)return;
+			
+			
 			var interSection=Snap.path.intersection(pathElem, pathTarget);
-
+			//console.log(interSection);
 			if(interSection.length > 0){
-				result = true;
+				resultEdge = true;
 				return;
 			}
 		}
 	});
+	
+	
 
-	pathTarget.remove();
-	pathSet.remove();
+	//pathTarget.remove();
+	//pathSet.remove();
 
-	return result;
+	return resultEdge || resultPoint;
 }
 
 function isCollisionOfWall(target){
@@ -169,8 +193,6 @@ function isCollisionOfWall(target){
 	var east;
 	var south;
 	var west;
-
-
 
 	var bbox=curEditor.wallNorth.getBBox();
 	north =Snap.path.isBBoxIntersect(bbox, target);
@@ -230,11 +252,11 @@ function rect2Path(target){
 	pathStr+=" L"+posC.x+" "+posC.y;
 	pathStr+=" L"+posD.x+" "+posD.y;
 	pathStr+=" L"+posA.x+" "+posA.y;
-
+	pathStr+=" Z";
+	
 	var path=curEditor.canvas.path(pathStr).attr({
-		fill : "none",
-		stroke:"#888"
-			//fill : "#000"
+		//stroke:"#888",
+		fill : "none"
 	});
 
 	return path;
@@ -259,13 +281,28 @@ function g2Path(target){
 	pathStr+=" L"+posC.x+" "+posC.y;
 	pathStr+=" L"+posD.x+" "+posD.y;
 	pathStr+=" L"+posA.x+" "+posA.y;
+	pathStr+=" Z";
 
 	var path=curEditor.canvas.path(pathStr).attr({
-		fill : "none",
-		stroke:"#888"
-			//fill : "#000"
+		//stroke:"#888",
+		fill : "none"
 	});
 
 	return path;
 }
 
+//사각형 꼭지점 네 좌표 반환
+function getVertex(target){
+	var m=target.parent().transform().localMatrix;
+	var x=Number(target.attr("x"));
+	var y=Number(target.attr("y"));
+	var w=Number(target.attr("width"));
+	var h=Number(target.attr("height"));
+
+	var posA=new Coordinate(m.x(x,y), m.y(x,y));
+	var posB=new Coordinate(m.x(x+w,y), m.y(x+w,y));
+	var posC=new Coordinate(m.x(x+w,y+h), m.y(x+w,y+h));
+	var posD=new Coordinate(m.x(x,y+h), m.y(x,y+h));
+	
+	return [posA, posC, posB, posD];
+}
