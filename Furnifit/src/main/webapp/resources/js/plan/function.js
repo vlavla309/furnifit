@@ -50,13 +50,8 @@ function toAjax() {
 
 function wishlist(data) {
 	var str = ""
-	if (data.wishlist == null || data.wishlist == "") {
-		str += "<div class=\"product\">"
-		str += "	로그인을 해주세요"
-		str += "</div>"
-	} else {
+
 		$.each(data.wishlist, function(i, item) {
-			
 					str+="	<div class=\"product\">"
 					str+="		<div class=\"imgWrap\">"
 					str+="			<a href=\"1\"><img src=\"" + proImgPath + "" + item.imgs[0].path + "/"+ item.imgs[0].name + "\" /></a>"
@@ -68,7 +63,6 @@ function wishlist(data) {
 		});
 		
 		$('.wishlistWrap').html(str);
-	}
 
 }
 
