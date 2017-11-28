@@ -33,9 +33,12 @@ function toAjax() {
 				filter(data)
 				once=0;
 			}
+<<<<<<< HEAD
+=======
 			//console.log(data)
 			/* console.log(data.list[0].imgs[0].name) */
 			/* console.log(data.list[0].productId) */
+>>>>>>> f72af42c6d439d26be38982e7577a82d87b05fd8
 			productList(data);
 			makeFurnitureList(data);
 		},
@@ -90,17 +93,27 @@ function filter(data) {
 	str += "<ul>"
 	// color
 	$.each(data.colorlist, function(i, item) {
+<<<<<<< HEAD
+=======
 		console.log(item.name)
+>>>>>>> f72af42c6d439d26be38982e7577a82d87b05fd8
 		if (item.name == "white"){
 			str+="<li><a class=\"btn btn-default colorBtn\" id =\""+item.name+"\" style=\"background:"+item.rgb+"\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:black\" aria-hidden=\"true\"></i></a></li>"
 		}else{
 			str += "<li><a class=\"btn btn-default colorBtn\" id =\""+item.name+"\" style=\"background:"+item.rgb+"\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:white\" aria-hidden=\"true\"></i></a></li>"
 		}
+<<<<<<< HEAD
+=======
 		//console.log(item.name)
+>>>>>>> f72af42c6d439d26be38982e7577a82d87b05fd8
 	});
 	str += "</ul>";
 	$('#colorul').html(str);
 	
+<<<<<<< HEAD
+
+=======
+>>>>>>> f72af42c6d439d26be38982e7577a82d87b05fd8
 	$('.productWrap').html(str)
 }
 
@@ -231,6 +244,11 @@ $(function() {
 		toAjax();
 	});
 	
+<<<<<<< HEAD
+	toAjax()
+
+=======
+>>>>>>> f72af42c6d439d26be38982e7577a82d87b05fd8
 	/* 정렬 */
 	$('.target').change(function() {
 		$('input[name=sort]').val($(this).val())
