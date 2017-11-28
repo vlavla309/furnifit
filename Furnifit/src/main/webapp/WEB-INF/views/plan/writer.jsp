@@ -7,8 +7,12 @@
 <title>Plan Writer - FurniFit</title>
 
 <!-- css -->
-<link href="${pageContext.servletContext.contextPath }/resources/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="${pageContext.servletContext.contextPath }/resources/css/font-awesome.css" rel="stylesheet">
+<link
+	href="${pageContext.servletContext.contextPath }/resources/css/bootstrap.css"
+	rel="stylesheet" type="text/css" media="all" />
+<link
+	href="${pageContext.servletContext.contextPath }/resources/css/font-awesome.css"
+	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="${rSrcPath}/css/planwriter.css">
 <link rel="stylesheet" type="text/css"
@@ -74,7 +78,6 @@ li {
 	display: inline;
 	margin-right: 2em;
 }
-
 </style>
 
 
@@ -169,9 +172,9 @@ li {
 											<button>검색</button>
 										</div>
 										<div id="searchAccodian">
-											<h3>카테고리</h3>
+											<h3>카테고리 <i class="fa fa-plus" aria-hidden="true"></i></h3>
 											<div>
-												<ul id = "category"></ul>
+												<ul id="category"></ul>
 											</div>
 											<h3>브랜드</h3>
 											<div>
@@ -209,14 +212,15 @@ li {
 										</div>
 
 										<form name="filter" id="filter">
-											<input type="text" value="" name="sort"> <input
-												type="text" value="" name="keyword"> <input
-												type="text" name="category" value="" id="cate"> <input
-												type="text" name="minPrice" value="0" id="min"> <input
-												type="text" name="maxPrice" value="0" id="max"> <input
-												type="text" name="maxWidth" value="0"> <input
-												type="text" name="maxLength" value="0"> <input
-												type="text" name="maxHeight" value="0">
+											<input type="hidden" value="" name="sort"> <input
+												type="hidden" value="" name="keyword"> <input
+												type="hidden" name="category" value="" id="cate"> <input
+												type="hidden" name="minPrice" value="0" id="min"> <input
+												type="hidden" name="maxPrice" value="0" id="max"> <input
+												type="hidden" name="maxWidth" value="0"> <input
+												type="hidden" name="maxLength" value="0"> <input
+												type="hidden" name="maxHeight" value="0">
+												<input type="hidden" name = "pageSize" value = "6">
 										</form>
 									</div>
 								</div>
@@ -226,7 +230,14 @@ li {
 									<!-- 상품 항목  끝-->
 
 								</div>
-
+								<div class="row">
+									<div class="col-md-12">
+										<div class="text-center">
+											<a class="btn btn-default" id="add"><i
+												class="fa fa-angle-down" aria-hidden="true"></i> 더보기</a>
+										</div>
+									</div>
+								</div>
 							</div>
 
 
@@ -289,19 +300,16 @@ li {
 		<div id="footer">
 			<div id="furnitureInfoWrap">
 				<div class="imgWrap">
-					<img src="" />
+					<img src="images/bed.png" />
 				</div>
 				<div class="infoWrap">
-					<span class="category">카테고리</span> 
-					<span class="name">상품명</span> 
-					<span class="brand">브랜드</span> 
-					<span class="size">200x200x200</span>
+					<span>카테고리</span> <span>상품명</span> <span>브랜드</span> <span>200x200x200</span>
 				</div>
 				<div class="controlWrap">
 					<ul>
-						<li><a href="#" id="clockwiseRotateBtn"><img src="${contextPath }/resources/images/plan/rotate.png" alt="시계방향 회전"></a></li>
-						<li><a href="#" id="counterclockwiseRotateBtn"><img src="${contextPath }/resources/images/plan/counterRotate.png" alt="시계반대방향 회전"></a></li>
-						<li><a href="#" id="deleteBtn"><img src="${contextPath }/resources/images/plan/trash.png" alt="삭제"></a></li>
+						<li><a href="#" id="clockwiseRotateBtn">시계방향 회전</a></li>
+						<li><a href="#" id="counterclockwiseRotateBtn">시계반대방향 회전</a></li>
+						<li><a href="#" id="deleteBtn">삭제</a></li>
 					</ul>
 				</div>
 			</div>
