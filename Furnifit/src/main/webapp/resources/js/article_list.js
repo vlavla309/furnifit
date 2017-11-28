@@ -2,7 +2,12 @@ $(document).ready(function() {
 
 	var acreage = $('input[name=acreage]').val();
 	var sort = $('input[name=sort]').val();
+
 	
+	if(acreage == "null"){
+		acreage = "";
+		
+		}
 	$("#acreage").val(acreage).prop("selected", true);
 	$("#sort").val(sort).prop("selected", true);
 
