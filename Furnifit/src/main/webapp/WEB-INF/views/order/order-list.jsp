@@ -49,7 +49,7 @@
             <dl>
               <c:if test="${list.email == login.email}">
                 <dt class="accordion">${list.orderId} / ${list.email}님의 주문목록 / ${list.regdate}
-                  <div class="text-right"><a href="${contextPath}/order/${list.orderId}" class="btn btn-default">상세보기</a></div>
+                  <div class="text-right"><a href="${contextPath}/mypage/order/${list.orderId}" class="btn btn-default">상세보기</a></div>
                 </dt>
               </c:if>
             </dl>
