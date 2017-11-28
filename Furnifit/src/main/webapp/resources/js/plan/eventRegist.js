@@ -17,6 +17,7 @@ $( document ).ready(function(){
 			var dir = isCollisionOfWall(selectedElem.getBBox());
 			var collisionFurnitures=isCollisionOfFurnitures(target);
 			if(dir[0]||dir[1]||dir[2]||dir[3]||collisionFurnitures){
+				showMsgBar("fail","주위의 다른 사물 혹은 벽과 충돌합니다.");
 				console.log("벽이나 주변 사물과 충돌되어 회전 불가");
 				rotate(selectedElem, -r);
 			}
@@ -30,6 +31,7 @@ $( document ).ready(function(){
 			var dir = isCollisionOfWall(selectedElem.getBBox());
 			var collisionFurnitures=isCollisionOfFurnitures(target);
 			if(dir[0]||dir[1]||dir[2]||dir[3]||collisionFurnitures){
+				showMsgBar("fail","회전 실패, 주위의 다른 사물 혹은 벽과 충돌합니다.");
 				console.log("벽이나 주변 사물과 충돌되어 회전 불가");
 				rotate(selectedElem, -r);
 			}
@@ -58,5 +60,6 @@ $( document ).ready(function(){
 		var pid=Number($(this).attr("href"));
 		var fur=furnitures.get(pid);
 		curEditor.furniture(curEditor.offsetX, curEditor.offsetY, fur);
+		showMsgBar("success","가구가 추가되었습니다.");
 	});
 });

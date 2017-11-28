@@ -119,7 +119,6 @@ li {
 						<li><a href="#">menu2</a></li>
 						<li><a id=crtBtn href="#">침대하나</a></li>
 					</ul>
-
 					<ul id="headerMenuRight">
 						<li class="exit"><a href="#">EXIT</a></li>
 					</ul>
@@ -164,10 +163,13 @@ li {
 							<!-- 상품 목록 -->
 							<div id="tabs-1" class="tabContent">
 								<div id="searchTab">
-									<button type="button" id="searchToggleBtn">Search</button>
+									<button type="button" id="searchToggleBtn">
+									Search
+									<i class="fa fa-search" aria-hidden="true"></i>
+									</button>
 									<div id="searchWrap">
 										<div id="searchKeyword">
-											<div class="col-lg-6 in-gp-tb">
+											<div class="col-lg-12 in-gp-tb">
 												<div class="input-group">
 													<input type="text" class="form-control"
 														placeholder="Search for..."> 
@@ -277,6 +279,9 @@ li {
 				</div>
 			</div>
 			<!-- right sidebar 끝-->
+			
+			<div id="msgBar" class="alert"></div>
+			
 		</div>
 		<!-- header 끝 -->
 

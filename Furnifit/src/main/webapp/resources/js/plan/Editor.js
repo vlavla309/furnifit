@@ -14,6 +14,11 @@ function Editor( ){
 	this.scale=1;
 	this.offsetX=80;
 	this.offsetY=80;
+	
+	this.name;
+	this.width;
+	this.height;
+	this.length;
 }
 
 
@@ -41,7 +46,11 @@ Editor.prototype.init = function (id, zoomScale){
 }
 
 /* 배치도에 새 가구 생성 */
-Editor.prototype.room = function(width,height,length){
+Editor.prototype.room = function(name,width,height,length){
+	this.name=name;
+	this.width=width;
+	this.height=height;
+	this.length=length;
 	
 	var x=80; //방 렌더링 시작 위치;
 	var y=80; //방 렌더링 시작 위치;

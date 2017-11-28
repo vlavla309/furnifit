@@ -87,7 +87,7 @@ a{
 
 #planitemTabs{
 	background:white;
-	min-width:150px;
+	min-width:200px;
 	height:100%;
 	box-shadow: 0 -1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
 	/* display:none; */	
@@ -96,9 +96,9 @@ a{
 .planitem{
 	border: 1px solid black;
 	background :white;
-	margin:1em;
+	margin:auto;
 	padding:0.5em;
-	width:120px;
+	width:150px;
 	max-height:90px;
 }
 
@@ -142,6 +142,14 @@ a{
 	border-left: 1px solid #e7e7e7;
     box-shadow: 0px 1px 10px 0px #d0d0d0;
 }
+
+#rightTabs > ul{
+	border-bottom-left-radius:0;
+	border-bottom-right-radius:0;
+}
+
+
+
 
 .tabContent{
 	padding:0px!important;
@@ -231,7 +239,7 @@ a{
 	/* border : 1px solid black; */
 	/* margin : 1em; */
 	width:100%;
-	display:inline-flex;
+	display:none;
 	
 }
 
@@ -308,18 +316,24 @@ a{
     border: none;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    background: #BB2929;
+    background: #8A0808;
+}
+
+#searchToggleBtn i{
+	font-size:1em;
 }
 
 #searchWrap{
-    border: 1px solid black;
+    border: 1px solid #e7e7e7;
     padding-top : 0.5em;
     padding-bottom : 0.5em;
 	padding:0.5em;
+	display:none;
 }
 
 #searchKeyword > div{
-	padding:0;
+	float:none!important;
+	padding:0;z
 	padding-top:0.5em;
 	padding-bottom:0.5em;
 }
@@ -328,5 +342,10 @@ a{
 	font-size:14px;
 }
 
-
-
+#msgBar{
+	opacity: 0.9;
+	margin : auto;
+	margin-top:0.5em;
+	width:fit-content;
+	display:none;
+}
