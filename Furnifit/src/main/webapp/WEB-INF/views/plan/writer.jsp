@@ -165,10 +165,13 @@ li {
 							<!-- 상품 목록 -->
 							<div id="tabs-1" class="tabContent">
 								<div id="searchTab">
-									<button type="button" id="searchToggleBtn">Search</button>
+									<button type="button" id="searchToggleBtn">
+									Search
+									<i class="fa fa-search" aria-hidden="true"></i>
+									</button>
 									<div id="searchWrap">
 										<div id="searchKeyword">
-											<div class="col-lg-6 in-gp-tb">
+											<div class="col-lg-12 in-gp-tb">
 												<div class="input-group">
 													<input type="text" class="form-control"
 														placeholder="Search for..."> 
