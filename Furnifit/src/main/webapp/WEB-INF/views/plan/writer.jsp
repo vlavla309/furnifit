@@ -172,7 +172,9 @@ li {
 											<button>검색</button>
 										</div>
 										<div id="searchAccodian">
-											<h3>카테고리 <i class="fa fa-plus" aria-hidden="true"></i></h3>
+											<h3>
+												카테고리 <i class="fa fa-plus" aria-hidden="true"></i>
+											</h3>
 											<div>
 												<ul id="category"></ul>
 											</div>
@@ -219,8 +221,8 @@ li {
 												type="hidden" name="maxPrice" value="0" id="max"> <input
 												type="hidden" name="maxWidth" value="0"> <input
 												type="hidden" name="maxLength" value="0"> <input
-												type="hidden" name="maxHeight" value="0">
-												<input type="hidden" name = "pageSize" value = "6">
+												type="hidden" name="maxHeight" value="0"> <input
+												type="hidden" name="pageSize" value="6">
 										</form>
 									</div>
 								</div>
@@ -244,6 +246,12 @@ li {
 
 							<!-- 위시리스트 목록 -->
 							<div id="tabs-2" class="tabContent">
+
+								<form name="wishlist" id="wishlistparam">
+									<input type="hidden" value="" name="pageSize"> 
+									<input type="hidden" name="maxHeight" value="0"> 
+								</form>
+
 								<div class="wishlistWrap">
 									<!-- 상품 목록 -->
 									<div class="product">
@@ -255,6 +263,16 @@ li {
 										</div>
 									</div>
 								</div>
+
+								<div class="row">
+									<div class="col-md-12">
+										<div class="text-center">
+											<a class="btn btn-default" id="add"><i
+												class="fa fa-angle-down" aria-hidden="true"></i> 더보기</a>
+										</div>
+									</div>
+								</div>
+
 							</div>
 
 							<!-- 배치 목록 -->
