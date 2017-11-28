@@ -140,28 +140,52 @@ function hasCollision(target, set){
 /* Check. Is Collision of Furnitures */
 function isCollisionOfFurnitures(target){
 	//console.log(target);
-	var result=false;
+	var resultEdge=false;
+	var resultPoint=false;
 	var pathTarget=getPath(target);
 
+	var vertexTarget=getVertex(target[0]);
 	var pathSet=Snap.set();
+
+	//배치도 가구들마다 충돌 체크
 	curEditor.furnitures.forEach(function(elem, i) {
+		console.log("fur"+i)
 		if(target!=elem){
 			pathElem=getPath(elem);
 			pathSet.push(pathElem);
 
+			console.log(pathElem);
+			//드래그 대상의 꼭지점이 다른 가구의 영역에 포함 되는지 확인
+			vertexTarget.forEach(function(pos, j) {
+				if(resultPoint)return false;
+				resultPoint=Snap.path.isPointInside(pathElem, pos.x, pos.y);
+			});
+			if(resultPoint)return;
+			
+			//다른가구의 꼭지점이 드래그 대상 영역에 포함되는지 확인
+			var vertextElem=getVertex(elem[0]);
+			vertextElem.forEach(function(pos, j) {
+				if(resultPoint)return false;
+				resultPoint=Snap.path.isPointInside(pathTarget, pos.x, pos.y);
+			});
+			if(resultPoint)return;
+			
+			
 			var interSection=Snap.path.intersection(pathElem, pathTarget);
-			console.log(interSection);
+			//console.log(interSection);
 			if(interSection.length > 0){
-				result = true;
+				resultEdge = true;
 				return;
 			}
 		}
 	});
+	
+	
 
-	pathTarget.remove();
-	pathSet.remove();
+	//pathTarget.remove();
+	//pathSet.remove();
 
-	return result;
+	return resultEdge || resultPoint;
 }
 
 function isCollisionOfWall(target){
@@ -228,7 +252,8 @@ function rect2Path(target){
 	pathStr+=" L"+posC.x+" "+posC.y;
 	pathStr+=" L"+posD.x+" "+posD.y;
 	pathStr+=" L"+posA.x+" "+posA.y;
-
+	pathStr+=" Z";
+	
 	var path=curEditor.canvas.path(pathStr).attr({
 		//stroke:"#888",
 		fill : "none"
@@ -256,6 +281,7 @@ function g2Path(target){
 	pathStr+=" L"+posC.x+" "+posC.y;
 	pathStr+=" L"+posD.x+" "+posD.y;
 	pathStr+=" L"+posA.x+" "+posA.y;
+	pathStr+=" Z";
 
 	var path=curEditor.canvas.path(pathStr).attr({
 		//stroke:"#888",
@@ -265,3 +291,18 @@ function g2Path(target){
 	return path;
 }
 
+//사각형 꼭지점 네 좌표 반환
+function getVertex(target){
+	var m=target.parent().transform().localMatrix;
+	var x=Number(target.attr("x"));
+	var y=Number(target.attr("y"));
+	var w=Number(target.attr("width"));
+	var h=Number(target.attr("height"));
+
+	var posA=new Coordinate(m.x(x,y), m.y(x,y));
+	var posB=new Coordinate(m.x(x+w,y), m.y(x+w,y));
+	var posC=new Coordinate(m.x(x+w,y+h), m.y(x+w,y+h));
+	var posD=new Coordinate(m.x(x,y+h), m.y(x,y+h));
+	
+	return [posA, posC, posB, posD];
+}

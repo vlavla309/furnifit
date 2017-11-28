@@ -46,7 +46,7 @@
                    </tr>
                    <tr>
                      <div class="alert alert-warning" role="alert">
-                      <strong id="shareInfo">작성자 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input readonly="readonly"  value="${article.email}"  type="text" class="artPlanitemEmail" >
+                      <strong id="shareInfo">작성자 :</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input readonly="readonly"  value="${article.email}"  type="text" class="artPlanitemEmail" >
                      </div>
                    </tr>        
                   </table>
