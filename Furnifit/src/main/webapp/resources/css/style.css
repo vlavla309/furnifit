@@ -1678,6 +1678,8 @@ button.btn1.btn-1.btn-1b:hover {
 .login-body{
    width: 40%;
     margin:0 auto;
+    border: 1px solid #e7e7e7;
+    box-shadow: 0px 1px 10px 0px #d0d0d0;
 }
 .login-heading{
     background: #37767A;
@@ -1692,7 +1694,7 @@ button.btn1.btn-1.btn-1b:hover {
     padding: 4em 1.5em 1em;
     background: #FFFFFF;
 }
-.login-info input[type="text"], .login-info input[type="password"] {
+.login-info input[type="text"], .login-info input[type="password"], .login-info input[type="email"] {
     font-size: 0.9em;
     padding: 10px 0px;
     width: 100%;
@@ -1724,6 +1726,50 @@ button.btn1.btn-1.btn-1b:hover {
    -o-transition: 0.5s all ;
    -ms-transition: 0.5s all;
 }
+
+.login-info h2 {
+    color: #999;
+    font-size: .875em;
+    margin: 1em 0;
+    text-align: center;
+}
+
+.login-icons ul {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.login-icons ul li {
+    display: inline-block;
+    margin: 0 1em;
+}
+
+.login-icons i.fa.fa-facebook, .login-icons i.fa.fa-twitter, .login-icons i.fa.fa-google-plus, .login-icons i.fa.fa-dribbble {
+    font-size: 1.5em;
+    color: #FFFFFF;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+    background: #3b5998;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.login-icons i.fa.fa-twitter{
+	background:#55acee;
+}
+.login-icons i.fa.fa-google-plus{
+	background:#dc4e41;
+}
+.login-icons i.fa.fa-dribbble{
+	background:#ea4c89;
+}
+
 .forgot-top-grids {
     margin-top: 2em;
 }
