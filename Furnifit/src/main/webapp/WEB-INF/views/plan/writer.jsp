@@ -171,7 +171,7 @@ li {
 										<div id="searchKeyword">
 											<div class="col-lg-12 in-gp-tb">
 												<div class="input-group">
-													<input type="text" class="form-control"
+													<input type="text" class="form-control" id="keyword"
 														placeholder="Search for..."> 
 														<span class="input-group-btn">
 															<button class="btn btn-default" type="button">Search</button>

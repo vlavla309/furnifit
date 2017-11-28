@@ -50,7 +50,7 @@ function toAjax() {
 
 function wishlist(data) {
 	var str = ""
-	if (email == null || email == "") {
+	if (data.wishlist == null || data.wishlist == "") {
 		str += "<div class=\"product\">"
 		str += "	로그인을 해주세요"
 		str += "</div>"
@@ -76,7 +76,7 @@ function productList(data) {
 
 	var str = ""
 	$.each(data.list, function(i, item) {
-		str += "<div class=\"product\">"
+		str += "<div class=\"product count\">"
 		str += "	<div class=\"imgWrap\">"
 		str += "		<a class='addFurnitureBtn' href=\"" + item.productId
 				+ "\"><img src=\"" + proImgPath + "" + item.imgs[0].path + "/"
@@ -259,7 +259,7 @@ $(function() {
 	});
 
 	/* search버튼을 누르면, 검색! ajax는 추후에 */
-	$(document).on("click", ".btn-sm", function(event) {
+	$(document).on("click", ".btn-default", function(event) {
 		$('input[name=keyword]').val($('#keyword').val())
 		$('#keyword').val("")
 		toAjax();
@@ -276,8 +276,8 @@ $(function() {
 		event.preventDefault();
 		$('input[name=pageSize]').val(
 				Number($('input[name=pageSize]').val()) + 6)
-		var total = $('input[name = totalsize').val()
-		if (Number(total) <= Number($('input[name=pageSize]').val())) {
+		var total = $('.count').length
+		if (Number(total) < Number($('input[name=pageSize]').val())) {
 			$('#add').remove()
 		}
 		toAjax();
