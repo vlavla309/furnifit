@@ -3,7 +3,7 @@
 
 <link rel="stylesheet" href="${rSrcPath}css/plan-manage.css" />
 <script src="${rSrcPath}js/order-list.js"></script>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
 
 <div class="blog">
   <div class="container">
@@ -42,11 +42,39 @@
                <c:if test="${plan.email == login.email}">
                 <dt class="accordion">${plan.planId} / ${plan.email}님의 배치도 / ${plan.regdate}</dt>
                 <dd><ul><li>
+                
+                
+                
+           <div class="table-responsive" style="width: 100%; padding-left:60px; padding-right: 60px">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="align4">번호</th>
+                  <th class="align5">배치도명</th>
+                  <th class="align2">(가로 * 세로 * 높이)</th>
+                </tr>
+              </thead>
+              <tbody>
                   <c:forEach items="${itemlist}" var="item">
+                  <tr>
                       <c:if test="${item.planId == plan.planId}">
-                        <a href="${contextPath}/mypage/itemlist/${item.planitemId}" value="${item.planitemId}">${item.name}</a><br>
+                        <td class="align2">${item.planitemId})</td>
+                        <td class="align3"><a href="${contextPath}/mypage/itemlist/${item.planitemId}" value="${item.planitemId}">${item.name}</a></td>
+                        <td class="align2"> (${item.width} * ${item.height} * ${item.length})</td>
                       </c:if>
+                   </tr>    
                   </c:forEach>
+                </tbody>
+              </table>
+            </div>
+                
+                
+                
+                
+                
+                
+                
+                
                 </li></ul></dd>
                </c:if>
               </dl>
