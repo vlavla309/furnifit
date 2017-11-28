@@ -131,7 +131,7 @@ li {
 			<!-- left sidebar 시작 -->
 			<div class="sidebar">
 				<div id="leftSidebarWrap">
-					<div id="sidemenu">
+					<div class="sidemenu">
 						<div id="planitemTabs">
 							<ul id="planitems">
 								<!-- 샘플 ㅎㅎ -->
@@ -152,7 +152,7 @@ li {
 			<!-- right sidebar 시작 -->
 			<div class="sidebar">
 				<div id="rightSidebarWrap">
-					<div id="sidemenu">
+					<div class="sidemenu">
 						<div id="rightToggle">
 							<button id="rightToggleBtn">></button>
 						</div>
@@ -165,14 +165,24 @@ li {
 							<!-- 상품 목록 -->
 							<div id="tabs-1" class="tabContent">
 								<div id="searchTab">
-									<button type="button" id="searchToggleBtn">검색하기</button>
+									<button type="button" id="searchToggleBtn">Search</button>
 									<div id="searchWrap">
 										<div id="searchKeyword">
-											<input type="text" />
-											<button>검색</button>
+											<div class="col-lg-6 in-gp-tb">
+												<div class="input-group">
+													<input type="text" class="form-control"
+														placeholder="Search for..."> 
+														<span class="input-group-btn">
+															<button class="btn btn-default" type="button">Search</button>
+														</span>
+												</div>
+												<!-- /input-group -->
+											</div>
 										</div>
 										<div id="searchAccodian">
-											<h3>카테고리 <i class="fa fa-plus" aria-hidden="true"></i></h3>
+											<h3>
+												카테고리 <i class="fa fa-plus" aria-hidden="true"></i>
+											</h3>
 											<div>
 												<ul id="category"></ul>
 											</div>
@@ -219,8 +229,8 @@ li {
 												type="hidden" name="maxPrice" value="0" id="max"> <input
 												type="hidden" name="maxWidth" value="0"> <input
 												type="hidden" name="maxLength" value="0"> <input
-												type="hidden" name="maxHeight" value="0">
-												<input type="hidden" name = "pageSize" value = "6">
+												type="hidden" name="maxHeight" value="0"> <input
+												type="hidden" name="pageSize" value="6">
 										</form>
 									</div>
 								</div>
@@ -300,16 +310,20 @@ li {
 		<div id="footer">
 			<div id="furnitureInfoWrap">
 				<div class="imgWrap">
-					<img src="images/bed.png" />
+					<a href="#" target="_blank"><img src="" /></a>
 				</div>
 				<div class="infoWrap">
-					<span>카테고리</span> <span>상품명</span> <span>브랜드</span> <span>200x200x200</span>
+					<span class="category">카테고리</span> 
+ 					<span class="name">상품명</span> 
+ 					<span class="brand">브랜드</span> 
+ 					<span class="size">200x200x200</span>
 				</div>
 				<div class="controlWrap">
 					<ul>
-						<li><a href="#" id="clockwiseRotateBtn">시계방향 회전</a></li>
-						<li><a href="#" id="counterclockwiseRotateBtn">시계반대방향 회전</a></li>
-						<li><a href="#" id="deleteBtn">삭제</a></li>
+						<li><a href="#" id="clockwiseRotateBtn"><img src="${contextPath }/resources/images/plan/rotate.png" alt="시계방향 회전"></a></li>
+ 						<li><a href="#" id="counterclockwiseRotateBtn"><img src="${contextPath }/resources/images/plan/counterRotate.png" alt="시계반대방향 회전"></a></li>
+ 						<li><a href="#" id="deleteBtn"><img src="${contextPath }/resources/images/plan/trash.png" alt="삭제"></a></li>
+  					
 					</ul>
 				</div>
 			</div>
