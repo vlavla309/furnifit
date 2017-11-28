@@ -6,6 +6,31 @@
 <script src="${rSrcPath}js/order-write.js"></script>
 
 
+
+
+<div id="myModal" class="modal modal-primary fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body" data-rno>
+        <p><input type="text" id="content" class="form-control"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
+        <button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+
+
+
 <form role="form" method="post">
 <div class="blog">
   <div class="container">
@@ -14,7 +39,6 @@
     <div class="col-md-12" >
       <div class="box">
           <h1>주문서 작성</h1><br>
-          
           <!-- 테이블(가구img, 가구명, 수량, 판매가, 합계, 위시리스트, 삭제) -->
           <div class="table-responsive">
             <table class="table">
@@ -49,7 +73,7 @@
                         <td value="${product.price}"><input type="number" class="count" id="${status.index}" min="1" value="1" name="amounts" ></td>
                         <td>${product.price}원</td>
                         <td class="subPrice">${product.price}원</td>
-                        <td><a href="#" name="addWishlist" class="btn btn-default" value="${furni.productId}">WishList</a></td>
+                        <td><a href="#" name="addWishlist" class="btn btn-default" value="${product.productId}" data-target="#myModal" >WishList</a></td>
                         <td><a href="#" class="deleteOrder" value="${product.productId}"><i class="fa fa-trash-o"></i></a></td>
                        <c:set var="doneLoop" value="true"/>
                       </c:if>
