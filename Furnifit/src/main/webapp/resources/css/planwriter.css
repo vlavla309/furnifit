@@ -28,7 +28,7 @@ a{
 }
 
 #headerNav{
-	background-color:#F7F7F7;
+	background-color:#FBF8EF;
 	display: flex;
 	border-bottom: 1px solid #e7e7e7;
 	box-shadow: 0px 1px 10px 0px #d0d0d0;
@@ -37,7 +37,7 @@ a{
 #headerLogo{
 	float:left;
 	padding :0.5rem 1rem 0.5rem 1rem;
-	background: #78cae9; 
+	background: #B40404; 
 	color:white;
 }
 #headerLogo a{
@@ -46,17 +46,22 @@ a{
 
 #headerMenuLeft{
 	float:left;
+	margin-bottom:0px!important;
 }
+
 
 #headerMenuRight{
 	float:right;
+	margin:0px!important;
 }
+
 
 #headerMenuLeft li, #headerMenuRight li{
 	padding :0.5rem;
 	list-style: none;
 	display: inline-block;
 	border-left: 1px solid #e7e7e7;
+	margin:0;
 }
 
 #headerMenuRight .exit{
@@ -71,7 +76,6 @@ a{
 
 #sidemenu{
 	display:inline-flex;
-	max-width: 25rem;
 	height:100%;
 }
 
@@ -132,7 +136,7 @@ a{
 
 #rightTabs{
 	float:right;
-	width:35em;
+	width:25em;
 }
 
 .tabContent{
@@ -201,7 +205,7 @@ a{
 	width:100%;
 	bottom:0px;
 	position:fixed;
-	background:blue;
+	background:#FBF8EF;
 }
 
 

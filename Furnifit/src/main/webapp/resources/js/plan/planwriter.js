@@ -137,8 +137,13 @@ function selectPlan(id){
 }
 
 function setFurnitureInfo(){
-	console.log(selectedElem.data("productId"));
 	var productId=Number(selectedElem.data("productId"));
-	var furniture=furnitures.get(productId)
-	$(".furnitureInfoWrap .imgWrap img").attr("src", furniture.imgPath);
+	var furniture=furnitures.get(productId);
+	//console.log(furniture.toString());
+	$("#furnitureInfoWrap .imgWrap img").attr("src", furniture.imgPath);
+	$("#furnitureInfoWrap .infoWrap .category").text(furniture.category);
+	$("#furnitureInfoWrap .infoWrap .name").text(furniture.name);
+	$("#furnitureInfoWrap .infoWrap .brand").text(furniture.brand);
+	$("#furnitureInfoWrap .infoWrap .size").text(furniture.width+"x"+furniture.height+"x"+furniture.length);
+	
 }

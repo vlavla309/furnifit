@@ -6,38 +6,18 @@
 <meta charset="utf-8">
 <title>Plan Writer - FurniFit</title>
 
-
 <!-- css -->
+<link
+	href="${pageContext.servletContext.contextPath }/resources/css/bootstrap.css"
+	rel="stylesheet" type="text/css" media="all" />
+<link
+	href="${pageContext.servletContext.contextPath }/resources/css/font-awesome.css"
+	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="${rSrcPath}/css/planwriter.css">
 <link rel="stylesheet" type="text/css"
 	href="${rSrcPath}/css/jquery-ui.css">
-<link
-	href="${pageContext.servletContext.contextPath }/resources/css/font-awesome.css"
-	rel="stylesheet">
 
-<!-- Javascript -->
-<script type="text/javascript" src="${rSrcPath}/js/jquery-1.12.4.js"></script>
-<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-<script type="text/javascript" src="${rSrcPath}/js/plan/snap.svg-min.js"></script>
-<script type="text/javascript" src="${rSrcPath}/js/plan/snap.svg.zpd.js"></script>
-
-<script type="text/javascript" src="${rSrcPath}/js/plan/planwriter.js"></script>
-<script type="text/javascript" src="${rSrcPath}/js/plan/Furniture.js"></script>
-<script type="text/javascript" src="${rSrcPath}/js/plan/function.js"></script>
-<script type="text/javascript" src="${rSrcPath}/js/plan/eventRegist.js"></script>
-<script type="text/javascript" src="${rSrcPath}/js/plan/eventHandler.js"></script>
-<script type="text/javascript" src="${rSrcPath}/js/plan/Editor.js"></script>
-<script type="text/javascript" src="${rSrcPath}/js/plan/Coordinate.js"></script>
-<script type="text/javascript" src="${rSrcPath}/js/plan/calc.js"></script>
-
-<script type="text/javascript">
-	var contextPath = "${contextPath}";
-	var planImgPath = contextPath + "/resources/images/plan";
-	var rSrcPath = "${rSrcPath}";
-	var proImgPath = "${rSrcPath}/productimg";
-</script>
 
 <style>
 .information-grid-info {
@@ -92,7 +72,38 @@
 #myBtn:hover {
 	background-color: #555;
 }
+
+li {
+	list-style: none;
+	display: inline;
+	margin-right: 2em;
+}
 </style>
+
+
+<!-- Javascript -->
+<script type="text/javascript" src="${rSrcPath}/js/jquery-1.12.4.js"></script>
+<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script type="text/javascript" src="${rSrcPath}/js/plan/snap.svg-min.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/snap.svg.zpd.js"></script>
+
+<script type="text/javascript" src="${rSrcPath}/js/plan/planwriter.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/Furniture.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/function.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/eventRegist.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/eventHandler.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/Editor.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/Coordinate.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/calc.js"></script>
+
+<script type="text/javascript">
+	var contextPath = "${contextPath}";
+	var planImgPath = contextPath + "/resources/images/plan";
+	var rSrcPath = "${rSrcPath}";
+	var proImgPath = "${rSrcPath}/productimg";
+</script>
+
 
 </head>
 <body>
@@ -161,8 +172,10 @@
 											<button>검색</button>
 										</div>
 										<div id="searchAccodian">
-											<h3>카테고리</h3>
-											<div id="category"></div>
+											<h3>카테고리 <i class="fa fa-plus" aria-hidden="true"></i></h3>
+											<div>
+												<ul id="category"></ul>
+											</div>
 											<h3>브랜드</h3>
 											<div>
 												<ul id="brand"></ul>
@@ -206,9 +219,8 @@
 												type="hidden" name="maxPrice" value="0" id="max"> <input
 												type="hidden" name="maxWidth" value="0"> <input
 												type="hidden" name="maxLength" value="0"> <input
-												type="hidden" name="maxHeight" value="0"> <input
-												type="hidden" name="pageSize" value="6"> <input
-												type="hidden" name="totalsize" value="${totalsize}">
+												type="hidden" name="maxHeight" value="0">
+												<input type="hidden" name = "pageSize" value = "6">
 										</form>
 									</div>
 								</div>
@@ -218,7 +230,14 @@
 									<!-- 상품 항목  끝-->
 
 								</div>
-
+								<div class="row">
+									<div class="col-md-12">
+										<div class="text-center">
+											<a class="btn btn-default" id="add"><i
+												class="fa fa-angle-down" aria-hidden="true"></i> 더보기</a>
+										</div>
+									</div>
+								</div>
 							</div>
 
 

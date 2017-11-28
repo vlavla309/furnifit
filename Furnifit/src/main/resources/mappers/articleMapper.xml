@@ -175,7 +175,6 @@
 				<when test="acreage == 'mm'"> and acreage BETWEEN 5 and 7 </when>
 				<when test="acreage == 'll'"> and acreage BETWEEN 8 and 9 </when>
 				<when test="acreage =='xl'"> and acreage >= 10 </when>
-				<otherwise> and acreage >= 1</otherwise>
 			</choose>
 		</where>
 		ORDER BY
