@@ -1,63 +1,46 @@
 $(function() {
-	totalSum();
+	calculateSum();
 	
 	// 페이지 로드 시 초기 합계 (.count : 수량 / #total : 총 합계 / input[name=price] : orders의 총 합계(hidden))
-	function totalSum(){
-    	var sum = 0;
-        var price = $(".count").parent().next().next();
-        for (var i = 0; i < price.length; i++) {
-          sum = sum +  parseInt($(price[i]).text());
-        }  
-        $("#total").text(sum + "원");
-        $("input[name=price]").val(sum);
+	function calculateSum(){
+ 	   	$(".count").each(function(i, item){
+ 	   		var subPrice = $(item).val()* $(item).parent().attr("value");	//합계
+ 	   		//alert("subPrice"+subPrice)
+ 	   		$(item).parent().next().next().text(subPrice);
+ 	   		//console.log($(item).parent().next().next().attr("value", subPrice));
+ 	   		//alert(subPrice)
+ 	   		//$("#a").text(subPrice + "원");
+ 	   	});
+ 	    
+ 	    var sum=0;
+ 	    $(".subPrice").each(function(i, item){
+ 	    	sum += Math.floor(Number($(item).attr("value")));
+ 	    });
+ 	    alert(sum)
+	    var rate = (100-$("select[name=discount]").val())/100;	//할인율
+	    var totalPrice = sum * rate;		//총 합계
+	
+	    
+	    $("#total").text(totalPrice + "원");
+	    $("input[name=price]").val(totalPrice);
 	}
 	
-	
     // 수량 변경에 따른 합계 & 총 합계 (수량 * 판매가)
-    $(".count").bind('keyup mouseup', function (event) {
-      $(event.target).parent().next().next().text( parseInt($(event.target).val())*parseInt($(event.target).parent().next().text())+"원")
-      totalSum(); 
+    $(".count").bind('change', function (event) {
+    	calculateSum();
     });
   
-    
     // Select 쿠폰선택 (select[name=discount] : 쿠폰 select)
- 	$("#coupon").text("적용된 쿠폰이 없습니다.");
-    
+    $("#coupon").text("적용된 쿠폰이 없습니다.");
     $("select[name=discount]").bind('change', function (event) {
- 	    var rate = $(this).val();  	//할인율(discountRate)
-
- 	    var sel = document.getElementById("sel");
- 	  	var selVal = sel.options[sel.selectedIndex].text;  //선택한 option의 text 
- 	    var serialNum = 0;	//시리얼 번호
- 	    
- 		if(selVal != "---쿠폰 선택---"){
- 			serialNum = selVal.split(")")[0];		//시리얼번호 split
-     	 $("#coupon").html("serialNo : "+serialNum+'<br><br>'+rate.split(".")[0]+"% 쿠폰이 적용되었습니다.");
-     	 $(".count").attr("disabled", true);		//수량 비활성화
-     	  var sum = 0;
-          var price = $(".count").parent().next().next();
-          for (var i = 0; i < price.length; i++) {
-          	sum = Math.floor(sum +  parseInt($(price[i]).text()) * ((100 - rate) * 0.01));	//쿠폰 할인율 적용한 총 합계
-          }  
-          $("#total").text(sum + "원");
-          
-          $("input[name=price]").val(sum);
-          $("input[name=useCoupones]").val(serialNum);	//orders의 사용된 쿠폰시리얼번호
-          $("input[name=serial]").val(serialNum);		//offer_coupones의 시리얼번호
- 	   }else{
-   		 $("#coupon").text("적용된 쿠폰이 없습니다.");
-   		 totalSum();
-   		 $(".count").attr("disabled", false);
-   		 $("input[name=price]").val(sum);
-   		 $("input[name=useCoupones]").val(serialNum);
-   		 $("input[name=serial]").val(serialNum);
-   	   }
+    	calculateSum();
+    	
+ 	   
    }); 
     
 
     // 가구 삭제
     var furniCnt = $("#kind").attr('class');
-    
     $(document).on("click", ".deleteOrder", function(event){   
     	event.preventDefault(); 
     	var furniProId =  $(this).parent().parent().attr("value");	//furniture 가구 고유번호
@@ -76,7 +59,7 @@ $(function() {
     	}else{
     		alert("1개 이상의 가구가 있어야 합니다.")
     	}
-    	totalSum();
+    	calculateSum();
     });
     
     
