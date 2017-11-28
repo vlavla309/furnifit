@@ -80,7 +80,6 @@ li {
 }
 </style>
 
-
 <!-- Javascript -->
 <script type="text/javascript" src="${rSrcPath}/js/jquery-1.12.4.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -102,8 +101,8 @@ li {
 	var planImgPath = contextPath + "/resources/images/plan";
 	var rSrcPath = "${rSrcPath}";
 	var proImgPath = "${rSrcPath}/productimg";
+	var email = "${login.email}"
 </script>
-
 
 </head>
 <body>
@@ -250,35 +249,10 @@ li {
 								</div>
 							</div>
 
-
-
 							<!-- 위시리스트 목록 -->
 							<div id="tabs-2" class="tabContent">
-
-								<form name="wishlist" id="wishlistparam">
-									<input type="hidden" value="" name="pageSize"> 
-									<input type="hidden" name="maxHeight" value="0"> 
-								</form>
-
 								<div class="wishlistWrap">
-									<!-- 상품 목록 -->
-									<div class="product">
-										<div class="imgWrap">
-											<a href="1"><img src="images/small_bed.png" /></a>
-										</div>
-										<div class="infoWrap">
-											<span>상품명</span> <span>브랜드</span> <span>200x200x200</span> <span>100000원</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="col-md-12">
-										<div class="text-center">
-											<a class="btn btn-default" id="add"><i
-												class="fa fa-angle-down" aria-hidden="true"></i> 더보기</a>
-										</div>
-									</div>
+									
 								</div>
 
 							</div>

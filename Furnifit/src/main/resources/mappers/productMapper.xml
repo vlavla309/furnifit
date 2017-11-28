@@ -45,9 +45,10 @@
 		#{order_no},
 		sysdate)
 	</insert>
-	
+
 	<select id="productAll" resultType="Product">
-		SELECT product_id AS "productId",
+		SELECT product_id AS
+		"productId",
 		category,
 		NAME,
 		brand,
@@ -63,7 +64,8 @@
 	</select>
 
 	<select id="listAll" resultType="Product">
-		SELECT product_id AS "productId",
+		SELECT product_id AS
+		"productId",
 		category,
 		NAME,
 		brand,
@@ -100,7 +102,8 @@
 		description,
 		link,
 		regdate
-		FROM products))
+		FROM
+		products))
 		WHERE request_page = 1
 	</select>
 
@@ -117,7 +120,8 @@
 		description,
 		link,
 		regdate
-		FROM (SELECT CEIL(rownum / #{pageSize}) request_page,
+		FROM (SELECT CEIL(rownum /
+		#{pageSize}) request_page,
 		product_id,
 		category,
 		NAME,
@@ -149,7 +153,7 @@
 					product_id > 0
 				</when>
 				<otherwise>
-					category = #{category}					
+					category = #{category}
 				</otherwise>
 			</choose>
 
@@ -189,7 +193,7 @@
 			</if>
 			<!-- 정렬 -->
 			<if test="sort.equalsIgnoreCase('low')">
-				order by price 
+				order by price
 			</if>
 			<if test="sort.equalsIgnoreCase('height')">
 				order by price desc
@@ -217,12 +221,52 @@
 		link,
 		REGDATE
 		FROM products
-		where product_id =	#{value}
+		where product_id =
+		#{value}
 	</select>
-	
+
 	<!-- 상품 상세보기에서 상품과 같은 카테고리에 있는 상품 목록을 보여주는 부분 -->
-	<select id = "productReadList" resultType="Product" parameterType="String">
-		select product_id AS "productId", category, brand from Products where category = #{category}
+	<select id="productReadList" resultType="Product" parameterType="String">
+		select product_id as "", category, brand from Products where category
+		= #{category}
 	</select>
-	
+
+	<select id="productwish" resultType="Product" parameterType="map">
+		SELECT product_id as productId,
+				category,
+				NAME,
+				brand,
+				price,
+				color,
+				width,
+				length,
+				height,
+				description  
+		FROM   (SELECT Ceil(rownum / #{pageSize}) request_page, 
+		               product_id,
+		               category,
+		               NAME,
+		               brand,
+		               price,
+		               color,
+		               width,
+		               length,
+		               height,
+		               description
+		        FROM   (SELECT  P.product_id,
+		                        p.category,
+		                        p.NAME,
+		                        p.brand,
+		                        p.price,
+		                        p.color,
+		                        p.width,
+		                        p.length,
+		                        p.height,
+		                        p.description
+		                FROM   products p,	wishlist w
+		                WHERE p.product_id = w.product_id
+						AND W.email = #{email}
+		                )) 
+		  WHERE  request_page = #{page}
+	</select>
 </mapper>

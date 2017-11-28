@@ -45,17 +45,11 @@ public interface ProductDao {
 	public List<Product> searchlist(ProductParams params);
 	
 	/**
-	 * 위시리트스에서 product 전체 조회를 할때!
-	 * @return
-	 */
-	public List<Product> productList();
-	
-	
-	/**
 	 * @param category
 	 * @return
 	 */
 	public List<Product> productReadList(String category);
 	
 	
+	public List<Product> productwish(Map<String, String> map);
 }
