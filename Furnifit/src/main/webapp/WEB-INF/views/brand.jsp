@@ -10,7 +10,7 @@
 
 <section class="scene four">
     <header>
-      <h1><span class="fonth3" style="color: #FAF9F8; font-size: 3.75rem;">Furni-Fit의 Partners<br>Introduction</span></h1>
+      <h1><span class="fonth3" style="color: #FAF9F8; font-size: 3.75rem;"><strong>Furni-Fit의 Partners<br>Introduction</strong></span></h1>
     </header>
     <a class="btn red" id="mainButton1" href="${contextPath}/">main</a>
   </section>
@@ -56,7 +56,7 @@
   </section>
   <section class="scene five">
     <header>
-      <h1><span class="fonth3" style= "color: #FAF9F8; font-size: 3.4rem;">앞으로 PartnerShip을 점차<br>확대해 나갈 예정입니다<br>기대해주시기 바랍니다</span></h1>
+      <h1><span class="fonth3" style= "color: #FAF9F8; font-size: 3.4rem;"><strong>앞으로 PartnerShip을 점차<br>확대해 나갈 예정입니다<br>기대해주시기 바랍니다</strong></span></h1>
     </header>
     <a class="btn red" id="mainButton2" href="${contextPath}/">main</a>
   </section>
