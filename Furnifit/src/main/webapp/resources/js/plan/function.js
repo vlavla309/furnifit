@@ -33,17 +33,7 @@ function toAjax() {
 				filter(data)
 				once=0;
 			}
-<<<<<<< HEAD
-			productList(data)
-=======
-
-			//console.log(data)
-			/* console.log(data.list[0].imgs[0].name) */
-			/* console.log(data.list[0].productId) */
-			filter(data)
-			
 			productList(data);
->>>>>>> 3d852997a165a322047bc7d814a5762082430b34
 			makeFurnitureList(data);
 		},
 		error : function(data) {
@@ -97,25 +87,16 @@ function filter(data) {
 	str += "<ul>"
 	// color
 	$.each(data.colorlist, function(i, item) {
-<<<<<<< HEAD
-		console.log(item.name)
 		if (item.name == "white"){
 			str+="<li><a class=\"btn btn-default colorBtn\" id =\""+item.name+"\" style=\"background:"+item.rgb+"\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:black\" aria-hidden=\"true\"></i></a></li>"
 		}else{
 			str += "<li><a class=\"btn btn-default colorBtn\" id =\""+item.name+"\" style=\"background:"+item.rgb+"\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:white\" aria-hidden=\"true\"></i></a></li>"
 		}
-=======
-		//console.log(item.name)
-		str += "<li><a class=\"btn btn-default colorBtn\" id =\""+item.name+"\" style=\"background:"+item.rgb+"\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:white\" aria-hidden=\"true\"></i></a></li>"
->>>>>>> 3d852997a165a322047bc7d814a5762082430b34
 	});
 	str += "</ul>";
 	$('#colorul').html(str);
 	
-<<<<<<< HEAD
 
-=======
->>>>>>> 3d852997a165a322047bc7d814a5762082430b34
 	$('.productWrap').html(str)
 }
 
@@ -139,10 +120,6 @@ function makeFurnitureList(data){
 	furnitures.forEach(function(item, key, mapObj){
 		//console.log(item.toString());
 	});
-<<<<<<< HEAD
-		
-=======
->>>>>>> 3d852997a165a322047bc7d814a5762082430b34
 }
 
 $(function() {
@@ -250,11 +227,8 @@ $(function() {
 		toAjax();
 	});
 	
-<<<<<<< HEAD
 	toAjax()
 
-=======
->>>>>>> 3d852997a165a322047bc7d814a5762082430b34
 	/* 정렬 */
 	$('.target').change(function() {
 		$('input[name=sort]').val($(this).val())
