@@ -63,6 +63,7 @@ Editor.prototype.room = function(name,width,height,length){
 	pathStr+=" L"+(x+w)+" "+(y+h);
 	pathStr+=" L"+(x)+" "+(y+h);
 	pathStr+=" L"+x+" "+y;
+	pathStr+=" Z";
 	var path=this.canvas.path(pathStr).attr({
 		"fill": "none",
 		stroke: "#5D5D5D",
@@ -136,6 +137,8 @@ Editor.prototype.room = function(name,width,height,length){
 		unSelectAll();
 		select(this);
 	});
+	
+	var bbox=path.getBBox();
 }
 
 /* 배치도에 새 가구 생성 */

@@ -112,7 +112,7 @@ li {
 		<div id="header">
 			<nav id="headerNav">
 				<div id="headerLogo">
-					<a href="#">FurniFit</a>
+					<a href="#"><strong>FurniFit</strong></a>
 				</div>
 				<div id="headerMenuWrap">
 					<ul id="headerMenuLeft">
@@ -121,7 +121,7 @@ li {
 						<li><a id=crtBtn href="#">침대하나</a></li>
 					</ul>
 					<ul id="headerMenuRight">
-						<li class="exit"><a href="#">EXIT</a></li>
+						<li class="exit"><a href="#"><strong>EXIT </strong><i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
 					</ul>
 				</div>
 
@@ -141,7 +141,7 @@ li {
 								src="${rSrcPath }/images/plan/plus.png" width=50px;></a>
 						</div>
 						<div id="leftToggle">
-							<button id="leftToggleBtn"><</button>
+							<button id="leftToggleBtn"  class="sideToggleBtn"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>
 						</div>
 					</div>
 				</div>
@@ -153,7 +153,7 @@ li {
 				<div id="rightSidebarWrap">
 					<div class="sidemenu">
 						<div id="rightToggle">
-							<button id="rightToggleBtn">></button>
+							<button id="rightToggleBtn" class="sideToggleBtn"><i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
 						</div>
 						<div id="rightTabs">
 							<ul>
@@ -350,7 +350,6 @@ li {
 			</div>
 		</div>
 		<!-- footer 끝 -->
-
 
 		<!-- 새 배치도 추가 폼 -->
 		<div id="newPlanForm" title="새 배치도 추가">
