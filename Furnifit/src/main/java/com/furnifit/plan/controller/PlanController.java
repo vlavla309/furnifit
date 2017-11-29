@@ -1,6 +1,7 @@
 package com.furnifit.plan.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +10,10 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.furnifit.common.web.PageBuilder;
 import com.furnifit.common.web.Params;
@@ -88,6 +91,18 @@ public class PlanController {
 	 */
 	@RequestMapping(value = "/plan/writer", method=RequestMethod.GET)
 	public String writer() throws Exception {
+		return "plan/writer";
+	}
+	
+	/**
+	 * 배치도 작성 처리(김형주)
+	 */
+	@RequestMapping(value = "/plan", method=RequestMethod.POST)
+	@ResponseBody
+	public String regist(@RequestBody Map<String, Object> plan) throws Exception {
+		logger.info("In regist()........");
+		logger.info(plan);
+		
 		return "plan/writer";
 	}
 	
