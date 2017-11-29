@@ -19,6 +19,10 @@ function Editor( ){
 	this.width;
 	this.height;
 	this.length;
+	
+	this.placed;
+	
+	this.originZpdMatrix;
 }
 
 /* 배치도 객체 초기화 */
@@ -35,7 +39,9 @@ Editor.prototype.init = function (id, zoomScale){
      // Zpd 플러그인 초기화
      applyZpd();
      
-     //배치된 가구리스트 집합
+ 	this.originZpdMatrix=paper.zpd('save');
+     
+     //배치된 가구리스트 집합(화면);
      this.furnitures=Snap.set();
      
      //벽 집합

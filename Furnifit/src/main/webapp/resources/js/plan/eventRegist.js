@@ -1,14 +1,15 @@
 $( document ).ready(function(){
-	$("#saveBtn").on("click", function(){
+	$("#writeBtn").on("click", function(){
 		unSelectAll();
-		
-		
 		writePlan();
 	});
 
-	$("#crtBtn").on("click", function(){
-		console.log(curEditor.offsetX+" "+curEditor.offsetY);
-		curEditor.furniture(curEditor.offsetX, curEditor.offsetY,"bed", 2039);
+	$("#saveBtn").on("click", function(){
+		alert("미구현ㅎㅎ");
+	});
+	
+	$("#resetBtn").on("click", function(){
+		alert("미구현ㅎㅎ");
 	});
 
 	$("#clockwiseRotateBtn").on("click", function(){

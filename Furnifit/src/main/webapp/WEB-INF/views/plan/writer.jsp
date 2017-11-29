@@ -85,11 +85,11 @@ li {
 <!-- Javascript -->
 <script type="text/javascript" src="${rSrcPath}/js/jquery-1.12.4.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<!-- Snap.svg Library and Plug-in -->
 <script type="text/javascript" src="${rSrcPath}/js/plan/snap.svg-min.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/snap.svg.zpd.js"></script>
 
-
+<!-- Domain -->
 <script type="text/javascript" src="${rSrcPath}/js/plan/Plan.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/Planitem.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/Editor.js"></script>
@@ -123,9 +123,9 @@ li {
 				</div>
 				<div id="headerMenuWrap">
 					<ul id="headerMenuLeft">
-						<li><a id=saveBtn href="#">저장</a></li>
-						<li><a href="#">menu2</a></li>
-						<li><a id=crtBtn href="#">침대하나</a></li>
+						<li><a id=writeBtn href="#">Write</a></li>
+						<li><a id=saveBtn href="#">Save</a></li>
+						<li><a id=resetBtn href="#">Reset</a></li>
 					</ul>
 					<ul id="headerMenuRight">
 						<li class="exit"><a href="#"><strong>EXIT </strong><i
@@ -266,10 +266,11 @@ li {
 							</div>
 
 							<!-- 위시리스트 목록 -->
+							<c:if test="${login !=null}">
 							<div id="tabs-2" class="tabContent">
 								<div class="wishlistWrap"></div>
-
 							</div>
+							</c:if>
 
 							<!-- 배치 목록 -->
 							<div id="tabs-3" class="tabContent">
