@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.furnifit.common.web.Params;
 import com.furnifit.common.web.UploadFileUtils;
+import com.furnifit.furniture.dao.FurnitureDao;
 import com.furnifit.plan.dao.PlanDao;
 import com.furnifit.plan.domain.Plan;
 import com.furnifit.planitem.dao.PlanItemDao;
@@ -29,6 +30,10 @@ public class PlanServiceImpl implements PlanService {
 
 	@Inject
 	private PlanItemDao planitemDao;
+
+	@Inject
+	private FurnitureDao furnitureDao;
+
 
 
 	@Resource(name = "svgImgPath")
@@ -80,16 +85,20 @@ public class PlanServiceImpl implements PlanService {
 		try {
 			for (PlanItem planItem : list) {
 				planItem.setPlanId(planId);
-				
+				planItem.getFurnitures();
 				//이미지 업로드 및 경로 설정
 				String encImage=planItem.getImage();
 				byte[] decByte = dec.decode(encImage.split(",")[1].getBytes());
 				String decImage=new String(decByte, "UTF-8");
 				String imgPath=UploadFileUtils.uploadFile(svgImgPath, planItem.getName()+".svg", decImage.getBytes());
-				
 				planItem.setImage(imgPath);
-				
 				planitemDao.create(planItem);
+				
+				int planitemId=planItem.getPlanitemId();
+				int[] productIds=planItem.getFurnitures();
+				for (int productId : productIds) {
+					furnitureDao.create(planitemId, productId);
+				}
 			}
 
 		} catch (Exception e) {

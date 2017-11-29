@@ -19,12 +19,18 @@ function writePlan(planName){
 		var acreage=editor.acreage;
 		var image=editor.canvas.paper.toDataURL();
 		var planitem=new Planitem(name, width, height, length, acreage, image);
+		
+		editor.furnitures.forEach(function(furniture){
+			console.log(furniture.data("productId"));
+			planitem.furnitures.push(furniture.data("productId"));
+		})
+		
 		plan.planitems.push(planitem);
 	});
 
 
 	var jsonData = JSON.stringify(plan);
-	console.log(jsonData);
+	//console.log(jsonData);
 	$.ajax({
 		url : contextPath + '/plan',
 		type : 'post',

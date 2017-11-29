@@ -10,5 +10,6 @@ function Planitem(name, width, height, length, acreage, image){
 	this.length=length;
 	this.acreage=acreage;
 	this.image=image;
+	this.furnitures=new Array();
 }
 
