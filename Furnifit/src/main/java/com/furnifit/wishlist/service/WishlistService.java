@@ -29,12 +29,6 @@ public interface WishlistService {
 	 */
 	public void delete(Map<String, String> map);
 	
-	/**
-	 * 마이페이지에 위시리스트 목록 불러오기
-	 * @param email
-	 * @return
-	 */
-	public List<Wishlist> userwishlist(Map<String, String> map);
 	
 	public int listcount(String email);
 }

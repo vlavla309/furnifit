@@ -61,7 +61,7 @@ public class OrdersController {
 		ordersService.create(orders);
 		itemService.create(orderitem);
 		
-		return "redirect:/order/order-list";
+		return "redirect:/mypage/order";
 	}
 	
 	/** 주문목록 리스트  */

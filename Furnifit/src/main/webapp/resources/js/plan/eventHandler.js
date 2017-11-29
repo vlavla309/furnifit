@@ -94,6 +94,7 @@ function dragDrop(x,y) {
 	var collisionFurnitures=isCollisionOfFurnitures(target);
 
 	if(collisionFurnitures){
+		showMsgBar("fail","이동 실패, 주위의 다른 사물 혹은 벽과 충돌합니다.");
 		console.log("겹침");
 		this.attr({
 			transform: savedTransform
@@ -149,12 +150,10 @@ function isCollisionOfFurnitures(target){
 
 	//배치도 가구들마다 충돌 체크
 	curEditor.furnitures.forEach(function(elem, i) {
-		console.log("fur"+i)
 		if(target!=elem){
 			pathElem=getPath(elem);
 			pathSet.push(pathElem);
 
-			console.log(pathElem);
 			//드래그 대상의 꼭지점이 다른 가구의 영역에 포함 되는지 확인
 			vertexTarget.forEach(function(pos, j) {
 				if(resultPoint)return false;
@@ -179,11 +178,9 @@ function isCollisionOfFurnitures(target){
 			}
 		}
 	});
-	
-	
 
-	//pathTarget.remove();
-	//pathSet.remove();
+	pathTarget.remove();
+	pathSet.remove();
 
 	return resultEdge || resultPoint;
 }

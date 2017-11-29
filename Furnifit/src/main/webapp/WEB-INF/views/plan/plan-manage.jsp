@@ -45,22 +45,15 @@
                 
                 
                 
-           <div class="table-responsive" style="width: 100%; padding-left:60px; padding-right: 60px">
+           <div class="table-responsive" style="width: 100%; padding-left:80px; padding-right: 60px">
             <table class="table">
-              <thead>
-                <tr>
-                  <th class="align4">번호</th>
-                  <th class="align5">배치도명</th>
-                  <th class="align2">(가로 * 세로 * 높이)</th>
-                </tr>
-              </thead>
               <tbody>
                   <c:forEach items="${itemlist}" var="item">
                   <tr>
                       <c:if test="${item.planId == plan.planId}">
                         <td class="align2">${item.planitemId})</td>
                         <td class="align3"><a href="${contextPath}/mypage/itemlist/${item.planitemId}" value="${item.planitemId}">${item.name}</a></td>
-                        <td class="align2"> (${item.width} * ${item.height} * ${item.length})</td>
+                        <td class="align2"> (W)${item.width} / (D)${item.height} / (H)${item.length}</td>
                       </c:if>
                    </tr>    
                   </c:forEach>

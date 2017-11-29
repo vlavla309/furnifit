@@ -42,11 +42,6 @@ public interface ProductService {
 	 */
 	public List<Product> searchlist(ProductParams params);
 	
-	/**
-	 * 위시리트스에서 product 전체 조회를 할때!
-	 * @return
-	 */
-	public List<Product> productList();
 	
 	/**
 	 * 상품 상세보기 뷰에 해당 상품 카테고리에 해당하는 상품 목록!
@@ -55,5 +50,6 @@ public interface ProductService {
 	 */
 	public List<Product> productReadList(String category);
 	
+	public List<Product> productwish(String email, int page, int pageSize);
 	
 }

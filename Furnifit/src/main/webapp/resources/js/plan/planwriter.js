@@ -60,14 +60,6 @@ $( function() {
 		curEditor=editors.get(id);
 	});
 	
-	/*----------------------상품 카테고리 탭----------------------*/
-	/*$( "#rightTabs" ).tabs({
-		beforeLoad: function( event, ui ) {
-			ui.jqXHR.fail(function() {
-				ui.panel.html("페이지 로드불가!!" );
-			});
-		}
-	});*/
 	
 	$( function() {
 	    $( "#rightTabs" ).tabs();
@@ -75,7 +67,7 @@ $( function() {
 	
 	// 상품 카테고리 탭 영역 토글 버튼 이벤트처리
 	$( "#rightToggleBtn" ).on( "click", function() {
-		$( "#rightTabs" ).toggle("slow", "swing", changeDirection(this));
+		$( "#rightTabs" ).toggle(changeDirection(this));
 	});
 	/*----------------------상품 카테고리 탭 끝!!!----------------------*/
 	
@@ -87,13 +79,9 @@ $( function() {
 } );
 
 function changeDirection(target) {
-	var val = $(target).text();
-	if (val == ">") {
-		$(target).text("<");
-	} else {
-		$(target).text(">");
-	}
-	console.log(val);
+	var val = $(target).children();
+	val.toggleClass("fa-angle-double-right");
+	val.toggleClass("fa-angle-double-left");
 }
 
 
@@ -123,7 +111,7 @@ function addPlanItem(){
 	var height=$("#planHeight").val();
 	var length=$("#planLength").val();
 	
-	editor.room(width, height, length);
+	editor.room(planName,width, height, length);
 	return id;
 }
 
@@ -143,8 +131,8 @@ function setFurnitureInfo(){
 	$("#furnitureInfoWrap .imgWrap a").attr("href", contextPath+"/product/"+furniture.productId);
 	$("#furnitureInfoWrap .imgWrap a img").attr("src", furniture.imgPath);
 	$("#furnitureInfoWrap .infoWrap .category").text(furniture.category);
-	$("#furnitureInfoWrap .infoWrap .name").text(furniture.name);
+	$("#furnitureInfoWrap .infoWrap .name").html("<strong>"+furniture.name+"</strong>");
 	$("#furnitureInfoWrap .infoWrap .brand").text(furniture.brand);
-	$("#furnitureInfoWrap .infoWrap .size").text(furniture.width+"x"+furniture.height+"x"+furniture.length);
+	$("#furnitureInfoWrap .infoWrap .size").text(furniture.width+"*"+furniture.height+"*"+furniture.length +"(가로*세로*높이)");
 	
 }

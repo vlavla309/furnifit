@@ -96,22 +96,26 @@ public class ProductServiceImpl implements ProductService {
 
 
 	@Override
-	public List<Product> productList() {
-		List<Product> products=productdao.productList();
-		for (Product product : products) {
-			product.setImgs(imgDao.productImg(product.getProductId()));
-		}
-		return products;
-	}
-
-
-	@Override
 	public List<Product> productReadList(String category) {
 		List<Product> products=productdao.productReadList(category);
 		for (Product product : products) {
 			product.setImgs(imgDao.productImg(product.getProductId()));
 		}
 		return products;
+	}
+	
+	@Override
+	public List<Product> productwish(String email,  int page, int pageSize){
+		Map<String, String> map = new HashMap<>();
+		map.put("pageSize", pageSize+"");
+		map.put("page", page+"");
+		map.put("email", email);
+		List<Product> list = productdao.productwish(map);
+		
+		for (Product product : list) {
+			product.setImgs(imgDao.productImg(product.getProductId()));
+		}
+		return list;
 	}
 
 	

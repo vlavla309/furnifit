@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,7 +82,6 @@ li {
 }
 </style>
 
-
 <!-- Javascript -->
 <script type="text/javascript" src="${rSrcPath}/js/jquery-1.12.4.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -102,8 +103,8 @@ li {
 	var planImgPath = contextPath + "/resources/images/plan";
 	var rSrcPath = "${rSrcPath}";
 	var proImgPath = "${rSrcPath}/productimg";
+	var email = "${login.email}"
 </script>
-
 
 </head>
 <body>
@@ -112,7 +113,7 @@ li {
 		<div id="header">
 			<nav id="headerNav">
 				<div id="headerLogo">
-					<a href="#">FurniFit</a>
+					<a href="#"><strong>FurniFit</strong></a>
 				</div>
 				<div id="headerMenuWrap">
 					<ul id="headerMenuLeft">
@@ -120,9 +121,9 @@ li {
 						<li><a href="#">menu2</a></li>
 						<li><a id=crtBtn href="#">침대하나</a></li>
 					</ul>
-
 					<ul id="headerMenuRight">
-						<li class="exit"><a href="#">EXIT</a></li>
+						<li class="exit"><a href="#"><strong>EXIT </strong><i
+								class="fa fa-sign-in" aria-hidden="true"></i></a></li>
 					</ul>
 				</div>
 
@@ -142,7 +143,9 @@ li {
 								src="${rSrcPath }/images/plan/plus.png" width=50px;></a>
 						</div>
 						<div id="leftToggle">
-							<button id="leftToggleBtn"><</button>
+							<button id="leftToggleBtn" class="sideToggleBtn">
+								<i class="fa fa-angle-double-left" aria-hidden="true"></i>
+							</button>
 						</div>
 					</div>
 				</div>
@@ -154,30 +157,33 @@ li {
 				<div id="rightSidebarWrap">
 					<div class="sidemenu">
 						<div id="rightToggle">
-							<button id="rightToggleBtn">></button>
+							<button id="rightToggleBtn" class="sideToggleBtn">
+								<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+							</button>
 						</div>
 						<div id="rightTabs">
 							<ul>
 								<li><a href="#tabs-1">가구목록</a></li>
-								<li><a href="#tabs-2">찜목록</a></li>
+								<c:if test="${login !=null}">
+									<li><a href="#tabs-2" id="wishtab">찜목록</a></li>
+								</c:if>
 								<li><a href="#tabs-3">배치목록</a></li>
 							</ul>
 							<!-- 상품 목록 -->
 							<div id="tabs-1" class="tabContent">
 								<div id="searchTab">
 									<button type="button" id="searchToggleBtn">
-									Search
-									<i class="fa fa-search" aria-hidden="true"></i>
+										Search <i class="fa fa-search" aria-hidden="true"></i>
 									</button>
 									<div id="searchWrap">
 										<div id="searchKeyword">
 											<div class="col-lg-12 in-gp-tb">
 												<div class="input-group">
-													<input type="text" class="form-control"
-														placeholder="Search for..."> 
-														<span class="input-group-btn">
-															<button class="btn btn-default" type="button">Search</button>
-														</span>
+													<input type="text" class="form-control" id="keyword"
+														placeholder="Search for..."> <span
+														class="input-group-btn">
+														<button class="btn btn-default" type="button">Search</button>
+													</span>
 												</div>
 												<!-- /input-group -->
 											</div>
@@ -253,36 +259,9 @@ li {
 								</div>
 							</div>
 
-
-
 							<!-- 위시리스트 목록 -->
 							<div id="tabs-2" class="tabContent">
-
-								<form name="wishlist" id="wishlistparam">
-									<input type="hidden" value="" name="pageSize"> 
-									<input type="hidden" name="maxHeight" value="0"> 
-								</form>
-
-								<div class="wishlistWrap">
-									<!-- 상품 목록 -->
-									<div class="product">
-										<div class="imgWrap">
-											<a href="1"><img src="images/small_bed.png" /></a>
-										</div>
-										<div class="infoWrap">
-											<span>상품명</span> <span>브랜드</span> <span>200x200x200</span> <span>100000원</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="col-md-12">
-										<div class="text-center">
-											<a class="btn btn-default" id="add"><i
-												class="fa fa-angle-down" aria-hidden="true"></i> 더보기</a>
-										</div>
-									</div>
-								</div>
+								<div class="wishlistWrap"></div>
 
 							</div>
 
@@ -306,6 +285,9 @@ li {
 				</div>
 			</div>
 			<!-- right sidebar 끝-->
+
+			<div id="msgBar" class="alert"></div>
+
 		</div>
 		<!-- header 끝 -->
 
@@ -332,23 +314,25 @@ li {
 					<a href="#" target="_blank"><img src="" /></a>
 				</div>
 				<div class="infoWrap">
-					<span class="category">카테고리</span> 
- 					<span class="name">상품명</span> 
- 					<span class="brand">브랜드</span> 
- 					<span class="size">200x200x200</span>
+					<span class="category">카테고리</span> <span class="name">상품명</span> <span
+						class="brand">브랜드</span> <span class="size">200x200x200</span>
 				</div>
 				<div class="controlWrap">
 					<ul>
-						<li><a href="#" id="clockwiseRotateBtn"><img src="${contextPath }/resources/images/plan/rotate.png" alt="시계방향 회전"></a></li>
- 						<li><a href="#" id="counterclockwiseRotateBtn"><img src="${contextPath }/resources/images/plan/counterRotate.png" alt="시계반대방향 회전"></a></li>
- 						<li><a href="#" id="deleteBtn"><img src="${contextPath }/resources/images/plan/trash.png" alt="삭제"></a></li>
-  					
+						<li><a href="#" id="clockwiseRotateBtn"><img
+								src="${contextPath }/resources/images/plan/rotate.png"
+								alt="시계방향 회전"></a></li>
+						<li><a href="#" id="counterclockwiseRotateBtn"><img
+								src="${contextPath }/resources/images/plan/counterRotate.png"
+								alt="시계반대방향 회전"></a></li>
+						<li><a href="#" id="deleteBtn"><img
+								src="${contextPath }/resources/images/plan/trash.png" alt="삭제"></a></li>
+
 					</ul>
 				</div>
 			</div>
 		</div>
 		<!-- footer 끝 -->
-
 
 		<!-- 새 배치도 추가 폼 -->
 		<div id="newPlanForm" title="새 배치도 추가">

@@ -82,25 +82,17 @@ public class WishlistController {
 		param.setPageSize(6);
 		param.setPagiSize(5);
 		
-		Map<String, String> map = new HashMap<>();
+		logger.info(param);
+		
 		Member member = (Member) session.getAttribute("login");
-		
-		map.put("pageSize", param.getPageSize()+"");
-		map.put("page", param.getPage()+"");
-		map.put("email", member.getEmail());
-		
-		List<Wishlist> wishlist = wishlistservice.userwishlist(map);
-		List<Product> product = productsrv.productList();
+		List<Product> wishlist = productsrv.productwish(member.getEmail(), param.getPage(), param.getPageSize());
 		List<Brand> brandlist = branddao.list();
-		
 		PageBuilder pb = new PageBuilder();
 		pb.setParams(param);
 		pb.setTotalRowCount(wishlistservice.listcount(member.getEmail()));
 		pb.build();
-		logger.info(pb.getCurrentStartPage() + " : " + pb.getCurrentEndPage());
 		model.addAttribute("pb", pb);
 		model.addAttribute("wishlist",wishlist);
-		model.addAttribute("list", product);
 		model.addAttribute("brandlist", brandlist);
 		
 		return "mypage/wishlist";

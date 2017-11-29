@@ -90,7 +90,7 @@ public class OrderitemsController {
 		}
 		couponService.couponUpdate(coupon);
 		
-		return "redirect:/order/order-list";
+		return "redirect:/mypage/order";
 	}
 	
 }	

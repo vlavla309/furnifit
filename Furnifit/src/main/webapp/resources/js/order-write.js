@@ -67,28 +67,27 @@ $(function() {
     
     // 위시리스트
     var wishbtn = $("a[name=addWishlist]");
-    
     wishbtn.click(function(event) {
       event.preventDefault(); 
       var furniProId =  $(this).parent().parent().attr("value");	//furniture 가구 고유번호
-   	  var productId = $(this).attr('value');
-      
-   	  alert(furniProId + "----" + productId)
+   	  var productId = $(this).attr("href");
    	  
    	  $.ajax({
-        url :'${contextPath}/wishlist/'+productId,
+        url : contextPath+'/wishlist/'+productId,
         type : 'POST',
         success : function(request) {
           console.log(request);
-          alert("위시리스트에 추가 되었습니다.");
-          /*if(furniProId == productId){
+          $(".modal-body").text("위시리스트에 추가 되었습니다.");
+          //alert("위시리스트에 추가 되었습니다.");
+          if(furniProId == productId){
           	$(event.target).attr("disabled", true);	//위시리스트 추가 시 비활성화
-          }*/
+          }
         },
         error : function(request) {
           console.log(request);
-          alert("이미 위시리스트에 있습니다.");
-          /*$(event.target).attr("disabled", true);*/
+          $(".modal-body").text("이미 위시리스트에 있습니다.");
+          //alert("이미 위시리스트에 있습니다.");
+          $(event.target).attr("disabled", true);
         }
       })
     })

@@ -38,10 +38,6 @@ private static final String namespace = "com.furnifit.wishlist.dao.WishlistDao";
 		sqlsession.delete(namespace+".delete", map);
 	}
 
-	@Override
-	public List<Wishlist> userwishlist(Map<String, String> map) {
-		return sqlsession.selectList(namespace+".userwishlist",map);
-	}
 
 	@Override
 	public int listcount(String email) {

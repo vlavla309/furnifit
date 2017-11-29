@@ -64,6 +64,11 @@ a{
 	margin:0;
 }
 
+.sideToggleBtn{
+	font-size:1.5em;
+	padding:0.5em;
+}
+
 #headerMenuRight .exit{
 	float:right;
 	background-color: red;
@@ -87,7 +92,7 @@ a{
 
 #planitemTabs{
 	background:white;
-	min-width:150px;
+	min-width:200px;
 	height:100%;
 	box-shadow: 0 -1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
 	/* display:none; */	
@@ -96,9 +101,9 @@ a{
 .planitem{
 	border: 1px solid black;
 	background :white;
-	margin:1em;
+	margin:auto;
 	padding:0.5em;
-	width:120px;
+	width:150px;
 	max-height:90px;
 }
 
@@ -126,12 +131,25 @@ a{
 	height:100%;
 	float:right;
 }
+#rightToggleBtn{
+    border-bottom-left-radius: 0.3em;
+    border-top-left-radius: 0.3em;
+}
+
+#leftToggleBtn{
+    border-bottom-right-radius: 0.3em;
+    border-top-right-radius: 0.3em;
+}
 
 #rightToggleBtn, #leftToggleBtn{
-	padding : 0.5rem;
-	background: #78cae9;
+	padding : 0.3em;
+	background: #8A0808;
 	border :0;
 	color :white;
+	font-size:1.5em;
+}
+#rightToggleBtn i, #leftToggleBtn i{
+	font-size:1em;
 }
 
 #rightTabs{
@@ -142,6 +160,14 @@ a{
 	border-left: 1px solid #e7e7e7;
     box-shadow: 0px 1px 10px 0px #d0d0d0;
 }
+
+#rightTabs > ul{
+	border-bottom-left-radius:0;
+	border-bottom-right-radius:0;
+}
+
+
+
 
 .tabContent{
 	padding:0px!important;
@@ -231,7 +257,7 @@ a{
 	/* border : 1px solid black; */
 	/* margin : 1em; */
 	width:100%;
-	display:inline-flex;
+	display:none;
 	
 }
 
@@ -269,6 +295,7 @@ a{
 
 #furnitureInfoWrap .infoWrap span{
 	display:block;
+	margin-bottom: 0.3em;
 }
 
 
@@ -320,11 +347,12 @@ a{
     padding-top : 0.5em;
     padding-bottom : 0.5em;
 	padding:0.5em;
+	display:none;
 }
 
 #searchKeyword > div{
 	float:none!important;
-	padding:0;
+	padding:0;z
 	padding-top:0.5em;
 	padding-bottom:0.5em;
 }
@@ -333,5 +361,10 @@ a{
 	font-size:14px;
 }
 
-
-
+#msgBar{
+	opacity: 0.9;
+	margin : auto;
+	margin-top:0.5em;
+	width:fit-content;
+	display:none;
+}

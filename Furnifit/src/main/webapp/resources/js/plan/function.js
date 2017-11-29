@@ -29,11 +29,14 @@ function toAjax() {
 		type : 'post',
 		data : formData,
 		success : function(data) {
+			console.log(data)
+			
 			if (once == 1) {
 				filter(data)
 				once = 0;
 				wishlist(data)
 			}
+			
 			productList(data);
 			makeFurnitureList(data);
 		},
@@ -47,28 +50,19 @@ function toAjax() {
 
 function wishlist(data) {
 	var str = ""
-	if ($('#email').val() == null || $('#email').val() == "") {
-		str += "<div class=\"product\">"
-		str += "	로그인을 해주세요"
-		str += "</div>"
-	} else {
+
 		$.each(data.wishlist, function(i, item) {
-			str += "<div class=\"product\">"
-			str += "	<div class=\"imgWrap\">"
-			str += "		<a class='addFurnitureBtn' href=\"" + item.productId
-					+ "\"><img src=\"" + proImgPath + "" + item.imgs[0].path
-					+ "/" + item.imgs[0].name + "\" /></a>"
-			str += "	</div>"
-			str += "	<div class=\"infoWrap\">"
-			str += "	<span>" + item.name + "</span>"
-			str += "	<span>" + item.brand + "</span>";
-			str += "	<span>" + item.width + " * " + item.length + " * "
-					+ item.height + "</span>";
-			str += "	<span>" + item.price + "원 </span>";
-			str += "</div>"
-			str += "</div>"
+					str+="	<div class=\"product\">"
+					str+="		<div class=\"imgWrap\">"
+					str+="			<a href=\"1\"><img src=\"" + proImgPath + "" + item.imgs[0].path + "/"+ item.imgs[0].name + "\" /></a>"
+					str+="		</div>"
+					str+="	<div class=\"infoWrap\">"
+					str+="			<span>"+item.name+"</span> <span>"+item.brand+"</span> <span>"+item.width+"*"+item.height+"*"+item.length +"</span> <span>"+item.price+"</span>"
+					str+="		</div>"
+					str+="	</div>"			
 		});
-	}
+		
+		$('.wishlistWrap').html(str);
 
 }
 
@@ -76,7 +70,7 @@ function productList(data) {
 
 	var str = ""
 	$.each(data.list, function(i, item) {
-		str += "<div class=\"product\">"
+		str += "<div class=\"product count\">"
 		str += "	<div class=\"imgWrap\">"
 		str += "		<a class='addFurnitureBtn' href=\"" + item.productId
 				+ "\"><img src=\"" + proImgPath + "" + item.imgs[0].path + "/"
@@ -117,25 +111,22 @@ function filter(data) {
 	str = ""
 	str += "<ul>"
 	// color
-	$
-			.each(
-					data.colorlist,
-					function(i, item) {
-						console.log(item.name)
-						if (item.name == "white") {
-							str += "<li><a class=\"btn btn-default colorBtn\" id =\""
-									+ item.name
-									+ "\" style=\"background:"
-									+ item.rgb
-									+ "\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:black\" aria-hidden=\"true\"></i></a></li>"
-						} else {
-							str += "<li><a class=\"btn btn-default colorBtn\" id =\""
-									+ item.name
-									+ "\" style=\"background:"
-									+ item.rgb
-									+ "\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:white\" aria-hidden=\"true\"></i></a></li>"
-						}
-					});
+	$.each(data.colorlist,function(i, item) {
+		console.log(item.name)
+		if (item.name == "white") {
+			str += "<li><a class=\"btn btn-default colorBtn\" id =\""
+					+ item.name
+					+ "\" style=\"background:"
+					+ item.rgb
+					+ "\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:black\" aria-hidden=\"true\"></i></a></li>"
+		} else {
+			str += "<li><a class=\"btn btn-default colorBtn\" id =\""
+					+ item.name
+					+ "\" style=\"background:"
+					+ item.rgb
+					+ "\" aria-hidden=\"true\" aria-label=\"Settings\"><i class=\"fa fa-check  fa-lg colorUncheck\"  style=\"color:white\" aria-hidden=\"true\"></i></a></li>"
+		}
+	});
 	str += "</ul>";
 	$('#colorul').html(str);
 
@@ -163,20 +154,15 @@ $(function() {
 	 * color 버튼을 누르면 조건검색 리스트에 추가됨. ajax는 추후에!, 클래스 속성을 btnd로 변경한 후에 icon
 	 * delete를 추가로 해준다.
 	 */
-	$(document).on(
-			"click",
-			".colorBtn",
-			function(event) {
-				event.preventDefault();
-				$(this).children().first().toggleClass("colorUncheck");
-				$(this).attr('class', 'btn btn-default colordelete')
-				$('#filter').append(
-						"<input type =\"hidden\" name =\"colors\" value=\""
-								+ $(this).attr('id') + "\"/>")
+	$(document).on("click",".colorBtn",	function(event) {
+		event.preventDefault();
+		$(this).children().first().toggleClass("colorUncheck");
+		$(this).attr('class', 'btn btn-default colordelete')
+		$('#filter').append("<input type =\"hidden\" name =\"colors\" value=\""+ $(this).attr('id') + "\"/>")
 
-				toAjax();
+		toAjax();
 
-			});
+	});
 
 	/* 색상버튼 체크를 해제하고, 아래에 form에서 input 제거!, ajax는 추후 */
 	$(document).on("click", ".colordelete", function(event) {
@@ -188,19 +174,14 @@ $(function() {
 	});
 
 	/* brand 버튼을 누르면 조건검색 리스트에 추가됨. ajax는 추후에! */
-	$(document).on(
-			"click",
-			".branda",
-			function(event) {
-				event.preventDefault();
+	$(document).on("click",".branda",function(event) {
+		event.preventDefault();
 
-				$(this).attr('class', 'branddelete');
-				$(this).toggleClass("paramActive");
-				$('#filter').append(
-						"<input type =\"hidden\" name =\"brands\" value=\""
-								+ $(this).text() + "\"/>")
-				toAjax();
-			});
+		$(this).attr('class', 'branddelete');
+		$(this).toggleClass("paramActive");
+		$('#filter').append("<input type =\"hidden\" name =\"brands\" value=\""+ $(this).text() + "\"/>")
+		toAjax();
+	});
 
 	/* 브랜드 버튼 체크를 해제하고, 아래에 form에서 input 제거!, ajax는 추후 */
 	$(document).on("click", ".branddelete", function(event) {
@@ -272,7 +253,7 @@ $(function() {
 	});
 
 	/* search버튼을 누르면, 검색! ajax는 추후에 */
-	$(document).on("click", ".btn-sm", function(event) {
+	$(document).on("click", ".btn-default", function(event) {
 		$('input[name=keyword]').val($('#keyword').val())
 		$('#keyword').val("")
 		toAjax();
@@ -285,19 +266,48 @@ $(function() {
 	});
 
 	/* 더보기 버튼을 누르면 page size가 늘어남 */
-	$(document).on(
-			"click",
-			"#add",
-			function(event) {
-				event.preventDefault();
-				$('input[name=pageSize]').val(
-						Number($('input[name=pageSize]').val()) + 6)
-				var total = $('input[name = totalsize').val()
-				if (Number(total) <= Number($('input[name=pageSize]').val())) {
-					$('#add').remove()
-				}
-				toAjax();
-			});
+	$(document).on(	"click","#add",	function(event) {
+		event.preventDefault();
+		$('input[name=pageSize]').val(
+				Number($('input[name=pageSize]').val()) + 6)
+		var total = $('.count').length
+		if (Number(total) < Number($('input[name=pageSize]').val())) {
+			$('#add').remove()
+		}
+		toAjax();
+	});
 
 	toAjax();
-})
+});
+
+var timerId;
+function showMsgBar(type, msg){
+	var msgBar=$("#msgBar");
+	msgBar.removeClass("alert-success");
+	msgBar.removeClass("alert-danger");
+	msgBar.hide();
+	clearTimeout(timerId);
+	
+	var alertType="alert-danger";
+	var strongStr;
+	switch(type){
+	case "success":
+		alertType="alert-success";
+		strongStr="Success! ";
+		break;
+	case "fail":
+		alertType="alert-danger";
+		strongStr="Fail! ";
+		break;
+	}
+	var msgStr="<strong>"+strongStr+"</strong>"+msg;
+	msgBar.addClass(alertType);
+	msgBar.html(msgStr);
+	msgBar.show();
+
+	timerId=setTimeout(function(){
+		console.log("종료");
+		msgBar.hide("fade");
+	}, 3000);
+
+}
