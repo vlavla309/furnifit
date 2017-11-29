@@ -147,13 +147,17 @@
 									<div id="searchWrap">
 										<div id="searchKeyword">
 											<div class="col-lg-12 in-gp-tb">
+												<form id="searchForm">
 												<div class="input-group">
+												
 													<input type="text" class="form-control" id="keyword"
 														placeholder="Search for..."> <span
 														class="input-group-btn">
-														<button class="btn btn-default" type="button">Search</button>
+														<button class="btn btn-default" type="submit">Search</button>
 													</span>
+												
 												</div>
+												</form>
 												<!-- /input-group -->
 											</div>
 										</div>

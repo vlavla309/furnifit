@@ -252,8 +252,9 @@ $(function() {
 		}
 	});
 
-	/* search버튼을 누르면, 검색! ajax는 추후에 */
-	$(document).on("click", ".btn-default", function(event) {
+	/* search버튼을 누르거나, 엔터버튼 누를때*/ 
+	$(document).on("submit", "#searchForm", function(event) {
+		event.preventDefault();
 		$('input[name=keyword]').val($('#keyword').val())
 		$('#keyword').val("")
 		toAjax();
