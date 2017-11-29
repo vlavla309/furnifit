@@ -29,7 +29,6 @@ function writePlan(planName){
 
 
 	var jsonData = JSON.stringify(plan);
-	//console.log(jsonData);
 	$.ajax({
 		url : contextPath + '/plan',
 		type : 'post',

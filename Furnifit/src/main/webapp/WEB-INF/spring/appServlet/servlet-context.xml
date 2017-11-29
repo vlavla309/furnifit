@@ -63,6 +63,7 @@
 			<mapping path="/wishlist/**"/>
 			<mapping path="/mypage/**"/>
 			<mapping path="/article/**"/>
+			<exclude-mapping path="/article"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>
