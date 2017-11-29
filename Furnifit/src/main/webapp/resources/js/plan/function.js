@@ -39,7 +39,7 @@ function toAjax() {
 			
 			productList(data);
 			makeFurnitureList(data);
-			//_showPage();
+			_showPage();
 		},
 		error : function(data) {
 			console.log(data)

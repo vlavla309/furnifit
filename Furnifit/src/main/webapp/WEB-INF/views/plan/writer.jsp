@@ -22,135 +22,7 @@
 
 
 <style>
-.information-grid-info {
-	height: 250px;
-}
 
-.colorBtn {
-	border: 1px solid #dadada;
-	height: 30px;
-	width: 30px;
-}
-
-.colordelete {
-	border: 1px solid #dadada;
-	height: 30px;
-	width: 30px;
-}
-
-.pdbotton {
-	padding-bottom: 15px;
-}
-
-.categorydelete, .branddelete, .branda, .categorya {
-	padding: 0.5em;
-	border-radius: 0.5em;
-}
-
-.paramActive {
-	background: #ac3939;
-	color: white !important;
-}
-
-.colorUncheck {
-	display: none;
-}
-
-#myBtn {
-	display: none;
-	position: fixed;
-	bottom: 20px;
-	right: 30px;
-	z-index: 99;
-	border: none;
-	outline: none;
-	background-color: red;
-	color: white;
-	cursor: pointer;
-	padding: 15px;
-	border-radius: 10px;
-}
-
-#myBtn:hover {
-	background-color: #555;
-}
-
-li {
-	list-style: none;
-	display: inline;
-	margin-right: 2em;
-}
-
-#loadingDiv{
-	position: absolute;
-	z-index: 1;
-	width:100%;
-	height:100%;
-	background:black;
-	opacity: 0.75;
-}
-
-#loadingWrap{
-position: relative; 
-	z-index: 1;
-	width:fit-content;
-	height:fit-content;
-	margin:auto;
-	top: 30%;
-}
-
-#loadingWrap .logo{
-	margin:auto;
-	margin-bottom:2em;
-}
-
-.loader {
-	position: relative; 
-	/* left: 50%;
-	top: 50%; */
-	z-index: 1;
-	width: 150px;
-	height: 150px;
-	/* margin: -75px 0 0 -75px; */
-	margin:auto;
-	border: 16px solid #f3f3f3;
-	border-radius: 50%;
-	border-top: 16px solid #3498db;
-	width: 120px;
-	height: 120px;
-	-webkit-animation: spin 2s linear infinite;
-	animation: spin 2s linear infinite;
-}
-
-@
--webkit-keyframes spin { 0% {
-	-webkit-transform: rotate(0deg);
-}
-
-100%
-{
--webkit-transform
-:
- 
-rotate
-(360deg);
- 
-}
-}
-@
-keyframes spin { 0% {
-	transform: rotate(0deg);
-}
-100%
-{
-transform
-:
- 
-rotate
-(360deg);
- 
-}
-}
 </style>
 
 <!-- Javascript -->
@@ -184,7 +56,7 @@ rotate
 	
 	
 	var _showPage = function() {
-		var loader = $("#loadingWrap");
+		var loader = $("#loadingDiv");
 		loader.css("display", "none");
 	};
 </script>
@@ -260,11 +132,11 @@ rotate
 						</div>
 						<div id="rightTabs">
 							<ul>
-								<li><a href="#tabs-1">가구목록</a></li>
+								<li><a href="#tabs-1" class="sidebarColor">가구목록</a></li>
 								<c:if test="${login !=null}">
-									<li><a href="#tabs-2" id="wishtab">찜목록</a></li>
+									<li><a href="#tabs-2" id="wishtab" class="sidebarColor">찜목록</a></li>
 								</c:if>
-								<li><a href="#tabs-3">배치목록</a></li>
+								<li><a href="#tabs-3" class="sidebarColor">배치목록</a></li>
 							</ul>
 							<!-- 상품 목록 -->
 							<div id="tabs-1" class="tabContent">
@@ -286,21 +158,21 @@ rotate
 											</div>
 										</div>
 										<div id="searchAccodian">
-											<h3>
-												카테고리 <i class="fa fa-plus" aria-hidden="true"></i>
+											<h3 class="sidebarColor">
+												카테고리 <i class="fa fa-angle-double-up" aria-hidden="true"></i>
 											</h3>
 											<div>
 												<ul id="category"></ul>
 											</div>
-											<h3>브랜드</h3>
+											<h3 class="sidebarColor">브랜드<i class="fa fa-angle-double-down" aria-hidden="true"></i></h3>
 											<div>
 												<ul id="brand"></ul>
 											</div>
-											<h3>색상</h3>
+											<h3 class="sidebarColor">색상<i class="fa fa-angle-double-down" aria-hidden="true"></i></h3>
 											<div>
 												<ul id="colorul"></ul>
 											</div>
-											<h3>가격</h3>
+											<h3 class="sidebarColor">가격<i class="fa fa-angle-double-down" aria-hidden="true"></i></h3>
 											<div id="price">
 												<ul>
 													<li><input type="number" id="minprice" class="price"
@@ -311,7 +183,7 @@ rotate
 													<li><button type="submit" class="btn btn-sm pricebtna">적용하기</button></li>
 												</ul>
 											</div>
-											<h3>사이즈</h3>
+											<h3 class="sidebarColor">사이즈<i class="fa fa-angle-double-down" aria-hidden="true"></i></h3>
 											<div id="size">
 												<ul>
 													<li><input type="number" placeholder="가로" id="w"

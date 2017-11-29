@@ -75,7 +75,18 @@ $( function() {
 	/*상품 검색 ui 아코디언*/
 	$( "#searchAccodian" ).accordion({
 		heightStyle: "content",
-		collapsible: true
+		collapsible: true,
+		icons: false,
+		beforeActivate:function(e,ui){
+			console.log("아코디언ㅎㅎㅎ");
+			console.log(ui.newHeader);
+			console.log(ui.oldHeader);
+			
+			ui.newHeader.children().toggleClass("fa-angle-double-down fa-angle-double-up");
+			ui.oldHeader.children().toggleClass("fa-angle-double-down fa-angle-double-up");
+			//ui.newHeader.children().addClass("fa-angle-double-down");
+
+		}
 	});
 	
 	
@@ -162,5 +173,5 @@ function setFurnitureInfo(){
 	$("#furnitureInfoWrap .infoWrap .name").html("<strong>"+furniture.name+"</strong>");
 	$("#furnitureInfoWrap .infoWrap .brand").text(furniture.brand);
 	$("#furnitureInfoWrap .infoWrap .size").text(furniture.width+"*"+furniture.height+"*"+furniture.length +"(가로*세로*높이)");
-	
 }
+
