@@ -6,7 +6,7 @@ $(function() {
     event.preventDefault(); 
   	  var planitemid = $(this).attr('value');
     $.ajax({
-      url :'${contextPath}/wishlist/'+planitemid,
+      url : contextPath+'/wishlist/'+planitemid,
       type : 'POST',
       success : function(request) {
         console.log(request);
