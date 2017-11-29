@@ -243,4 +243,31 @@ Editor.prototype.furniture= function(x,y,target){
 	return furniture;
 }
 
+/* 배치도에 새 가구 생성 */
+Editor.prototype.startPlace= function(target){
+	var width = target.width * this.scale;
+	var height = target.height * this.scale;
+	
+	var rect=this.canvas.rect(0, 0, width, height).attr({
+		stroke: "#6799FF",
+		strokeWidth: 4}
+	); 
+	 
+	this.canvas.paper.mousemove(function(ev, x, y){
+		console.log(x+","+y)
+		console.log(ev); 
+		var m = rect.parent().parent().parent().transform().localMatrix; 
+		mx=ev.offsetX;
+		my=ev.offsetY;
+		if(m){
+			mx = mx/m.a;
+			my = my/m.d;
+		};
+		var origTransform = rect.transform().local;//기존 트랜스폼 명령
+		rect.attr({x:mx, y:my})
+		//rect.attr({transform: origTransform + (origTransform ? "T" : "t") + [mx,my]});
+		//console.log(rect);
+	})
+}
+
 
