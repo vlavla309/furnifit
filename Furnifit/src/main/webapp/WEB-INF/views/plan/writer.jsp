@@ -89,13 +89,18 @@ li {
 <script type="text/javascript" src="${rSrcPath}/js/plan/snap.svg-min.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/snap.svg.zpd.js"></script>
 
-<script type="text/javascript" src="${rSrcPath}/js/plan/planwriter.js"></script>
-<script type="text/javascript" src="${rSrcPath}/js/plan/Furniture.js"></script>
-<script type="text/javascript" src="${rSrcPath}/js/plan/function.js"></script>
-<script type="text/javascript" src="${rSrcPath}/js/plan/eventRegist.js"></script>
-<script type="text/javascript" src="${rSrcPath}/js/plan/eventHandler.js"></script>
+
+<script type="text/javascript" src="${rSrcPath}/js/plan/Plan.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/Planitem.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/Editor.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/Coordinate.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/Furniture.js"></script>
+
+<script type="text/javascript" src="${rSrcPath}/js/plan/planwriter.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/function.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/function2.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/eventRegist.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/eventHandler.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/calc.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/converter.js"></script>
 
