@@ -30,31 +30,53 @@ public class MybatisReplyDao implements ReplyDao {
 	          
 	private static String namespace = "com.furnifit.reply.dao.ReplyDao";
 
-	/* 댓글 목록을 가져오기 때문에 SqlSession의 selectList()를 사용했음 */
+	/**
+	 * replies 테이블에서 데이터를 가져오기 위해서 SqlSession의 selectList()를 사용했음
+	 * 댓글 목록 출력을 위해서 Mapper 파일에 등록된 SQL문 실행
+	 * @param Integer articleId
+	 * @return List<Reply>
+	 */
 	@Override
 	public List<Reply> list(Integer articleId) throws Exception {
 		return session.selectList(namespace + ".list", articleId);
 	}
 
-	/* 댓글을 저장하기 위해서 SqlSession의 insert()를 사용했음 */
+	/**
+	 * replies 테이블에 데이터를 등록하기 위해서 SqlSession의 insert()를 사용했음
+	 * 댓글 등록을 위해서 Mapper 파일에 등록된 SQL문 실행
+	 * @param Reply reply
+	 */
 	@Override
 	public void create(Reply reply) throws Exception {
 		session.insert(namespace + ".create", reply);
 	}
 
-	/* 댓글을 수정하기 위해서 SqlSession의 update()를 사용했음 */
+	/**
+	 * replies 테이블의 데이터를 수정하기 위해서 SqlSession의 update()를 사용했음
+	 * 댓글 수정을 위해서 Mapper 파일에 등록된 SQL문 실행
+	 * @param Reply reply
+	 */
 	@Override
 	public void update(Reply reply) throws Exception {
 		session.update(namespace + ".update", reply);
 	}
 
-	/* 댓글을 삭제하기 위해서 SqlSession의 update()를 사용했음 */
+	/**
+	 * replies 테이블의 데이터를 삭제하기 위해서 SqlSession의 update()를 사용했음
+	 * 댓글 삭제를 위해서 Mapper 파일에 등록된 SQL문 실행
+	 * @param Integer reply_id
+	 */
 	@Override
 	public void delete(Integer reply_id) throws Exception {
 		session.update(namespace + ".delete", reply_id);
 	}
 
-	/* 무한 스크롤을 위해서 SqlSession의 selectList()를 사용했음 */
+	/**
+	 * 무한 스크롤
+	 * replies 테이블의 데이터를 가져오기 위해서 SqlSession의 selectList()를 사용했음
+	 * 댓글 목록 출력을 위해서 Mapper 파일에 등록된 SQL문 실행
+	 * @param Integer reply_id
+	 */
 	@Override
 	public List<Reply> infiniteScrollDown(Reply reply) throws Exception {
 		return session.selectList(namespace + ".infiniteScrollDown", reply);

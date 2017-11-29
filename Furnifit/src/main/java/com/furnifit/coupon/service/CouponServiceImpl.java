@@ -11,14 +11,14 @@ import com.furnifit.coupon.domain.Coupon;
 
 /**
  * CouponServiceImpl 클래스
+ * 
  * @author 김호준
- *
  */
-@Service
+@Service  // Service를 스프링에 인식, 비즈니스 로직 처리를 위해서 @Service 클래스 사용
 public class CouponServiceImpl implements CouponService {
 	
-	@Inject
-	private CouponDao daodao;
+	@Inject                    // 해당 타입의 객체를 찾아서 변수에 자동으로 할당시킴
+	private CouponDao daodao;  // XML Mapper 파일에 등록된 SQL을 실행하기 위한 다양한 기능을 제공하기 때문에 사용했음
 
 	/**
 	 * 회원별 발급된 쿠폰 확인

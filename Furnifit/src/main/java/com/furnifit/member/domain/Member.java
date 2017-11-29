@@ -1,5 +1,11 @@
 package com.furnifit.member.domain;
 
+/**
+ * Member 도메인 클래스
+ * 
+ * @author 김형주
+ *
+ */
 public class Member {
 	private String email;
 	private String passwd;

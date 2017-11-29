@@ -13,19 +13,36 @@ import com.furnifit.reply.domain.Reply;
  */
 public interface ReplyDao {
 
-	/* 댓글 목록 */
+	/**
+	 * 댓글 목록
+	 * @param Integer articleId
+	 * @return List<Reply>
+	 */
 	public List<Reply> list(Integer articleId) throws Exception;
 	
-	/* 댓글 등록 */
+	/**
+	 * 댓글 등록
+	 * @param Reply reply
+	 */
 	public void create(Reply reply) throws Exception;
 
-	/* 댓글 수정 */
+	/**
+	 * 댓글 수정
+	 * @param Reply reply
+	 */
 	public void update(Reply reply) throws Exception;
 
-	/* 댓글 삭제 */
+	/**
+	 * 댓글 삭제
+	 * @param Integer reply_id
+	 */
 	public void delete(Integer reply_id) throws Exception;
 	
-	/* 무한 스크롤 */
+	/**
+	 * 무한 스크롤
+	 * @param Reply reply
+	 * @return List<Reply>
+	 */
 	public List<Reply> infiniteScrollDown(Reply reply) throws Exception;
 	
 }
