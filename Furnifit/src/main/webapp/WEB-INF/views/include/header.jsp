@@ -95,7 +95,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav">
 								<li><a href="${contextPath}" class="active">Home</a></li>
-								<li><a href="codes.html">About</a></li>
+								<li><a href="${contextPath}/about">About</a></li>
 								<li><a href="${contextPath}/product">Product</a></li>
 								<li><a href="#" class="dropdown-toggle hvr-bounce-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">가구배치도<span class="caret"></span></a>
 									<ul class="dropdown-menu">
