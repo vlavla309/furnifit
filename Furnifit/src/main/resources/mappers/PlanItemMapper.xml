@@ -6,6 +6,9 @@
 	
 	<!-- 새 배치도 항목 등록 -->
 	<insert id="create" parameterType="PlanItem">
+		<selectKey keyProperty="planitemId" resultType="int" order="BEFORE">
+			select planitems_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
 		INSERT INTO planitems
 		(planitem_id,
 		plan_id,
@@ -15,7 +18,7 @@
 		acreage,
 		image,
 		name)
-		VALUES (planitems_seq.NEXTVAL,
+		VALUES (#{planitemId},
 		#{planId},
 		#{width},
 		#{height},

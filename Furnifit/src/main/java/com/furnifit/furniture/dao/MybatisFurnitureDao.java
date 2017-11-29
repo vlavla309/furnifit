@@ -1,6 +1,8 @@
 package com.furnifit.furniture.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -17,6 +19,15 @@ public class MybatisFurnitureDao implements FurnitureDao {
 	@Inject
 	private SqlSession sqlSession;
 	
+	@Override
+	public void create(int planitemId, int productId) {
+		Map<String, Integer> map =new HashMap<>();
+		map.put("planitemId", planitemId);
+		map.put("productId", productId);
+		
+		sqlSession.insert(NAMESPACE+".create", map);
+	}
+
 	@Override
 	public List<Furniture> list(int planitemId) {
 		return sqlSession.selectList(NAMESPACE+".list", planitemId);

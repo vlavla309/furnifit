@@ -3,6 +3,14 @@
                         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.furnifit.furniture.dao.FurnitureDao">
+	<insert id="create" parameterType="hashmap">
+		INSERT INTO furnitures
+		(planitem_id,
+		product_id)
+		VALUES (#{planitemId},
+		#{productId})
+	</insert>
+
 	<select id="list" resultType="Furniture">
 	SELECT planitem_id AS "planitemId",
    		   product_id AS "productId"

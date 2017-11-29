@@ -1,5 +1,6 @@
 package com.furnifit.planitem.domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.furnifit.product.domain.Product;
@@ -18,11 +19,15 @@ public class PlanItem {
 	private int acreage;
 	private String image;
 	private String name;
-	private List<Product> furnitures;
+	private int[] furnitures;
 	
 	public PlanItem() {}
 
-	public PlanItem(int planitemId, int planId, int width, int height, int length, int acreage, String image, String name) {
+	
+
+	public PlanItem(int planitemId, int planId, int width, int height, int length, int acreage, String image,
+			String name, int[] furnitures) {
+		super();
 		this.planitemId = planitemId;
 		this.planId = planId;
 		this.width = width;
@@ -31,7 +36,9 @@ public class PlanItem {
 		this.acreage = acreage;
 		this.image = image;
 		this.name = name;
+		this.furnitures = furnitures;
 	}
+
 
 
 	public int getPlanitemId() {
@@ -111,21 +118,28 @@ public class PlanItem {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
-	public List<Product> getFurnitures() {
+
+
+
+	public int[] getFurnitures() {
 		return furnitures;
 	}
 
-	public void setFurnitures(List<Product> furnitures) {
+
+
+	public void setFurnitures(int[] furnitures) {
 		this.furnitures = furnitures;
 	}
+
+
 
 	@Override
 	public String toString() {
 		return "PlanItem [planitemId=" + planitemId + ", planId=" + planId + ", width=" + width + ", height=" + height
 				+ ", length=" + length + ", acreage=" + acreage + ", image=" + image + ", name=" + name
-				+ ", furnitures=" + furnitures + "]";
+				+ ", furnitures=" + Arrays.toString(furnitures) + "]";
 	}
+	
 
 
 }
