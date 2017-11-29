@@ -1,13 +1,10 @@
 $( document ).ready(function(){
 	$("#saveBtn").on("click", function(){
-		unSelectAll();
-		var data=curEditor.canvas.paper.toDataURL();
-		console.log(data);
+		alert("미구현ㅎㅎ");
 	});
-
-	$("#crtBtn").on("click", function(){
-		console.log(curEditor.offsetX+" "+curEditor.offsetY);
-		curEditor.furniture(curEditor.offsetX, curEditor.offsetY,"bed", 2039);
+	
+	$("#resetBtn").on("click", function(){
+		alert("미구현ㅎㅎ");
 	});
 
 	$("#clockwiseRotateBtn").on("click", function(){
@@ -47,6 +44,7 @@ $( document ).ready(function(){
 			selectedElem=null;
 		}
 		unSelectAll();
+		printPlaced();
 	});
 
 
@@ -61,5 +59,19 @@ $( document ).ready(function(){
 		var fur=furnitures.get(pid);
 		curEditor.furniture(curEditor.offsetX, curEditor.offsetY, fur);
 		showMsgBar("success","가구가 추가되었습니다.");
+		printPlaced();
+	});
+	
+	$(document).on("click", ".placedItemBtn",function(e){
+		e.preventDefault();
+		var targetId=$(this).attr("href");
+		curEditor.furnitures.forEach(function(furniture){
+			var id=furniture.id;
+			if(id==targetId){
+				unSelectAll();
+				select(furniture);
+				return false;
+			}
+		});
 	});
 });

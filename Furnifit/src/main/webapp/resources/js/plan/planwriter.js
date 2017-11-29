@@ -7,7 +7,7 @@ var selectedElem; //현재 선택된 엘레먼트
 var planCount=1; //작성중인 배치도 ID 시퀀스
 var editors; //작성중인 배치도 편집기 목록
 var curEditor; //현재 작성중인 배치도 편집기
-var furnitures;
+var furnitures;  //로드된 상품 목록\
 
 $( function() {
 	//초기화!!!
@@ -58,6 +58,7 @@ $( function() {
 		
 		var id=parseInt(pid)
 		curEditor=editors.get(id);
+		printPlaced();
 	});
 	
 	
@@ -76,6 +77,33 @@ $( function() {
 		heightStyle: "content",
 		collapsible: true
 	});
+	
+	
+	
+	// 새 배치도 작성 등록 폼 다이얼로그 
+	var writePlanDlg = $( "#writePlanForm" ).dialog({
+		autoOpen: false,
+		modal: true,
+		buttons: {
+			Add: function() {
+				unSelectAll();
+				var name=$( "#writePlanForm #planGroupName" ).val();
+				writePlan(name);
+				$( this ).dialog( "close" );
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		},
+		close: function() {
+			form[ 0 ].reset();
+		}
+	});
+
+	$("#writeBtn").on("click", function(){
+		writePlanDlg.dialog( "open" );
+	});
+	
 } );
 
 function changeDirection(target) {
@@ -89,15 +117,15 @@ function addPlanItem(){
 	var id=planCount++;
 	
 	var planName=$("#planName").val();
-	var planWidth=$("#planWidth").val();
-	var planHeigth=$("#planHeigth").val();
-	var planLength=$("#planLength").val();
+	var planWidth=Number($("#planWidth").val());
+	var planHeight=Number($("#planHeight").val());
+	var planLength=Number($("#planLength").val());
 	
 	$("#planitems").append("<li><div class='planitem'><a href='"+id+"'>"+planName+"</a></div></li>");
 	
 
 	var planStr="<div id='editorContainer-"+id+"' class='editorContainer'>";
-	planStr +="<svg width='100%' height='100%'>";
+	planStr +="<svg width='"+(planWidth+160+28)+"' height='"+(planHeight+160+28)+"'>";
 	planStr +="<g class='editor'>";
 	planStr +="</g>";
 	planStr +="</svg>";

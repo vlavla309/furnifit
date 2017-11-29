@@ -83,7 +83,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="bottom-header navBar">
 			<div class="container">
 				<div class="logo wow fadeInDown animated" data-wow-delay=".5s">
-					<h1><a href="${contextPath}"><img src="${contextPath}/resources/images/logo.jpg" alt="" /></a></h1>
+					<h1><a href="${contextPath}"><img src="${contextPath}/resources/images/logo.png" alt="" /></a></h1>
 				</div>
 				<div class="top-nav wow fadeInRight animated" data-wow-delay=".5s">
 					<nav class="navbar navbar-default">
@@ -95,7 +95,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav">
 								<li><a href="${contextPath}" class="active">Home</a></li>
-								<li><a href="codes.html">About</a></li>
+								<li><a href="${contextPath}/about">About</a></li>
 								<li><a href="${contextPath}/product">Product</a></li>
 								<li><a href="#" class="dropdown-toggle hvr-bounce-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">가구배치도<span class="caret"></span></a>
 									<ul class="dropdown-menu">

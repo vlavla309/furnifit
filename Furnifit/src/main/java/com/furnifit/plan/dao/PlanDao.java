@@ -34,4 +34,11 @@ public interface PlanDao {
 	 */
 	public int pageCount();
 	
+	/**
+	 * 새 배치도 등록 
+	 * @param Plan
+	 * @return
+	 */
+	public void create(Plan plan);
+	
 }

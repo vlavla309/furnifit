@@ -1,14 +1,21 @@
 package com.furnifit.plan.service;
 
+import java.util.Base64;
+import java.util.Base64.Decoder;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import com.furnifit.common.web.Params;
+import com.furnifit.common.web.UploadFileUtils;
+import com.furnifit.furniture.dao.FurnitureDao;
 import com.furnifit.plan.dao.PlanDao;
 import com.furnifit.plan.domain.Plan;
+import com.furnifit.planitem.dao.PlanItemDao;
+import com.furnifit.planitem.domain.PlanItem;
 
 /**
  * PlanServiceImpl 클래스
@@ -17,10 +24,21 @@ import com.furnifit.plan.domain.Plan;
  */
 @Service
 public class PlanServiceImpl implements PlanService {
-	
+
 	@Inject
-	private PlanDao dao;
-	
+	private PlanDao planDao;
+
+	@Inject
+	private PlanItemDao planitemDao;
+
+	@Inject
+	private FurnitureDao furnitureDao;
+
+
+
+	@Resource(name = "svgImgPath")
+	private String svgImgPath;
+
 	/**
 	 * 배치도 목록 리스트
 	 * @param email
@@ -28,7 +46,7 @@ public class PlanServiceImpl implements PlanService {
 	 */
 	@Override
 	public List<Plan> listAll(String email) throws Exception {
-		return dao.listAll(email);
+		return planDao.listAll(email);
 	}
 
 	/**
@@ -38,7 +56,7 @@ public class PlanServiceImpl implements PlanService {
 	 */
 	@Override
 	public List<Plan> listByParams(Params params) throws Exception {
-		return dao.listByParams(params);
+		return planDao.listByParams(params);
 	}
 
 	/**
@@ -48,6 +66,43 @@ public class PlanServiceImpl implements PlanService {
 	 */
 	@Override
 	public int pageCount() {
-		return dao.pageCount();
+		return planDao.pageCount();
+	}
+
+
+	/**
+	 * 새 배치도 작성 등록
+	 * @param plan
+	 * @return
+	 */
+	@Override
+	public void writePlan(Plan plan) {
+		//create Plans & Get planId
+		planDao.create(plan);
+		int planId=plan.getPlanId();
+		Decoder dec=Base64.getDecoder();
+		List<PlanItem> list=plan.getPlanitems();
+		try {
+			for (PlanItem planItem : list) {
+				planItem.setPlanId(planId);
+				planItem.getFurnitures();
+				//이미지 업로드 및 경로 설정
+				String encImage=planItem.getImage();
+				byte[] decByte = dec.decode(encImage.split(",")[1].getBytes());
+				String decImage=new String(decByte, "UTF-8");
+				String imgPath=UploadFileUtils.uploadFile(svgImgPath, planItem.getName()+".svg", decImage.getBytes());
+				planItem.setImage(imgPath);
+				planitemDao.create(planItem);
+				
+				int planitemId=planItem.getPlanitemId();
+				int[] productIds=planItem.getFurnitures();
+				for (int productId : productIds) {
+					furnitureDao.create(planitemId, productId);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

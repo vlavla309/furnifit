@@ -85,18 +85,24 @@ li {
 <!-- Javascript -->
 <script type="text/javascript" src="${rSrcPath}/js/jquery-1.12.4.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<!-- Snap.svg Library and Plug-in -->
 <script type="text/javascript" src="${rSrcPath}/js/plan/snap.svg-min.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/snap.svg.zpd.js"></script>
 
-<script type="text/javascript" src="${rSrcPath}/js/plan/planwriter.js"></script>
-<script type="text/javascript" src="${rSrcPath}/js/plan/Furniture.js"></script>
-<script type="text/javascript" src="${rSrcPath}/js/plan/function.js"></script>
-<script type="text/javascript" src="${rSrcPath}/js/plan/eventRegist.js"></script>
-<script type="text/javascript" src="${rSrcPath}/js/plan/eventHandler.js"></script>
+<!-- Domain -->
+<script type="text/javascript" src="${rSrcPath}/js/plan/Plan.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/Planitem.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/Editor.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/Coordinate.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/Furniture.js"></script>
+
+<script type="text/javascript" src="${rSrcPath}/js/plan/planwriter.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/function.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/function2.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/eventRegist.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/eventHandler.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/calc.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/converter.js"></script>
 
 <script type="text/javascript">
 	var contextPath = "${contextPath}";
@@ -117,9 +123,9 @@ li {
 				</div>
 				<div id="headerMenuWrap">
 					<ul id="headerMenuLeft">
-						<li><a id=saveBtn href="#">저장</a></li>
-						<li><a href="#">menu2</a></li>
-						<li><a id=crtBtn href="#">침대하나</a></li>
+						<li><a id=writeBtn href="#">Write</a></li>
+						<li><a id=saveBtn href="#">Save</a></li>
+						<li><a id=resetBtn href="#">Reset</a></li>
 					</ul>
 					<ul id="headerMenuRight">
 						<li class="exit"><a href="#"><strong>EXIT </strong><i
@@ -260,23 +266,24 @@ li {
 							</div>
 
 							<!-- 위시리스트 목록 -->
+							<c:if test="${login !=null}">
 							<div id="tabs-2" class="tabContent">
 								<div class="wishlistWrap"></div>
-
 							</div>
+							</c:if>
 
 							<!-- 배치 목록 -->
 							<div id="tabs-3" class="tabContent">
 								<div class="furnitureWrap">
 									<!-- 상품 목록 -->
-									<div class="product">
+									<!-- <div class="product">
 										<div class="imgWrap">
 											<a href="1"><img src="images/bed.png" /></a>
 										</div>
 										<div class="infoWrap">
 											<span>상품명</span> <span>브랜드</span> <span>200x200x200</span> <span>100000원</span>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 
@@ -355,6 +362,17 @@ li {
 			</form>
 		</div>
 		<!-- 새 배치도 추가 폼 -->
+		
+		<!-- 배치도 전송 폼 -->
+		<div id="writePlanForm" title="배치도 작성 등록">
+			<form>
+				<fieldset class="ui-helper-reset">
+					<label for="tab_title">배치도 그룹 이름</label><br> 
+					<input type="text" name="planName" id="planGroupName" placeholder='배치도 그룹의 이름을 입력해주세요' class="ui-widget-content ui-corner-all" required>
+				</fieldset>
+			</form>
+		</div>
+		<!-- /배치도 전송 폼 -->
 	</div>
 
 </body>

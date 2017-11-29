@@ -11,7 +11,15 @@ import com.furnifit.planitem.domain.PlanItem;
  * @author 손정화
  */
 public interface PlanItemDao {
+
 	
+	/**
+	 * 배치도 항목 등록
+	 * @param planitem
+	 * @throws Exception
+	 */
+	public void create(PlanItem planitem) throws Exception;
+
 	/**
 	 * 배치도 상세정보 조회
 	 * @param planitemId
@@ -34,5 +42,7 @@ public interface PlanItemDao {
 	 * @return
 	 */
 	public void delete(int planitemId) throws Exception;
+
+	
 	
 }
