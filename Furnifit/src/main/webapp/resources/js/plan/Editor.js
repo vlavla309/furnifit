@@ -21,7 +21,6 @@ function Editor( ){
 	this.length;
 }
 
-
 /* 배치도 객체 초기화 */
 Editor.prototype.init = function (id, zoomScale){
 	this.canvas = Snap("#editorContainer-"+id+" .editor");
@@ -70,7 +69,18 @@ Editor.prototype.room = function(name,width,height,length){
 		strokeWidth: 0
 	});
 	
-	var image = this.canvas.image(planImgPath+"/floor10.jpg", x, y ,w, h);
+	
+	
+	var encData="data:image/png;base64,";
+	var image=this.canvas.image(encData, x, y ,w, h);
+	//var canvas=this.canvas;
+	
+	getImageBase64(planImgPath+"/floor10.jpg", function (data) {
+		encData+=data;
+		loop=false;
+		image.attr("href", encData);
+	});
+
 	
 	var horizonGradient = this.canvas.paper.gradient("l(0, 0, 0, 1)#BDBDBD-#CFCFCF-#BDBDBD");
 	var verticalGradient = this.canvas.paper.gradient("l(0, 1, 1, 1)#BDBDBD-#CFCFCF-#BDBDBD");
@@ -139,7 +149,7 @@ Editor.prototype.room = function(name,width,height,length){
 	});
 	
 	var bbox=path.getBBox();
-	console.log(bbox);
+	//console.log(bbox);
 	var textWidth=80;
 	var textHeight=15;
 	var tpA=new Coordinate((bbox.cx-textWidth), (bbox.cy-textHeight));
@@ -155,12 +165,12 @@ Editor.prototype.room = function(name,width,height,length){
 	pathStr+=" Z";
 	
 
-	
+	console.log(encData);
 	var t1 = this.canvas.text(bbox.cx, bbox.cy, this.name);
 	t1.attr({"font-size":35});
-	console.log(t1);
+	/*console.log(t1);
 	console.log(t1.node);
-	console.log(t1.node.clientWidth);
+	console.log(t1.node.clientWidth);*/
 }
 
 /* 배치도에 새 가구 생성 */
@@ -170,7 +180,8 @@ Editor.prototype.furniture= function(x,y,target){
 	var width = target.width * this.scale;
 	var height = target.height * this.scale;
 	var length = target.length * this.scale;
-	var imgPath=planImgPath+"/";
+	var color= target.color;
+	var imgPath=planImgPath+"/"+color+"/";
 	
 	switch(target.category){
 	case "침대":
@@ -196,7 +207,15 @@ Editor.prototype.furniture= function(x,y,target){
 	}
 	
 	var rect=this.canvas.rect(x, y, width, length).attr("fill", "none");
-	var image=this.canvas.image(imgPath, x, y , width, length);
+	
+	
+	var encData="data:image/png;base64,";
+	var image=this.canvas.image(encData, x, y , width, length);
+	
+	getImageBase64(imgPath, function (data) {
+		encData+=data;
+		image.attr("href", encData);
+	});
 	
 	furniture=this.canvas.g(rect,image).attr({
 		stroke: "#6799FF",

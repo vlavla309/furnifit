@@ -1,8 +1,20 @@
 $( document ).ready(function(){
 	$("#saveBtn").on("click", function(){
 		unSelectAll();
-		var data=curEditor.canvas.paper.toDataURL();
+		//var data=curEditor.canvas.paper.toDataURL();
+		var data=curEditor.canvas.paper.outerSVG();
+ 
 		console.log(data);
+		
+		var $form = $('<form></form>');
+	     $form.attr('action', '/one/plan/test');
+	     $form.attr('method', 'post');
+	     $form.appendTo('body');
+	     
+	     //var svg = $('<input type="hidden" value="'+data+'" name="data">');
+	     //console.log(svg);
+	     $form.append(data);
+	     //$form.submit();
 	});
 
 	$("#crtBtn").on("click", function(){
