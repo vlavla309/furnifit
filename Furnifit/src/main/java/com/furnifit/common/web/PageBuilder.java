@@ -163,7 +163,8 @@ public class PageBuilder {
 		// 조건검색이 있는 경우
 		if(params instanceof ArticleParams) {
 			ArticleParams aParams= (ArticleParams) params;
-			queryString += aParams.getSort() != null ? "&sort=" + aParams.getSort() :"" +  aParams.getAcreage() != null ? "&acreage=" + aParams.getAcreage() : "";
+			queryString += aParams.getSort() != null ? "&sort=" + aParams.getSort() :"";
+			queryString += aParams.getAcreage() != null ? "&acreage=" + aParams.getAcreage() : "";
 		}
 
 		return queryString;
