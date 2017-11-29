@@ -107,14 +107,7 @@ a{
 	/* display:none; */	
 }
 
-.planitem{
-	border: 1px solid black;
-	background :white;
-	margin:auto;
-	padding:0.5em;
-	width:150px;
-	max-height:90px;
-}
+
 
 #leftToggle{
 	height:100%;
@@ -496,6 +489,46 @@ li {
 	display:inline-block;
 	margin: 0.5em 1em 0em;
 }
+
+#planitems{
+	margin-top:1em;
+}
+
+.planitem{
+	border-bottom: 1px solid #e7e7e7;
+	box-shadow: 0px 1px 10px 0px #d0d0d0;
+	background :white;
+	margin:auto;
+	margin-bottom:1em;
+	width:180px;
+	height:180px;
+}
+.planitem .imgWrap{
+	margin:auto;
+	width:170px;
+	height:150px;
+}
+
+.planitem .imgWrap a{
+	display: flex;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+.planitem .imgWrap img{
+	margin:auto;
+	max-width:100%;
+	max-height:100%;
+	width:auto;
+	height:auto;
+}
+.planitem .nameWrap{
+	margin:auto;
+	width:fit-content;
+	height:20px;
+}
+
 
 #loadingDiv{
 	position: absolute;

@@ -86,6 +86,9 @@ function dragDrop(x,y) {
 		if(dir[2])my--;
 		if(dir[3])mx++;
 
+		if(dir[0]&&dir[2] || dir[1]&&dir[3]){
+			break;
+		}
 		target.attr({transform: origTransform + (origTransform ? "T" : "t") + [mx, my]});
 		dir = isCollisionOfWall(target.getBBox());
 	}
@@ -100,7 +103,7 @@ function dragDrop(x,y) {
 			transform: savedTransform
 		});
 	}
-
+	refreshThumbnail();
 	curEditor.canvas.paper.zpd('toggle');
 }
 /*------------- 드래그 이벤트 핸들러 끝!--------------*/

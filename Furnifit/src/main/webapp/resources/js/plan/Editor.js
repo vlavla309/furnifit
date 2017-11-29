@@ -1,7 +1,8 @@
 /**
  * 배치도 화면 클래스
  */
-function Editor( ){
+function Editor(){
+	this.id;
 	this.canvas;
 	this.room;
 	this.furnitures;
@@ -25,6 +26,7 @@ function Editor( ){
 
 /* 배치도 객체 초기화 */
 Editor.prototype.init = function (id, zoomScale){
+	this.id=id;
 	this.canvas = Snap("#editorContainer-"+id+" .editor");
 	var paper = (this.canvas).paper;
 	 var applyZpd = function() {

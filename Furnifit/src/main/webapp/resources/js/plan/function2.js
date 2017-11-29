@@ -64,3 +64,12 @@ function printPlaced(){
 		
 		$('.furnitureWrap').html(str);
 }
+
+function refreshThumbnail(){
+	setTimeout(() => {
+		var svgData=curEditor.canvas.paper.toDataURL();
+		var id=curEditor.id;
+		var imgElem=$(".planitem  a[href="+id+"] img");
+		imgElem.attr("src",svgData);
+	}, 1000);
+}
