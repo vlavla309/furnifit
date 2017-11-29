@@ -5,7 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+/**
+ * Brand Controller 클래스
+ * 
+ * @author 김호준
+ * 
+ */
 @Controller
 @RequestMapping("/brand")
 public class BrandController {

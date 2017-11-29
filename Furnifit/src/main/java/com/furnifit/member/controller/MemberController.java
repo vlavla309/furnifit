@@ -20,15 +20,20 @@ import com.furnifit.member.domain.LoginDTO;
 import com.furnifit.member.domain.Member;
 import com.furnifit.member.service.MemberService;
 
-
+/**
+ * Member Controller 클래스
+ * @author 김호준
+ *
+ */
 @Controller
 @RequestMapping(value = "/member")
 public class MemberController {
 
+	/* 로그 확인 */
 	Logger log = Logger.getLogger(MemberController.class);
 
-	@Inject
-	private MemberService memberService;
+	@Inject                               // 해당 타입의 객체를 찾아서 변수에 자동으로 할당시킴
+	private MemberService memberService;  // root-context.xml 파일에 <context:component-scan /> 태그가 설정되어 있어야 한다.
 
 	// 로그인 페이지
 	@RequestMapping(value = "/login", method=RequestMethod.GET)
@@ -105,7 +110,7 @@ public class MemberController {
 	@RequestMapping(value = "/withdraw", method=RequestMethod.GET)
 	public String delete() {
 		log.debug("mypage 회원 탈퇴");
-		return "mypage/mypage";
+		return "member/mypage";
 	}
 	
 	// 회원 탈퇴 처리

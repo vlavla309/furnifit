@@ -31,11 +31,10 @@ public interface MemberDao {
 	// 회원정보 수정
 	public int update(Member member);
 	
-		
 	// 회원 탈퇴
 	public void delete(String email);
 	
-	/** 회원 여부 확인 */
+	// 회원 여부 확인
 	public Member login(LoginDTO dto);
 	
 	// 자동 로그인 처리를 위한 세션아이디와 유효기간 저장

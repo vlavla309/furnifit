@@ -10,17 +10,17 @@ import org.springframework.stereotype.Repository;
 import com.furnifit.coupon.domain.Coupon;
 
 /**
- * CouponDao MyBatis 구현 클래스
+ * CouponDao 인터페이스의 구현 클래스
  * @author 김호준
  *
  */
-@Repository
+@Repository // Dao를 스프링에 인식, 데이터베이스 연동을 위해서 @Repository 사용
 public class MybatisCouponDao implements CouponDao {
 	
 	private static final String NAMESPACE = "com.furnifit.coupon.dao.CouponDao";
 
-	@Inject
-	private SqlSession sqlSession;
+	@Inject                         // 해당 타입의 객체를 찾아서 변수에 자동으로 할당시킴
+	private SqlSession sqlSession;  // XML Mapper 파일에 등록된 SQL을 실행하기 위한 다양한 기능을 제공하기 때문에 사용했음
 
 	/**
 	 * 회원별 발급된 쿠폰 확인

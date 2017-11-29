@@ -106,7 +106,7 @@ public class ReplyController {
 		
 		logger.info("infiniteScrollDownPOST");
 		int bnoToStart = reply.getReply_id() - 1;  // 출력된 댓글의 마지막 번호에서 1개를 뺀 값
-		reply.setReply_id(bnoToStart);
+		reply.setReply_id(bnoToStart);             
 		return service.infiniteScrollDown(reply);
 	}
 

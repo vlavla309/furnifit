@@ -5,9 +5,10 @@ import java.util.List;
 import com.furnifit.reply.domain.Reply;
 
 /**
- * @author 김호준
- *
  * 댓글 Dao 인터페이스
+ * 
+ * @author 김호준
+ * 
  * XML Mapper를 사용하는 경우 id가 Dao 인터페이스 메소드와 이름이 같아야 한다.
  */
 public interface ReplyDao {

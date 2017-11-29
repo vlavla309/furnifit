@@ -6,12 +6,10 @@ body {
 	사진을 배경으로 만들고 크기와 위치 조절을 위한 코드
 	폰트의 설정과 크기 설정
 */
-
 @font-face {
 	font-family: 'Sequel';
 	src: url(../fonts/Sequel-Regular.ttf)
 }
-
 .scene {
 	height: 150vh;
 	overflow: hidden;
