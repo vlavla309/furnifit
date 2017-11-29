@@ -100,7 +100,6 @@ public class ProductController {
 		List<Color> colorlist = colordao.list();
 		List<Brand> brandlist = branddao.list();
 		List<Category> categorylist = categorys.list();
-		
 		List<Product> wishlist=null;
 		Member member = (Member) session.getAttribute("login");
 		if(member !=null) {
@@ -120,18 +119,8 @@ public class ProductController {
 	@RequestMapping(value="/{productid}", method= RequestMethod.GET)
 	public String read(Model model, @PathVariable("productid") int productid) {
 		Product product = productsrv.read(productid);
-		logger.info("Product : "+product);
-		
 		List<Product> categorylist = productsrv.productReadList(product.getCategory());
-		for (Product product2 : categorylist) {
-			logger.info(product2);
-		}
-		
 		List<Article> artlist = artsrv.productRead(productid);
-		
-		for (Article article : artlist) {
-			logger.info(article);
-		}
 		
 		model.addAttribute("product", product);
 		model.addAttribute("title", "Furnifit - "+product.getName());

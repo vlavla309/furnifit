@@ -63,6 +63,7 @@ Editor.prototype.room = function(name,width,height,length){
 	pathStr+=" L"+(x+w)+" "+(y+h);
 	pathStr+=" L"+(x)+" "+(y+h);
 	pathStr+=" L"+x+" "+y;
+	pathStr+=" Z";
 	var path=this.canvas.path(pathStr).attr({
 		"fill": "none",
 		stroke: "#5D5D5D",
@@ -136,37 +137,31 @@ Editor.prototype.room = function(name,width,height,length){
 		unSelectAll();
 		select(this);
 	});
-}
-
-/* 배치도에 새 가구 생성 */
-Editor.prototype.furniture2= function(x,y,type, productId){
-	var furniture;
-	var rect=this.canvas.rect(x, y, 100*this.scale, 213*this.scale).attr("fill", "none");
-	var image=this.canvas.image(planImgPath+"/bed.png", x, y ,100*this.scale, 213*this.scale);
 	
-	furniture=this.canvas.g(rect,image).attr({
-		stroke: "#6799FF",
-		strokeWidth: 0,
-		class: "furniture"}
-	).data("productId", productId).transform("");
-
-	//클릭 이벤트 등록
-	furniture.mousedown(function(){
-		unSelectAll();
-	});
+	var bbox=path.getBBox();
+	console.log(bbox);
+	var textWidth=80;
+	var textHeight=15;
+	var tpA=new Coordinate((bbox.cx-textWidth), (bbox.cy-textHeight));
+	var tpB=new Coordinate((bbox.cx+textWidth), (bbox.cy-textHeight));
+	var tpC=new Coordinate((bbox.cx+textWidth), (bbox.cy+textHeight));
+	var tpD=new Coordinate((bbox.cx-textWidth), (bbox.cy+textHeight));
 	
-	furniture.mouseup(function(){
-		select(this);
-	});
+	pathStr="M"+tpA.x+" "+tpA.y;
+	pathStr+=" L"+tpB.x+" "+tpB.y;
+	pathStr+=" L"+tpC.x+" "+tpC.y;
+	pathStr+=" L"+tpD.x+" "+tpD.y;
+	pathStr+=" L"+tpA.x+" "+tpA.y;
+	pathStr+=" Z";
+	
 
-	//드래그 이벤트 등록
-	furniture.drag(dragMove, dragStart,dragDrop);
-	furniture.hover(hIn, hOut);
-	this.furnitures.push(furniture);
-	return furniture;
+	
+	var t1 = this.canvas.text(bbox.cx, bbox.cy, this.name);
+	t1.attr({"font-size":35});
+	console.log(t1);
+	console.log(t1.node);
+	console.log(t1.node.clientWidth);
 }
-
-
 
 /* 배치도에 새 가구 생성 */
 Editor.prototype.furniture= function(x,y,target){

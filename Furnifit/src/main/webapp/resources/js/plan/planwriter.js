@@ -79,13 +79,9 @@ $( function() {
 } );
 
 function changeDirection(target) {
-	var val = $(target).text();
-	if (val == ">") {
-		$(target).text("<");
-	} else {
-		$(target).text(">");
-	}
-	console.log(val);
+	var val = $(target).children();
+	val.toggleClass("fa-angle-double-right");
+	val.toggleClass("fa-angle-double-left");
 }
 
 
