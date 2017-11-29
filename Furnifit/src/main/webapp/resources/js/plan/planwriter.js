@@ -89,15 +89,17 @@ function addPlanItem(){
 	var id=planCount++;
 	
 	var planName=$("#planName").val();
-	var planWidth=$("#planWidth").val();
-	var planHeigth=$("#planHeigth").val();
-	var planLength=$("#planLength").val();
+	var planWidth=Number($("#planWidth").val());
+	var planHeight=Number($("#planHeight").val());
+	var planLength=Number($("#planLength").val());
 	
 	$("#planitems").append("<li><div class='planitem'><a href='"+id+"'>"+planName+"</a></div></li>");
 	
 
 	var planStr="<div id='editorContainer-"+id+"' class='editorContainer'>";
-	planStr +="<svg width='100%' height='100%'>";
+	//planStr +="<svg width='100%' height='100%'>";
+	//planStr +="<svg width='1280px' height='720px'>";
+	planStr +="<svg width='"+(planWidth+160+28)+"' height='"+(planHeight+160+28)+"'>";
 	planStr +="<g class='editor'>";
 	planStr +="</g>";
 	planStr +="</svg>";

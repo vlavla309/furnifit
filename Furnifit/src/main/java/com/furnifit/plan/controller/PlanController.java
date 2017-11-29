@@ -90,4 +90,20 @@ public class PlanController {
 	public String writer() throws Exception {
 		return "plan/writer";
 	}
+	
+	@RequestMapping(value = "/plan/test", method=RequestMethod.POST)
+	public String test(String data, Model model) throws Exception {
+		System.out.println(data);
+		model.addAttribute("svgData", data);
+		return "plan/svgtest";
+	}
+	
+	@RequestMapping(value = "/plan/test", method=RequestMethod.GET)
+	public String test2(String data, Model model) throws Exception {
+		System.out.println(data);
+		model.addAttribute("svgData", data);
+		return "plan/svgtest";
+	}
+	
+	
 }

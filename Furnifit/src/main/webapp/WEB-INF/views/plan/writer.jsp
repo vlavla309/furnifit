@@ -97,6 +97,7 @@ li {
 <script type="text/javascript" src="${rSrcPath}/js/plan/Editor.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/Coordinate.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/calc.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/converter.js"></script>
 
 <script type="text/javascript">
 	var contextPath = "${contextPath}";
