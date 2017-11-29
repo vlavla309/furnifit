@@ -4,6 +4,27 @@
                         
 <mapper namespace="com.furnifit.planitem.dao.PlanItemDao">
 	
+	<!-- 새 배치도 항목 등록 -->
+	<insert id="create" parameterType="PlanItem">
+		INSERT INTO planitems
+		(planitem_id,
+		plan_id,
+		width,
+		height,
+		length,
+		acreage,
+		image,
+		name)
+		VALUES (planitems_seq.NEXTVAL,
+		#{planId},
+		#{width},
+		#{height},
+		#{length},
+		#{acreage},
+		#{image},
+		#{name})
+	</insert>
+	
 	<!-- 배치도 상세정보 조회 -->
 	<select id="read" resultType="PlanItem" parameterType="int">
 		SELECT planitem_id AS "planitemId",

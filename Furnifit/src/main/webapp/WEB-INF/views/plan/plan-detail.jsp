@@ -39,7 +39,7 @@
       <div class="box">
         <div class="table-responsive">
           <table class="table"> 
-            <tr><td class="text-center"><img src="${rSrcPath}/${planitemlist.image}" class="img-size"></td></tr>
+            <tr><td class="text-center"><img src="${rSrcPath}/svg/plan/${planitemlist.image}" class="img-size"></td></tr>
           </table>
         </div>
         <div class="table-responsive">

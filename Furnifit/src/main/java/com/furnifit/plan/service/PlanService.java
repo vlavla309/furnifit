@@ -33,4 +33,12 @@ public interface PlanService {
 	 */
 	public int pageCount();
 	
+	
+	
+	/**
+	 * 새 배치도 작성 등록
+	 * @param plan
+	 * @return
+	 */
+	public void writePlan(Plan plan);
 }

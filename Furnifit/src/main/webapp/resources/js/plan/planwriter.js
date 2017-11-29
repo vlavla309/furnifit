@@ -76,6 +76,33 @@ $( function() {
 		heightStyle: "content",
 		collapsible: true
 	});
+	
+	
+	
+	// 새 배치도 작성 등록 폼 다이얼로그 
+	var writePlanDlg = $( "#writePlanForm" ).dialog({
+		autoOpen: false,
+		modal: true,
+		buttons: {
+			Add: function() {
+				unSelectAll();
+				var name=$( "#writePlanForm #planGroupName" ).val();
+				writePlan(name);
+				$( this ).dialog( "close" );
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		},
+		close: function() {
+			form[ 0 ].reset();
+		}
+	});
+
+	$("#writeBtn").on("click", function(){
+		writePlanDlg.dialog( "open" );
+	});
+	
 } );
 
 function changeDirection(target) {
@@ -97,8 +124,6 @@ function addPlanItem(){
 	
 
 	var planStr="<div id='editorContainer-"+id+"' class='editorContainer'>";
-	//planStr +="<svg width='100%' height='100%'>";
-	//planStr +="<svg width='1280px' height='720px'>";
 	planStr +="<svg width='"+(planWidth+160+28)+"' height='"+(planHeight+160+28)+"'>";
 	planStr +="<g class='editor'>";
 	planStr +="</g>";

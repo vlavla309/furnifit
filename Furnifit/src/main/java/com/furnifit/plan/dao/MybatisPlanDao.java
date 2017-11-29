@@ -53,4 +53,11 @@ public class MybatisPlanDao implements PlanDao {
 	public int pageCount() {
 		return sqlSession.selectOne(NAMESPACE + ".pageCount");
 	}
+
+	@Override
+	public void create(Plan plan) {
+		sqlSession.insert(NAMESPACE + ".create", plan);
+	}
+	
+	
 }
