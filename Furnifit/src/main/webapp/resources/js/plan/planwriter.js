@@ -58,6 +58,7 @@ $( function() {
 		
 		var id=parseInt(pid)
 		curEditor=editors.get(id);
+		printPlaced();
 	});
 	
 	

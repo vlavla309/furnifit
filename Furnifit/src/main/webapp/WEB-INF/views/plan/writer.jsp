@@ -276,14 +276,14 @@ li {
 							<div id="tabs-3" class="tabContent">
 								<div class="furnitureWrap">
 									<!-- 상품 목록 -->
-									<div class="product">
+									<!-- <div class="product">
 										<div class="imgWrap">
 											<a href="1"><img src="images/bed.png" /></a>
 										</div>
 										<div class="infoWrap">
 											<span>상품명</span> <span>브랜드</span> <span>200x200x200</span> <span>100000원</span>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 
