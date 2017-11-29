@@ -101,7 +101,7 @@ li {
 <script type="text/javascript" src="${rSrcPath}/js/plan/function2.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/eventRegist.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/eventHandler.js"></script>
-<script type="text/javascript" src="${rSrcPath}/js/plan/calc.js"></script>
+<script type="text/javascript" src="${rSrcPath}/js/plan/Calculator.js"></script>
 <script type="text/javascript" src="${rSrcPath}/js/plan/converter.js"></script>
 
 <script type="text/javascript">
