@@ -8,8 +8,6 @@ import com.furnifit.coupon.domain.Coupon;
  * 쿠폰 Dao 인터페이스
  * 
  * @author 김호준
- * 
- * XML Mapper를 사용하는 경우 id가 Dao 인터페이스 메소드와 이름이 같아야 한다.
  */
 public interface CouponDao {
 	
