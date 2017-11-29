@@ -19,10 +19,8 @@ function Editor( ){
 	this.width;
 	this.height;
 	this.length;
+	this.acreage;
 	
-	this.placed;
-	
-	this.originZpdMatrix;
 }
 
 /* 배치도 객체 초기화 */
@@ -56,7 +54,8 @@ Editor.prototype.room = function(name,width,height,length){
 	this.width=width;
 	this.height=height;
 	this.length=length;
-	
+	this.acreage=getAcreage(width, height); 
+		
 	var x=80; //방 렌더링 시작 위치;
 	var y=80; //방 렌더링 시작 위치;
 	var w=width*this.scale;
@@ -172,11 +171,8 @@ Editor.prototype.room = function(name,width,height,length){
 	
 
 	console.log(encData);
-	var t1 = this.canvas.text(bbox.cx, bbox.cy, this.name);
-	t1.attr({"font-size":35});
-	/*console.log(t1);
-	console.log(t1.node);
-	console.log(t1.node.clientWidth);*/
+	var t1 = this.canvas.text(bbox.cx, bbox.cy, this.name+"("+this.acreage+"평)");
+	t1.attr({"font-size":28});
 }
 
 /* 배치도에 새 가구 생성 */

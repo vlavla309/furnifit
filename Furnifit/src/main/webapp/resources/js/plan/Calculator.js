@@ -7,5 +7,5 @@ function cos(r){
 }
 
 function getAcreage(width, height){
-	return Math.floor((width*heigth)/3.305);
+	return Math.floor((width*height)/(3.305*10000));
 }
