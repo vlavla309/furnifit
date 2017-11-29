@@ -80,6 +80,77 @@ li {
 	display: inline;
 	margin-right: 2em;
 }
+
+#loadingDiv{
+	position: absolute;
+	z-index: 1;
+	width:100%;
+	height:100%;
+	background:black;
+	opacity: 0.75;
+}
+
+#loadingWrap{
+position: relative; 
+	z-index: 1;
+	width:fit-content;
+	height:fit-content;
+	margin:auto;
+	top: 30%;
+}
+
+#loadingWrap .logo{
+	margin:auto;
+	margin-bottom:2em;
+}
+
+.loader {
+	position: relative; 
+	/* left: 50%;
+	top: 50%; */
+	z-index: 1;
+	width: 150px;
+	height: 150px;
+	/* margin: -75px 0 0 -75px; */
+	margin:auto;
+	border: 16px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 16px solid #3498db;
+	width: 120px;
+	height: 120px;
+	-webkit-animation: spin 2s linear infinite;
+	animation: spin 2s linear infinite;
+}
+
+@
+-webkit-keyframes spin { 0% {
+	-webkit-transform: rotate(0deg);
+}
+
+100%
+{
+-webkit-transform
+:
+ 
+rotate
+(360deg);
+ 
+}
+}
+@
+keyframes spin { 0% {
+	transform: rotate(0deg);
+}
+100%
+{
+transform
+:
+ 
+rotate
+(360deg);
+ 
+}
+}
 </style>
 
 <!-- Javascript -->
@@ -110,10 +181,29 @@ li {
 	var rSrcPath = "${rSrcPath}";
 	var proImgPath = "${rSrcPath}/productimg";
 	var email = "${login.email}"
+	
+	
+	var _showPage = function() {
+		var loader = $("#loadingWrap");
+		loader.css("display", "none");
+	};
 </script>
 
 </head>
+
 <body>
+<!--로딩화면 -->
+	<div id="loadingDiv">
+		<div id="loadingWrap">
+			<%-- <div class="logo">
+				<img src="${rSrcPath}/images/logo.png">
+			</div> --%>
+			<div class="loader"></div>
+		</div>
+	</div>
+
+
+
 	<div id="wrap">
 		<!-- header 시작 -->
 		<div id="header">
@@ -126,6 +216,7 @@ li {
 						<li><a id=writeBtn href="#">Write</a></li>
 						<li><a id=saveBtn href="#">Save</a></li>
 						<li><a id=resetBtn href="#">Reset</a></li>
+						<li><a id=helpBtn href="${contextPath }/about" target="_blank">Help</a></li>
 					</ul>
 					<ul id="headerMenuRight">
 						<li class="exit"><a href="#"><strong>EXIT </strong><i
