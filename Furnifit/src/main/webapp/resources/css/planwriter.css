@@ -230,6 +230,7 @@ a{
 }
 
 .product .infoWrap span{
+	margin:0.3em 0em;
 	display:block;
 }
 
@@ -485,10 +486,15 @@ a{
 	background-color: #555;
 }
 
+
 li {
 	list-style: none;
-	display: inline;
-	margin-right: 2em;
+}
+
+#colorul li{
+	width:fit-content;
+	display:inline-block;
+	margin: 0.5em 1em 0em;
 }
 
 #loadingDiv{
