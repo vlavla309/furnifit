@@ -2,8 +2,10 @@
  * 
  */
 
-function writePlan(){
+function writePlan(planName){
 	var plan=new Plan();
+
+	plan.name=planName;
 
 	editors.forEach(function(editor, key, map) {
 		editor.canvas.paper.zpd('destroy'); 

@@ -362,6 +362,17 @@ li {
 			</form>
 		</div>
 		<!-- 새 배치도 추가 폼 -->
+		
+		<!-- 배치도 전송 폼 -->
+		<div id="writePlanForm" title="배치도 작성 등록">
+			<form>
+				<fieldset class="ui-helper-reset">
+					<label for="tab_title">배치도 그룹 이름</label><br> 
+					<input type="text" name="planName" id="planGroupName" placeholder='배치도 그룹의 이름을 입력해주세요' class="ui-widget-content ui-corner-all" required>
+				</fieldset>
+			</form>
+		</div>
+		<!-- /배치도 전송 폼 -->
 	</div>
 
 </body>

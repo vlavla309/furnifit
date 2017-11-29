@@ -38,6 +38,11 @@
 		<beans:constructor-arg value="C:/workspace/git/Furnifit/src/main/webapp/resources/articleimg"/>
 	</beans:bean>
 	
+	<!-- 배치도 이미지업로드 패스 등록 -->
+	<beans:bean id="svgImgPath" class="java.lang.String">
+		<beans:constructor-arg value="C:/workspace/git/Furnifit/src/main/webapp/resources/svg/plan"/>
+	</beans:bean>
+	
 	<task:scheduler id="jobScheduler" pool-size="10" />
 	<task:annotation-driven scheduler="jobScheduler" />
 	

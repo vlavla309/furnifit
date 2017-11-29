@@ -56,4 +56,19 @@
 		FROM   plans
 	</select>
 	
+	
+	<!-- 새 배치도 등ㄺ -->
+	<insert id="create" parameterType="Plan">
+		<selectKey keyProperty="planId" resultType="int" order="BEFORE">
+			select plans_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO plans
+		(plan_id,
+		email,
+		name)
+		VALUES (#{planId},
+		#{email},
+		#{name})
+	</insert>
+	
 </mapper>

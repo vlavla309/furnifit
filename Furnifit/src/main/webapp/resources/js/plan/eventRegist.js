@@ -1,9 +1,4 @@
 $( document ).ready(function(){
-	$("#writeBtn").on("click", function(){
-		unSelectAll();
-		writePlan();
-	});
-
 	$("#saveBtn").on("click", function(){
 		alert("미구현ㅎㅎ");
 	});

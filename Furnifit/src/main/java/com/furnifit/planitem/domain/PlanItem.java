@@ -1,5 +1,9 @@
 package com.furnifit.planitem.domain;
 
+import java.util.List;
+
+import com.furnifit.product.domain.Product;
+
 /**
  * @author 박보라
  *
@@ -14,6 +18,7 @@ public class PlanItem {
 	private int acreage;
 	private String image;
 	private String name;
+	private List<Product> furnitures;
 	
 	public PlanItem() {}
 
@@ -106,11 +111,21 @@ public class PlanItem {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	
+	public List<Product> getFurnitures() {
+		return furnitures;
+	}
+
+	public void setFurnitures(List<Product> furnitures) {
+		this.furnitures = furnitures;
+	}
 
 	@Override
 	public String toString() {
 		return "PlanItem [planitemId=" + planitemId + ", planId=" + planId + ", width=" + width + ", height=" + height
-				+ ", length=" + length + ", acreage=" + acreage + ", image=" + image + ", name=" + name + "]";
+				+ ", length=" + length + ", acreage=" + acreage + ", image=" + image + ", name=" + name
+				+ ", furnitures=" + furnitures + "]";
 	}
+
 
 }
