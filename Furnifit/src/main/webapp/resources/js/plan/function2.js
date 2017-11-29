@@ -15,11 +15,9 @@ function writePlan(){
 		var height=editor.height;
 		var length=editor.length;
 		var acreage=editor.acreage;
-
-		var planitem=new Planitem(name, width, height, length, acreage);
+		var image=editor.canvas.paper.toDataURL();
+		var planitem=new Planitem(name, width, height, length, acreage, image);
 		plan.planitems.push(planitem);
-		
-		console.log(editor.canvas.paper.toDataURL());
 	});
 
 

@@ -101,24 +101,22 @@ public class PlanController {
 	@ResponseBody
 	public String regist(@RequestBody Map<String, Object> plan) throws Exception {
 		logger.info("In regist()........");
-		logger.info(plan);
+		//logger.info(plan);
+		
+		List<Map<String, Object>> pitems= (List<Map<String, Object>>) plan.get("planitems");
+		for (Map<String, Object> map : pitems) {
+			logger.info(map);
+		}
+		
+		
+	/*	for (PlanItem planItem : planitems) {
+			logger.info(planItem);
+		}
+*/
 		
 		return "plan/writer";
 	}
 	
-	@RequestMapping(value = "/plan/test", method=RequestMethod.POST)
-	public String test(String data, Model model) throws Exception {
-		System.out.println(data);
-		model.addAttribute("svgData", data);
-		return "plan/svgtest";
-	}
-	
-	@RequestMapping(value = "/plan/test", method=RequestMethod.GET)
-	public String test2(String data, Model model) throws Exception {
-		System.out.println(data);
-		model.addAttribute("svgData", data);
-		return "plan/svgtest";
-	}
 	
 	
 }
