@@ -23,7 +23,7 @@
                      </tr>               
                      <tr>
                       <div class="alert alert-warning" role="alert">
-                       <strong id="shareInfo">평 수 :</strong>&nbsp;&nbsp;<input id="m" readonly="readonly"  value="${planItem.length}" type="text">x <input id="m" readonly="readonly" value="${planItem.width}" type="text" >x <input  id="m" readonly="readonly"  value="${planItem.height}" type="text">
+                       <strong id="shareInfo">평 수 :</strong>&nbsp;&nbsp;<input id="m" readonly="readonly"  value="${planItem.width}" type="text">x <input id="m" readonly="readonly" value="${planItem.height}" type="text" >x <input  id="m" readonly="readonly"  value="${planItem.length}" type="text">
                         &nbsp;&nbsp;&nbsp; <strong id="shareInfo">(&nbsp;평 수 :&nbsp;</strong><input readonly="readonly" value="${planItem.acreage}"  id="acreage" type="text"> <strong id="shareInfo">평&nbsp;)</strong>
                       </div>
                      </tr>

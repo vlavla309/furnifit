@@ -28,7 +28,7 @@
                    </tr>              
                    <tr>
                     <div class="alert alert-warning" role="alert">
-                    <strong id="shareInfo">방크기 :</strong><input readonly="readonly"  value="${planItem.length}" id="m" type="text">x <input readonly="readonly" value="${planItem.width}"  id="m" type="text" >x <input readonly="readonly"  value="${planItem.height}" id="m" type="text">
+                    <strong id="shareInfo">방크기 :</strong><input readonly="readonly"  value="${planItem.width}" id="m" type="text">x <input readonly="readonly" value="${planItem.height}"  id="m" type="text" >x <input readonly="readonly"  value="${planItem.length}" id="m" type="text">
                     &nbsp;&nbsp; <strong id="shareInfo">(&nbsp;평&nbsp;&nbsp;수  :&nbsp;</strong><input readonly="readonly" value="${planItem.acreage}"  id="acreage" type="text"> <strong id="shareInfo">평&nbsp;)</strong>
                     </div>
                    </tr>
