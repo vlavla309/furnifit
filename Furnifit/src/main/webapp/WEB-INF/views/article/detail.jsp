@@ -166,7 +166,7 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-          <button type="button" class="btn btn-default id="replyAddBtn">ADD REPLY</button>
+          <button type="button" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
         </div>
       </div>
       <br>
@@ -176,7 +176,7 @@
 <div id="replies">
 </div>
 
-<script src="${rSrcPath}js/article_detail_reply.js"></script>
+
 
 </div>
 </div>
@@ -187,7 +187,7 @@
 </div>
 </div>
 </div>  
-
+<script src="${rSrcPath}js/article_detail_reply.js"></script>
 <!-- //blog -->
 <%@ include file="../include/footer.jsp" %>
 </body>
