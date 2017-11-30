@@ -82,7 +82,7 @@ Editor.prototype.room = function(name,width,height,length){
 	var image=this.canvas.image(encData, x, y ,w, h);
 	//var canvas=this.canvas;
 	
-	getImageBase64(planImgPath+"/floor10.jpg", function (data) {
+	getImageBase64(planImgPath+"/floor16.jpg", function (data) {
 		encData+=data;
 		loop=false;
 		image.attr("href", encData);
