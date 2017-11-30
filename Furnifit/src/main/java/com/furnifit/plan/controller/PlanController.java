@@ -114,5 +114,23 @@ public class PlanController {
 		}
 		return entity;
 	}
+	
+	/**
+	 * 배치도 파일 저장 처리(김형주)
+	 */
+	@RequestMapping(value = "/plan/file", method=RequestMethod.POST)
+	public ResponseEntity<String> regist(@RequestBody PlanItem planitem, HttpSession session) throws Exception {
+		logger.info("플랜이름 :"+planitem.getName());
+		logger.info("플랜내용 :"+planitem.getImage());
+		ResponseEntity<String> entity = null;
+		try {
+			String filePath = planService.saveFile(planitem);
+			entity = new ResponseEntity<String>(filePath,HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 
 }

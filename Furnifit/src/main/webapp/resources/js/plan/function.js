@@ -54,7 +54,7 @@ function wishlist(data) {
 		$.each(data.wishlist, function(i, item) {
 					str+="	<div class=\"product\">"
 					str+="		<div class=\"imgWrap\">"
-					str+="			<a href=\"1\"><img src=\"" + proImgPath + "" + item.imgs[0].path + "/"+ item.imgs[0].name + "\" /></a>"
+					str+="			<a class='addFurnitureBtn' href=\"1\"><img src=\"" + proImgPath + "" + item.imgs[0].path + "/"+ item.imgs[0].name + "\" /></a>"
 					str+="		</div>"
 					str+="	<div class=\"infoWrap\">"
 					str+="			<span>"+item.name+"</span> <span>"+item.brand+"</span> <span>"+item.width+"*"+item.height+"*"+item.length +"</span> <span>"+item.price+"</span>"
