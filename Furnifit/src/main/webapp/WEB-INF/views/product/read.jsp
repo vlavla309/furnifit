@@ -22,11 +22,12 @@
 <link rel="stylesheet" type="text/css" href="${rSrcPath}css/custom.css" />
 <script src="${rSrcPath}js/modernizr.custom.17475.js"></script>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="${rSrcPath}/js/bootstrap.js"></script>
 <script type="text/javascript" src="${rSrcPath}js/jquerypp.custom.js"></script>
 <script type="text/javascript" src="${rSrcPath}js/jquery.elastislide.js"></script>
-		
+
 <script src="${rSrcPath}js/productRead.js"></script>
 
 <style>
@@ -133,16 +134,18 @@
 					<ul id="carousel1" class="elastislide-list">
 						<c:forEach items="${categorylist}" var="category">
 							<c:forEach items="${category.imgs}" var="img">
-								<li><a href="${contextPath}/product/${img.productId}"><img
-										src="${rSrcPath}/productimg/${img.path}/s_${img.name}"
-										alt="image04" /></a></li>
+								<c:if test="${img.path != '' || img.path != 'null'}">
+									<li><a href="${contextPath}/product/${img.productId}"><img
+											src="${rSrcPath}/productimg/${img.path}/s_${img.name}"/></a>
+									</li>
+								</c:if>
 							</c:forEach>
 						</c:forEach>
 					</ul>
 					<!-- End Elastislide Carousel -->
 				</div>
 			</div>
-			
+
 			<div class="Categories" data-wow-delay=".5s">
 				<h3>이 가구를 사용한 배치도</h3>
 				<div class="column">
@@ -157,7 +160,7 @@
 					<!-- End Elastislide Carousel -->
 				</div>
 			</div>
-			
+
 		</div>
 		<div class="clearfix"></div>
 	</div>
