@@ -17,9 +17,11 @@ function unSelectAll(){
 	setFooterBtnUp();
 	$("#furnitureInfoWrap").hide();
 	selectedElem=null;
-	curEditor.furnitures.attr({
-		strokeWidth: 0 // CamelCase...
-	});
+	if(curEditor){
+		curEditor.furnitures.attr({
+			strokeWidth: 0 // CamelCase...
+		});
+	}
 }
 
 function hIn(){

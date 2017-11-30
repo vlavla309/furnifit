@@ -166,7 +166,7 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-          <button type="button" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
+          <button type="button" class="btn btn-default" id="replyAddBtn">ADD REPLY</button>
         </div>
       </div>
       <br>

@@ -6,6 +6,8 @@ function Editor(){
 	this.canvas;
 	this.room;
 	this.furnitures;
+	
+	this.wallWidth=14;
 	this.wallHorizon;
 	this.wallVertical;
 	this.wallNorth;
@@ -62,7 +64,7 @@ Editor.prototype.room = function(name,width,height,length){
 	var y=80; //방 렌더링 시작 위치;
 	var w=width*this.scale;
 	var h=height*this.scale;
-	var wallWidth=14*this.scale;
+	var wallWidth=this.wallWidth*this.scale;
 
 	var pathStr="M"+x+" "+y;
 	pathStr+=" L"+(x+w)+" "+y;
