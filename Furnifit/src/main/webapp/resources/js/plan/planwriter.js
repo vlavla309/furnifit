@@ -134,7 +134,9 @@ function addPlanItem(){
 	var planLength=Number($("#planLength").val());
 	
 	
-	var planitemThumbStr="<li><div class='planitem'><div class='imgWrap'><a href='"+id+"'>"
+	var planitemThumbStr="<li><div class='planitem' id='planitem-"+id+"'><div class='removeBtn'>";
+	planitemThumbStr+="<a href='"+id+"'><i class='fa fa-times' aria-hidden='true'></i></a>";
+	planitemThumbStr+="</div><div class='imgWrap'><a href='"+id+"'>"
 	planitemThumbStr+="<img src='#' art='"+planName+"'>";
 	planitemThumbStr+="</a></div>";
 	planitemThumbStr+="<div class='nameWrap'><span>"+planName+"<span></div>";
@@ -162,12 +164,15 @@ function addPlanItem(){
 }
 
 function delPlanItem(id){
-	editors.delete(id);
+	editors.delete(parseInt(id));
+	curEditor=null;
+	printPlaced();
 	$("#editorContainer-"+id).remove();
+	$("#planitem-"+id).remove();
 }
 
 function selectPlan(id){
-	$(".planitem a[href="+id+"]").trigger("click");
+	$(".planitem .imgWrap a[href="+id+"]").trigger("click");
 }
 
 function setFurnitureInfo(){
@@ -180,5 +185,7 @@ function setFurnitureInfo(){
 	$("#furnitureInfoWrap .infoWrap .name").html("<strong>"+furniture.name+"</strong>");
 	$("#furnitureInfoWrap .infoWrap .brand").text(furniture.brand);
 	$("#furnitureInfoWrap .infoWrap .size").text(furniture.width+"*"+furniture.height+"*"+furniture.length +"(가로*세로*높이)");
+	$("#furnitureInfoWrap .descWrap .description").text(furniture.description);
+	
 }
 

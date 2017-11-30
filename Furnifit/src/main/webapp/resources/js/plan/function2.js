@@ -34,9 +34,9 @@ function writePlan(planName){
 		type : 'post',
 		data : jsonData,
 		contentType: 'application/json',
-		mimeType: 'application/json',
 		success : function(data) {
-			console.log(data)
+			console.log(data);
+			location.href=contextPath+"/mypage/planlist";
 		},
 		error : function(data) {
 			console.log(data)
@@ -45,13 +45,15 @@ function writePlan(planName){
 }
 
 function printPlaced(){
-	var str = ""
-		curEditor.furnitures.forEach(function(furniture){
-			var productId=furniture.data("productId");
-			var item=furnitures.get(productId);
-			var id=furniture.id;
-			
-			str+="	<div class=\"product\">"
+	var str = "";
+		if(curEditor){
+			console.log("있음?");
+			curEditor.furnitures.forEach(function(furniture){
+				var productId=furniture.data("productId");
+				var item=furnitures.get(productId);
+				var id=furniture.id;
+
+				str+="	<div class=\"product\">"
 				str+="		<div class=\"imgWrap\">"
 				str+="			<a href='"+id+"' class='placedItemBtn'><img src='" + item.imgPath+ "' /></a>"
 				str+="		</div>"
@@ -59,9 +61,9 @@ function printPlaced(){
 				str+="			<span>"+item.name+"</span> <span>"+item.brand+"</span> <span>"+item.width+"*"+item.height+"*"+item.length +"</span> <span>"+item.price+"</span>"
 				str+="		</div>"
 				str+="	</div>"
-		});
-					
-		
+			});
+		}
+	
 		$('.furnitureWrap').html(str);
 }
 
@@ -72,4 +74,14 @@ function refreshThumbnail(){
 		var imgElem=$(".planitem  a[href="+id+"] img");
 		imgElem.attr("src",svgData);
 	}, 1000);
+}
+
+function setFooterBtnUp(){
+	$("#downBtn i").removeClass("fa-angle-double-down");
+	$("#downBtn i").addClass("fa-angle-double-up");
+}
+
+function setFooterBtnDown(){
+	$("#downBtn i").removeClass("fa-angle-double-up");
+	$("#downBtn i").addClass("fa-angle-double-down	 ");
 }

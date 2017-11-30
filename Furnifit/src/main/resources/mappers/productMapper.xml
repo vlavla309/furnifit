@@ -64,8 +64,7 @@
 	</select>
 
 	<select id="listAll" resultType="Product">
-		SELECT product_id AS
-		"productId",
+		SELECT product_id AS "productId",
 		category,
 		NAME,
 		brand,
@@ -227,7 +226,7 @@
 
 	<!-- 상품 상세보기에서 상품과 같은 카테고리에 있는 상품 목록을 보여주는 부분 -->
 	<select id="productReadList" resultType="Product" parameterType="String">
-		select product_id as "", category, brand from Products where category
+		select product_id as "productId", category, brand from Products where category
 		= #{category}
 	</select>
 

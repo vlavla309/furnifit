@@ -122,6 +122,11 @@ public class ProductController {
 		List<Product> categorylist = productsrv.productReadList(product.getCategory());
 		List<Article> artlist = artsrv.productRead(productid);
 		
+		
+		for (Product product1 : categorylist) {
+			logger.info(product1);
+		}
+		
 		model.addAttribute("product", product);
 		model.addAttribute("title", "Furnifit - "+product.getName());
 		model.addAttribute("categorylist", categorylist);

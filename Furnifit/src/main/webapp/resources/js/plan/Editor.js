@@ -195,7 +195,7 @@ Editor.prototype.furniture= function(x,y,target){
 	case "선반":
 		imgPath+="shelf.png";
 		break;
-	case "쇼파":
+	case "쇼파":case "소파":
 		if(target.width>80)imgPath+="sofa_big.png";
 		else imgPath+="sofa_small.png";
 		break;
@@ -203,10 +203,13 @@ Editor.prototype.furniture= function(x,y,target){
 		imgPath+="closet.png";
 		break;
 	case "책상":
-		imgPath+="desk.png";
+		imgPath+="desk1.png";
 		break;
 	case "식탁":
 		imgPath+="kitchentable.png";
+		break;
+	case "의자":
+		imgPath+="chair.png";
 		break;
 	}
 	
@@ -269,5 +272,3 @@ Editor.prototype.startPlace= function(target){
 		//console.log(rect);
 	})
 }
-
-

@@ -24,29 +24,34 @@ $( document ).ready(function(){
 	$("#counterclockwiseRotateBtn").on("click", function(){
 		var r=-45;
 		if(selectedElem){
-			rotate(selectedElem, r);
-			var dir = isCollisionOfWall(selectedElem.getBBox());
-			var collisionFurnitures=isCollisionOfFurnitures(target);
-			if(dir[0]||dir[1]||dir[2]||dir[3]||collisionFurnitures){
-				showMsgBar("fail","회전 실패, 주위의 다른 사물 혹은 벽과 충돌합니다.");
-				console.log("벽이나 주변 사물과 충돌되어 회전 불가");
-				rotate(selectedElem, -r);
+			if(selectedElem.hasClass("furniture")){
+				rotate(selectedElem, r);
+				var dir = isCollisionOfWall(selectedElem.getBBox());
+				var collisionFurnitures=isCollisionOfFurnitures(target);
+				if(dir[0]||dir[1]||dir[2]||dir[3]||collisionFurnitures){
+					showMsgBar("fail","회전 실패, 주위의 다른 사물 혹은 벽과 충돌합니다.");
+					console.log("벽이나 주변 사물과 충돌되어 회전 불가");
+					rotate(selectedElem, -r);
+				}
+				refreshThumbnail();
 			}
-			refreshThumbnail();
+			
 		}
 	});
 
 	$("#deleteBtn").on("click", function(){
 		console.log("가구 삭제");
 		if(selectedElem){
-			curEditor.furnitures.exclude(selectedElem);
-			console.log(selectedElem);
-			selectedElem.remove();
-			selectedElem=null;
-			refreshThumbnail();
+			if(selectedElem.hasClass("furniture")){
+				curEditor.furnitures.exclude(selectedElem);
+				console.log(selectedElem);
+				selectedElem.remove();
+				selectedElem=null;
+				refreshThumbnail();
+			}
+			unSelectAll();
+			printPlaced();
 		}
-		unSelectAll();
-		printPlaced();
 	});
 
 
@@ -60,11 +65,11 @@ $( document ).ready(function(){
 		var pid=Number($(this).attr("href"));
 		var fur=furnitures.get(pid);
 		if(fur&&curEditor){
-			curEditor.startPlace(fur);
-		//curEditor.furniture(curEditor.offsetX, curEditor.offsetY, fur);
-		showMsgBar("success","가구가 추가되었습니다.");
-		printPlaced();
-		refreshThumbnail();
+			//curEditor.startPlace(fur);
+			curEditor.furniture(curEditor.offsetX, curEditor.offsetY, fur);
+			showMsgBar("success","가구가 추가되었습니다.");
+			printPlaced();
+			refreshThumbnail();
 		}else{
 			showMsgBar("fail","먼저 배치도를 추가해 주세요.");
 		}
@@ -82,4 +87,30 @@ $( document ).ready(function(){
 			}
 		});
 	});
+	
+	
+	$(document).on("click", "#downBtn a",function(e){
+		e.preventDefault();
+		var furVal=$("#furnitureInfoWrap").css("display");
+		if(furVal=="inline-flex"){
+			$("#furnitureInfoWrap").hide();
+			setFooterBtnUp();
+		}else {
+			$("#furnitureInfoWrap").show().css("display", "inline-flex");
+			setFooterBtnDown();
+		}
+	});
+	
+	
+	$(document).on("mouseenter mouseleave", ".planitem", function(){
+		console.log("haha");
+		$(this).children(".removeBtn").toggle();
+	});
+	
+	$(document).on("click", ".planitem .removeBtn a", function(){
+		console.log("haha");
+		var id=$(this).attr("href");
+		delPlanItem(id);
+	});
+	
 });
