@@ -59,10 +59,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="top-header-left wow fadeInLeft animated" data-wow-delay=".5s">
                          <c:choose>
                             <c:when test="${empty login }"> 
-                              <p style="color: #A7A8AA; font-size: 13px;">Welcome to FurniFit</p>
+                              <p style="color: #A7A8AA; font-size: 13px; text-align: left; margin: 6.500px 0px 0px 187px;"><strong>Welcome to FurniFits</strong></p>
                             </c:when>
                             <c:otherwise>
-                              <p style="color: #A7A8AA; font-size: 13px;">${login.email }</p>
+                              <p style="color: #A7A8AA; font-size: 13px; margin: 6.500px 0px 0px 187px;"><strong>${login.email }</strong></p>
                             </c:otherwise>
                           </c:choose>
 					</div>
@@ -71,8 +71,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                           <ul>
                           <c:choose>
                             <c:when test="${empty login }"> 
-                              <li><a href="${contextPath}/member/login" style="color: #A7A8AA; font-size: 13px;">Login</a></li>
-                              <li><a href="${contextPath}/member/register" style="color: #A7A8AA; font-size: 13px;">Sign up</a></li>
+                              <li><a href="${contextPath}/member/login" style="color: #A7A8AA; font-size: 13px;"><strong>Login</strong></a></li>
+                              <li><a href="${contextPath}/member/register" style="color: #A7A8AA; font-size: 13px;"><strong>Sign up</strong></a></li>
                             </c:when>
                             <c:otherwise>
                               <li><a href="${contextPath}/member/logout" style="color: #A7A8AA; font-size: 13px;">Logout</a></li>
