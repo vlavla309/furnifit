@@ -41,7 +41,7 @@
           <div class="information-grid-info articleDiv2">
             <div class="planDiv">
               <a href="${contextPath}/article/${article.articleId}">
-                <img src="${rSrcPath }/${article.planitemImg }" alt="" /></a>
+                <img src="${rSrcPath }/svg/plan/${article.planitemImg }" alt="" /></a>
             </div>
             <p>
               <a href="${contextPath}/article/${article.articleId}">

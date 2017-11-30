@@ -6,8 +6,8 @@ import com.furnifit.coupon.domain.Coupon;
 
 /**
  * CouponService 클래스
+ * 
  * @author 김호준
- *
  */
 public interface CouponService {
 

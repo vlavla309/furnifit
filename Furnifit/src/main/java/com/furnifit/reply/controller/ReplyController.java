@@ -37,9 +37,9 @@ public class ReplyController {
 	private static final Logger logger = LoggerFactory.getLogger(ReplyController.class);
 		
 	@Inject                        // 해당 타입의 객체를 찾아서 변수에 자동으로 할당시킴
-	private ReplyService service;  // root-context.xml 파일에 <context:component-scan /> 태그가 설정되어 있어야 한다.
+	private ReplyService service;  // root-context.xml 파일에 <context:component-scan /> 태그 범위에 포함되어 있음
 	
-	/* 댓글 등록 요청에 대한 메소드 */
+	/** 댓글 등록 요청에 대한 메소드 */
 	@RequestMapping(value = "", method = {RequestMethod.GET, RequestMethod.POST})  
 	public ResponseEntity<String> register(@RequestBody Reply reply) {
 		ResponseEntity<String> entity = null;
@@ -53,7 +53,7 @@ public class ReplyController {
 	    return entity;
 	  }
 	
-	/* 댓글 목록 요청에 대한 메소드 */
+	/** 댓글 목록 요청에 대한 메소드 */
 	@RequestMapping(value = "/all/{articleId}", method = {RequestMethod.GET, RequestMethod.POST})
 	public ResponseEntity<List<Reply>> list(@PathVariable("articleId") Integer articleId) {
 		ResponseEntity<List<Reply>> entity = null;
@@ -68,7 +68,7 @@ public class ReplyController {
 	    return entity;
 	  }
 	
-	/* 댓글 수정 요청에 대한 메소드 */
+	/** 댓글 수정 요청에 대한 메소드 */
 	@RequestMapping(value = "/{reply_id}", method = { RequestMethod.PUT, RequestMethod.PATCH })
 	public ResponseEntity<String> update(@PathVariable("reply_id") Integer reply_id, @RequestBody Reply reply) {
 		
@@ -85,7 +85,7 @@ public class ReplyController {
 	    return entity;
 	  }
 	
-	/* 댓글 삭제 요청에 대한 메소드 */
+	/** 댓글 삭제 요청에 대한 메소드 */
 	@RequestMapping(value = "/{reply_id}", method = RequestMethod.DELETE)
 	public ResponseEntity<String> remove(@PathVariable("reply_id") Integer reply_id) {
 		
@@ -100,7 +100,7 @@ public class ReplyController {
 	    return entity;
 	  }
 	
-	/* 무한 스크롤 요청에 대한 메소드 */
+	/** 무한 스크롤 요청에 대한 메소드 */
 	@RequestMapping(value = "/infiniteScrollDown", method = RequestMethod.GET)
 	public List<Reply> infiniteScrollDownPOST(Reply reply) throws Exception {
 		

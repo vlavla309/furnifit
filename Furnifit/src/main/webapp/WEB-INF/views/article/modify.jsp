@@ -42,7 +42,7 @@
                <br>
                <!-- 배치도 이미지 -->
                 <div class="planimgDiv" >
-                  <img src="${rSrcPath }/${planItem.image}"  alt="" />
+                  <img src="${rSrcPath }/svg/plan/${planItem.image}"  alt="" />
                 </div>  
               <!-- 자세히보기-가구목록  -->
                 <br>

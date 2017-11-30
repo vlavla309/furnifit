@@ -17,41 +17,31 @@ import com.furnifit.coupon.service.CouponService;
 import com.furnifit.member.domain.Member;
 import com.furnifit.member.service.MemberService;
 
-
+/**
+ * Mypage Controller 클래스
+ * 
+ * @author 김호준
+ */
 @Controller
 @RequestMapping(value = "/mypage")
 public class MypageController {
 
 	Logger log = Logger.getLogger(MypageController.class);
 
-	@Inject
-	private MemberService memberService;
+	@Inject                               // 해당 타입의 객체를 찾아서 변수에 자동으로 할당시킴
+	private MemberService memberService;  // root-context.xml 파일에 <context:component-scan /> 태그 설정되어 있음
 	
-	@Inject
-	private CouponService couponService;
+	@Inject                               // 해당 타입의 객체를 찾아서 변수에 자동으로 할당시킴
+	private CouponService couponService;  // root-context.xml 파일에 <context:component-scan /> 태그 설정되어 있음
 
-	// 마이페이지
+	/** 마이페이지로 이동 */
 	@RequestMapping(value = "", method=RequestMethod.GET)
 	public String mypage() {
 		log.debug("마이페이지");
 		return "mypage/mypage";
 	}
-/*	
-	// 쿠폰페이지
-	@RequestMapping(value = "/coupon", method=RequestMethod.GET)
-	public String coupon() {
-		log.debug("쿠폰페이지");
-		
-		return "1";
-	}*/
-	/*
-	// 쿠폰 확인
-	@RequestMapping(value = "/coupon", method=RequestMethod.POST)
-	public void coupon(String email) throws Exception {
-		log.debug("쿠폰 확인");
-		couponService.read(email);
-	}
-	*/
+	
+	/** 사용가능한 쿠폰, 사용완료한 쿠폰, 기간만료한 쿠폰 확인 */
 	@RequestMapping(value = "/coupon", method=RequestMethod.GET)
 	public String coupon(HttpServletRequest request, Model model) throws Exception {
 		HttpSession session = request.getSession();   

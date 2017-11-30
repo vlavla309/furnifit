@@ -1,9 +1,9 @@
 package com.furnifit.coupon.domain;
 
 /**
-*
+* Coupon 도메인 클래스
+* 
 * @author 김호준
-*
 */
 public class Coupon {
 	private int serial;

@@ -19,19 +19,35 @@ import com.furnifit.reply.domain.Reply;
 
 public interface ReplyService {
 	
-	/* 댓글 등록 */
+	/**
+	 * 댓글 등록
+	 * @param Reply reply
+	 */
 	public void addReply(Reply reply) throws Exception;
 	
-	/* 댓글 목록 */
+	/**
+	 * 댓글 등록
+	 * @param Reply reply
+	 */
 	public List<Reply> listReply(Integer articleId) throws Exception;
 
-	/* 댓글 수정 */
+	/**
+	 * 댓글 수정
+	 * @param Reply reply
+	 */
 	public void modifyReply(Reply reply) throws Exception;
 
-	/* 댓글 삭제 */
+	/**
+	 * 댓글 삭제
+	 * @param Integer reply_id
+	 */
 	public void removeReply(Integer reply_id) throws Exception;
 	
-	/* 무한 스크롤 */
+	/**
+	 * 무한 스크롤
+	 * @param Reply reply
+	 * @return List<Reply>
+	 */
 	public List<Reply> infiniteScrollDown(Reply reply) throws Exception;
 	
 }

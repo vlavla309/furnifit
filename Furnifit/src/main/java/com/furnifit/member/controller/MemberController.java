@@ -22,8 +22,8 @@ import com.furnifit.member.service.MemberService;
 
 /**
  * Member Controller 클래스
+ * 
  * @author 김호준
- *
  */
 @Controller
 @RequestMapping(value = "/member")
@@ -35,13 +35,13 @@ public class MemberController {
 	@Inject                               // 해당 타입의 객체를 찾아서 변수에 자동으로 할당시킴
 	private MemberService memberService;  // root-context.xml 파일에 <context:component-scan /> 태그가 설정되어 있어야 한다.
 
-	// 로그인 페이지
+	/** 로그인 페이지로 이동 */
 	@RequestMapping(value = "/login", method=RequestMethod.GET)
 	public void loginGet(@ModelAttribute("dto") LoginDTO dto, Model model) throws Exception {
 		model.addAttribute("title", "Login - FurniFit");
 	}
 
-	// 로그인 처리
+	/** 로그인 처리 */
 	@RequestMapping(value = "/loginAction", method=RequestMethod.POST)
 	public void logisnAction(LoginDTO dto, HttpSession session, Model model) throws Exception {
 		Member member = memberService.login(dto);
@@ -62,7 +62,7 @@ public class MemberController {
 		}
 	}
 
-	// 로그아웃 처리
+	/** 로그아웃 처리 */
 	@RequestMapping(value = "logout", method=RequestMethod.GET)
 	public String logOut(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		Member user = (Member)session.getAttribute("login");
@@ -73,14 +73,14 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	// 회원가입
+	/** 회원가입 */
 	@RequestMapping(value = "/register", method=RequestMethod.GET)
 	public String signup() {
 		log.debug("회원가입 폼");
 		return "member/signup";
 	}
 	
-	// 회원가입 처리
+	/** 회원가입 처리 */
 	@RequestMapping(value = "/register", method=RequestMethod.POST)
 	public String signup(Member member) throws Exception {
 		log.debug("회원가입 처리");
@@ -88,14 +88,14 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	// 회원정보 수정
+	/** 회원정보 수정 */
 	@RequestMapping(value = "/edit", method=RequestMethod.GET)
 	public String editSignup() {
 		log.debug("회원정보 수정 폼");
 		return "member/editSignup";
 	}
 	
-	// 회원정보 수정 처리
+	/** 회원정보 수정 처리 */
 	@RequestMapping(value = "/edit", method=RequestMethod.POST)
 	public String editSignup(Member member, HttpSession session) throws Exception {
 		
@@ -106,14 +106,14 @@ public class MemberController {
 		return "redirect: /one";
 	}
 	
-	// 회원 탈퇴
+	/** 회원 탈퇴 */
 	@RequestMapping(value = "/withdraw", method=RequestMethod.GET)
 	public String delete() {
 		log.debug("mypage 회원 탈퇴");
 		return "member/mypage";
 	}
 	
-	// 회원 탈퇴 처리
+	/** 회원 탈퇴 처리 */
 	@RequestMapping(value = "/withdraw", method=RequestMethod.POST)
 	public String delete(String email, String passwd, Model model) throws Exception {
 		log.debug("회원 탈퇴 처리");
