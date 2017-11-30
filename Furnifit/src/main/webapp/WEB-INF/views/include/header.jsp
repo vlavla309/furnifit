@@ -57,19 +57,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="container">
 				<div class="top-header-info">
 					<div class="top-header-left wow fadeInLeft animated" data-wow-delay=".5s">
-						<p>MORE THAN 10 NEW DESIGNS FOR YOUR HOME</p>
+                         <c:choose>
+                            <c:when test="${empty login }"> 
+                              <p style="color: white; font-size: 13px;">Welcome to FurniFit</p>
+                            </c:when>
+                            <c:otherwise>
+                              <p style="color: white; font-size: 13px;">${login.email }</p>
+                            </c:otherwise>
+                          </c:choose>
 					</div>
 					<div class="top-header-right wow fadeInRight animated" data-wow-delay=".5s">
 						<div class="top-header-right-info">
                           <ul>
                           <c:choose>
                             <c:when test="${empty login }"> 
-                              <li><a href="${contextPath}/member/login">Login</a></li>
-                              <li><a href="${contextPath}/member/register">Sign up</a></li>
+                              <li><a href="${contextPath}/member/login" style="color: white; font-size: 13px;">Login</a></li>
+                              <li><a href="${contextPath}/member/register" style="color: white; font-size: 13px;">Sign up</a></li>
                             </c:when>
                             <c:otherwise>
-                              <li><a href="${contextPath}/member/logout">Logout</a></li>
-                              <li><a href="${contextPath}/mypage">Mypage</a></li>
+                              <li><a href="${contextPath}/member/logout" style="color: white; font-size: 13px;">Logout</a></li>
+                              <li><a href="${contextPath}/mypage" style="color: white; font-size: 13px;">Mypage</a></li>
                             </c:otherwise>
                           </c:choose>
                           </ul>
