@@ -82,4 +82,17 @@ $( document ).ready(function(){
 			}
 		});
 	});
+	
+	
+	$(document).on("click", "#downBtn a",function(e){
+		e.preventDefault();
+		var furVal=$("#furnitureInfoWrap").css("display");
+		if(furVal=="inline-flex"){
+			$("#furnitureInfoWrap").hide();
+			setFooterBtnUp();
+		}else {
+			$("#furnitureInfoWrap").show().css("display", "inline-flex");
+			setFooterBtnDown();
+		}
+	});
 });

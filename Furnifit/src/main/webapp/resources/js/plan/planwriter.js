@@ -180,5 +180,7 @@ function setFurnitureInfo(){
 	$("#furnitureInfoWrap .infoWrap .name").html("<strong>"+furniture.name+"</strong>");
 	$("#furnitureInfoWrap .infoWrap .brand").text(furniture.brand);
 	$("#furnitureInfoWrap .infoWrap .size").text(furniture.width+"*"+furniture.height+"*"+furniture.length +"(가로*세로*높이)");
+	$("#furnitureInfoWrap .descWrap .description").text(furniture.description);
+	
 }
 

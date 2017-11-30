@@ -7,11 +7,14 @@ function select(target){
 		selectedViewbox=target.parent().parent(); // 선택된 가구의 뷰박스 획득
 		setFurnitureInfo();
 		target.attr({strokeWidth: 6}); 
-		$("#furnitureInfoWrap").show().css("display", "flex");
+		$("#furnitureInfoWrap").show().css("display", "inline-flex");
+		setFooterBtnDown();
 	}
+	
 }
 
 function unSelectAll(){
+	setFooterBtnUp();
 	$("#furnitureInfoWrap").hide();
 	selectedElem=null;
 	curEditor.furnitures.attr({

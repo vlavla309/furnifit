@@ -291,6 +291,9 @@
 					<span class="category">카테고리</span> <span class="name">상품명</span> <span
 						class="brand">브랜드</span> <span class="size">200x200x200</span>
 				</div>
+				<div class="descWrap">
+					<span class="description">상품 설명!!</span>
+				</div>
 				<div class="controlWrap">
 					<ul>
 						<li><a href="#" id="clockwiseRotateBtn"><img
@@ -304,6 +307,9 @@
 
 					</ul>
 				</div>
+			</div>
+			<div id="downBtn">
+				<a href="#"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
 			</div>
 		</div>
 		<!-- footer 끝 -->

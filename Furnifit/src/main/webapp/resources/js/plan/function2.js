@@ -73,3 +73,13 @@ function refreshThumbnail(){
 		imgElem.attr("src",svgData);
 	}, 1000);
 }
+
+function setFooterBtnUp(){
+	$("#downBtn i").removeClass("fa-angle-double-down");
+	$("#downBtn i").addClass("fa-angle-double-up");
+}
+
+function setFooterBtnDown(){
+	$("#downBtn i").removeClass("fa-angle-double-up");
+	$("#downBtn i").addClass("fa-angle-double-down	 ");
+}
