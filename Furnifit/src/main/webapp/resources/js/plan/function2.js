@@ -60,9 +60,9 @@ function writePlan(){
 
 function savePlanFile(){
 	if(curEditor){
-		editor.canvas.paper.zpd('destroy'); 
-		editor.canvas.paper.zpd('toggle'); 
-		editor.canvas.paper.zpd('toggle'); 
+		curEditor.canvas.paper.zpd('destroy'); 
+		curEditor.canvas.paper.zpd('toggle'); 
+		curEditor.canvas.paper.zpd('toggle'); 
 		var width=parseInt(curEditor.width)+parseInt(curEditor.wallWidth*2);
 		var height=parseInt(curEditor.height)+parseInt(curEditor.wallWidth*2);
 
