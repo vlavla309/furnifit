@@ -9,49 +9,6 @@
 <!-- bxSlider CSS file -->
 <link href="${rSrcPath }css/jquery.bxslider.css" rel="stylesheet" />
 
-<style>
-.indexLogo{
-vertical-align: middle;
-margin-left: 210px;
-width: 65%;
-padding-top: 10px;
-}
-
-
-.indexPrd{
-background-color: white;
-}
-
-.indexPrdNew{
-
-font-weight: bold;
-padding-top: 40px;
-}
-
-.prdList{
-border: 1px solid #D8D8D8;
-}
-
-.indexArtA{
-display: block;
-width: fit-content;
-margin: auto;
-}
-
-.indexShadow{
-box-shadow: 0px 1px 10px 0px #d0d0d0;
-}
-
-.indexArtA img{
-    background-color: white;
-    width: 100%;
-    height: 100%;
-    max-width: 320px;
-    max-height: 350px;
-}
-
-
-</style>
 <body >
   <!-- banner -->
   <div class="banner">
@@ -130,7 +87,6 @@ Design Virtual Furniture Layout</h3>
 
   
   <!-- bxSlider Javascript file -->
-  <script src="${rSrcPath }js/jquery-3.1.1.min.js"></script>
 <script src="${rSrcPath }js/jquery.bxslider.js"></script>
 <script>
   $(document).ready(function(){
@@ -150,19 +106,21 @@ Design Virtual Furniture Layout</h3>
   
   
   <!-- 공유게시판 리스트 -->
-	<div class="information w3lagile" style="background-color: white" >
-		<div class="container">
+	<div class="information w3lagile indexArtBack"  >
+		<div class="container indexPrdCon">
 		  <div class="information-grids agile-info">
       <!-- 여기서부터 FOR문 -->
               <c:forEach items="${artList }" var="article">
-				<div class="col-md-4 information-grid wow fadeInLeft animated" data-wow-delay=".5s" style="padding: 50px">
-					<div class="information-info indexShadow"  style="background-color: white">
-						<div class="information-grid-img">
+				<div class="col-md-4 information-grid wow fadeInLeft animated indexArtPadding" data-wow-delay=".5s" >
+					<div class="information-info indexShadow"   >
+						<div class="information-grid-img indexDiv2">
                            <a class="indexArtA" href="${contextPath}/article/${article.articleId}">                       
 							<img src="${rSrcPath }/svg/plan/${article.planitemImg}"  alt="" /></a> 
 						</div>                      
-						<div class="information-grid-info">
-							<font style="font-size: 15pt">${article.title }</font>
+						<div class="information-grid-info" style="padding: 30px">
+                          <hr>
+							<i class="fa fa-tags" aria-hidden="true">
+                              <font class="indexArtTitle">${article.title }</font></i>
 							<p>${article.content }</p>
 						</div>
 					</div>
