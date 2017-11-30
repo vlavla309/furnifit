@@ -213,6 +213,7 @@ Editor.prototype.furniture= function(x,y,target){
 	case "의자":
 		imgPath+="chair.png";
 		break;
+		
 	}
 	
 	var rect=this.canvas.rect(x, y, width, height).attr("fill", "none");
@@ -276,6 +277,18 @@ Editor.prototype.startPlace= function(target){
 	this.room.unclick();
 	var canvas=this;
 	this.room.click(function(){
-		canvas.furniture(dx,dy,target);
+		var furniture=canvas.furniture(dx,dy,target);
+		
+		curEditor.room.unclick();
+		curEditor.room.click(function(){
+			unSelectAll();
+			select(this);
+		});
+		
+		rect.remove();
+		printPlaced();
 	});
+	
+	
+
 }
