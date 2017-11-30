@@ -112,7 +112,7 @@ $("#replies").on("click", ".replyLi", function(event){
   var reply = $(this);
   
   $("#content").val(reply.find('.timeline-body').text());
-  $(".modal-title").html(reply.attr("data-rno"));
+  $(".modal-title").html("Furni-Fit");
   console.log(content)  
 });
 

@@ -1,6 +1,20 @@
 $( document ).ready(function(){
 	$("#saveBtn").on("click", function(){
 		alert("미구현ㅎㅎ");
+		var width=parseInt(curEditor.width)+parseInt(curEditor.wallWidth*2);
+		var height=parseInt(curEditor.height)+parseInt(curEditor.wallWidth*2);
+		
+		var ULCx=curEditor.offsetX-curEditor.wallWidth;
+		var ULCy=curEditor.offsetY-curEditor.wallWidth;
+		var UUwidth =width;
+		var UUheight=height;
+		var test=curEditor.canvas.paper.clone();
+		test.attr({
+			width:width,
+			height:height,
+			viewBox: ULCx+" "+ULCy+" "+UUwidth+" "+UUheight});
+		console.log(test.toDataURL());
+		test.remove();
 	});
 	
 	$("#resetBtn").on("click", function(){
@@ -65,8 +79,8 @@ $( document ).ready(function(){
 		var pid=Number($(this).attr("href"));
 		var fur=furnitures.get(pid);
 		if(fur&&curEditor){
-			//curEditor.startPlace(fur);
-			curEditor.furniture(curEditor.offsetX, curEditor.offsetY, fur);
+			curEditor.startPlace(fur);
+			//curEditor.furniture(curEditor.offsetX, curEditor.offsetY, fur);
 			showMsgBar("success","가구가 추가되었습니다.");
 			printPlaced();
 			refreshThumbnail();
@@ -100,4 +114,17 @@ $( document ).ready(function(){
 			setFooterBtnDown();
 		}
 	});
+	
+	
+	$(document).on("mouseenter mouseleave", ".planitem", function(){
+		console.log("haha");
+		$(this).children(".removeBtn").toggle();
+	});
+	
+	$(document).on("click", ".planitem .removeBtn a", function(){
+		console.log("haha");
+		var id=$(this).attr("href");
+		delPlanItem(id);
+	});
+	
 });

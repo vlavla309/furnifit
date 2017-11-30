@@ -6,6 +6,8 @@ function Editor(){
 	this.canvas;
 	this.room;
 	this.furnitures;
+	
+	this.wallWidth=14;
 	this.wallHorizon;
 	this.wallVertical;
 	this.wallNorth;
@@ -62,7 +64,7 @@ Editor.prototype.room = function(name,width,height,length){
 	var y=80; //방 렌더링 시작 위치;
 	var w=width*this.scale;
 	var h=height*this.scale;
-	var wallWidth=14*this.scale;
+	var wallWidth=this.wallWidth*this.scale;
 
 	var pathStr="M"+x+" "+y;
 	pathStr+=" L"+(x+w)+" "+y;
@@ -82,7 +84,7 @@ Editor.prototype.room = function(name,width,height,length){
 	var image=this.canvas.image(encData, x, y ,w, h);
 	//var canvas=this.canvas;
 	
-	getImageBase64(planImgPath+"/floor10.jpg", function (data) {
+	getImageBase64(planImgPath+"/floor16.jpg", function (data) {
 		encData+=data;
 		loop=false;
 		image.attr("href", encData);
@@ -259,12 +261,18 @@ Editor.prototype.startPlace= function(target){
 	this.canvas.paper.mousemove(function(ev, x, y){
 		console.log(x+","+y)
 		console.log(ev); 
-		var m = rect.parent().parent().parent().transform().localMatrix; 
+		var m = rect.parent().parent().transform().localMatrix; 
+		console.log(m);
 		mx=ev.offsetX;
 		my=ev.offsetY;
+		
 		if(m){
-			mx = mx/m.a;
-			my = my/m.d;
+			m=m.invert();
+			mx=m.x(mx,my);
+			my=m.y(mx,my);
+			
+			/*mx = mx/m.a;
+			my = my/m.d;*/
 		};
 		var origTransform = rect.transform().local;//기존 트랜스폼 명령
 		rect.attr({x:mx, y:my})

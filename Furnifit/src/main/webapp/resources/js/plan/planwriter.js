@@ -99,8 +99,7 @@ $( function() {
 		buttons: {
 			Add: function() {
 				unSelectAll();
-				var name=$( "#writePlanForm #planGroupName" ).val();
-				writePlan(name);
+				writePlan();
 				$( this ).dialog( "close" );
 			},
 			Cancel: function() {
@@ -113,6 +112,10 @@ $( function() {
 	});
 
 	$("#writeBtn").on("click", function(){
+		if(editors.size<1){
+			showMsgBar("fail","작성 중인 배치도 항목이 존재하지 않습니다.");
+			return false;
+		}
 		writePlanDlg.dialog( "open" );
 	});
 	
@@ -134,7 +137,9 @@ function addPlanItem(){
 	var planLength=Number($("#planLength").val());
 	
 	
-	var planitemThumbStr="<li><div class='planitem'><div class='imgWrap'><a href='"+id+"'>"
+	var planitemThumbStr="<li><div class='planitem' id='planitem-"+id+"'><div class='removeBtn'>";
+	planitemThumbStr+="<a href='"+id+"'><i class='fa fa-times' aria-hidden='true'></i></a>";
+	planitemThumbStr+="</div><div class='imgWrap'><a href='"+id+"'>"
 	planitemThumbStr+="<img src='#' art='"+planName+"'>";
 	planitemThumbStr+="</a></div>";
 	planitemThumbStr+="<div class='nameWrap'><span>"+planName+"<span></div>";
@@ -162,12 +167,15 @@ function addPlanItem(){
 }
 
 function delPlanItem(id){
-	editors.delete(id);
+	editors.delete(parseInt(id));
+	curEditor=null;
+	printPlaced();
 	$("#editorContainer-"+id).remove();
+	$("#planitem-"+id).remove();
 }
 
 function selectPlan(id){
-	$(".planitem a[href="+id+"]").trigger("click");
+	$(".planitem .imgWrap a[href="+id+"]").trigger("click");
 }
 
 function setFurnitureInfo(){

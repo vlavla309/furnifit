@@ -8,6 +8,9 @@
 <meta charset="utf-8">
 <title>Plan Writer - FurniFit</title>
 
+<!-- Favicon -->
+<link rel="shortcut icon" href="${rSrcPath }/images/favicon.ico">
+
 <!-- css -->
 <link
 	href="${pageContext.servletContext.contextPath }/resources/css/bootstrap.css"

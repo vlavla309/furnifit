@@ -57,19 +57,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="container">
 				<div class="top-header-info">
 					<div class="top-header-left wow fadeInLeft animated" data-wow-delay=".5s">
-						<p>MORE THAN 10 NEW DESIGNS FOR YOUR HOME</p>
+                         <c:choose>
+                            <c:when test="${empty login }"> 
+                              <p style="color: #A7A8AA; font-size: 13px; text-align: left; margin: 6.500px 0px 0px 197px;"><strong>Welcome to FurniFit</strong></p>
+                            </c:when>
+                            <c:otherwise>
+                              <p style="color: #A7A8AA; font-size: 13px; margin: 6.500px 0px 0px 197px;"><strong>${login.email }님 로그인 하셨습니다.</strong></p>
+                            </c:otherwise>
+                          </c:choose>
 					</div>
 					<div class="top-header-right wow fadeInRight animated" data-wow-delay=".5s">
 						<div class="top-header-right-info">
                           <ul>
                           <c:choose>
                             <c:when test="${empty login }"> 
-                              <li><a href="${contextPath}/member/login">Login</a></li>
-                              <li><a href="${contextPath}/member/register">Sign up</a></li>
+                              <li><a href="${contextPath}/member/login" style="color: #A7A8AA; font-size: 13px;"><strong>Login</strong></a></li>
+                              <li><a href="${contextPath}/member/register" style="color: #A7A8AA; font-size: 13px;"><strong>Sign up</strong></a></li>
                             </c:when>
                             <c:otherwise>
-                              <li><a href="${contextPath}/member/logout">Logout</a></li>
-                              <li><a href="${contextPath}/mypage">Mypage</a></li>
+                              <li><a href="${contextPath}/member/logout" style="color: #A7A8AA; font-size: 13px;">Logout</a></li>
+                              <li><a href="${contextPath}/mypage" style="color: #A7A8AA; font-size: 13px;">Mypage</a></li>
                             </c:otherwise>
                           </c:choose>
                           </ul>
