@@ -24,29 +24,34 @@ $( document ).ready(function(){
 	$("#counterclockwiseRotateBtn").on("click", function(){
 		var r=-45;
 		if(selectedElem){
-			rotate(selectedElem, r);
-			var dir = isCollisionOfWall(selectedElem.getBBox());
-			var collisionFurnitures=isCollisionOfFurnitures(target);
-			if(dir[0]||dir[1]||dir[2]||dir[3]||collisionFurnitures){
-				showMsgBar("fail","회전 실패, 주위의 다른 사물 혹은 벽과 충돌합니다.");
-				console.log("벽이나 주변 사물과 충돌되어 회전 불가");
-				rotate(selectedElem, -r);
+			if(selectedElem.hasClass("furniture")){
+				rotate(selectedElem, r);
+				var dir = isCollisionOfWall(selectedElem.getBBox());
+				var collisionFurnitures=isCollisionOfFurnitures(target);
+				if(dir[0]||dir[1]||dir[2]||dir[3]||collisionFurnitures){
+					showMsgBar("fail","회전 실패, 주위의 다른 사물 혹은 벽과 충돌합니다.");
+					console.log("벽이나 주변 사물과 충돌되어 회전 불가");
+					rotate(selectedElem, -r);
+				}
+				refreshThumbnail();
 			}
-			refreshThumbnail();
+			
 		}
 	});
 
 	$("#deleteBtn").on("click", function(){
 		console.log("가구 삭제");
 		if(selectedElem){
-			curEditor.furnitures.exclude(selectedElem);
-			console.log(selectedElem);
-			selectedElem.remove();
-			selectedElem=null;
-			refreshThumbnail();
+			if(selectedElem.hasClass("furniture")){
+				curEditor.furnitures.exclude(selectedElem);
+				console.log(selectedElem);
+				selectedElem.remove();
+				selectedElem=null;
+				refreshThumbnail();
+			}
+			unSelectAll();
+			printPlaced();
 		}
-		unSelectAll();
-		printPlaced();
 	});
 
 
