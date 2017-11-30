@@ -35,7 +35,8 @@ function writePlan(planName){
 		data : jsonData,
 		contentType: 'application/json',
 		success : function(data) {
-			console.log(data)
+			console.log(data);
+			location.href=contextPath+"/mypage/planlist";
 		},
 		error : function(data) {
 			console.log(data)

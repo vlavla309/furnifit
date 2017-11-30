@@ -203,7 +203,7 @@ Editor.prototype.furniture= function(x,y,target){
 		imgPath+="closet.png";
 		break;
 	case "책상":
-		imgPath+="desk.png";
+		imgPath+="desk1.png";
 		break;
 	case "식탁":
 		imgPath+="kitchentable.png";
@@ -272,5 +272,3 @@ Editor.prototype.startPlace= function(target){
 		//console.log(rect);
 	})
 }
-
-
