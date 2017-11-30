@@ -136,7 +136,7 @@
 							<c:forEach items="${category.imgs}" var="img">
 								<c:if test="${img.path != '' || img.path != 'null'}">
 									<li><a href="${contextPath}/product/${img.productId}"><img
-											src="${rSrcPath}/productimg/${img.path}/s_${img.name}"/></a>
+											src="${rSrcPath}/productimg/${img.path}/${img.name}"/></a>
 									</li>
 								</c:if>
 							</c:forEach>
