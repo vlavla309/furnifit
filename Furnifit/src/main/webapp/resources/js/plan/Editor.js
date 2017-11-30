@@ -261,12 +261,18 @@ Editor.prototype.startPlace= function(target){
 	this.canvas.paper.mousemove(function(ev, x, y){
 		console.log(x+","+y)
 		console.log(ev); 
-		var m = rect.parent().parent().parent().transform().localMatrix; 
+		var m = rect.parent().parent().transform().localMatrix; 
+		console.log(m);
 		mx=ev.offsetX;
 		my=ev.offsetY;
+		
 		if(m){
-			mx = mx/m.a;
-			my = my/m.d;
+			m=m.invert();
+			mx=m.x(mx,my);
+			my=m.y(mx,my);
+			
+			/*mx = mx/m.a;
+			my = my/m.d;*/
 		};
 		var origTransform = rect.transform().local;//기존 트랜스폼 명령
 		rect.attr({x:mx, y:my})
