@@ -549,6 +549,12 @@ li {
 }
 
 
+.planitem .removeBtn{
+	width: fit-content;
+    position: absolute;
+    left: 175px;
+    display:none;
+}
 #loadingDiv{
 	position: absolute;
 	z-index: 1;

@@ -100,4 +100,17 @@ $( document ).ready(function(){
 			setFooterBtnDown();
 		}
 	});
+	
+	
+	$(document).on("mouseenter mouseleave", ".planitem", function(){
+		console.log("haha");
+		$(this).children(".removeBtn").toggle();
+	});
+	
+	$(document).on("click", ".planitem .removeBtn a", function(){
+		console.log("haha");
+		var id=$(this).attr("href");
+		delPlanItem(id);
+	});
+	
 });
