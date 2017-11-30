@@ -60,11 +60,11 @@ $( document ).ready(function(){
 		var pid=Number($(this).attr("href"));
 		var fur=furnitures.get(pid);
 		if(fur&&curEditor){
-			curEditor.startPlace(fur);
-		//curEditor.furniture(curEditor.offsetX, curEditor.offsetY, fur);
-		showMsgBar("success","가구가 추가되었습니다.");
-		printPlaced();
-		refreshThumbnail();
+			//curEditor.startPlace(fur);
+			curEditor.furniture(curEditor.offsetX, curEditor.offsetY, fur);
+			showMsgBar("success","가구가 추가되었습니다.");
+			printPlaced();
+			refreshThumbnail();
 		}else{
 			showMsgBar("fail","먼저 배치도를 추가해 주세요.");
 		}
