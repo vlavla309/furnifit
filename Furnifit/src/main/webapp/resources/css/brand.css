@@ -65,7 +65,7 @@ body {
     width:8rem;
     display: block;
     margin:0 auto;
-  margin-top:1rem;
+  	margin-top:1rem;
 }
 
 /* 첫번째 사진과 마지막 사진에 있는 버튼 디자인 설정 */
@@ -104,7 +104,6 @@ body {
     right: 15px;
 }
 #mainButton2 {
-    position: absolute;
-    bottom: -4397px;
-    right: 15px;
+    position: relative;
+    bottom: -500px;
 }

@@ -6,6 +6,7 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +22,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- css -->
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/resources/css/style.css" type="text/css" media="all" />
 <!--// css -->
+<!-- Favicon -->
+<link rel="shortcut icon" href="${rSrcPath }/images/favicon.ico">
+<!-- // Favicon -->
 
 <!-- font-awesome icons -->
 <link href="${pageContext.servletContext.contextPath }/resources/css/font-awesome.css" rel="stylesheet"> 
@@ -62,7 +66,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                               <p style="color: #A7A8AA; font-size: 13px; text-align: left; margin: 6.500px 0px 0px 197px;"><strong>Welcome to FurniFit</strong></p>
                             </c:when>
                             <c:otherwise>
-                              <p style="color: #A7A8AA; font-size: 13px; margin: 6.500px 0px 0px 197px;"><strong>${login.email }</strong></p>
+                              <p style="color: #A7A8AA; font-size: 13px; margin: 6.500px 0px 0px 197px;"><strong>${login.email }님 로그인 하셨습니다.</strong></p>
                             </c:otherwise>
                           </c:choose>
 					</div>
@@ -104,13 +108,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li><a href="${contextPath}" class="active">Home</a></li>
 								<li><a href="${contextPath}/about">About</a></li>
 								<li><a href="${contextPath}/product">Product</a></li>
-								<li><a href="#" class="dropdown-toggle hvr-bounce-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">가구배치도<span class="caret"></span></a>
+								<li><a href="#" class="dropdown-toggle hvr-bounce-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Plan<span class="caret"></span></a>
 									<ul class="dropdown-menu">
-										<li><a class="hvr-bounce-to-bottom" href="${contextPath}/plan/writer">배치도작성</a></li>
-										<li><a class="hvr-bounce-to-bottom" href="${contextPath}/article">배치도공유게시판</a></li> 
+										<li><a class="hvr-bounce-to-bottom" href="${contextPath}/plan/writer">Write</a></li>
+										<li><a class="hvr-bounce-to-bottom" href="${contextPath}/article">Board</a></li> 
 									</ul>
 								</li>	
-								<li><a href="${contextPath}/brand">brand</a></li>
+								<li><a href="${contextPath}/brand">Brand</a></li>
 							</ul>	
 							<div class="clearfix"> </div>
 						</div>	

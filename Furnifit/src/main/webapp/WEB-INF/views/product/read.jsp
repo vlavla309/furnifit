@@ -66,15 +66,15 @@
 									<c:if test="${img.orderNo==0}">
 										<img class="xzoom" id="xzoom-default"
 											src="${rSrcPath}/productimg/${img.path}/${img.name}"
-											xoriginal="${rSrcPath}/productimg/${img.path}/${img.name}"
+											xoriginal="${rSrcPath}/productimg/${img.path}/Z${img.name}"
 											title="${img.orderNo }" />
 									</c:if>
 								</c:forEach>
 								<div class="xzoom-thumbs">
 									<c:forEach items="${product.imgs}" var="img">
-										<a href="${rSrcPath}/productimg/${img.path}/${img.name}">
+										<a href="${rSrcPath}/productimg/${img.path}/Z${img.name}">
 											<img class="xzoom-gallery" width="80"
-											src="${rSrcPath}/productimg/${img.path}/${img.name}"
+											src="${rSrcPath}/productimg/${img.path}/Z${img.name}"
 											xpreview="${rSrcPath}/productimg/${img.path}/${img.name}"
 											title="The description goes here">
 										</a>
@@ -104,8 +104,8 @@
 														title="규격은  W(너비) D(넓이) H(높이)로 구성되며, 원형일 경우 R(지름) H(높이)의 형태로 규격이 표시됩니다."><i
 															class="fa fa-question-circle" aria-hidden="true"></i></a>
 													</th>
-													<td>${product.width}*${product.length}*
-														${product.height}</td>
+													<td>${product.width}*${product.height}*${product.length}
+														</td>
 												</tr>
 												<tr>
 													<th>판매가</th>
