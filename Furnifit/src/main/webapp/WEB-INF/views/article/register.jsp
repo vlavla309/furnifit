@@ -58,9 +58,11 @@
                              <tr>
                                <td class="align2"> 
                                  <c:forEach items="${product.imgs}" var="img">
+                                  <c:if test="${img.orderNo == 0 }">
                                    <div class="artPrdImg">
                                      <img src="${rSrcPath}/productimg/${img.path}/${img.name}"/>
-                                   </div>                
+                                   </div>  
+                                  </c:if>              
                                  </c:forEach>
                                </td>
                                <td class="align2">${product.name }</td>
