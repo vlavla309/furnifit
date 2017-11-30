@@ -60,6 +60,9 @@ function writePlan(){
 
 function savePlanFile(){
 	if(curEditor){
+		editor.canvas.paper.zpd('destroy'); 
+		editor.canvas.paper.zpd('toggle'); 
+		editor.canvas.paper.zpd('toggle'); 
 		var width=parseInt(curEditor.width)+parseInt(curEditor.wallWidth*2);
 		var height=parseInt(curEditor.height)+parseInt(curEditor.wallWidth*2);
 
@@ -91,7 +94,7 @@ function savePlanFile(){
 			contentType:'application/json',
 			success : function(data) {
 				console.log(data);
-				window.location.assign(rSrcPath+"/svg/plan/"+data);
+				window.location.assign(contextPath+"/plan/download?filename="+data);
 			},
 			error : function(data) {
 				console.log(data)
@@ -126,7 +129,7 @@ function printPlaced(){
 }
 
 function refreshThumbnail(){
-	setTimeout(() => {
+	setTimeout(function() {
 		var svgData=curEditor.canvas.paper.toDataURL();
 		var id=curEditor.id;
 		var imgElem=$(".planitem  a[href="+id+"] img");

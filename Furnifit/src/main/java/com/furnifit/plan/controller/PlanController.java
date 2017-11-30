@@ -1,11 +1,16 @@
 package com.furnifit.plan.controller;
 
+import java.io.File;
+import java.net.URLEncoder;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.furnifit.common.web.PageBuilder;
 import com.furnifit.common.web.Params;
@@ -48,6 +54,8 @@ public class PlanController {
 	@Inject
 	private CouponService couponService;
 
+	@Resource(name = "svgImgPath")
+	private String svgImgPath;
 
 	/** 배치도목록 리스트 */
 	@RequestMapping(value = "/mypage/planlist", method=RequestMethod.GET)
@@ -120,7 +128,7 @@ public class PlanController {
 	 * 배치도 파일 저장 처리(김형주)
 	 */
 	@RequestMapping(value = "/plan/file", method=RequestMethod.POST)
-	public ResponseEntity<String> regist(@RequestBody PlanItem planitem, HttpSession session) throws Exception {
+	public ResponseEntity<String> save(@RequestBody PlanItem planitem) throws Exception {
 		logger.info("플랜이름 :"+planitem.getName());
 		//logger.info("플랜내용 :"+planitem.getImage());
 		ResponseEntity<String> entity = null;
@@ -135,6 +143,25 @@ public class PlanController {
 			entity = new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
 		}
 		return entity;
+	}
+	
+	/**
+	 * 배치도 파일 다운로드 처리(김형주)
+	 */
+	@RequestMapping(value = "/plan/download")
+	public void download(@RequestParam String filename, HttpServletResponse response) throws Exception {
+		
+		logger.info("파일이름 :"+filename);
+		byte fileByte[] = FileUtils.readFileToByteArray(new File(svgImgPath+filename));
+	     
+	    response.setContentType("application/octet-stream");
+	    response.setContentLength(fileByte.length);
+	    response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(filename,"UTF-8")+"\";");
+	    response.setHeader("Content-Transfer-Encoding", "binary");
+	    response.getOutputStream().write(fileByte);
+	     
+	    response.getOutputStream().flush();
+	    response.getOutputStream().close();
 	}
 
 }
