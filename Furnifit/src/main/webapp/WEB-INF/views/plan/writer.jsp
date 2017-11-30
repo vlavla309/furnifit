@@ -327,13 +327,13 @@
 					<br> <label for="tab_title">방의 크기</label><br> <input
 						type="number" name="planWidth" id="planWidth"
 						placeholder='방의 가로길이를 입력해주세요'
-						class="ui-widget-content ui-corner-all" required> <input
+						class="ui-widget-content ui-corner-all" required value='250' min='250'> <input
 						type="number" name="planHeight" id="planHeight"
 						placeholder='방의 세로길이를 입력해주세요'
-						class="ui-widget-content ui-corner-all" required> <input
+						class="ui-widget-content ui-corner-all" required value='250' min='250'> <input
 						type="number" name="planLength" id="planLength"
 						placeholder='방의 높이를 입력해주세요'
-						class="ui-widget-content ui-corner-all" required>
+						class="ui-widget-content ui-corner-all" required value='200' min='200'>
 				</fieldset>
 			</form>
 		</div>
