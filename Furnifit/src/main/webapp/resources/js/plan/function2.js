@@ -2,7 +2,8 @@
  * 
  */
 
-function writePlan(planName){
+function writePlan(){
+	var planName=$( "#writePlanForm #planGroupName" ).val();
 	var plan=new Plan();
 
 	plan.name=planName;
@@ -11,13 +12,26 @@ function writePlan(planName){
 		editor.canvas.paper.zpd('destroy'); 
 		editor.canvas.paper.zpd('toggle'); 
 		editor.canvas.paper.zpd('toggle'); 
+		
+		var viewWidth=parseInt(editor.width)+parseInt(editor.wallWidth*2);
+		var viewHeight=parseInt(editor.height)+parseInt(editor.wallWidth*2);
+		
+		var ULCx=curEditor.offsetX-editor.wallWidth;
+		var ULCy=curEditor.offsetY-editor.wallWidth;
+		
+		var clone=editor.canvas.paper.clone();
+		clone.attr({
+			width:viewWidth,
+			height:viewHeight,
+			viewBox: ULCx+" "+ULCy+" "+viewWidth+" "+viewHeight});
 
 		var name=editor.name;
 		var width=editor.width;
 		var height=editor.height;
 		var length=editor.length;
 		var acreage=editor.acreage;
-		var image=editor.canvas.paper.toDataURL();
+		var image=clone.toDataURL();
+		clone.remove();
 		var planitem=new Planitem(name, width, height, length, acreage, image);
 
 		editor.furnitures.forEach(function(furniture){
