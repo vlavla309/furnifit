@@ -55,7 +55,7 @@ function wishlist(data) {
 		$.each(data.wishlist, function(i, item) {
 					str+="	<div class=\"product\">"
 					str+="		<div class=\"imgWrap\">"
-					str+="			<a class='addFurnitureBtn' href=\"1\"><img src=\"" + proImgPath + "" + item.imgs[0].path + "/"+ item.imgs[0].name + "\" /></a>"
+					str+="			<a class='addFurnitureBtn' href=\"" + item.productId+ "\"><img src=\"" + proImgPath + "" + item.imgs[0].path + "/"+ item.imgs[0].name + "\" /></a>"
 					str+="		</div>"
 					str+="	<div class=\"infoWrap\">"
 					str+="			<span>"+item.name+"</span> <span>"+item.brand+"</span> <span>"+item.width+"*"+item.height+"*"+item.length +"</span> <span>"+item.price+"</span>"
@@ -68,7 +68,6 @@ function wishlist(data) {
 }
 
 function productList(data) {
-
 	var str = ""
 	$.each(data.list, function(i, item) {
 		str += "<div class=\"product count\">"
@@ -78,15 +77,13 @@ function productList(data) {
 		str += "	<div class=\"infoWrap\">"
 		str += "	<span><b>" + item.name + "</b></span>"
 		str += "	<span>" + item.brand + "</span>";
-		str += "	<span>" + item.width + " * " + item.length + " * "
-				+ item.height + "</span>";
+		str += "	<span>" + item.width + " * " + item.length + " * "+ item.height + "</span>";
 		str += "	<span>" + item.price + "원 </span>";
 		str += "</div>"
 		str += "</div>"
 	});
 
 	$('.productWrap').html(str)
-
 }
 
 function filter(data) {
