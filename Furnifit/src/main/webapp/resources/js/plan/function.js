@@ -20,7 +20,7 @@ function scale() {
 }
 
 var once = 1;
-
+var totalsize = 0;
 var ajaxVal;
 function toAjax() {
 	if(ajaxVal)ajaxVal.abort();
@@ -30,12 +30,13 @@ function toAjax() {
 		type : 'post',
 		data : formData,
 		success : function(data) {
-			//console.log(data)
+			console.log(data)
 			
 			if (once == 1) {
 				filter(data)
 				once = 0;
 				wishlist(data)
+				totalsize =  data.totalsize
 			}
 			
 			productList(data);
@@ -269,10 +270,9 @@ $(function() {
 	/* 더보기 버튼을 누르면 page size가 늘어남 */
 	$(document).on(	"click","#add",	function(event) {
 		event.preventDefault();
-		$('input[name=pageSize]').val(
-				Number($('input[name=pageSize]').val()) + 6)
-		var total = $('.count').length
-		if (Number(total) < Number($('input[name=pageSize]').val())) {
+		$('input[name=pageSize]').val(Number($('input[name=pageSize]').val()) + 6)
+		console.log(totalsize + " : "+ $('input[name=pageSize]').val())
+		if (totalsize < Number($('input[name=pageSize]').val())) {
 			$('#add').remove()
 		}
 		toAjax();

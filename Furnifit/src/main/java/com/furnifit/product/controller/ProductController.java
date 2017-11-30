@@ -81,7 +81,7 @@ public class ProductController {
 		model.addAttribute("title", "Furnifit - productList");
 		model.addAttribute("list",list);
 		model.addAttribute("wishlist",wishlist);
-		model.addAttribute("totalsize", list.size());
+		model.addAttribute("totalsize", productsrv.totlasize());
 		model.addAttribute("colorlist", colorlist);
 		model.addAttribute("brandlist", brandlist);
 		model.addAttribute("categorylist", categorylist);
@@ -110,6 +110,7 @@ public class ProductController {
 		map.put("colorlist", colorlist);
 		map.put("categorylist", categorylist);
 		map.put("list", list);
+		map.put("totalsize", productsrv.totlasize());
 		
 		
 		return map;

@@ -46,20 +46,8 @@
 		sysdate)
 	</insert>
 
-	<select id="productAll" resultType="Product">
-		SELECT product_id AS
-		"productId",
-		category,
-		NAME,
-		brand,
-		price,
-		color,
-		width,
-		length,
-		height,
-		description,
-		link,
-		regdate
+	<select id="totlasize" resultType="int">
+		SELECT count(product_id)
 		FROM products
 	</select>
 
