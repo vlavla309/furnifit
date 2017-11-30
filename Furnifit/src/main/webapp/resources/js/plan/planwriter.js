@@ -99,8 +99,7 @@ $( function() {
 		buttons: {
 			Add: function() {
 				unSelectAll();
-				var name=$( "#writePlanForm #planGroupName" ).val();
-				writePlan(name);
+				writePlan();
 				$( this ).dialog( "close" );
 			},
 			Cancel: function() {
@@ -113,6 +112,10 @@ $( function() {
 	});
 
 	$("#writeBtn").on("click", function(){
+		if(editors.size<1){
+			showMsgBar("fail","작성 중인 배치도 항목이 존재하지 않습니다.");
+			return false;
+		}
 		writePlanDlg.dialog( "open" );
 	});
 	
