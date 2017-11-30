@@ -51,5 +51,16 @@ public interface ProductDao {
 	public List<Product> productReadList(String category);
 	
 	
+	/**
+	 * 위시리스트와 상품 조인
+	 * @param map
+	 * @return
+	 */
 	public List<Product> productwish(Map<String, String> map);
+	
+	/**
+	 * 상품 total count
+	 * @return
+	 */
+	public int totlasize();
 }

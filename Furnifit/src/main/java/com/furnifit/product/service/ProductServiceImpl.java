@@ -118,5 +118,11 @@ public class ProductServiceImpl implements ProductService {
 		return list;
 	}
 
+
+	@Override
+	public int totlasize() {
+		return productdao.totlasize();
+	}
+
 	
 }

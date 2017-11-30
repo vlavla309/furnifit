@@ -50,6 +50,19 @@ public interface ProductService {
 	 */
 	public List<Product> productReadList(String category);
 	
+	/**
+	 * 위시리스트와 상품조인
+	 * @param email
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
 	public List<Product> productwish(String email, int page, int pageSize);
+	
+	/**
+	 * 상품 count
+	 * @return
+	 */
+	public int totlasize();
 	
 }
