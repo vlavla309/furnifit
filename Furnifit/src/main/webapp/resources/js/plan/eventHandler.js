@@ -86,6 +86,9 @@ function dragDrop(x,y) {
 		if(dir[2])my--;
 		if(dir[3])mx++;
 
+		if(dir[0]&&dir[2] || dir[1]&&dir[3]){
+			break;
+		}
 		target.attr({transform: origTransform + (origTransform ? "T" : "t") + [mx, my]});
 		dir = isCollisionOfWall(target.getBBox());
 	}
@@ -100,44 +103,12 @@ function dragDrop(x,y) {
 			transform: savedTransform
 		});
 	}
-
+	refreshThumbnail();
 	curEditor.canvas.paper.zpd('toggle');
 }
 /*------------- 드래그 이벤트 핸들러 끝!--------------*/
 
-/*Collision Detect*/
-function hasCollision(target, set){
-	var result=false;
-	var pathTarget;
-	if(target.node.nodeName=="path"){
-		pathTarget=target.clone();
-	}else {
-		pathTarget=getPath(target);
-	}
 
-	var pathSet=Snap.set();
-	set.forEach(function(elem, i) {
-		if(target!=elem){
-			if(elem.node.nodeName=="path"){
-				pathElem=elem.clone();
-			}else {
-				pathElem=getPath(elem);
-			}
-			pathSet.push(pathElem);
-			var interSection=Snap.path.intersection(pathElem, pathTarget);
-
-			if(interSection.length > 0){
-				result = true;
-				return;
-			}
-		}
-	});
-
-	//pathTarget.remove();
-	//pathSet.remove();
-
-	return result;
-}
 /* Check. Is Collision of Furnitures */
 function isCollisionOfFurnitures(target){
 	//console.log(target);
@@ -185,6 +156,11 @@ function isCollisionOfFurnitures(target){
 	return resultEdge || resultPoint;
 }
 
+
+/** 드래그 대상이 벽과 충돌하는지 확인한다, 충돌여부를 동서남북 순의 boolean배열로 반환한다
+ * @param target 드래그 대상
+ * @returns
+ */
 function isCollisionOfWall(target){
 	var north;
 	var east;
@@ -204,14 +180,6 @@ function isCollisionOfWall(target){
 	west =Snap.path.isBBoxIntersect(bbox, target);
 
 	return [north, east, south, west];	
-
-	if(north && east && south && west)return "none";
-	else if(east && south && west)return "n";
-	else if(north && south && west)return "e";
-	else if(north && east && west)return "s";
-	else if(north && east && south)return "w";
-
-	return "both";
 }
 
 

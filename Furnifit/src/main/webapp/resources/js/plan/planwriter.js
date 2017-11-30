@@ -22,6 +22,7 @@ $( function() {
 			Add: function() {
 				var planid=addPlanItem();
 				selectPlan(planid);
+				refreshThumbnail();
 				$( this ).dialog( "close" );
 			},
 			Cancel: function() {
@@ -75,7 +76,18 @@ $( function() {
 	/*상품 검색 ui 아코디언*/
 	$( "#searchAccodian" ).accordion({
 		heightStyle: "content",
-		collapsible: true
+		collapsible: true,
+		icons: false,
+		beforeActivate:function(e,ui){
+			console.log("아코디언ㅎㅎㅎ");
+			console.log(ui.newHeader);
+			console.log(ui.oldHeader);
+			
+			ui.newHeader.children().toggleClass("fa-angle-double-down fa-angle-double-up");
+			ui.oldHeader.children().toggleClass("fa-angle-double-down fa-angle-double-up");
+			//ui.newHeader.children().addClass("fa-angle-double-down");
+
+		}
 	});
 	
 	
@@ -121,7 +133,13 @@ function addPlanItem(){
 	var planHeight=Number($("#planHeight").val());
 	var planLength=Number($("#planLength").val());
 	
-	$("#planitems").append("<li><div class='planitem'><a href='"+id+"'>"+planName+"</a></div></li>");
+	
+	var planitemThumbStr="<li><div class='planitem'><div class='imgWrap'><a href='"+id+"'>"
+	planitemThumbStr+="<img src='#' art='"+planName+"'>";
+	planitemThumbStr+="</a></div>";
+	planitemThumbStr+="<div class='nameWrap'><span>"+planName+"<span></div>";
+	planitemThumbStr+="</div></li>";
+	$("#planitems").append(planitemThumbStr);
 	
 
 	var planStr="<div id='editorContainer-"+id+"' class='editorContainer'>";
@@ -162,5 +180,5 @@ function setFurnitureInfo(){
 	$("#furnitureInfoWrap .infoWrap .name").html("<strong>"+furniture.name+"</strong>");
 	$("#furnitureInfoWrap .infoWrap .brand").text(furniture.brand);
 	$("#furnitureInfoWrap .infoWrap .size").text(furniture.width+"*"+furniture.height+"*"+furniture.length +"(가로*세로*높이)");
-	
 }
+

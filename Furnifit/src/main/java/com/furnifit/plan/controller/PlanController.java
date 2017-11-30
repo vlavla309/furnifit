@@ -2,18 +2,18 @@ package com.furnifit.plan.controller;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.furnifit.common.web.PageBuilder;
 import com.furnifit.common.web.Params;
@@ -99,15 +99,20 @@ public class PlanController {
 	 * 배치도 작성 처리(김형주)
 	 */
 	@RequestMapping(value = "/plan", method=RequestMethod.POST)
-	@ResponseBody 
-	public String regist(@RequestBody Plan plan, HttpSession session) throws Exception {
+	public ResponseEntity<String> regist(@RequestBody Plan plan, HttpSession session) throws Exception {
 		logger.info("플랜이름 :"+plan.getName());
-		Member member= (Member) session.getAttribute("login");
-		plan.setEmail(member.getEmail());
-		
-		planService.writePlan(plan);
-		
-		return "plan/writer";
+
+		ResponseEntity<String> entity = null;
+		try {
+			Member member= (Member) session.getAttribute("login");
+			plan.setEmail(member.getEmail());
+			planService.writePlan(plan);
+			entity = new ResponseEntity<String>("success",HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		return entity;
 	}
 
 }

@@ -1,7 +1,8 @@
 /**
  * 배치도 화면 클래스
  */
-function Editor( ){
+function Editor(){
+	this.id;
 	this.canvas;
 	this.room;
 	this.furnitures;
@@ -19,14 +20,13 @@ function Editor( ){
 	this.width;
 	this.height;
 	this.length;
+	this.acreage;
 	
-	this.placed;
-	
-	this.originZpdMatrix;
 }
 
 /* 배치도 객체 초기화 */
 Editor.prototype.init = function (id, zoomScale){
+	this.id=id;
 	this.canvas = Snap("#editorContainer-"+id+" .editor");
 	var paper = (this.canvas).paper;
 	 var applyZpd = function() {
@@ -56,7 +56,8 @@ Editor.prototype.room = function(name,width,height,length){
 	this.width=width;
 	this.height=height;
 	this.length=length;
-	
+	this.acreage=getAcreage(width, height); 
+		
 	var x=80; //방 렌더링 시작 위치;
 	var y=80; //방 렌더링 시작 위치;
 	var w=width*this.scale;
@@ -172,11 +173,8 @@ Editor.prototype.room = function(name,width,height,length){
 	
 
 	console.log(encData);
-	var t1 = this.canvas.text(bbox.cx, bbox.cy, this.name);
-	t1.attr({"font-size":35});
-	/*console.log(t1);
-	console.log(t1.node);
-	console.log(t1.node.clientWidth);*/
+	var t1 = this.canvas.text(bbox.cx, bbox.cy, this.name+"("+this.acreage+"평)");
+	t1.attr({"font-size":28});
 }
 
 /* 배치도에 새 가구 생성 */
@@ -243,6 +241,33 @@ Editor.prototype.furniture= function(x,y,target){
 	furniture.hover(hIn, hOut);
 	this.furnitures.push(furniture);
 	return furniture;
+}
+
+/* 배치도에 새 가구 생성 */
+Editor.prototype.startPlace= function(target){
+	var width = target.width * this.scale;
+	var height = target.height * this.scale;
+	
+	var rect=this.canvas.rect(0, 0, width, height).attr({
+		stroke: "#6799FF",
+		strokeWidth: 4}
+	); 
+	 
+	this.canvas.paper.mousemove(function(ev, x, y){
+		console.log(x+","+y)
+		console.log(ev); 
+		var m = rect.parent().parent().parent().transform().localMatrix; 
+		mx=ev.offsetX;
+		my=ev.offsetY;
+		if(m){
+			mx = mx/m.a;
+			my = my/m.d;
+		};
+		var origTransform = rect.transform().local;//기존 트랜스폼 명령
+		rect.attr({x:mx, y:my})
+		//rect.attr({transform: origTransform + (origTransform ? "T" : "t") + [mx,my]});
+		//console.log(rect);
+	})
 }
 
 

@@ -29,7 +29,6 @@ function writePlan(planName){
 
 
 	var jsonData = JSON.stringify(plan);
-	//console.log(jsonData);
 	$.ajax({
 		url : contextPath + '/plan',
 		type : 'post',
@@ -64,4 +63,13 @@ function printPlaced(){
 					
 		
 		$('.furnitureWrap').html(str);
+}
+
+function refreshThumbnail(){
+	setTimeout(() => {
+		var svgData=curEditor.canvas.paper.toDataURL();
+		var id=curEditor.id;
+		var imgElem=$(".planitem  a[href="+id+"] img");
+		imgElem.attr("src",svgData);
+	}, 1000);
 }

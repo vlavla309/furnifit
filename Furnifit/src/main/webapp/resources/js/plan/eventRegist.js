@@ -15,9 +15,9 @@ $( document ).ready(function(){
 			var collisionFurnitures=isCollisionOfFurnitures(target);
 			if(dir[0]||dir[1]||dir[2]||dir[3]||collisionFurnitures){
 				showMsgBar("fail","주위의 다른 사물 혹은 벽과 충돌합니다.");
-				console.log("벽이나 주변 사물과 충돌되어 회전 불가");
 				rotate(selectedElem, -r);
 			}
+			refreshThumbnail();
 		}
 	});
 
@@ -32,6 +32,7 @@ $( document ).ready(function(){
 				console.log("벽이나 주변 사물과 충돌되어 회전 불가");
 				rotate(selectedElem, -r);
 			}
+			refreshThumbnail();
 		}
 	});
 
@@ -42,6 +43,7 @@ $( document ).ready(function(){
 			console.log(selectedElem);
 			selectedElem.remove();
 			selectedElem=null;
+			refreshThumbnail();
 		}
 		unSelectAll();
 		printPlaced();
@@ -57,9 +59,15 @@ $( document ).ready(function(){
 		e.preventDefault();
 		var pid=Number($(this).attr("href"));
 		var fur=furnitures.get(pid);
-		curEditor.furniture(curEditor.offsetX, curEditor.offsetY, fur);
+		if(fur&&curEditor){
+			curEditor.startPlace(fur);
+		//curEditor.furniture(curEditor.offsetX, curEditor.offsetY, fur);
 		showMsgBar("success","가구가 추가되었습니다.");
 		printPlaced();
+		refreshThumbnail();
+		}else{
+			showMsgBar("fail","먼저 배치도를 추가해 주세요.");
+		}
 	});
 	
 	$(document).on("click", ".placedItemBtn",function(e){

@@ -21,15 +21,16 @@ function scale() {
 
 var once = 1;
 
+var ajaxVal;
 function toAjax() {
-
+	if(ajaxVal)ajaxVal.abort();
 	var formData = $("#filter").serialize();
-	$.ajax({
+	ajaxVal=$.ajax({
 		url : contextPath + '/product/',
 		type : 'post',
 		data : formData,
 		success : function(data) {
-			console.log(data)
+			//console.log(data)
 			
 			if (once == 1) {
 				filter(data)
@@ -39,13 +40,12 @@ function toAjax() {
 			
 			productList(data);
 			makeFurnitureList(data);
+			_showPage();
 		},
 		error : function(data) {
 			console.log(data)
 		}
-
 	});
-
 }
 
 function wishlist(data) {
@@ -72,9 +72,7 @@ function productList(data) {
 	$.each(data.list, function(i, item) {
 		str += "<div class=\"product count\">"
 		str += "	<div class=\"imgWrap\">"
-		str += "		<a class='addFurnitureBtn' href=\"" + item.productId
-				+ "\"><img src=\"" + proImgPath + "" + item.imgs[0].path + "/"
-				+ item.imgs[0].name + "\" /></a>"
+		str += "		<a class='addFurnitureBtn' href=\"" + item.productId+ "\"><img src=\"" + proImgPath + "" + item.imgs[0].path + "/"+ item.imgs[0].name + "\" /></a>"
 		str += "	</div>"
 		str += "	<div class=\"infoWrap\">"
 		str += "	<span><b>" + item.name + "</b></span>"
@@ -143,9 +141,11 @@ function makeFurnitureList(data) {
 		furnitures.set(Number(item.productId), furniture);
 	});
 	/* 테스트 */
+	/*
 	furnitures.forEach(function(item, key, mapObj) {
 		// console.log(item.toString());
 	});
+	*/
 }
 
 $(function() {
@@ -252,8 +252,9 @@ $(function() {
 		}
 	});
 
-	/* search버튼을 누르면, 검색! ajax는 추후에 */
-	$(document).on("click", ".btn-default", function(event) {
+	/* search버튼을 누르거나, 엔터버튼 누를때*/ 
+	$(document).on("submit", "#searchForm", function(event) {
+		event.preventDefault();
 		$('input[name=keyword]').val($('#keyword').val())
 		$('#keyword').val("")
 		toAjax();
@@ -280,6 +281,14 @@ $(function() {
 	toAjax();
 });
 
+
+
+/**
+ * 화면 상단에 메시지를 출력한다, 메시지는 3초간 유지된다
+ * @param type 메시지 타입
+ * @param msg 메시지 내용
+ * @returns
+ */
 var timerId;
 function showMsgBar(type, msg){
 	var msgBar=$("#msgBar");
