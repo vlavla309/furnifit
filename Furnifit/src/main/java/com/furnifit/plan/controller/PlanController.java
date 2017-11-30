@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -121,11 +122,14 @@ public class PlanController {
 	@RequestMapping(value = "/plan/file", method=RequestMethod.POST)
 	public ResponseEntity<String> regist(@RequestBody PlanItem planitem, HttpSession session) throws Exception {
 		logger.info("플랜이름 :"+planitem.getName());
-		logger.info("플랜내용 :"+planitem.getImage());
+		//logger.info("플랜내용 :"+planitem.getImage());
 		ResponseEntity<String> entity = null;
 		try {
 			String filePath = planService.saveFile(planitem);
-			entity = new ResponseEntity<String>(filePath,HttpStatus.OK);
+			logger.info("파일이름 :"+filePath);
+			HttpHeaders responseHeaders = new HttpHeaders();
+		    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+			entity = new ResponseEntity<String>(filePath,responseHeaders,HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);

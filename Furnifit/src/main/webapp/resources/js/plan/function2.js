@@ -88,10 +88,10 @@ function savePlanFile(){
 			url : contextPath + '/plan/file',
 			type : 'post',
 			data : jsonData,
-			contentType: 'application/json',
+			contentType:'application/json',
 			success : function(data) {
 				console.log(data);
-				window.location.assign(data);
+				window.location.assign(rSrcPath+"/svg/plan/"+data);
 			},
 			error : function(data) {
 				console.log(data)
