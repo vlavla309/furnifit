@@ -38,12 +38,8 @@
 											* 세로 * 높이 mm)</small>
 									</p>
 									<div class="box" style="text-align: center;">
-										<c:forEach items="${brandlist}" var="brands">
-											<c:if test="${wish.brand == brands.name}">
-												<a href="${brands.link}" class="btn btn-default">쇼핑몰로 가기</a>
-											</c:if>
-										</c:forEach>
-										<a href="${wish.productId}"
+										<a href="${wish.link}" class="btn btn-default"> 쇼핑몰로 가기</a> <a
+											href="${wish.productId}"
 											class="btn btn-default wishdeletebtn">삭제</a>
 									</div>
 								</div>

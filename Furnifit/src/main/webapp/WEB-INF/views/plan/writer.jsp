@@ -181,28 +181,23 @@
 											</div>
 											<h3 class="sidebarColor">가격<i class="fa fa-angle-double-down" aria-hidden="true"></i></h3>
 											<div id="price">
-												<ul>
-													<li><input type="number" id="minprice" class="price"
-														value="0" placeholder="min price"></li>
-													<li>~</li>
-													<li><input type="number" id="maxprice" class="price"
-														value="10000" placeholder="max price"></li>
-													<li><button type="submit" class="btn btn-sm pricebtna">적용하기</button></li>
-												</ul>
+													<input type="number" id="minprice" class="price"
+														value="0" placeholder="min price" style="width: 90px;">
+													~
+													<input type="number" id="maxprice" class="price"
+														value="10000" placeholder="max price" style="width: 90px;">
+													<button type="submit" class="btn btn-sm pricebtna"><i class="fa fa-search" aria-hidden="true"></i></button>
 											</div>
 											<h3 class="sidebarColor">사이즈<i class="fa fa-angle-double-down" aria-hidden="true"></i></h3>
 											<div id="size">
-												<ul>
-													<li><input type="number" placeholder="가로" id="w"
-														class="size" style="width: 50px;"></li>
-													<li>*</li>
-													<li><input type="number" placeholder="세로" id="l"
-														class="size" style="width: 50px;"></li>
-													<li>*</li>
-													<li><input type="number" placeholder="높이" id="d"
-														class="size" style="width: 50px;"></li>
-													<li><button type="submit" class="btn btn-sm sizebtn">적용하기</button></li>
-												</ul>
+													<input type="number" placeholder="가로" id="w" class="size" style="width: 60px;"></li>
+													*
+													<input type="number" placeholder="세로" id="l"
+														class="size" style="width: 60px;">
+													*
+													<input type="number" placeholder="높이" id="d"
+														class="size" style="width: 60px;">
+													<button type="submit" class="btn btn-sm sizebtn"><i class="fa fa-search" aria-hidden="true"></i></button>
 											</div>
 										</div>
 
