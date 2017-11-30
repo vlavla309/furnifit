@@ -36,7 +36,7 @@
     <div class="col-md-12 information-grid pdbotton"
       data-wow-delay=".5s">
       <c:forEach items="${list}" var="article">
-        <div class="information-info col-md-4 articleDiv"">
+        <div class="information-info col-md-4 articleDiv">
           <br>
           <div class="information-grid-info articleDiv2">
             <div class="planDiv">
