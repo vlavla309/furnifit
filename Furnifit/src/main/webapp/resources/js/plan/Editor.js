@@ -6,6 +6,8 @@ function Editor(){
 	this.canvas;
 	this.room;
 	this.furnitures;
+	
+	this.wallWidth=14;
 	this.wallHorizon;
 	this.wallVertical;
 	this.wallNorth;
@@ -62,7 +64,7 @@ Editor.prototype.room = function(name,width,height,length){
 	var y=80; //방 렌더링 시작 위치;
 	var w=width*this.scale;
 	var h=height*this.scale;
-	var wallWidth=14*this.scale;
+	var wallWidth=this.wallWidth*this.scale;
 
 	var pathStr="M"+x+" "+y;
 	pathStr+=" L"+(x+w)+" "+y;
@@ -82,7 +84,7 @@ Editor.prototype.room = function(name,width,height,length){
 	var image=this.canvas.image(encData, x, y ,w, h);
 	//var canvas=this.canvas;
 	
-	getImageBase64(planImgPath+"/floor10.jpg", function (data) {
+	getImageBase64(planImgPath+"/floor16.jpg", function (data) {
 		encData+=data;
 		loop=false;
 		image.attr("href", encData);
@@ -195,7 +197,7 @@ Editor.prototype.furniture= function(x,y,target){
 	case "선반":
 		imgPath+="shelf.png";
 		break;
-	case "쇼파":
+	case "쇼파":case "소파":
 		if(target.width>80)imgPath+="sofa_big.png";
 		else imgPath+="sofa_small.png";
 		break;
@@ -203,18 +205,22 @@ Editor.prototype.furniture= function(x,y,target){
 		imgPath+="closet.png";
 		break;
 	case "책상":
-		imgPath+="desk.png";
+		imgPath+="desk1.png";
 		break;
 	case "식탁":
 		imgPath+="kitchentable.png";
 		break;
+	case "의자":
+		imgPath+="chair.png";
+		break;
+		
 	}
 	
-	var rect=this.canvas.rect(x, y, width, length).attr("fill", "none");
+	var rect=this.canvas.rect(x, y, width, height).attr("fill", "none");
 	
 	
 	var encData="data:image/png;base64,";
-	var image=this.canvas.image(encData, x, y , width, length);
+	var image=this.canvas.image(encData, x, y , width, height);
 	
 	getImageBase64(imgPath, function (data) {
 		encData+=data;
@@ -243,31 +249,46 @@ Editor.prototype.furniture= function(x,y,target){
 	return furniture;
 }
 
-/* 배치도에 새 가구 생성 */
+/* 배치도에 새 가구 생성 위치 잡기 */
 Editor.prototype.startPlace= function(target){
 	var width = target.width * this.scale;
 	var height = target.height * this.scale;
 	
 	var rect=this.canvas.rect(0, 0, width, height).attr({
+		fill:"none",
 		stroke: "#6799FF",
-		strokeWidth: 4}
-	); 
-	 
+		strokeWidth: 4
+		}); 
+	 var dx,dy;
 	this.canvas.paper.mousemove(function(ev, x, y){
-		console.log(x+","+y)
-		console.log(ev); 
-		var m = rect.parent().parent().parent().transform().localMatrix; 
-		mx=ev.offsetX;
-		my=ev.offsetY;
+		var m = rect.parent().parent().transform().localMatrix; 
+		mx=ev.offsetX-(width/2);
+		my=ev.offsetY-(height/2);
+		
 		if(m){
-			mx = mx/m.a;
-			my = my/m.d;
+			m=m.invert();
+			mx=m.x(mx,my);
+			my=m.y(mx,my);
 		};
-		var origTransform = rect.transform().local;//기존 트랜스폼 명령
 		rect.attr({x:mx, y:my})
-		//rect.attr({transform: origTransform + (origTransform ? "T" : "t") + [mx,my]});
-		//console.log(rect);
-	})
+		dx=mx;
+		dy=my;
+	});
+	this.room.unclick();
+	var canvas=this;
+	this.room.click(function(){
+		var furniture=canvas.furniture(dx,dy,target);
+		
+		curEditor.room.unclick();
+		curEditor.room.click(function(){
+			unSelectAll();
+			select(this);
+		});
+		
+		rect.remove();
+		printPlaced();
+	});
+	
+	
+
 }
-
-

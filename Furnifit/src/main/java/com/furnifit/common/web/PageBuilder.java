@@ -164,7 +164,7 @@ public class PageBuilder {
 		if(params instanceof ArticleParams) {
 			ArticleParams aParams= (ArticleParams) params;
 			queryString += aParams.getSort() != null ? "&sort=" + aParams.getSort() :"";
-			queryString += aParams.getAcreage() != null ? "&acreage=" + aParams.getAcreage() : "";
+			queryString += aParams.getAcreage() != null ? "&acreage=" + aParams.getAcreage() :"";
 		}
 
 		return queryString;

@@ -77,8 +77,12 @@ $(window).scroll(function() {
 
 // 댓글을 등록하는 코드
 $("#replyAddBtn").on("click", function() {
-  var content = $("#newContent").val();
-
+	var articleId = $("#newArticleId").val();
+	var email =loginEmail;
+	var content = $("#newContent").val();
+  console.log(email);
+  console.log(content);
+  console.log(articleId);
   $.ajax({
     type : 'post',
     url : '/one/reply',
@@ -108,7 +112,7 @@ $("#replies").on("click", ".replyLi", function(event){
   var reply = $(this);
   
   $("#content").val(reply.find('.timeline-body').text());
-  $(".modal-title").html(reply.attr("data-rno"));
+  $(".modal-title").html("Furni-Fit");
   console.log(content)  
 });
 

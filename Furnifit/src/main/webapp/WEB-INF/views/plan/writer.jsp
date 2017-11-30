@@ -8,6 +8,9 @@
 <meta charset="utf-8">
 <title>Plan Writer - FurniFit</title>
 
+<!-- Favicon -->
+<link rel="shortcut icon" href="${rSrcPath }/images/favicon.ico">
+
 <!-- css -->
 <link
 	href="${pageContext.servletContext.contextPath }/resources/css/bootstrap.css"
@@ -291,6 +294,9 @@
 					<span class="category">카테고리</span> <span class="name">상품명</span> <span
 						class="brand">브랜드</span> <span class="size">200x200x200</span>
 				</div>
+				<!-- <div class="descWrap">
+					<span class="description">상품 설명!!</span>
+				</div> -->
 				<div class="controlWrap">
 					<ul>
 						<li><a href="#" id="clockwiseRotateBtn"><img
@@ -305,14 +311,17 @@
 					</ul>
 				</div>
 			</div>
+			<div id="downBtn">
+				<a href="#"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
+			</div>
 		</div>
 		<!-- footer 끝 -->
 
 		<!-- 새 배치도 추가 폼 -->
-		<div id="newPlanForm" title="새 배치도 추가">
+		<div id="newPlanForm" title="새 배치도 항목 추가">
 			<form>
 				<fieldset class="ui-helper-reset">
-					<label for="tab_title">배치도이름</label><br> <input type="text"
+					<label for="tab_title">배치도 항목 이름</label><br> <input type="text"
 						name="planName" id="planName" placeholder='배치도 이름을 입력해주세요'
 						class="ui-widget-content ui-corner-all" required> <br>
 					<br> <label for="tab_title">방의 크기</label><br> <input
@@ -334,7 +343,7 @@
 		<div id="writePlanForm" title="배치도 작성 등록">
 			<form>
 				<fieldset class="ui-helper-reset">
-					<label for="tab_title">배치도 그룹 이름</label><br> 
+					<label for="tab_title">배치도 이름</label><br> 
 					<input type="text" name="planName" id="planGroupName" placeholder='배치도 그룹의 이름을 입력해주세요' class="ui-widget-content ui-corner-all" required>
 				</fieldset>
 			</form>

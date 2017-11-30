@@ -102,7 +102,6 @@ public class ArticleController {
 		params.setPageSize(PAGE_SIZE);
 		params.setPagiSize(PAGI_SIZE);
 		
-		
 		List<Article> articles = service.listByParams(params);
 		
 		model.addAttribute("list", articles);
@@ -111,7 +110,10 @@ public class ArticleController {
 		PageBuilder pb = new PageBuilder();
 		pb.setParams(params);
 		
+		
 		pb.setTotalRowCount(service.listSearchCount(params));
+
+	
 		
 		pb.build();
 		model.addAttribute("pb", pb);

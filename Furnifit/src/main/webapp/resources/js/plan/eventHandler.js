@@ -6,21 +6,26 @@ function select(target){
 	if(selectedElem.hasClass("furniture")){
 		selectedViewbox=target.parent().parent(); // 선택된 가구의 뷰박스 획득
 		setFurnitureInfo();
-		target.attr({strokeWidth: 4}); 
-		$("#furnitureInfoWrap").show().css("display", "flex");
+		target.attr({strokeWidth: 6}); 
+		$("#furnitureInfoWrap").show().css("display", "inline-flex");
+		setFooterBtnDown();
 	}
+	
 }
 
 function unSelectAll(){
+	setFooterBtnUp();
 	$("#furnitureInfoWrap").hide();
 	selectedElem=null;
-	curEditor.furnitures.attr({
-		strokeWidth: 0 // CamelCase...
-	});
+	if(curEditor){
+		curEditor.furnitures.attr({
+			strokeWidth: 0 // CamelCase...
+		});
+	}
 }
 
 function hIn(){
-	this.attr("strokeWidth", 4);
+	this.attr("strokeWidth", 6);
 }
 
 function hOut(){
@@ -34,7 +39,7 @@ function dragStart(x,y,e) {
 	curEditor.canvas.paper.zpd('toggle');
 	selectedViewbox=this.parent().parent(); //선택된 가구의 에디터 정보 가져오기
 	origTransform = this.transform().local;//기존 트랜스폼 명령
-	savedTransform = this.transform().local;//기존 트랜스폼 명령
+	savedTransform = origTransform;//기존 트랜스폼 명령(보존)
 	target=this;
 	ox=0;
 	oy=0;
@@ -86,9 +91,7 @@ function dragDrop(x,y) {
 		if(dir[2])my--;
 		if(dir[3])mx++;
 
-		if(dir[0]&&dir[2] || dir[1]&&dir[3]){
-			break;
-		}
+		if(dir[0]&&dir[2] || dir[1]&&dir[3]){break;}
 		target.attr({transform: origTransform + (origTransform ? "T" : "t") + [mx, my]});
 		dir = isCollisionOfWall(target.getBBox());
 	}
@@ -111,7 +114,6 @@ function dragDrop(x,y) {
 
 /* Check. Is Collision of Furnitures */
 function isCollisionOfFurnitures(target){
-	//console.log(target);
 	var resultEdge=false;
 	var resultPoint=false;
 	var pathTarget=getPath(target);
@@ -140,9 +142,8 @@ function isCollisionOfFurnitures(target){
 			});
 			if(resultPoint)return;
 			
-			
+			//가구들 간의 모서리가 겹치는지 확인
 			var interSection=Snap.path.intersection(pathElem, pathTarget);
-			//console.log(interSection);
 			if(interSection.length > 0){
 				resultEdge = true;
 				return;

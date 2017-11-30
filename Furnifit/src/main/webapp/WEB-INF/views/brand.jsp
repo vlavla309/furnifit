@@ -58,7 +58,9 @@
     <header>
       <h1><span class="fonth3" style= "color: #FAF9F8; font-size: 3.4rem;"><strong>앞으로 PartnerShip을 점차<br>확대해 나갈 예정입니다<br>기대해주시기 바랍니다</strong></span></h1>
     </header>
+    <div class="text-right">
     <a class="btn red" id="mainButton2" href="${contextPath}/">main</a>
+    </div>
   </section>
   
   <!-- <a class="btn blue" href="#blue">blue</a> -->

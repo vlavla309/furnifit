@@ -22,11 +22,12 @@
 <link rel="stylesheet" type="text/css" href="${rSrcPath}css/custom.css" />
 <script src="${rSrcPath}js/modernizr.custom.17475.js"></script>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="${rSrcPath}/js/bootstrap.js"></script>
 <script type="text/javascript" src="${rSrcPath}js/jquerypp.custom.js"></script>
 <script type="text/javascript" src="${rSrcPath}js/jquery.elastislide.js"></script>
-		
+
 <script src="${rSrcPath}js/productRead.js"></script>
 
 <style>
@@ -65,15 +66,15 @@
 									<c:if test="${img.orderNo==0}">
 										<img class="xzoom" id="xzoom-default"
 											src="${rSrcPath}/productimg/${img.path}/${img.name}"
-											xoriginal="${rSrcPath}/productimg/${img.path}/${img.name}"
+											xoriginal="${rSrcPath}/productimg/${img.path}/Z${img.name}"
 											title="${img.orderNo }" />
 									</c:if>
 								</c:forEach>
 								<div class="xzoom-thumbs">
 									<c:forEach items="${product.imgs}" var="img">
-										<a href="${rSrcPath}/productimg/${img.path}/${img.name}">
+										<a href="${rSrcPath}/productimg/${img.path}/Z${img.name}">
 											<img class="xzoom-gallery" width="80"
-											src="${rSrcPath}/productimg/${img.path}/${img.name}"
+											src="${rSrcPath}/productimg/${img.path}/Z${img.name}"
 											xpreview="${rSrcPath}/productimg/${img.path}/${img.name}"
 											title="The description goes here">
 										</a>
@@ -103,8 +104,8 @@
 														title="규격은  W(너비) D(넓이) H(높이)로 구성되며, 원형일 경우 R(지름) H(높이)의 형태로 규격이 표시됩니다."><i
 															class="fa fa-question-circle" aria-hidden="true"></i></a>
 													</th>
-													<td>${product.width}*${product.length}*
-														${product.height}</td>
+													<td>${product.width}*${product.height}*${product.length}
+														</td>
 												</tr>
 												<tr>
 													<th>판매가</th>
@@ -133,16 +134,18 @@
 					<ul id="carousel1" class="elastislide-list">
 						<c:forEach items="${categorylist}" var="category">
 							<c:forEach items="${category.imgs}" var="img">
-								<li><a href="${contextPath}/product/${img.productId}"><img
-										src="${rSrcPath}/productimg/${img.path}/s_${img.name}"
-										alt="image04" /></a></li>
+								<c:if test="${img.path != '' || img.path != 'null'}">
+									<li><a href="${contextPath}/product/${img.productId}"><img
+											src="${rSrcPath}/productimg/${img.path}/${img.name}"/></a>
+									</li>
+								</c:if>
 							</c:forEach>
 						</c:forEach>
 					</ul>
 					<!-- End Elastislide Carousel -->
 				</div>
 			</div>
-			
+
 			<div class="Categories" data-wow-delay=".5s">
 				<h3>이 가구를 사용한 배치도</h3>
 				<div class="column">
@@ -157,7 +160,7 @@
 					<!-- End Elastislide Carousel -->
 				</div>
 			</div>
-			
+
 		</div>
 		<div class="clearfix"></div>
 	</div>

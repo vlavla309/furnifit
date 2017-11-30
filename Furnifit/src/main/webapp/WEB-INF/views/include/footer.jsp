@@ -6,10 +6,11 @@
 				<div class="col-md-3 footer-nav agile-w3layouts wow fadeInLeft animated" data-wow-delay=".5s">
 					<h4>Navigation</h4>
 					<ul>
-						<li><a href="about.html">About</a></li>
-						<li><a href="gallery1.html">Gallery</a></li>
-						<li><a href="blog.html">Blog</a></li>
-						<li><a href="contact.html">Contact</a></li>
+						<li><a href="${contextPath}/about" >About</a></li>
+						<li><a href="${contextPath}/product">Product</a></li>
+						<li><a href="${contextPath}/plan/writer">Plan Write</a></li>
+						<li><a href="${contextPath}/article">Plan Board</a></li>
+						<li><a href="${contextPath}/brand" >Brand</a></li>
 					</ul>
 				</div>
 				<div class="col-md-5 footer-nav agile-w3layouts wow fadeInUp animated" data-wow-delay=".5s">
