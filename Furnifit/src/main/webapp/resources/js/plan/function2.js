@@ -58,6 +58,53 @@ function writePlan(){
 	});
 }
 
+function savePlanFile(){
+	if(curEditor){
+		editor.canvas.paper.zpd('destroy'); 
+		editor.canvas.paper.zpd('toggle'); 
+		editor.canvas.paper.zpd('toggle'); 
+		var width=parseInt(curEditor.width)+parseInt(curEditor.wallWidth*2);
+		var height=parseInt(curEditor.height)+parseInt(curEditor.wallWidth*2);
+
+		var ULCx=curEditor.offsetX-curEditor.wallWidth;
+		var ULCy=curEditor.offsetY-curEditor.wallWidth;
+		var UUwidth =width;
+		var UUheight=height;
+		var clone=curEditor.canvas.paper.clone();
+		clone.attr({
+			width:width,
+			height:height,
+			viewBox: ULCx+" "+ULCy+" "+UUwidth+" "+UUheight});
+		clone.remove();
+		
+		var planitem=new Planitem(
+				curEditor.name, 
+				curEditor.width, 
+				curEditor.height,
+				curEditor.length,
+				curEditor.acreage,
+				clone.toDataURL()
+				);
+		
+		var jsonData = JSON.stringify(planitem);
+		$.ajax({
+			url : contextPath + '/plan/file',
+			type : 'post',
+			data : jsonData,
+			contentType:'application/json',
+			success : function(data) {
+				console.log(data);
+				window.location.assign(contextPath+"/plan/download?filename="+data);
+			},
+			error : function(data) {
+				console.log(data)
+			}
+		});
+	}else {
+		showMsgBar("fail","먼저 배치도를 추가해 주세요.");
+	}
+}
+
 function printPlaced(){
 	var str = "";
 		if(curEditor){
@@ -82,7 +129,7 @@ function printPlaced(){
 }
 
 function refreshThumbnail(){
-	setTimeout(() => {
+	setTimeout(function() {
 		var svgData=curEditor.canvas.paper.toDataURL();
 		var id=curEditor.id;
 		var imgElem=$(".planitem  a[href="+id+"] img");
