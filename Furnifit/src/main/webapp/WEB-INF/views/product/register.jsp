@@ -80,14 +80,14 @@
 						</div>
 
 						<div class="form-group">
+							<label for="height">height</label> <input type="text"
+								name="height" class="form-control" placeholder="Enter height...">
+						</div>
+						
+						<div class="form-group">
 							<label for="lenght">lenght</label> <input type="text"
 								name="length" class="form-control"
 								placeholder="Enter lenght....">
-						</div>
-
-						<div class="form-group">
-							<label for="height">height</label> <input type="text"
-								name="height" class="form-control" placeholder="Enter height...">
 						</div>
 
 						<div class="form-group">

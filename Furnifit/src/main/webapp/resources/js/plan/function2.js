@@ -34,7 +34,6 @@ function writePlan(planName){
 		type : 'post',
 		data : jsonData,
 		contentType: 'application/json',
-		mimeType: 'application/json',
 		success : function(data) {
 			console.log(data)
 		},
