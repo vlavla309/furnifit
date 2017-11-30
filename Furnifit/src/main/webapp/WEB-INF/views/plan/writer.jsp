@@ -291,9 +291,9 @@
 					<span class="category">카테고리</span> <span class="name">상품명</span> <span
 						class="brand">브랜드</span> <span class="size">200x200x200</span>
 				</div>
-				<div class="descWrap">
+				<!-- <div class="descWrap">
 					<span class="description">상품 설명!!</span>
-				</div>
+				</div> -->
 				<div class="controlWrap">
 					<ul>
 						<li><a href="#" id="clockwiseRotateBtn"><img

@@ -134,8 +134,8 @@ function filter(data) {
 function makeFurnitureList(data) {
 	$.each(data.list, function(i, item) {
 		var furniture = new Furniture(item.productId, item.category, item.name,
-				item.brand, item.price, item.color, item.width, item.length,
-				item.height, proImgPath + "/" + item.imgs[0].path + "/"
+				item.brand, item.price, item.color, item.width, item.height,
+				item.length, proImgPath + "/" + item.imgs[0].path + "/"
 						+ item.imgs[0].name, item.description);
 
 		furnitures.set(Number(item.productId), furniture);
