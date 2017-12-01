@@ -18,9 +18,8 @@
 		product_id as
 		"productId"
 		FROM
-		wishlist 
+		wishlist
 	</select>
-
 
 	<!-- 검색 데이터 개수 -->
 	<select id="userwishlistCount" parameterType="String"
@@ -30,11 +29,11 @@
 		where email = #{email}
 	</select>
 
-
 	<delete id="delete" parameterType="map">
 		DELETE FROM WISHLIST
 		WHERE
 		EMAIL = #{email} and PRODUCT_ID = #{productId}
 	</delete>
-
+	
+	
 </mapper>

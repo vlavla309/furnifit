@@ -31,4 +31,5 @@ public interface WishlistDao {
 	
 	
 	public int listcount(String email);
+	
 }

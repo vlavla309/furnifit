@@ -44,4 +44,5 @@ private static final String namespace = "com.furnifit.wishlist.dao.WishlistDao";
 		return sqlsession.selectOne(namespace+".userwishlistCount", email);
 	}
 
+
 }

@@ -45,4 +45,5 @@ public class WishlistServiceImpl implements WishlistService {
 		return wishdao.listcount(email);
 	}
 
+
 }

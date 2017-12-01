@@ -1,6 +1,8 @@
 package com.furnifit.orderitems.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +28,7 @@ import com.furnifit.product.domain.Product;
 import com.furnifit.product.service.ProductService;
 import com.furnifit.productimg.dao.ProductImageDao;
 import com.furnifit.productimg.domain.ProductImg;
+import com.furnifit.wishlist.service.WishlistService;
 
 
 /**
@@ -51,6 +54,8 @@ public class OrderitemsController {
 	private ProductImageDao imgDao;
 	@Inject
 	private CouponService couponService;
+	@Inject
+	private WishlistService wishsrv;
 
 
 	/** 주문, 주문항목 생성 */
@@ -63,12 +68,12 @@ public class OrderitemsController {
 		List<Product> proList = proService.list();
 		List<ProductImg> imgList = imgDao.list();
 		List<Coupon> couponList =  couponService.readAvailable(member.getEmail());	//사용 가능한 쿠폰 확인
-		
 		model.addAttribute("title", "Furnifit - order/"+planitemId);
-		model.addAttribute("proList", proList);	
+		model.addAttribute("proList", proList);
 		model.addAttribute("furniList", furniList);
 		model.addAttribute("imgList", imgList);
 		model.addAttribute("couponList", couponList);
+		model.addAttribute("wishlist", wishsrv.read());
 		return "order/order-write";
 	}
 	

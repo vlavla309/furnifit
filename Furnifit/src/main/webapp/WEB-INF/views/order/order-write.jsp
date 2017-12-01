@@ -2,36 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="../include/header.jsp"%>
 
-
 <link rel="stylesheet" href="${rSrcPath}css/order-write.css" />
 <script src="${rSrcPath}js/order-write.js"></script>
-
-
-<!-- 모달 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">wishList</h4>
-      </div>
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer">
-        <a href="${contextPath}/wishlist" class="btn btn-default">위시리스트로 가기</a>
-        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- /모달 -->
-
-
-
-
 
 
 <form role="form" method="post">
@@ -42,6 +14,7 @@
     <div class="col-md-12" >
       <div class="box">
           <h1>주문서 작성</h1><br>
+          
           <!-- 테이블(가구img, 가구명, 수량, 판매가, 합계, 위시리스트, 삭제) -->
           <div class="table-responsive">
             <table class="table">
@@ -76,7 +49,7 @@
                         <td value="${product.price}"><input type="number" class="count" id="${status.index}" min="1" value="1" name="amounts" ></td>
                         <td>${product.price}원</td>
                         <td class="subPrice">${product.price}원</td>
-                        <td><a href="${product.productId}" name="addWishlist" class="btn btn-default" data-toggle="modal" data-target="#myModal">WishList</a></td>
+                        <td><a href="#" name="addWishlist" class="btn btn-default" value="${furni.productId}">WishList</a></td>
                         <td><a href="#" class="deleteOrder" value="${product.productId}"><i class="fa fa-trash-o"></i></a></td>
                        <c:set var="doneLoop" value="true"/>
                       </c:if>
@@ -109,7 +82,6 @@
                    </c:forEach>
                 </select><br><br>
                 <!-- /쿠폰 옵션 선택 div -->
-                <input type="hidden" name="email" value="${login.email}">
                 <input type="hidden" name="useCoupones" value="0">
                    <c:forEach items="${couponList}" var="coupon">
                   <input type="hidden" name="serial" value="${coupon.serial}">
@@ -138,6 +110,7 @@
             <div class="form-group">
               <div class="box price">
                 <div class="table-responsive">
+                <input type="hidden" name="email" value="${login.email}">
                   <table class="table" style="margin-top: 10px">
                       <tr><td class="${furniList.size()}" id="kind"><strong>${furniList.size()}종류의 가구를 주문합니다.</strong></td></tr>
                       <tr><td style="color: red"><h3>총 합계</h3></td></tr>
