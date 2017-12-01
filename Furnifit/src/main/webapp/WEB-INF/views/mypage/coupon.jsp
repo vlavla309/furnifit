@@ -38,10 +38,10 @@
                     <td>${coupon.expirationDate}</td>
                     
                     <c:choose>
-                      <c:when test="${coupon.status == '사용가능'}">
+                      <c:when test="${coupon.status == '사용 가능'}">
                         <td class="textFont"><span class="badge badge-primary">${coupon.status}</span></td>
                       </c:when>
-                      <c:when test="${coupon.status == '사용완료'}">
+                      <c:when test="${coupon.status == '사용 완료'}">
                         <td class="textFont"><span id="textColor2" class="badge">${coupon.status}</span></td>
                       </c:when>
                       <c:otherwise>
