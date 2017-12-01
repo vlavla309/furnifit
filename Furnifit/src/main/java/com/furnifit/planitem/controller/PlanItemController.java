@@ -1,5 +1,6 @@
 package com.furnifit.planitem.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -57,16 +58,23 @@ public class PlanItemController {
 		logger.info(planitemList);
 		
 		// 가구정보
-		List<Product> proList = proService.list();
-		List<Furniture> furniList = furniDao.list(planItemId);
+		List<Product> proList = new ArrayList<>();
 		
+		List<Furniture> furniList = furniDao.list(planItemId);
+		for (Furniture furniture : furniList) {
+			int productId=furniture.getProductId();
+			proList.add(proService.read(productId));
+			logger.info(furniture);
+		}
+		for (Furniture furniture : furniList) {
+			
+		}
 		// 쇼핑몰 링크
 		List<Brand> brandList = brandDao.list();
 		
 		model.addAttribute("title", "Furnifit - itemList/"+planItemId);
 		model.addAttribute("planitemlist", planitemList);
 		model.addAttribute("prolist", proList);
-		model.addAttribute("furnilist", furniList);
 		model.addAttribute("brandlist", brandList);
 		return "plan/plan-detail";
 	}

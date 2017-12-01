@@ -54,8 +54,57 @@ function writePlan(){
 		},
 		error : function(data) {
 			console.log(data)
+			
 		}
 	});
+}
+
+function savePlanFile(){
+	if(curEditor){
+		curEditor.canvas.paper.zpd('destroy'); 
+		curEditor.canvas.paper.zpd('toggle'); 
+		curEditor.canvas.paper.zpd('toggle'); 
+		var width=parseInt(curEditor.width)+parseInt(curEditor.wallWidth*2);
+		var height=parseInt(curEditor.height)+parseInt(curEditor.wallWidth*2);
+
+		var ULCx=curEditor.offsetX-curEditor.wallWidth;
+		var ULCy=curEditor.offsetY-curEditor.wallWidth;
+		var UUwidth =width;
+		var UUheight=height;
+		var clone=curEditor.canvas.paper.clone();
+		clone.attr({
+			width:width,
+			height:height,
+			viewBox: ULCx+" "+ULCy+" "+UUwidth+" "+UUheight});
+		clone.remove();
+		
+		var planitem=new Planitem(
+				curEditor.name, 
+				curEditor.width, 
+				curEditor.height,
+				curEditor.length,
+				curEditor.acreage,
+				clone.toDataURL()
+				);
+		
+		var jsonData = JSON.stringify(planitem);
+		$.ajax({
+			url : contextPath + '/plan/file',
+			type : 'post',
+			data : jsonData,
+			contentType:'application/json',
+			success : function(data) {
+				console.log(data);
+				window.location.assign(contextPath+"/plan/download?filename="+data);
+			},
+			error : function(data) {
+				console.log(data);
+				showMsgBar("fail","배치도 이미지 다운로드에 실패하였습니다.");
+			}
+		});
+	}else {
+		showMsgBar("fail","먼저 배치도를 추가해 주세요.");
+	}
 }
 
 function printPlaced(){
@@ -82,7 +131,7 @@ function printPlaced(){
 }
 
 function refreshThumbnail(){
-	setTimeout(() => {
+	setTimeout(function() {
 		var svgData=curEditor.canvas.paper.toDataURL();
 		var id=curEditor.id;
 		var imgElem=$(".planitem  a[href="+id+"] img");

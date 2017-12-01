@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.furnifit.common.web.Params;
 import com.furnifit.plan.domain.Plan;
+import com.furnifit.planitem.domain.PlanItem;
 
 /**
  * PlanService 클래스
@@ -41,4 +42,12 @@ public interface PlanService {
 	 * @return
 	 */
 	public void writePlan(Plan plan);
+
+	
+	/**
+	 * 배치도 파일 생성
+	 * @param plan
+	 * @return
+	 */
+	String saveFile(PlanItem planItem);
 }

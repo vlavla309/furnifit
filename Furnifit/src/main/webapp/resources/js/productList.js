@@ -184,6 +184,7 @@ var find = false;
 			event.preventDefault();
 			$('input[name=pageSize]').val(Number($('input[name=pageSize]').val())+ 6)
 			var total = $('input[name = totalsize').val()
+			console.log(total + " : " + Number($('input[name=pageSize]').val()))
 			if(Number(total)<=Number($('input[name=pageSize]').val())){
 				$('#add').remove()
 			}
@@ -231,7 +232,6 @@ var find = false;
 					url : contextPath+'/wishlist/' + productId,
 					type : 'post',
 					success : function(data) {
-						alert("추가성공")
 						wishbtn.attr('class', 'wishdeletebtn')
 						wishbtn.children().children().attr('class', 'fa fa-heart')
 					},
@@ -251,7 +251,6 @@ var find = false;
 				url : contextPath+'/wishlist/' + productId,
 				type : 'DELETE',
 				success : function(data) {
-					alert("삭제성공")
 					wishdeletebtn.attr('class', 'wishbtn')
 					wishdeletebtn.children().children().attr('class','fa fa-heart-o')
 				},

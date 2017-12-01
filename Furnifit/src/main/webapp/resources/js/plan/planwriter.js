@@ -85,8 +85,6 @@ $( function() {
 			
 			ui.newHeader.children().toggleClass("fa-angle-double-down fa-angle-double-up");
 			ui.oldHeader.children().toggleClass("fa-angle-double-down fa-angle-double-up");
-			//ui.newHeader.children().addClass("fa-angle-double-down");
-
 		}
 	});
 	

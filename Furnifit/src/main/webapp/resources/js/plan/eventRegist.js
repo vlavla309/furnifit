@@ -1,20 +1,6 @@
 $( document ).ready(function(){
 	$("#saveBtn").on("click", function(){
-		alert("미구현ㅎㅎ");
-		var width=parseInt(curEditor.width)+parseInt(curEditor.wallWidth*2);
-		var height=parseInt(curEditor.height)+parseInt(curEditor.wallWidth*2);
-		
-		var ULCx=curEditor.offsetX-curEditor.wallWidth;
-		var ULCy=curEditor.offsetY-curEditor.wallWidth;
-		var UUwidth =width;
-		var UUheight=height;
-		var test=curEditor.canvas.paper.clone();
-		test.attr({
-			width:width,
-			height:height,
-			viewBox: ULCx+" "+ULCy+" "+UUwidth+" "+UUheight});
-		console.log(test.toDataURL());
-		test.remove();
+		savePlanFile();
 	});
 	
 	$("#resetBtn").on("click", function(){
@@ -117,12 +103,10 @@ $( document ).ready(function(){
 	
 	
 	$(document).on("mouseenter mouseleave", ".planitem", function(){
-		console.log("haha");
 		$(this).children(".removeBtn").toggle();
 	});
 	
 	$(document).on("click", ".planitem .removeBtn a", function(){
-		console.log("haha");
 		var id=$(this).attr("href");
 		delPlanItem(id);
 	});

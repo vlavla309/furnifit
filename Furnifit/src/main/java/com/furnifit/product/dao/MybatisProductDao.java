@@ -58,4 +58,9 @@ public class MybatisProductDao implements ProductDao {
 		return sqlsession.selectList(namespace+".productwish", map);
 	}
 
+	@Override
+	public int totlasize() {
+		return sqlsession.selectOne(namespace+".totlasize");
+	}
+
 }

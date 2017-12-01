@@ -42,14 +42,16 @@
             <div class="planDiv">
               <a href="${contextPath}/article/${article.articleId}">
                 <img src="${rSrcPath }/svg/plan/${article.planitemImg }" alt="" /></a>
-            </div>
-            <p>
+            </div>          
+            <br>
+            <hr style="width: 90%;">
+            <p style="margin-left: 40px;">
               <a href="${contextPath}/article/${article.articleId}">
                 <strong><font class="artListTitle">${article.title }</font></strong></a> 
             <br>
                   <small>${article.regdate }</small>
             </p>
-            <h3>
+            <h3 style="margin-left: 40px;">
               <span class="label artlabel artlabel1 ">&nbsp; 
                 <i class="fa fa-heart artLikecnt"></i>${article.likecnt }
               </span>&nbsp; 

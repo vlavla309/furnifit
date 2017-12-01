@@ -41,8 +41,6 @@ public class WishlistController {
 	WishlistService wishlistservice;
 	@Inject
 	ProductService productsrv;
-	@Inject
-	BrandDao branddao;
 
 	@RequestMapping(value = "/{productid}", method = RequestMethod.POST)
 	public ResponseEntity<String> create(@PathVariable("productid") int productid, HttpSession session) {
@@ -86,14 +84,12 @@ public class WishlistController {
 		
 		Member member = (Member) session.getAttribute("login");
 		List<Product> wishlist = productsrv.productwish(member.getEmail(), param.getPage(), param.getPageSize());
-		List<Brand> brandlist = branddao.list();
 		PageBuilder pb = new PageBuilder();
 		pb.setParams(param);
 		pb.setTotalRowCount(wishlistservice.listcount(member.getEmail()));
 		pb.build();
 		model.addAttribute("pb", pb);
 		model.addAttribute("wishlist",wishlist);
-		model.addAttribute("brandlist", brandlist);
 		
 		return "mypage/wishlist";
 		

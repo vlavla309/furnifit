@@ -49,22 +49,20 @@
           <table class="table">
             <tr>
               <th colspan="2">상품번호</th>
-              <th colspan="8">상품명</th><th></th><th></th>
+              <th> 가구사진</th>
+              <th colspan="8">가구명</th><th></th><th></th>
             </tr>
             <c:forEach items="${prolist}" var="product">
               <tr>
-                <c:forEach items="${furnilist}" var="furni">
-                  <c:if test="${furni.productId == product.productId}">
                     <td colspan="2">${product.productId}</td>
+                    <td><div class="imgWrap"><a href='${contextPath}/product/${product.productId}'><img src='${rSrcPath}/productimg/${product.imgs[0].path}/${product.imgs[0].name}'></a></div></td>
                     <td colspan="8"><a href="${contextPath}/product/${product.productId}">${product.name}</a></td>
-                    <td class="float-right"><a href="#" name="addWishlist" value="${furni.productId}" class="btn btn-default">WishList</a></td>
+                    <td class="float-right"><a href="#" name="addWishlist" value="${product.productId}" class="btn btn-default">WishList</a></td>
                   <c:forEach items="${brandlist}" var="brand">
                   <c:if test="${brand.name == product.brand}">
                     <td class="float-right"><a href="${brand.link}" class="btn btn-default">쇼핑몰로 가기</a></td>
                   </c:if>
                   </c:forEach>
-                  </c:if>
-                </c:forEach>
               </tr>
             </c:forEach>
           </table>

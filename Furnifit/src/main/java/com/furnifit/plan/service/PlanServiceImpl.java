@@ -105,4 +105,28 @@ public class PlanServiceImpl implements PlanService {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	/**
+	 * 배치도 파일 생성
+	 * @param plan
+	 * @return
+	 */
+	@Override
+	public String saveFile(PlanItem planItem) {
+		//create Plans & Get planId
+		Decoder dec=Base64.getDecoder();
+		String imgPath="fail";
+		try {
+				//이미지 업로드 및 경로 설정
+				String encImage=planItem.getImage();
+				byte[] decByte = dec.decode(encImage.split(",")[1].getBytes());
+				String decImage=new String(decByte, "UTF-8");
+				imgPath=UploadFileUtils.uploadFile(svgImgPath, planItem.getName()+".svg", decImage.getBytes());
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return imgPath;
+	}
 }
