@@ -30,8 +30,6 @@ function toAjax() {
 		type : 'post',
 		data : formData,
 		success : function(data) {
-			console.log(data)
-			
 			if (once == 1) {
 				filter(data)
 				once = 0;
@@ -108,7 +106,6 @@ function filter(data) {
 	str += "<ul>"
 	// color
 	$.each(data.colorlist,function(i, item) {
-		console.log(item.name)
 		if (item.name == "white") {
 			str += "<li><a class=\"btn btn-default colorBtn\" id =\""
 					+ item.name
