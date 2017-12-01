@@ -27,20 +27,22 @@ font-weight: bold;
 
 .indexLogo{
 vertical-align: middle;
-margin-left: 210px;
 width: 65%;
 padding-top: 10px;
+padding-bottom: 80px;
 }
 
 
 .indexPrd{
 background-color: white;
+border-bottom: 1px solid #A4A4A4;
 }
 
 .indexPrdNew{
 
 font-weight: bold;
-padding-top: 40px;
+text-align: left;
+padding-top: 55px; 
 }
 
 .prdList{
@@ -64,7 +66,8 @@ background-color: white;
     height: 100%;
     max-width: 320px;
     max-height: 350px;
-	padding: 10px;
+	padding: 5px;
+	background-color: ;
 }
 .indexPrdCon{
 border: 1px solid #E6E6E6;
@@ -72,11 +75,17 @@ border: 1px solid #E6E6E6;
 .indexDiv2{
 padding-left: 0px;
     padding-right: 0px;
-    border: 1px solid #E6E6E6;
+    border: 1px solid #D8D8D8;
 }
 
 .indexArtBack{
 background-color: white;
+padding-top: 80px;
+
+}
+
+.indexArtPadding{
+padding: 50px;	
 }
 
 .indexArtPadding{
