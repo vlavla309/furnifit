@@ -83,9 +83,11 @@
                         <tr>
                          <td class="align2">
                           <c:forEach items="${product.imgs}" var="img">
-                            <div class="artPrdImg">
-                             <img src="${rSrcPath}/productimg/${img.path}/${img.name}"/>
-                            </div>                
+                            <c:if test="${img.orderNo == 0 }">
+                              <div class="artPrdImg">
+                              <img src="${rSrcPath}/productimg/${img.path}/${img.name}"/>
+                              </div> 
+                            </c:if>               
                           </c:forEach></td>
                         <td class="align2">${product.name }</td>
                         <td class="align2">${product.price }</td>
@@ -110,7 +112,7 @@
                    <br>
                    <br>
                     <div class="row artContent"  role="alert" >       
-                      <textarea name="content" rows="15" cols="90" readonly="readonly">${article.content }</textarea>               
+                      <textarea name="content" rows="8" cols="80" readonly="readonly">${article.content }</textarea>               
                     </div>        
                 </div>                                                                     
                </div>

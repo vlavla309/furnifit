@@ -1,5 +1,5 @@
 /**
- * 배치도 화면 클래스
+ * 배치도 작성기 클래스
  */
 function Editor(){
 	this.id;

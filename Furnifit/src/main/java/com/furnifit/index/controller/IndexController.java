@@ -44,15 +44,15 @@ public class IndexController {
 	public String index(Locale locale, Model model,ArticleParams params, ProductParams Pparams) {
 		
 		params.setSort("like");
-		params.setPageSize(3);
+		params.setPageSize(5);
 		List<Article> article = artService.listByParams(params);
 		
-		for (Article article2 : article) {
+		/*for (Article article2 : article) {
 			String content = article2.getContent();
 			if(content.length() > 30) {				
 				article2.setContent(content.substring(0, 30));
 			}
-		}
+		} */
 		
 		Pparams.setSort("new");
 		Pparams.setPageSize(8);
