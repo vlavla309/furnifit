@@ -81,8 +81,8 @@
                           <input type="password" name="repasswd" class="lock" placeholder="Confirm Password" required>
                           <input type="text" pattern="^[가-힣]{2,5}$" class="user" required name="name" placeholder="Name : 한글 2자리 ~ 5자리 ">
                           <input type="text" pattern="[0-9]{10}[0-9]$" required name="phone" class="" placeholder="Telephone : '-'는 제외하고 입력">
-                          <input type="submit" name="Sign In" value="Sign up"></button>
-                          <!-- <!-- <button type="button" data-toggle="modal" data-target="#myModal">Open Modal</button> --> -->
+                          <input type="submit" name="Sign In" value="Sign up"></input>
+                          <!-- <button type="button" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
                         </form>
 
                       </div>
