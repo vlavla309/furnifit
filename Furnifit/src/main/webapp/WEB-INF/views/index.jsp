@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -6,8 +7,28 @@
 <link href="${rSrcPath}css/testCss.css" rel="stylesheet"> 
 <link href="${rSrcPath}css/index.css" rel="stylesheet"> 
 
+
+  <meta content="http://www.thepetedesign.com/demos/immersive_slider_demo.html" property="og:url" />
+  <meta content="http://www.thepetedesign.com/images/immersive_slider_image.png" property="og:image" />
+  <link rel="shortcut icon" id="favicon" href="favicon.png"> 
+  <meta name="author" content="Pete R.">
+  <link rel="canonical" href="http://www.thepetedesign.com/demos/immersive_slider_demo.html" />
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
+  <script type="text/javascript" src="${rSrcPath }js/jquery.immersive-slider.js"></script>
+  <link href='${rSrcPath }css/immersive-slider.css' rel='stylesheet' type='text/css'>
+  <link href='${rSrcPath }css/indexImmersive.css' rel='stylesheet' type='text/css'>
+  
+  
 <!-- bxSlider CSS file -->
 <link href="${rSrcPath }css/jquery.bxslider.css" rel="stylesheet" />
+
+<style>
+
+.artIMG{
+width: 100%;
+height: 100%;
+}
+</style>
 
 <body >
   <!-- banner -->
@@ -60,7 +81,6 @@ Design Virtual Furniture Layout</h3>
   <!-- 상품목록리스트 -->
   <div class="information w3lagile indexPrd" >
     <h2 class="indexPrdNew">NEW ARRIVAL</h2>
-     <br> 
       <ul class="bxslider" style="">
         <c:forEach items="${prdList}" var="product">
           <li style="border: 1px solid; padding: 20px; border-color: #D8D8D8">
@@ -105,33 +125,58 @@ Design Virtual Furniture Layout</h3>
 
   
   
-  <!-- 공유게시판 리스트 -->
-	<div class="information w3lagile indexArtBack"  >
-		<div class="container indexPrdCon">
-		  <div class="information-grids agile-info">
-      <!-- 여기서부터 FOR문 -->
-              <c:forEach items="${artList }" var="article">
-				<div class="col-md-4 information-grid wow fadeInLeft animated indexArtPadding" data-wow-delay=".5s" >
-					<div class="information-info indexShadow"   >
-						<div class="information-grid-img indexDiv2">
-                           <a class="indexArtA" href="${contextPath}/article/${article.articleId}">                       
-							<img src="${rSrcPath }/svg/plan/${article.planitemImg}"  alt="" /></a> 
-						</div>                      
-						<div class="information-grid-info" style="padding: 30px">
-                          <hr>
-							<i class="fa fa-tags" aria-hidden="true">
-                              <font class="indexArtTitle">${article.title }</font></i>
-							<p>${article.content }</p>
-						</div>
-					</div>
-				</div>
-              </c:forEach>
-        <!-- 여기까지 FOR문 -->	
-			  <div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
-  <!-- 공유게시판 리스트 여기까지 -->
+<div class="wrapper">
+    <div class="main">
+      <div class="page_container">
+        <div id="immersive_slider">
+        
+          <!-- for -->
+         <c:forEach items="${artList }" var="article">
+          <div class="slide" data-blurred="${rSrcPath }images/a6.jpg">
+            <div class="content" style="text-align: center; width: 30px">
+              
+              <i class="fa fa-tags" aria-hidden="true"  >&nbsp;
+                <font style="font-size: 17pt;">${article.title }</font></i>
+                <br>
+                <br>
+                <a href="http://www.bucketlistly.com" target="_blank"></a>
+                 <font style="font-size: 11pt">${article.content }</font> 
+            </div>
+            <div class="image">
+              <a href="${contextPath}/article/${article.articleId}" target="_blank">
+                <img src="${rSrcPath }/svg/plan/${article.planitemImg}" alt="Slider 1">
+              </a>
+            </div>
+          </div>
+         </c:forEach>  
+          <!-- ㅇㅕㄱㅣㄲㅏㅈㅣ --> 
+          <a href="#" class="is-prev">&laquo;</a>
+          <a href="#" class="is-next">&raquo;</a>
+        </div>
+      </div>
+    </div>
+    <div class="benefits">
+      <div class="page_container">
+
+      </div>
+    </div>
+    <script type="text/javascript">
+      $(document).ready( function() {
+        $("#immersive_slider").immersive_slider({
+          container: ".main"
+        });
+      });
+
+    </script>
+  </div>
+  <script>
+
+    var _gaq=[['_setAccount','UA-11278966-1'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+ 
   
   
 <!-- footer -->

@@ -43,7 +43,6 @@ $(document).ready(function(){
         success:function(result){
           console.log("result: " + result);
           if(result == 'success'){
-             alert("추천완료!");
              $("#like").hide();
              $("#alreadyLike").show();
              $("#likeCount").text("["+(likecnt+1)+"]");
@@ -66,7 +65,6 @@ $(document).ready(function(){
         success:function(result){
         console.log("result: " + result);
         if(result == 'success'){
-        alert("삭제 되었습니다.");
         $(".listBtn").trigger("click");
         
 
