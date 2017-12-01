@@ -86,9 +86,11 @@ public class MemberController {
 		log.debug("회원가입 처리");
 		memberService.create(member);
 		/*return "redirect:/";*/
-		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+
 		PrintWriter writer = response.getWriter();
-		writer.println("<script>alert('You have been successfully registered.'); location.href='/one/';</script>");
+		writer.println("<script>alert('성공적으로 회원 가입을 완료하였습니다.'); location.href='/one/';</script>");
 	}
 	
 	/** 회원 가입 폼에서 이메일 중복 체크 */
