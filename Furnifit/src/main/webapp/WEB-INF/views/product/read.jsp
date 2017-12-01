@@ -41,6 +41,12 @@
 	cursor: pointer;
 	opacity: 0.8;
 }
+
+
+.Categories ul li a {
+    font-size: .875em;
+}
+
 </style>
 
 <!-- blog -->

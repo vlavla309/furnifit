@@ -31,4 +31,5 @@ public interface WishlistService {
 	
 	
 	public int listcount(String email);
+	
 }

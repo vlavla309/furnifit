@@ -4,7 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet" href="${rSrcPath}css/productList.css" />
-<script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script src="" id="entry-template" type="text/x-handlebars-template">
 			{{#list}}
 				<div class="col-md-4 information-grid pdbotton" data-wow-delay=".5s">
@@ -32,11 +34,11 @@
 							</p>  
 							<h3>
 							{{#iflogin "${login.email}"}}
-    							<a href="{{productId}}" class="wishbtn"> 
+    							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
 									<span class="label label-danger"> 
 										<i class="fa fa-heart-o" aria-hidden="true"></i>
 									</span>
-								</a>
+								</button>
 							{{else}}
 								{{init}}
 								{{#each ../../wishlist}}
@@ -82,8 +84,9 @@
 									</select>
 								</div>
 								<div class="col-md-3">
-									<input type="text" class="form-control input-sm  maxlength="64"
-										placeholder="카테고리 내 검색" id="keyword"/>
+									<input type="text" class="form-control input-sm  maxlength="
+										64"
+										placeholder="카테고리 내 검색" id="keyword" />
 								</div>
 								<button type="submit" class="btn btn-sm">Search</button>
 							</li>
@@ -93,7 +96,7 @@
 				<tr>
 					<th scope="row">카테고리</th>
 					<td>
-						<ul id = "category">
+						<ul id="category">
 							<li><a class="categorya">전체</a></li>
 							<c:forEach items="${categorylist}" var="category">
 								<li><a class="categorya">${category.name}</a></li>
@@ -115,9 +118,11 @@
 					<th scope="row">가격</th>
 					<td colspan="2">
 						<ul>
-							<li><input type="number" id="minprice" class="price" value="0" placeholder="min price"></li>
-							<li>~</li> 
-							<li><input type="number"  id="maxprice" class="price" value="10000" placeholder="max price"></li>
+							<li><input type="number" id="minprice" class="price"
+								value="0" placeholder="min price"></li>
+							<li>~</li>
+							<li><input type="number" id="maxprice" class="price"
+								value="10000" placeholder="max price"></li>
 							<li><button type="submit" class="btn btn-sm pricebtna">적용하기</button></li>
 						</ul>
 					</td>
@@ -126,13 +131,14 @@
 					<th scope="row">사이즈</th>
 					<td colspan="2">
 						<ul>
-							<li><input type="number" placeholder="가로" id = "w" class="size" style="width: 50px;">
-							</li>
+							<li><input type="number" placeholder="가로" id="w"
+								class="size" style="width: 50px;"></li>
 							<li>*</li>
-							<li><input type="number" placeholder="세로" id="l" class="size" style="width: 50px;">
-							</li>
+							<li><input type="number" placeholder="세로" id="l"
+								class="size" style="width: 50px;"></li>
 							<li>*</li>
-							<li><input type="number" placeholder="높이" id = "d" class="size" style="width: 50px;"></li>
+							<li><input type="number" placeholder="높이" id="d"
+								class="size" style="width: 50px;"></li>
 							<li><button type="submit" class="btn btn-sm sizebtn">적용하기</button></li>
 						</ul>
 					</td>
@@ -143,29 +149,37 @@
 						<ul id="colorul">
 							<c:forEach items="${colorlist}" var="color">
 								<c:if test="${color.name == 'white'}">
-									<li><a class="btn btn-default colorBtn" id ="${color.name}" style="background:${color.rgb}" aria-hidden="true" aria-label="Settings"><i class="fa fa-check  fa-lg colorUncheck"  style="color:black" aria-hidden="true"></i></a></li>
+									<li><a class="btn btn-default colorBtn" id="${color.name}"
+										style="background:${color.rgb}" aria-hidden="true"
+										aria-label="Settings"><i
+											class="fa fa-check  fa-lg colorUncheck" style="color: black"
+											aria-hidden="true"></i></a></li>
 								</c:if>
 								<c:if test="${color.name != 'white'}">
-									<li><a class="btn btn-default colorBtn" id ="${color.name}" style="background:${color.rgb}" aria-hidden="true" aria-label="Settings"><i class="fa fa-check  fa-lg colorUncheck"  style="color:white" aria-hidden="true"></i></a></li>
+									<li><a class="btn btn-default colorBtn" id="${color.name}"
+										style="background:${color.rgb}" aria-hidden="true"
+										aria-label="Settings"><i
+											class="fa fa-check  fa-lg colorUncheck" style="color: white"
+											aria-hidden="true"></i></a></li>
 								</c:if>
 							</c:forEach>
-							
+
 						</ul>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-		<form name ="filter" id = "filter">
-			<input type="hidden" value="" name = "sort" >
-			<input type="hidden" value="" name = "keyword" >
-			<input type="hidden" name = "category" value="" id="cate">
-			<input type="hidden" name = "minPrice" value="0" id="min">
-			<input type="hidden" name = "maxPrice" value="0" id="max">
-			<input type="hidden" name="maxWidth" value="0">
-			<input type="hidden" name="maxLength" value="0">
-			<input type="hidden" name="maxHeight" value="0">
-			<input type="hidden" name = "pageSize" value = "6">
-			<input type = "hidden" name = "totalsize" value="${totalsize}">
+		<form name="filter" id="filter">
+			<input type="hidden" value="" name="sort"> <input
+				type="hidden" value="" name="keyword"> <input type="hidden"
+				name="category" value="" id="cate"> <input type="hidden"
+				name="minPrice" value="0" id="min"> <input type="hidden"
+				name="maxPrice" value="0" id="max"> <input type="hidden"
+				name="maxWidth" value="0"> <input type="hidden"
+				name="maxLength" value="0"> <input type="hidden"
+				name="maxHeight" value="0"> <input type="hidden"
+				name="pageSize" value="6"> <input type="hidden"
+				name="totalsize" value="${totalsize}">
 		</form>
 		<div class="information-grids agile-info" id="wrapper">
 			<c:forEach items="${list}" var="product">
@@ -195,10 +209,29 @@
 							<h3>
 								<c:choose>
 									<c:when test="${empty login || login eq null }">
-										<a href="${product.productId}" class="wishbtn"> <span
+										<a href="" data-toggle="modal" data-target="#myModal"
+											class="juicy" id="modalmodal"> <span
 											class="label label-danger"> <i class="fa fa-heart-o"
-												aria-hidden="true"></i></span>
+												aria-hidden="true"></i>
+										</span>
 										</a>
+										<!-- 로그인 페이지로 이동 모달 -->
+										<div class="modal fade" id="myModal" role="dialog">
+											<div class="modal-dialog modal-md">
+												<!-- <div class="modal-dialog modal-lg"> -->
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<p>로그인 후 이용가능합니다.</p>
+													</div>
+													<div class="modal-footer">
+														<a href="${contextPath}/member/login" class="btn btn-default">로그인하러 가기</a>
+														<button type="button" class="btn btn-danger-color"
+															data-dismiss="modal">취소</button>
+													</div>
+												</div>
+											</div>
+										</div>
 									</c:when>
 									<c:otherwise>
 										<!-- 로그인을 하면 -->
@@ -236,10 +269,11 @@
 		</div>
 	</div>
 	<!-- //container -->
-	<div class = "row">
+	<div class="row">
 		<div class="col-md-12">
 			<div class="text-center">
-				<a class="btn btn-default btn-lg" id = "add"><i class="fa fa-angle-down  fa-2x" aria-hidden="true"></i> 더보기</a>
+				<a class="btn btn-default btn-lg" id="add"><i
+					class="fa fa-angle-down  fa-2x" aria-hidden="true"></i> 더보기</a>
 			</div>
 		</div>
 	</div>
