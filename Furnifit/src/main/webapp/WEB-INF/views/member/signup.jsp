@@ -1,7 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="../include/header.jsp" %>
+<script src="${rSrcPath}js/signup.js"></script>
+<!-- <script>
+ 
+    // 아이디와 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위한 변수설정
+    var idCheck = 0;
+    var pwdCheck = 0;
+    // 아이디 체크하여 가입버튼 비활성화, 중복확인.
+    function checkId() {
+        var inputed = $('.user').val();
+        $.ajax({
+            data : {
+            	email : inputed
+            },
+            url : contextPath+'/member/checkSignup/',
+            success : function(data) {
+                if(inputed=="" && data=='0') {
+                    $(".signupbtn").prop("disabled", false);
+                    $(".signupbtn").css("background-color", "#8A0808");
+                    $("#checkEmail").css("background-color", "#B0F6AC");
+                    idCheck = 0;
+                } else if (data == '0') {
+                	$(".signupbtn").prop("disabled", false);
+                	$(".signupbtn").css("background-color", "#8A0808");
+                    $("#checkEmail").css("background-color", "#B0F6AC");
+                } else if (data == '1') {
+                    $(".signupbtn").prop("disabled", true);
+                    $(".signupbtn").css("background-color", "#aaaaaa");
+                    $("#checkEmail").css("background-color", "#FFCECE");
+                } 
+            }
+        });
+    }
+    </script> -->
 	
-	
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
 	<!-- blog -->
 		<div class="blog">
 			<!-- container -->
@@ -19,13 +73,15 @@
                         <h1>Sign up</h1>
                       </div>
                       <div class="login-info">
-                        <form id="signupForm" action="${contextPath}/member/register" method="post">
-                          <input type="text" pattern="^[a-zA-Z0-9]{0,10}@[a-zA-z]{0,8}.[a-zA-z]{0,3}$" class="user" required name="email" placeholder="Email : bangrylol@gmail.com" required="dd">
-                          <input type="password" pattern="^[0-9]{4}$" required name="passwd" class="lock" placeholder="Password" onclick="openConfirmid(this.form)">
-                          <input type="password" pattern="^[0-9]{4}$" name="repasswd" class="lock" placeholder="Confirm Password">
-                          <input type="text" pattern="^[가-힣]{0,5}$" class="user" required name="name" placeholder="Name : 한글 5자리까지 " required="">
-                          <input type="text" pattern="[0-9]{10}[0-9]$" required name="phone" class="" placeholder="Telephone : '-'는 제외하고 입력" required="">
-                          <input type="submit" name="Sign In" value="Sign up">
+                        <form id="signupForm" name="f" method="post" action="${contextPath}/member/register" onsubmit="return sendSignup();">
+                          <input type="text" class="user" required name="email" id="checkEmail" placeholder="Email" oninput="checkId()" required="">
+
+                          <input type="password" required name="passwd" class="lock" placeholder="Password" required>
+                          <input type="password" name="repasswd" class="lock" placeholder="Confirm Password" required>
+                          <input type="text" pattern="^[가-힣]{2,5}$" class="user" required name="name" placeholder="Name : 한글 2자리 ~ 5자리 ">
+                          <input type="text" pattern="[0-9]{10}[0-9]$" required name="phone" class="" placeholder="Telephone : '-'는 제외하고 입력">
+                          <!-- <input type="submit" class="signupbtn" name="Sign In" value="Sign up"></button> -->
+                          <button type="button" data-toggle="modal" data-target="#myModal">Open Modal</button>
                         </form>
 
                       </div>

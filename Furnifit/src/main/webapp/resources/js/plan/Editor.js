@@ -1,5 +1,5 @@
 /**
- * 배치도 화면 클래스
+ * 배치도 작성기 클래스
  */
 function Editor(){
 	this.id;
@@ -60,8 +60,8 @@ Editor.prototype.room = function(name,width,height,length){
 	this.length=length;
 	this.acreage=getAcreage(width, height); 
 		
-	var x=80; //방 렌더링 시작 위치;
-	var y=80; //방 렌더링 시작 위치;
+	var x=this.offsetX; //방 렌더링 시작 위치;
+	var y=this.offsetY; //방 렌더링 시작 위치;
 	var w=width*this.scale;
 	var h=height*this.scale;
 	var wallWidth=this.wallWidth*this.scale;
@@ -82,7 +82,6 @@ Editor.prototype.room = function(name,width,height,length){
 	
 	var encData="data:image/png;base64,";
 	var image=this.canvas.image(encData, x, y ,w, h);
-	//var canvas=this.canvas;
 	
 	getImageBase64(planImgPath+"/floor16.jpg", function (data) {
 		encData+=data;

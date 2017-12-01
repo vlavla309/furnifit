@@ -42,6 +42,12 @@
 		WHERE email = #{email}
 	</update>
 	
+	<select id="checkSignup" resultType="int">
+		SELECT NVL(COUNT(*),0)
+		FROM   members 
+		WHERE  email = #{email} 
+	</select>
+	
 	<delete id="delete" parameterType="int">
 		DELETE FROM members
 		WHERE email = #{email}

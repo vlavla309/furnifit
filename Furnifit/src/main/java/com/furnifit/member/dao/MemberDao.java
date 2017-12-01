@@ -60,6 +60,8 @@ public interface MemberDao {
 	 */
 	public void keepLogin(String email, String sessionid, Date sessionlimit) throws Exception;
 	
+	public int checkSignup(Member member);
+	
 	/**
 	 * 비밀번호 체크
 	 * @param String email, String passwd

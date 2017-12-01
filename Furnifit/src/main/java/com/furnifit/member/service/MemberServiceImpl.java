@@ -70,6 +70,11 @@ public class MemberServiceImpl implements MemberService {
 		return dao.update(member);
 	}
 	
+	@Override
+	public int checkSignup(Member member) {
+		return dao.checkSignup(member);
+	}
+	
 	/**
 	 * 탈퇴를 위해서 Service단에서 최종단인 dao를 호출
 	 * @param String email

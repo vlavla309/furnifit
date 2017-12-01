@@ -66,7 +66,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                               <p style="color: #A7A8AA; font-size: 13px; text-align: left; margin: 6.500px 0px 0px 197px;"><strong>Welcome to FurniFit</strong></p>
                             </c:when>
                             <c:otherwise>
-                              <p style="color: #A7A8AA; font-size: 13px; margin: 6.500px 0px 0px 197px;"><strong>${login.email }님 로그인 하셨습니다.</strong></p>
+                              <p style="color: #A7A8AA; font-size: 13px; margin: 6.500px 0px 0px 197px;"><strong>${login.email }님 환영합니다</strong></p>
                             </c:otherwise>
                           </c:choose>
 					</div>

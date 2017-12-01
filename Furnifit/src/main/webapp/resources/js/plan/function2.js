@@ -54,6 +54,7 @@ function writePlan(){
 		},
 		error : function(data) {
 			console.log(data)
+			
 		}
 	});
 }
@@ -97,7 +98,8 @@ function savePlanFile(){
 				window.location.assign(contextPath+"/plan/download?filename="+data);
 			},
 			error : function(data) {
-				console.log(data)
+				console.log(data);
+				showMsgBar("fail","배치도 이미지 다운로드에 실패하였습니다.");
 			}
 		});
 	}else {
