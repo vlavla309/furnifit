@@ -1,9 +1,9 @@
 package com.furnifit.member.controller;
 
+import java.io.PrintWriter;
 import java.util.Date;
 
 import javax.inject.Inject;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,7 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.util.WebUtils;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.furnifit.member.domain.LoginDTO;
 import com.furnifit.member.domain.Member;
@@ -82,10 +82,19 @@ public class MemberController {
 	
 	/** 회원가입 처리 */
 	@RequestMapping(value = "/register", method=RequestMethod.POST)
-	public String signup(Member member) throws Exception {
+	public void signup(Member member, HttpServletResponse response) throws Exception {
 		log.debug("회원가입 처리");
 		memberService.create(member);
-		return "redirect:/";
+		/*return "redirect:/";*/
+		
+		PrintWriter writer = response.getWriter();
+		writer.println("<script>alert('You have been successfully registered.'); location.href='/one/';</script>");
+	}
+	
+	/** 회원 가입 폼에서 이메일 중복 체크 */
+	@RequestMapping(value = "/checkSignup", method= {RequestMethod.GET, RequestMethod.POST})
+	public @ResponseBody int idCheck(Member member, Model model) {
+		return memberService.checkSignup(member);
 	}
 	
 	/** 회원정보 수정 */
@@ -103,9 +112,9 @@ public class MemberController {
 		if(check == 1) {
 			session.setAttribute("member", member);
 		}
-		return "redirect: /one";
+		return "redirect:/";
 	}
-	
+
 	/** 회원 탈퇴 */
 	@RequestMapping(value = "/withdraw", method=RequestMethod.GET)
 	public String delete() {

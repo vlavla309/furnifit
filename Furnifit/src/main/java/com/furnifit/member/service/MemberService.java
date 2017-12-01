@@ -45,6 +45,8 @@ public interface MemberService {
 	 */
 	public int update(Member member);
 	
+	public int checkSignup(Member member);
+	
 	/**
 	 * 회원 탈퇴
 	 * @param String email

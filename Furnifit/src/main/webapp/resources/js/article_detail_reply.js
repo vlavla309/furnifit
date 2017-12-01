@@ -4,7 +4,7 @@ var articleId = $("#newArticleId").val();
 var email =loginEmail;
 
 (getList = function getAllList() {
-$.getJSON("/one/reply/all/" + articleId, function(data) {
+$.getJSON(contextPath+'/reply/all/'+articleId, function(data) {
   var str = "";
   
   $(data).each(
@@ -42,9 +42,9 @@ $(window).scroll(function() {
     if (scrollHeight >= documentHeight - 100) { //브라우저 마다 미세한 차이 발생으로 -100
 
       var reply_id = $(".replyLi:last").attr("data-rno");
-	  
+      
         $.ajax({
-            url: "/one/reply/infiniteScrollDown",
+            url: contextPath+'/reply/infiniteScrollDown',
             data: {
                 reply_id : reply_id,
                 articleId : articleId
@@ -85,7 +85,7 @@ $("#replyAddBtn").on("click", function() {
   console.log(articleId);
   $.ajax({
     type : 'post',
-    url : '/one/reply',
+    url : contextPath+'/reply',
     headers : {
       "Content-Type" : "application/json",
       "X-HTTP-Method-Override" : "POST"},
@@ -112,7 +112,7 @@ $("#replies").on("click", ".replyLi", function(event){
   var reply = $(this);
   
   $("#content").val(reply.find('.timeline-body').text());
-  $(".modal-title").html("Furni-Fit");
+  $(".modal-title").html(reply.attr("data-rno"));
   console.log(content)  
 });
 
@@ -130,7 +130,7 @@ $("#replyDelBtn").on("click", function() {
   } else {
     $.ajax({
       type : 'delete',
-      url : '/one/reply/' + reply_id,
+      url : contextPath+'/reply/'+reply_id,
       headers : {
         "Content-Type" : "application/json",
         "X-HTTP-Method-Override" : "DELETE"
@@ -162,7 +162,7 @@ $("#replyModBtn").on("click",function(){
   } else {
       $.ajax({
         type:'put',
-        url:'/one/reply/'+ reply_id,
+        url:contextPath+'/reply/'+reply_id,     
         headers: { 
               "Content-Type": "application/json",
               "X-HTTP-Method-Override": "PUT" },

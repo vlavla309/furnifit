@@ -115,5 +115,10 @@ public class MybatisMemberDao implements MemberDao {
 		paramMap.put("sessionlimit", sessionlimit);
 		sqlSession.update(NAMESPACE + ".keepLogin", paramMap);
 	}
+
+	@Override
+	public int checkSignup(Member member) {
+		return sqlSession.selectOne(NAMESPACE + ".checkSignup", member);
+	}
 	
 }
