@@ -65,7 +65,7 @@ public class OrderitemsController {
 		Member member = (Member) session.getAttribute("login");
 		
 		List<Furniture> furniList = furniDao.list(planitemId);
-		List<Product> proList = proService.list();
+		List<Product> proList = proService.total();
 		List<ProductImg> imgList = imgDao.list();
 		List<Coupon> couponList =  couponService.readAvailable(member.getEmail());	//사용 가능한 쿠폰 확인
 		model.addAttribute("title", "Furnifit - order/"+planitemId);

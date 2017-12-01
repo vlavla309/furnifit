@@ -50,6 +50,22 @@
 		SELECT count(product_id)
 		FROM products
 	</select>
+	
+	<select id = "total" resultType="Product">
+		SELECT product_id AS "productId",
+		category,
+		NAME,
+		brand,
+		price,
+		color,
+		width,
+		length,
+		height,
+		description,
+		link,
+		regdate
+		FROM products
+	</select>
 
 	<select id="listAll" resultType="Product">
 		SELECT product_id AS "productId",

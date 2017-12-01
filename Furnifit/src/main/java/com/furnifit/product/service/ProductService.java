@@ -65,4 +65,6 @@ public interface ProductService {
 	 */
 	public int totlasize();
 	
+	
+	public List<Product> total();
 }

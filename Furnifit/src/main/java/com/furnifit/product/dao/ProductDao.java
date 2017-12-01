@@ -63,4 +63,6 @@ public interface ProductDao {
 	 * @return
 	 */
 	public int totlasize();
+	
+	public List<Product> total();
 }
