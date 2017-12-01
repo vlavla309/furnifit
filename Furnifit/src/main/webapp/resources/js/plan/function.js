@@ -198,8 +198,8 @@ $(function() {
 
 	/* 가격 적용하기 버튼을 누르면, 조건검색 리스트에 추가됨. ajax는 추후에! */
 	$(document).on("click", ".pricebtna", function(event) {
-		if ($('.pricebtna').text() == '적용하기') {
-			$('.pricebtna').text('취소하기')
+		if ($('.pricebtna').attr('name') == '적용하기') {
+			$('.pricebtna').attr('name', "취소하기")
 			$('.price').attr("disabled", true);
 
 			$('#min').val($('#minprice').val())
@@ -214,7 +214,7 @@ $(function() {
 		} else {
 			$('#min').val("0")
 			$('#max').val("0")
-			$('.pricebtna').text('적용하기')
+			$('.pricebtna').attr('name', '적용하기')
 			$(".price").removeAttr('disabled');
 		}
 	});
@@ -222,8 +222,8 @@ $(function() {
 	/* 사이즈 버튼을 누르면 조건검색 리스트에 추가됨. ajax는 추후에! */
 	/* 사이즈는 최대값만 넣을 수 있음. 최대값보다 작은 상품들을 보여줌. */
 	$(document).on("click", ".sizebtn", function(event) {
-		if ($('.sizebtn').text() == '적용하기') {
-			$('.sizebtn').text('취소하기')
+		if ($('.sizebtn').attr('name') == '적용하기') {
+			$('.sizebtn').attr('name','취소하기')
 			$('.size').attr("disabled", true);
 
 			$('input[name=maxWidth]').val($('#w').val())
@@ -242,7 +242,7 @@ $(function() {
 			$('input[name=maxWidth]').val("0")
 			$('input[name=maxLength]').val("0")
 			$('input[name=maxHeight]').val("0")
-			$('.sizebtn').text('적용하기')
+			$('.sizebtn').attr('name','적용하기')
 			$(".size").removeAttr('disabled');
 			toAjax();
 		}

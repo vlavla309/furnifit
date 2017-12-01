@@ -185,7 +185,7 @@
 														value="0" placeholder="min price" style="width: 90px;">
 													~
 													<input type="number" id="maxprice" class="price" value="10000" placeholder="max price" style="width: 90px;">
-													<button type="submit" class="btn btn-sm pricebtna"><i class="fa fa-search" aria-hidden="true"></i></button>
+													<button type="submit" class="btn btn-sm pricebtna" name = "적용하기"><i class="fa fa-search" aria-hidden="true"></i></button>
 											</div>
 											<h3 class="sidebarColor">사이즈<i class="fa fa-angle-double-down" aria-hidden="true"></i></h3>
 											<div id="size">
@@ -196,7 +196,7 @@
 													*
 													<input type="number" placeholder="높이" id="d"
 														class="size" style="width: 60px;">
-													<button type="submit" class="btn btn-sm sizebtn"><i class="fa fa-search" aria-hidden="true"></i></button>
+													<button type="submit" class="btn btn-sm sizebtn" name = "적용하기"><i class="fa fa-search" aria-hidden="true"></i></button>
 											</div>
 										</div>
 
