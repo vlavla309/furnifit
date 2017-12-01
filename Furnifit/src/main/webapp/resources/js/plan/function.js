@@ -58,7 +58,7 @@ function wishlist(data) {
 					str+="			<a class='addFurnitureBtn' href=\"" + item.productId+ "\"><img src=\"" + proImgPath + "" + item.imgs[0].path + "/"+ item.imgs[0].name + "\" /></a>"
 					str+="		</div>"
 					str+="	<div class=\"infoWrap\">"
-					str+="			<span>"+item.name+"</span> <span>"+item.brand+"</span> <span>"+item.width+"*"+item.height+"*"+item.length +"</span> <span>"+item.price+"</span>"
+					str+="			<span>"+item.name+"</span> <span>"+item.brand+"</span>"+"	<span>" + item.color + "</span>";+"<span>"+item.width+"*"+item.height+"*"+item.length +"</span> <span>"+item.price+"</span>"
 					str+="		</div>"
 					str+="	</div>"			
 		});
@@ -77,6 +77,7 @@ function productList(data) {
 		str += "	<div class=\"infoWrap\">"
 		str += "	<span><b>" + item.name + "</b></span>"
 		str += "	<span>" + item.brand + "</span>";
+		str += "	<span>" + item.color + "</span>";
 		str += "	<span>" + item.width + " * " + item.length + " * "+ item.height + "</span>";
 		str += "	<span>" + item.price + "원 </span>";
 		str += "</div>"
