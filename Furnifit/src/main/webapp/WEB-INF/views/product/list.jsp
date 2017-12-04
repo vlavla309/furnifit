@@ -34,11 +34,26 @@
 							</p>  
 							<h3>
 							{{#iflogin "${login.email}"}}
-    							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-									<span class="label label-danger"> 
-										<i class="fa fa-heart-o" aria-hidden="true"></i>
-									</span>
-								</button>
+								<a href="" data-toggle="modal" data-target="#myModal" class="juicy" id="modalmodal"> 
+									<span class="label label-danger"> <i class="fa fa-heart-o" aria-hidden="true"></i></span>
+								</a>
+								<!-- 로그인 페이지로 이동 모달 -->
+								<div class="modal fade" id="myModal" role="dialog">
+									<div class="modal-dialog modal-md">
+									<!-- <div class="modal-dialog modal-lg"> -->
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<p>로그인 후 이용가능합니다.</p>
+											</div>
+											<div class="modal-footer">
+											<a href="${contextPath}/member/login" class="btn btn-default">로그인하러 가기</a>
+											<button type="button" class="btn btn-danger-color"
+											data-dismiss="modal">취소</button>
+													</div>
+												</div>
+											</div>
+										</div>
 							{{else}}
 								{{init}}
 								{{#each ../../wishlist}}
@@ -225,7 +240,8 @@
 														<p>로그인 후 이용가능합니다.</p>
 													</div>
 													<div class="modal-footer">
-														<a href="${contextPath}/member/login" class="btn btn-default">로그인하러 가기</a>
+														<a href="${contextPath}/member/login"
+															class="btn btn-default">로그인하러 가기</a>
 														<button type="button" class="btn btn-danger-color"
 															data-dismiss="modal">취소</button>
 													</div>

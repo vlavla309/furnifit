@@ -78,7 +78,7 @@ public class OrdersController {
 		PageBuilder pageBuilder = new PageBuilder(params, totalRowCount);
 		pageBuilder.build();
 		
-		List<Product> proList = proService.list();
+		List<Product> proList = proService.total();
 		List<ProductImg> imgList = imgDao.list();
 		List<Coupon> couponList =  couponService.readAvailable(member.getEmail());	//사용 가능한 쿠폰 확인
 		
@@ -101,7 +101,7 @@ public class OrdersController {
 		Member member = (Member) session.getAttribute("login");
 		
 		List<Orderitems> itemList = itemService.read(orderId);
-		List<Product> proList = proService.list();
+		List<Product> proList = proService.total();
 		List<Orders> orderList = ordersService.listByParams(params);
 		List<Orders> priceList = ordersService.price(orderId);
 		List<ProductImg> imgList = imgDao.list();
