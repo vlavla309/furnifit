@@ -400,13 +400,13 @@ a{
 
 
 #rightTabs #searchWrap .ui-state-active {
-	background: #ffe5b2;
+	background: #F6E3CE;
 	border: 1px solid #c5c5c5;
 	color: #454545;
 }
 
 #rightTabs #searchWrap .ui-state-hover{
-	background: #ffe5b2;
+	background: #F6E3CE;
 }
 
 #rightTabs>ul>.ui-state-hover {
