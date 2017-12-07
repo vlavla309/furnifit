@@ -22,7 +22,7 @@
           <table class="table text-left">
               <tr><td>이메일 : ${login.email}</td></tr>
               <tr><td>이름 : ${login.name}</td></tr>
-              <tr><td>배치도 작성내역 : ${planlist.size()}회</td>
+              <tr><td>배치도 작성내역 : ${planSize.size()}회</td>
               </tr>
           </table>
         </div>
@@ -43,8 +43,6 @@
                 <dt class="accordion">${plan.planId} / ${plan.email}님의 배치도 / ${plan.regdate}</dt>
                 <dd><ul><li>
                 
-                
-                
            <div class="table-responsive" style="width: 100%; padding-left:80px; padding-right: 60px">
             <table class="table">
               <tbody>
@@ -60,13 +58,6 @@
                 </tbody>
               </table>
             </div>
-                
-                
-                
-                
-                
-                
-                
                 
                 </li></ul></dd>
                </c:if>

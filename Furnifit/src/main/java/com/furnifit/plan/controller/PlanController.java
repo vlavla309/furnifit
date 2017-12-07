@@ -68,8 +68,9 @@ public class PlanController {
 		params.setPageSize(PAGE_SIZE);
 		params.setPagiSize(PAGI_SIZE);
 
+		List<Plan> size = planService.listAll(member.getEmail());
 		List<Plan> planlist = planService.listByParams(params);
-
+		logger.info("파람----"+size);
 		PageBuilder pageBuilder = new PageBuilder(params, totalRowCount);
 		pageBuilder.build();
 
@@ -83,7 +84,8 @@ public class PlanController {
 		model.addAttribute("pageBuilder", pageBuilder);
 		model.addAttribute("itemlist", itemList);
 		model.addAttribute("couponlist", couponList);
-
+		model.addAttribute("planSize", size);
+		
 		return "plan/plan-manage";
 	}
 
